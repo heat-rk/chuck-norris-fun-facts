@@ -1,3 +1,17 @@
 <resources>
-    <string name="app_name">ChuckNorrisFunFacts</string>
+    <string name="app_name">Chuck Norris Fun Facts!</string>
+    <string name="user_info">Search</string>
+    <string name="user_Info_history">Random</string>
+    
+    <!-- SPLASH SCREEN -->
+    <string name="splash_attribution">Icons made by Google from www.flaticon.com</string>
+
+    <!-- SEARCH JOKE FRAGMENT -->
+    <string name="search_joke_screen_title">Search Chuck Norris Joke!</string>
+    <string name="search_joke_enter_hint">Is Chuck Norris immortal?</string>
+    <string name="search_joke_empty_hint">Try to find something!</string>
+
+    <!-- ERRORS -->
+    <string name="error_unknown">Неизвестная ошибка</string>
+    <string name="error_not_found">Ничего не найдено :(</string>
 </resources>

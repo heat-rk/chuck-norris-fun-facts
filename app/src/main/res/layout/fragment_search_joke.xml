@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.motion.widget.MotionLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layoutDescription="@xml/fragment_search_joke_scene"
+    style="@style/RootFragmentLayout">
+
+    <EditText
+        android:id="@+id/searchQueryEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/search_joke_enter_hint"
+        android:imeOptions="actionSearch"
+        android:inputType="text"
+        android:maxLength="120"
+        style="@style/RoundedWhiteEditText"/>
+
+    <ImageView
+        android:id="@+id/searchButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_search"
+        android:visibility="gone"
+        app:tint="@color/colorPrimary"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="@dimen/paddingMD"
+        app:layout_constraintTop_toBottomOf="@id/searchQueryEditText"
+        tools:listitem="@layout/item_joke_holder_view"
+        tools:itemCount="3"
+        style="@style/ScrollableBase"/>
+
+</androidx.constraintlayout.motion.widget.MotionLayout>

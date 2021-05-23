@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/navUserInfoSearch"
+        android:title="@string/user_info"
+        android:icon="@drawable/ic_search"
+        android:checked="true"/>
+    <item
+        android:id="@+id/navSearchHistory"
+        android:title="@string/user_Info_history"
+        android:icon="@drawable/ic_random_box"/>
+</menu>
