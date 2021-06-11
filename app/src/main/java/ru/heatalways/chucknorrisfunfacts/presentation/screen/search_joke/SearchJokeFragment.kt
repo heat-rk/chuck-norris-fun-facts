@@ -4,14 +4,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.inputmethod.EditorInfo
-import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.github.terrakok.cicerone.androidx.FragmentScreen
 import ru.heatalways.chucknorrisfunfacts.R
 import ru.heatalways.chucknorrisfunfacts.databinding.FragmentSearchJokeBinding
-import ru.heatalways.chucknorrisfunfacts.extensions.showHideSmoothly
 import ru.heatalways.chucknorrisfunfacts.presentation.adapters.JokesAdapter
 import ru.heatalways.chucknorrisfunfacts.presentation.base.BaseFragment
 
@@ -51,7 +48,7 @@ class SearchJokeFragment: BaseFragment<FragmentSearchJokeBinding>() {
                 is SearchJokeState.Loaded -> {
                     setProgressBarVisibility(false)
                     setErrorVisibility(false)
-                    jokesAdapter.setJokes(state.jokes)
+                    jokesAdapter.submitList(state.jokes)
                 }
                 SearchJokeState.Loading -> {
                     setProgressBarVisibility(true)
