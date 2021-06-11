@@ -16,6 +16,7 @@
 
     <!-- SELECT CATEGORY FRAGMENT -->
     <string name="select_category_screen_title">Select category</string>
+    <string name="select_category_search_hint">animal</string>
 
     <!-- ERRORS -->
     <string name="error_unknown">Unknown error :(</string>
