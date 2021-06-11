@@ -12,6 +12,7 @@ import androidx.viewbinding.ViewBinding
 import com.github.terrakok.cicerone.Navigator
 import com.github.terrakok.cicerone.androidx.AppNavigator
 import ru.heatalways.chucknorrisfunfacts.App
+import ru.heatalways.chucknorrisfunfacts.presentation.navigation.AnimatedNavigator
 
 abstract class BaseActivity<Binding: ViewBinding>: AppCompatActivity(){
     private var navigator: Navigator? = null
@@ -30,7 +31,7 @@ abstract class BaseActivity<Binding: ViewBinding>: AppCompatActivity(){
         setContentView(binding.root)
 
         getFragmentContainerId()?.let { fragmentContainerId ->
-            navigator = AppNavigator(this, fragmentContainerId)
+            navigator = AnimatedNavigator(this, fragmentContainerId)
         }
     }
 
