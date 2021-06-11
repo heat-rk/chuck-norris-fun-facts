@@ -95,8 +95,8 @@ abstract class BaseFragment<Binding: ViewBinding>: Fragment(), KeyboardChangeLis
         liveData.observe(viewLifecycleOwner, callback)
     }
 
-    protected fun showMessage(message: String, length: Int = Toast.LENGTH_SHORT) {
-        Toast.makeText(requireContext(), message, length).show()
+    protected fun showMessage(message: String?, length: Int = Toast.LENGTH_SHORT) {
+        Toast.makeText(requireContext(), message ?: getString(R.string.error_unknown), length).show()
     }
 
     protected fun setErrorVisibility(isVisible: Boolean, message: String? = null) {
