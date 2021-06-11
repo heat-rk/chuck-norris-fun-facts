@@ -40,11 +40,36 @@
         <item name="android:textColor">@color/colorPrimary</item>
     </style>
 
+    <style name="DarkOrangeText">
+        <item name="android:textSize">@dimen/txtSizeMD</item>
+        <item name="android:textColor">@color/colorPrimaryDark</item>
+    </style>
+
     <!-- EDIT TEXT -->
     <style name="RoundedWhiteEditText">
         <item name="android:background">@drawable/white_rounded_bordered_bg</item>
         <item name="android:textSize">@dimen/txtSizeMD</item>
         <item name="android:padding">@dimen/paddingSM</item>
+    </style>
+
+    <!-- BUTTON -->
+    <style name="RoundedBorderedButton">
+        <item name="android:textAllCaps">false</item>
+        <item name="android:background">@drawable/white_rounded_bordered_bg</item>
+        <item name="android:textSize">@dimen/txtSizeMD</item>
+        <item name="android:padding">@dimen/paddingSM</item>
+        <item name="android:textColor">@color/colorPrimary</item>
+    </style>
+
+    <style name="RoundedBorderedFilledButton" parent="RoundedBorderedButton">
+        <item name="android:background">@drawable/primary_rounded_bg</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="RoundedBorderedWithDrawableButton" parent="RoundedBorderedButton">
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textAlignment">textStart</item>
+        <item name="android:drawableEnd">@drawable/ic_arrow_right_small</item>
     </style>
 
     <!-- SCROLL VIEW -->

@@ -1,7 +1,69 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.recyclerview.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     style="@style/RootFragmentLayout">
 
-</androidx.recyclerview.widget.RecyclerView>
+    <LinearLayout
+        android:id="@+id/topRandomLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/paddingMD"
+        android:orientation="vertical"
+        android:background="@drawable/white_rounded_bordered_bg"
+        android:padding="@dimen/paddingMD"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:id="@+id/categoryLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/paddingMD"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/random_joke_select_category"
+                android:layout_marginBottom="@dimen/paddingXS"
+                style="@style/DarkOrangeText"/>
+
+            <Button
+                android:id="@+id/selectCategoryButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/random_joke_any_category"
+                style="@style/RoundedBorderedWithDrawableButton"/>
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/getJokeButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/random_joke_get"
+            style="@style/RoundedBorderedFilledButton"/>
+
+        <ProgressBar
+            android:id="@+id/buttonProgressBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:visibility="gone"/>
+
+    </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="@dimen/paddingMD"
+        app:layout_constraintTop_toBottomOf="@id/topRandomLayout"
+        tools:listitem="@layout/item_joke_holder_view"
+        tools:itemCount="5"
+        style="@style/ScrollableBase"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

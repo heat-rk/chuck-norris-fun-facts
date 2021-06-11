@@ -8,6 +8,15 @@
     <string name="search_joke_enter_hint">Is Chuck Norris immortal?</string>
     <string name="search_joke_empty_hint">Try to find something!</string>
 
+    <!-- RANDOM JOKE FRAGMENT -->
+    <string name="random_joke_screen_title">Random Chuck Norris Joke!</string>
+    <string name="random_joke_select_category">Select category</string>
+    <string name="random_joke_any_category">Any</string>
+    <string name="random_joke_get">Get joke!</string>
+
+    <!-- SELECT CATEGORY FRAGMENT -->
+    <string name="select_category_screen_title">Select category</string>
+
     <!-- ERRORS -->
     <string name="error_unknown">Unknown error :(</string>
     <string name="error_not_found">Nothing found :(</string>
