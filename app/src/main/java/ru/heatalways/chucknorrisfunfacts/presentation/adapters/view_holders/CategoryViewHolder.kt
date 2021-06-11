@@ -6,14 +6,17 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import ru.heatalways.chucknorrisfunfacts.App
 import ru.heatalways.chucknorrisfunfacts.R
+import ru.heatalways.chucknorrisfunfacts.data.entities.Category
 import ru.heatalways.chucknorrisfunfacts.databinding.ItemCategoryHolderViewBinding
 
 class CategoryViewHolder private constructor(rootView: View): RecyclerView.ViewHolder(rootView) {
     private val binding = ItemCategoryHolderViewBinding.bind(rootView)
 
-    fun bind(category: String?, onClick: ((String?) -> Unit)? = null) {
-        binding.root.text = category ?:
-            App.instance.resources.getString(R.string.random_joke_any_category)
+    fun bind(category: Category, onClick: ((Category) -> Unit)? = null) {
+        binding.root.text = when (category) {
+            Category.Any -> App.instance.resources.getString(R.string.random_joke_any_category)
+            is Category.Specific -> category.name
+        }
 
         binding.root.setOnClickListener {
             onClick?.invoke(category)

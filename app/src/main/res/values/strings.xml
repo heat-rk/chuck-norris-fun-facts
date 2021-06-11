@@ -21,4 +21,5 @@
     <!-- ERRORS -->
     <string name="error_unknown">Unknown error :(</string>
     <string name="error_not_found">Nothing found :(</string>
+    <string name="empty_field">—</string>
 </resources>

@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import com.github.terrakok.cicerone.androidx.FragmentScreen
 import ru.heatalways.chucknorrisfunfacts.R
+import ru.heatalways.chucknorrisfunfacts.data.entities.Category
 import ru.heatalways.chucknorrisfunfacts.databinding.FragmentRandomJokeBinding
 import ru.heatalways.chucknorrisfunfacts.extensions.setVisibleOrGone
 import ru.heatalways.chucknorrisfunfacts.presentation.base.BaseFragment
@@ -59,8 +60,10 @@ class RandomJokeFragment: BaseFragment<FragmentRandomJokeBinding>() {
 
     private fun initCategorySelectionObserver() {
         observe(randomJokeViewModel.selectedCategory) { category ->
-            binding.selectCategoryButton.text = category ?:
-                getString(R.string.random_joke_any_category)
+            binding.selectCategoryButton.text = when(category) {
+                Category.Any -> getString(R.string.random_joke_any_category)
+                is Category.Specific -> category.name
+            }
         }
     }
 
