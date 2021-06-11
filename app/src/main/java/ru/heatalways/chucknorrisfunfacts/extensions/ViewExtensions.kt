@@ -3,6 +3,7 @@ package ru.heatalways.chucknorrisfunfacts.extensions
 import android.animation.Animator
 import android.animation.ValueAnimator
 import android.text.Editable
+import android.text.InputFilter
 import android.text.TextWatcher
 import android.util.Log
 import android.view.View
@@ -10,6 +11,10 @@ import android.view.ViewGroup
 import android.view.animation.DecelerateInterpolator
 import android.widget.EditText
 import androidx.core.view.isVisible
+
+fun EditText.maxLength(max: Int){
+    this.filters = arrayOf<InputFilter>(InputFilter.LengthFilter(max))
+}
 
 fun View.setVisibleOrGone(isVisible: Boolean) {
     visibility = if(isVisible) View.VISIBLE else View.GONE

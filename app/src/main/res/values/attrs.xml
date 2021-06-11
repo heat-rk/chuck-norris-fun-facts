@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="SearchQueryView">
+        <attr name="search_button_visible" format="boolean"/>
+        <attr name="hint" format="string"/>
+        <attr name="maxQueryLength" format="integer"/>
+        <attr name="minQueryLength" format="integer"/>
+    </declare-styleable>
+</resources>

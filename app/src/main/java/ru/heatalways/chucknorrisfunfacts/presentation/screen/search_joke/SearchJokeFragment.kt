@@ -19,9 +19,6 @@ class SearchJokeFragment: BaseFragment<FragmentSearchJokeBinding>() {
     private val viewModel: SearchJokeViewModel by viewModels()
     private val jokesAdapter = JokesAdapter()
 
-    private val isQueryLengthValid get() = binding.searchQueryEditText.length() in 3..120
-    private val searchQuery get() = binding.searchQueryEditText.text.toString()
-
     override fun getBinding(inflater: LayoutInflater, container: ViewGroup?): FragmentSearchJokeBinding {
         return FragmentSearchJokeBinding.inflate(layoutInflater, container, false)
     }
@@ -36,21 +33,7 @@ class SearchJokeFragment: BaseFragment<FragmentSearchJokeBinding>() {
             recyclerView.layoutManager = LinearLayoutManager(context)
             recyclerView.adapter = jokesAdapter
 
-            searchQueryEditText.apply {
-                doAfterTextChanged {
-                    searchButton.showHideSmoothly(isQueryLengthValid)
-                }
-
-                setOnEditorActionListener { _, actionId,_ ->
-                    if (actionId == EditorInfo.IME_ACTION_SEARCH && isQueryLengthValid) {
-                        viewModel.onSearchQueryExecute(searchQuery)
-                        return@setOnEditorActionListener true
-                    }
-                    return@setOnEditorActionListener false
-                }
-            }
-
-            searchButton.setOnClickListener {
+            searchQueryEditText.onSearchExecute = { searchQuery ->
                 viewModel.onSearchQueryExecute(searchQuery)
             }
         }
