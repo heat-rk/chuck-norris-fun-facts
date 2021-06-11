@@ -12,13 +12,7 @@ class App: Application() {
     override fun onCreate() {
         super.onCreate()
         mInstance = this
-
-        initCicerone()
         initDagger()
-    }
-
-    private fun initCicerone() {
-         cicerone = Cicerone.create()
     }
 
     private fun initDagger() {
@@ -26,20 +20,17 @@ class App: Application() {
     }
 
     fun setNavigator(navigator: Navigator) {
-        cicerone.getNavigatorHolder().setNavigator(navigator)
+        mAppComponent.getCicerone().getNavigatorHolder().setNavigator(navigator)
     }
 
     fun removeNavigator() {
-        cicerone.getNavigatorHolder().removeNavigator()
+        mAppComponent.getCicerone().getNavigatorHolder().removeNavigator()
     }
 
     companion object {
         private lateinit var mInstance: App
         private lateinit var mAppComponent: AppComponent
-        private lateinit var cicerone: Cicerone<Router>
 
-        val router get() = cicerone.router
-        val navigatorHolder get() = cicerone.getNavigatorHolder()
         val appComponent get() = mAppComponent
         val instance get() = mInstance
     }

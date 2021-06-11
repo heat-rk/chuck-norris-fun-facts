@@ -35,7 +35,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
         }
 
         mainViewModel.currentScreen.observe(this, {
-            App.router.replaceScreen(it)
+            App.appComponent.getRouter().replaceScreen(it)
         })
 
         keyboardListenerUnregister = KeyboardVisibilityEvent.registerEventListener(
