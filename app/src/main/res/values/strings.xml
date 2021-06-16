@@ -11,7 +11,7 @@
     <!-- RANDOM JOKE FRAGMENT -->
     <string name="random_joke_screen_title">Random Chuck Norris Joke!</string>
     <string name="random_joke_select_category">Select category</string>
-    <string name="random_joke_any_category">Any</string>
+    <string name="random_joke_any_category">any</string>
     <string name="random_joke_get">Get joke!</string>
 
     <!-- SELECT CATEGORY FRAGMENT -->

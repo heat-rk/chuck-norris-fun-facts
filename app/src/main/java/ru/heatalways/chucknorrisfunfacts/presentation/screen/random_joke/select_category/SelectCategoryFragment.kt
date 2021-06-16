@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.github.terrakok.cicerone.androidx.FragmentScreen
 import ru.heatalways.chucknorrisfunfacts.R
 import ru.heatalways.chucknorrisfunfacts.databinding.FragmentSelectCategoryBinding
+import ru.heatalways.chucknorrisfunfacts.extensions.scrollUp
 import ru.heatalways.chucknorrisfunfacts.presentation.adapters.CategoriesAdapter
 import ru.heatalways.chucknorrisfunfacts.presentation.base.BaseFragment
 import ru.heatalways.chucknorrisfunfacts.presentation.screen.random_joke.RandomJokeViewModel
@@ -27,6 +28,8 @@ class SelectCategoryFragment: BaseFragment<FragmentSelectCategoryBinding>() {
         return FragmentSelectCategoryBinding.inflate(inflater, container, false)
     }
 
+    override val contentId = R.id.categoriesRecyclerView
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setTitle(R.string.select_category_screen_title)
@@ -39,6 +42,10 @@ class SelectCategoryFragment: BaseFragment<FragmentSelectCategoryBinding>() {
         binding.apply {
             categoriesRecyclerView.layoutManager = LinearLayoutManager(context)
             categoriesRecyclerView.adapter = categoriesAdapter
+
+            searchView.onSearchExecute = { query ->
+                selectCategoryViewModel.searchCategories(query)
+            }
         }
 
         initCategoriesObserver()
@@ -58,7 +65,7 @@ class SelectCategoryFragment: BaseFragment<FragmentSelectCategoryBinding>() {
                 is SelectCategoryState.CategoriesLoaded -> {
                     setProgressBarVisibility(false)
                     setErrorVisibility(false)
-                    categoriesAdapter.submitList(state.categories)
+                    categoriesAdapter.newList(state.categories)
                 }
             }
         }

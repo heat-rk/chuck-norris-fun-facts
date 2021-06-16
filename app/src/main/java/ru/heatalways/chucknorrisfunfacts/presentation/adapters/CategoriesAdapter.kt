@@ -1,12 +1,12 @@
 package ru.heatalways.chucknorrisfunfacts.presentation.adapters
 
 import android.view.ViewGroup
-import androidx.recyclerview.widget.ListAdapter
 import ru.heatalways.chucknorrisfunfacts.data.entities.Category
 import ru.heatalways.chucknorrisfunfacts.presentation.adapters.diff_utils.CategoryDiffUtil
 import ru.heatalways.chucknorrisfunfacts.presentation.adapters.view_holders.CategoryViewHolder
+import ru.heatalways.chucknorrisfunfacts.presentation.base.BaseListAdapter
 
-class CategoriesAdapter: ListAdapter<Category, CategoryViewHolder>(CategoryDiffUtil()) {
+class CategoriesAdapter: BaseListAdapter<Category, CategoryViewHolder>(CategoryDiffUtil()) {
     var onCategoryClick: ((Category) -> Unit)? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CategoryViewHolder {
