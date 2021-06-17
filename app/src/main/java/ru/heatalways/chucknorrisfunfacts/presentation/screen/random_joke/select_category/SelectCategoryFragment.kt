@@ -10,7 +10,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.github.terrakok.cicerone.androidx.FragmentScreen
 import ru.heatalways.chucknorrisfunfacts.R
 import ru.heatalways.chucknorrisfunfacts.databinding.FragmentSelectCategoryBinding
-import ru.heatalways.chucknorrisfunfacts.extensions.scrollUp
 import ru.heatalways.chucknorrisfunfacts.presentation.adapters.CategoriesAdapter
 import ru.heatalways.chucknorrisfunfacts.presentation.base.BaseFragment
 import ru.heatalways.chucknorrisfunfacts.presentation.screen.random_joke.RandomJokeViewModel
