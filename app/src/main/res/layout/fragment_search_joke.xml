@@ -12,7 +12,7 @@
     style="@style/RootFragmentLayout">
 
     <ru.heatalways.chucknorrisfunfacts.presentation.custom_view.SearchQueryView
-        android:id="@+id/searchQueryEditText"
+        android:id="@+id/searchView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:hint="@string/search_joke_enter_hint"

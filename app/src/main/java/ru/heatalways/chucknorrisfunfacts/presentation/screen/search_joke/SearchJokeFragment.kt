@@ -30,7 +30,7 @@ class SearchJokeFragment: BaseFragment<FragmentSearchJokeBinding>() {
             recyclerView.layoutManager = LinearLayoutManager(context)
             recyclerView.adapter = jokesAdapter
 
-            searchQueryEditText.onSearchExecute = { searchQuery ->
+            searchView.onSearchExecute = { searchQuery ->
                 viewModel.onSearchQueryExecute(searchQuery)
             }
         }
