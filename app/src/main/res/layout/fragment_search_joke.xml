@@ -19,14 +19,6 @@
         app:minQueryLength="3"
         app:maxQueryLength="120"/>
 
-    <ImageView
-        android:id="@+id/searchButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_search"
-        android:visibility="gone"
-        app:tint="@color/colorPrimary"/>
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
