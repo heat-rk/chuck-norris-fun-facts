@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>Test Execution</title>
+
+  <link href='https://fonts.googleapis.com/css?family=Muli' rel='stylesheet' type='text/css'>
+  <link href='chart.css' rel='stylesheet' type='text/css'>
+</head>
+
+<body>
+
+<p id="testChart"></p>
+
+<script src="https://momentjs.com/downloads/moment.js" type="text/javascript"></script>
+<script charset="utf-8" src="https://d3js.org/d3.v3.min.js"></script>
+
+<script>
+    moment.locale('en');
+
+
+
+</script>
+<script src="chart.js"></script>
+
+<script type="text/javascript">
+    var dataset = {"passedTests":2,"failedTests":0,"ignoredTests":0,"executionStats":{"idleTimeMillis":5678,"averageTestExecutionTimeMillis":7419},"measures":[{"measure":"emulator-5554","stats":{"idleTimeMillis":5678,"averageTestExecutionTimeMillis":7419},"data":[{"testName":"DEVICE_PROVIDER_INIT","metricType":"DEVICE_PROVIDER_INIT","startDate":1624010934684,"endDate":1624010934686,"expectedValue":0.0,"variance":0.0},{"testName":"DEVICE_PREPARE","metricType":"DEVICE_PREPARE","startDate":1624010936532,"endDate":1624010943753,"expectedValue":0.0,"variance":0.0},{"testName":"RandomJokeScreenTest.testCategorySelection","metricType":"PASSED","startDate":1624010945716,"endDate":1624010952629,"expectedValue":0.0,"variance":0.0},{"testName":"SearchJokeScreenTest.testSearchView","metricType":"PASSED","startDate":1624010954498,"endDate":1624010970040,"expectedValue":0.0,"variance":0.0}]}]}
+
+
+
+</script>
+
+<script>
+    var chart = testsChart();
+    d3.select("#testChart")
+        .datum(dataset)
+        .call(chart);
+
+
+
+</script>
+</body>
+</html>

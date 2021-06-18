@@ -1,0 +1,25 @@
+name: "chuck-norris-app tests"
+outputDir: "./marathon"
+poolingStrategy:
+  - type: "omni"
+shardingStrategy:
+  type: "parallel"
+sortingStrategy:
+  type: "no-sorting"
+batchingStrategy:
+  type: "isolate"
+flakinessStrategy:
+  type: "ignore"
+retryStrategy:
+  type: "no-retry"
+
+vendorConfiguration:
+  type: "Android"
+  vendor: ADAM
+  androidSdk: "C:/Users/kazyx/AppData/Local/Android/Sdk"
+  applicationPmClear: true
+  testApplicationPmClear: true
+  testApplicationApk: "app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk"
+  autoGrantPermission: true
+  adbInitTimeoutMillis: 30000
+  serialStrategy: "automatic"
