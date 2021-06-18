@@ -20,7 +20,7 @@ class RandomJokeViewModel: BaseViewModel() {
             mState.value = RandomJokeState.JokeLoading
 
             selectedCategory.value.let { category ->
-                val response = jokesService.random(
+                val response = jokesManager.random(
                     when (category) {
                         is Category.Specific -> category.name
                         else -> null

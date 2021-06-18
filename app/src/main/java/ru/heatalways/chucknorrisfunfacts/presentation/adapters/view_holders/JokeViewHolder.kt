@@ -14,7 +14,7 @@ class JokeViewHolder private constructor(rootView: View): RecyclerView.ViewHolde
     private val binding = ItemJokeHolderViewBinding.bind(rootView)
 
     fun bind(joke: ChuckJoke) {
-        App.appComponent.getGlideService().loadImage(
+        App.appComponent.getImageLoaderManager().loadImage(
             config = LoadPhotoConfig(url = joke.iconUrl),
             imageView = binding.iconImageView
         )

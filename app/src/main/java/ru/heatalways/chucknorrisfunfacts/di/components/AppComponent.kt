@@ -17,8 +17,8 @@ import javax.inject.Singleton
     NavigationModule::class
 ])
 interface AppComponent {
-    fun getChuckNorrisJokesService(): ChuckNorrisJokesManager
-    fun getGlideService(): ImageLoaderManager
+    fun getChuckNorrisJokesManager(): ChuckNorrisJokesManager
+    fun getImageLoaderManager(): ImageLoaderManager
     fun getCicerone(): Cicerone<Router>
     fun getRouter(): Router
 }

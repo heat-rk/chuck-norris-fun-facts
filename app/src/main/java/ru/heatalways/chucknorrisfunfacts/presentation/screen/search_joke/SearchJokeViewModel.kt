@@ -14,7 +14,7 @@ class SearchJokeViewModel: BaseViewModel() {
     fun onSearchQueryExecute(query: String) {
         viewModelScope.launch {
             mState.value = SearchJokeState.Loading
-            val response = jokesService.search(query)
+            val response = jokesManager.search(query)
             if (response.isOk && response.value != null) {
                 if (response.value.isNotEmpty())
                     mState.value = SearchJokeState.Loaded(response.value)

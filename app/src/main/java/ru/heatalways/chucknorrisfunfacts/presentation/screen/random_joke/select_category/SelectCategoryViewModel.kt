@@ -18,7 +18,7 @@ class SelectCategoryViewModel: BaseViewModel() {
     init {
         viewModelScope.launch {
             mState.value = SelectCategoryState.CategoriesLoading
-            val response = jokesService.categories()
+            val response = jokesManager.categories()
             if (response.isOk && response.value != null) {
                 categories = listOf(Category.Any).plus(response.value.map {
                     Category.Specific(it)
