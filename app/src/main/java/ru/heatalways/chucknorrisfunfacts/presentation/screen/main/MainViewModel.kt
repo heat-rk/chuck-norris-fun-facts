@@ -18,8 +18,8 @@ class MainViewModel: BaseViewModel() {
 
     fun onMenuItemSelect(itemId: Int) {
         val screen = when(itemId) {
-            R.id.navUserInfoSearch -> SearchJokeFragment.getScreen()
-            R.id.navSearchHistory -> RandomJokeFragment.getScreen()
+            R.id.navJokeSearch -> SearchJokeFragment.getScreen()
+            R.id.navJokeRandom -> RandomJokeFragment.getScreen()
             else -> null
         }
 
