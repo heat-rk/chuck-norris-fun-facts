@@ -24,7 +24,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingBottom="@dimen/paddingMD"
-        app:layout_constraintTop_toBottomOf="@id/searchQueryEditText"
+        app:layout_constraintTop_toBottomOf="@id/searchView"
         tools:listitem="@layout/item_joke_holder_view"
         tools:itemCount="3"
         style="@style/ScrollableBase"/>

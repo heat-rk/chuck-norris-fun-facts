@@ -6,27 +6,13 @@
     <ConstraintSet android:id="@+id/start">
 
         <Constraint
-            android:id="@id/searchQueryEditText"
+            android:id="@id/searchView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/paddingMD"
             android:alpha="1"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
-
-        <Constraint
-            android:id="@id/searchButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/paddingSM"
-            android:alpha="1"
-            app:layout_constraintEnd_toEndOf="@id/searchQueryEditText"
-            app:layout_constraintTop_toTopOf="@id/searchQueryEditText"
-            app:layout_constraintBottom_toBottomOf="@id/searchQueryEditText">
-
-            <PropertySet app:visibilityMode="ignore"/>
-
-        </Constraint>
 
         <Constraint
             android:id="@id/recyclerView">
@@ -40,26 +26,12 @@
     <ConstraintSet android:id="@+id/end">
 
         <Constraint
-            android:id="@id/searchQueryEditText"
+            android:id="@id/searchView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:alpha="0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintBottom_toTopOf="parent"/>
-
-        <Constraint
-            android:id="@id/searchButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/paddingSM"
-            android:alpha="0"
-            app:layout_constraintEnd_toEndOf="@id/searchQueryEditText"
-            app:layout_constraintTop_toTopOf="@id/searchQueryEditText"
-            app:layout_constraintBottom_toBottomOf="@id/searchQueryEditText">
-
-            <PropertySet app:visibilityMode="ignore"/>
-
-        </Constraint>
 
     </ConstraintSet>
 
