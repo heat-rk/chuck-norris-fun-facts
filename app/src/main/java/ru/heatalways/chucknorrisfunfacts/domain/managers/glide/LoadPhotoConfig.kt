@@ -1,4 +1,4 @@
-package ru.heatalways.chucknorrisfunfacts.domain.services.glide
+package ru.heatalways.chucknorrisfunfacts.domain.managers.glide
 
 import androidx.annotation.DrawableRes
 

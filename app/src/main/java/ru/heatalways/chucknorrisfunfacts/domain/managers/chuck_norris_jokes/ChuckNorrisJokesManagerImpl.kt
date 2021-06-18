@@ -1,11 +1,11 @@
-package ru.heatalways.chucknorrisfunfacts.domain.services.chuck_norris_jokes
+package ru.heatalways.chucknorrisfunfacts.domain.managers.chuck_norris_jokes
 
 import retrofit2.Response
 import ru.heatalways.chucknorrisfunfacts.data.entities.ChuckJoke
 import ru.heatalways.chucknorrisfunfacts.domain.network.api.ChuckNorrisJokesApi
 import ru.heatalways.chucknorrisfunfacts.domain.network.api_response.ApiResponse
 
-class ChuckNorrisJokesServiceImpl(private val api: ChuckNorrisJokesApi): ChuckNorrisJokesService {
+class ChuckNorrisJokesManagerImpl(private val api: ChuckNorrisJokesApi): ChuckNorrisJokesManager {
     override suspend fun random(category: String?): ApiResponse<ChuckJoke> {
         api.random(category).let { response ->
             if (response.isOk && response.value != null) {

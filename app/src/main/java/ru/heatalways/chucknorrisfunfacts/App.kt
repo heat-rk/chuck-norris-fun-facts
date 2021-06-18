@@ -1,12 +1,9 @@
 package ru.heatalways.chucknorrisfunfacts
 
 import android.app.Application
-import com.github.terrakok.cicerone.Cicerone
 import com.github.terrakok.cicerone.Navigator
-import com.github.terrakok.cicerone.Router
 import ru.heatalways.chucknorrisfunfacts.di.components.AppComponent
 import ru.heatalways.chucknorrisfunfacts.di.components.DaggerAppComponent
-import ru.heatalways.chucknorrisfunfacts.domain.services.glide.GlideService
 
 class App: Application() {
     override fun onCreate() {

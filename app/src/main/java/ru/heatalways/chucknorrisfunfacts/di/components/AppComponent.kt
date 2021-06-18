@@ -6,8 +6,8 @@ import dagger.Component
 import ru.heatalways.chucknorrisfunfacts.di.modules.ChuckNorrisJokesModule
 import ru.heatalways.chucknorrisfunfacts.di.modules.GlideModule
 import ru.heatalways.chucknorrisfunfacts.di.modules.NavigationModule
-import ru.heatalways.chucknorrisfunfacts.domain.services.chuck_norris_jokes.ChuckNorrisJokesService
-import ru.heatalways.chucknorrisfunfacts.domain.services.glide.GlideService
+import ru.heatalways.chucknorrisfunfacts.domain.managers.chuck_norris_jokes.ChuckNorrisJokesManager
+import ru.heatalways.chucknorrisfunfacts.domain.managers.glide.ImageLoaderManager
 import javax.inject.Singleton
 
 @Singleton
@@ -17,8 +17,8 @@ import javax.inject.Singleton
     NavigationModule::class
 ])
 interface AppComponent {
-    fun getChuckNorrisJokesService(): ChuckNorrisJokesService
-    fun getGlideService(): GlideService
+    fun getChuckNorrisJokesService(): ChuckNorrisJokesManager
+    fun getGlideService(): ImageLoaderManager
     fun getCicerone(): Cicerone<Router>
     fun getRouter(): Router
 }

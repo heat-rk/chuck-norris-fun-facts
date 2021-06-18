@@ -8,7 +8,7 @@ import ru.heatalways.chucknorrisfunfacts.App
 import ru.heatalways.chucknorrisfunfacts.R
 import ru.heatalways.chucknorrisfunfacts.data.entities.ChuckJoke
 import ru.heatalways.chucknorrisfunfacts.databinding.ItemJokeHolderViewBinding
-import ru.heatalways.chucknorrisfunfacts.domain.services.glide.LoadPhotoConfig
+import ru.heatalways.chucknorrisfunfacts.domain.managers.glide.LoadPhotoConfig
 
 class JokeViewHolder private constructor(rootView: View): RecyclerView.ViewHolder(rootView) {
     private val binding = ItemJokeHolderViewBinding.bind(rootView)

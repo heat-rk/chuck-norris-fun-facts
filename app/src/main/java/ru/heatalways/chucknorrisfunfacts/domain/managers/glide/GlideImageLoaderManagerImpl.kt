@@ -1,9 +1,9 @@
-package ru.heatalways.chucknorrisfunfacts.domain.services.glide
+package ru.heatalways.chucknorrisfunfacts.domain.managers.glide
 
 import android.widget.ImageView
 import com.bumptech.glide.Glide
 
-class GlideServiceImpl: GlideService {
+class GlideImageLoaderManagerImpl: ImageLoaderManager {
     override fun loadImage(config: LoadPhotoConfig, imageView: ImageView) {
         var builder = Glide
             .with(imageView.context)

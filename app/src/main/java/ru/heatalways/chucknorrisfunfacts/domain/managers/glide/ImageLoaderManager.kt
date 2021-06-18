@@ -1,7 +1,7 @@
-package ru.heatalways.chucknorrisfunfacts.domain.services.glide
+package ru.heatalways.chucknorrisfunfacts.domain.managers.glide
 
 import android.widget.ImageView
 
-interface GlideService {
+interface ImageLoaderManager {
     fun loadImage(config: LoadPhotoConfig, imageView: ImageView)
 }
