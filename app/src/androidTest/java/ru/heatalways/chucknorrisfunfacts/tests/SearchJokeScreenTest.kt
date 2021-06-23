@@ -24,14 +24,14 @@ class SearchJokeScreenTest: TestCase() {
         run {
             step("1. Enter short search query") {
                 SearchJokeScreen {
-                    search {
+                    searchQueryView.editText {
                         flakySafely {
                             isVisible()
                             typeText("he")
                         }
                     }
 
-                    searchButton {
+                    searchQueryView.searchButton {
                         flakySafely { isGone() }
                     }
                 }
@@ -39,7 +39,7 @@ class SearchJokeScreenTest: TestCase() {
 
             step("2. Enter valid search query") {
                 SearchJokeScreen {
-                    search {
+                    searchQueryView.editText {
                         flakySafely {
                             isVisible()
                             clearText()
@@ -47,7 +47,7 @@ class SearchJokeScreenTest: TestCase() {
                         }
                     }
 
-                    searchButton {
+                    searchQueryView.searchButton {
                         flakySafely { isVisible() }
                     }
                 }
@@ -55,7 +55,7 @@ class SearchJokeScreenTest: TestCase() {
 
             step("3. Search button click") {
                 SearchJokeScreen {
-                    searchButton {
+                    searchQueryView.searchButton {
                         flakySafely { click() }
                     }
                 }

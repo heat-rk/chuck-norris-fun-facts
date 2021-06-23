@@ -48,14 +48,14 @@ class RandomJokeScreenTest: TestCase() {
 
             step("3. Search animal category") {
                 CategorySelectionScreen {
-                    searchEditText {
+                    searchQueryView.editText {
                         flakySafely {
                             isVisible()
                             typeText("animal")
                         }
                     }
 
-                    searchButton {
+                    searchQueryView.searchButton {
                         flakySafely {
                             isVisible()
                             click()
