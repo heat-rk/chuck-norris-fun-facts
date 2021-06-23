@@ -1,0 +1,26 @@
+{
+  "total" : 2,
+  "items" : [ {
+    "uid" : "b2c2d4878c704ad7caef0f6082985abd",
+    "name" : "ru.heatalways.chucknorrisfunfacts.tests.RandomJokeScreenTest",
+    "statistic" : {
+      "failed" : 0,
+      "broken" : 0,
+      "skipped" : 0,
+      "passed" : 1,
+      "unknown" : 0,
+      "total" : 1
+    }
+  }, {
+    "uid" : "751ba247d999a04dbbe55f7e6483bd43",
+    "name" : "ru.heatalways.chucknorrisfunfacts.tests.SearchJokeScreenTest",
+    "statistic" : {
+      "failed" : 0,
+      "broken" : 0,
+      "skipped" : 0,
+      "passed" : 1,
+      "unknown" : 0,
+      "total" : 1
+    }
+  } ]
+}

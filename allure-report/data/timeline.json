@@ -1,0 +1,35 @@
+{
+  "uid" : "ab17fc5a4eb3bca4b216b548c7f9fcbc",
+  "name" : "timeline",
+  "children" : [ {
+    "name" : "emulator-5554",
+    "children" : [ {
+      "name" : "RandomJokeScreenTest.testCategorySelection",
+      "uid" : "40a840215cb35da2",
+      "parentUid" : "643c2cb5c2c641deecdc5712fbcf971f",
+      "status" : "passed",
+      "time" : {
+        "start" : 1624366400023,
+        "stop" : 1624366406427,
+        "duration" : 6404
+      },
+      "flaky" : false,
+      "newFailed" : false,
+      "parameters" : [ ]
+    }, {
+      "name" : "SearchJokeScreenTest.testSearchView",
+      "uid" : "392bb0a6bd5151f9",
+      "parentUid" : "643c2cb5c2c641deecdc5712fbcf971f",
+      "status" : "passed",
+      "time" : {
+        "start" : 1624366407823,
+        "stop" : 1624366437555,
+        "duration" : 29732
+      },
+      "flaky" : false,
+      "newFailed" : false,
+      "parameters" : [ ]
+    } ],
+    "uid" : "643c2cb5c2c641deecdc5712fbcf971f"
+  } ]
+}

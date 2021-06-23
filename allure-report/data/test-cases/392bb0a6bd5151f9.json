@@ -1,0 +1,63 @@
+{
+  "uid" : "392bb0a6bd5151f9",
+  "name" : "SearchJokeScreenTest.testSearchView",
+  "fullName" : "SearchJokeScreenTest.testSearchView",
+  "historyId" : "eb98ac9f74c22b06620a67fd06a4b07f",
+  "time" : {
+    "start" : 1624366407823,
+    "stop" : 1624366437555,
+    "duration" : 29732
+  },
+  "status" : "passed",
+  "flaky" : false,
+  "newFailed" : false,
+  "beforeStages" : [ ],
+  "testStage" : {
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ {
+      "uid" : "2564d99633acd317",
+      "name" : "Log",
+      "source" : "2564d99633acd317.log",
+      "type" : "text/txt",
+      "size" : 0
+    } ],
+    "parameters" : [ ],
+    "attachmentsCount" : 1,
+    "shouldDisplayMessage" : false,
+    "stepsCount" : 0,
+    "hasContent" : true
+  },
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "host",
+    "value" : "emulator-5554"
+  }, {
+    "name" : "package",
+    "value" : "ru.heatalways.chucknorrisfunfacts.tests"
+  }, {
+    "name" : "testClass",
+    "value" : "SearchJokeScreenTest"
+  }, {
+    "name" : "testMethod",
+    "value" : "testSearchView"
+  }, {
+    "name" : "suite",
+    "value" : "ru.heatalways.chucknorrisfunfacts.tests.SearchJokeScreenTest"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure2"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ ],
+    "tags" : [ ]
+  },
+  "source" : "392bb0a6bd5151f9.json",
+  "parameterValues" : [ ]
+}

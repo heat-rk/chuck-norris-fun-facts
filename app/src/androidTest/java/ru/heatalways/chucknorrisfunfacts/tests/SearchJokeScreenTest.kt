@@ -1,4 +1,4 @@
-package ru.heatalways.chucknorrisfunfacts.search_joke
+package ru.heatalways.chucknorrisfunfacts.tests
 
 import android.Manifest
 import androidx.test.ext.junit.rules.ActivityScenarioRule

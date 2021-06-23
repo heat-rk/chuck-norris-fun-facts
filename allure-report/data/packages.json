@@ -1,0 +1,35 @@
+{
+  "uid" : "83edc06c07f9ae9e47eb6dd1b683e4e2",
+  "name" : "packages",
+  "children" : [ {
+    "name" : "ru.heatalways.chucknorrisfunfacts.tests",
+    "children" : [ {
+      "name" : "testCategorySelection",
+      "uid" : "40a840215cb35da2",
+      "parentUid" : "e681174bf46cc2f36a892ba3b968f87d",
+      "status" : "passed",
+      "time" : {
+        "start" : 1624366400023,
+        "stop" : 1624366406427,
+        "duration" : 6404
+      },
+      "flaky" : false,
+      "newFailed" : false,
+      "parameters" : [ ]
+    }, {
+      "name" : "testSearchView",
+      "uid" : "392bb0a6bd5151f9",
+      "parentUid" : "e681174bf46cc2f36a892ba3b968f87d",
+      "status" : "passed",
+      "time" : {
+        "start" : 1624366407823,
+        "stop" : 1624366437555,
+        "duration" : 29732
+      },
+      "flaky" : false,
+      "newFailed" : false,
+      "parameters" : [ ]
+    } ],
+    "uid" : "ru.heatalways.chucknorrisfunfacts.tests"
+  } ]
+}

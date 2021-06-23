@@ -1,0 +1,21 @@
+[ {
+  "uid" : "40a840215cb35da2",
+  "name" : "RandomJokeScreenTest.testCategorySelection",
+  "time" : {
+    "start" : 1624366400023,
+    "stop" : 1624366406427,
+    "duration" : 6404
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "392bb0a6bd5151f9",
+  "name" : "SearchJokeScreenTest.testSearchView",
+  "time" : {
+    "start" : 1624366407823,
+    "stop" : 1624366437555,
+    "duration" : 29732
+  },
+  "status" : "passed",
+  "severity" : "normal"
+} ]

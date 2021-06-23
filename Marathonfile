@@ -5,7 +5,9 @@ poolingStrategy:
 shardingStrategy:
   type: "parallel"
 sortingStrategy:
-  type: "no-sorting"
+  type: "success-rate"
+  timeLimit: "2015-03-14T09:26:53.590Z"
+  ascending: false
 batchingStrategy:
   type: "isolate"
 flakinessStrategy:

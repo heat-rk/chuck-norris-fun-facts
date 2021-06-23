@@ -1,0 +1,39 @@
+{
+  "uid" : "98d3104e051c652961429bf95fa0b5d6",
+  "name" : "suites",
+  "children" : [ {
+    "name" : "ru.heatalways.chucknorrisfunfacts.tests.RandomJokeScreenTest",
+    "children" : [ {
+      "name" : "RandomJokeScreenTest.testCategorySelection",
+      "uid" : "40a840215cb35da2",
+      "parentUid" : "b2c2d4878c704ad7caef0f6082985abd",
+      "status" : "passed",
+      "time" : {
+        "start" : 1624366400023,
+        "stop" : 1624366406427,
+        "duration" : 6404
+      },
+      "flaky" : false,
+      "newFailed" : false,
+      "parameters" : [ ]
+    } ],
+    "uid" : "b2c2d4878c704ad7caef0f6082985abd"
+  }, {
+    "name" : "ru.heatalways.chucknorrisfunfacts.tests.SearchJokeScreenTest",
+    "children" : [ {
+      "name" : "SearchJokeScreenTest.testSearchView",
+      "uid" : "392bb0a6bd5151f9",
+      "parentUid" : "751ba247d999a04dbbe55f7e6483bd43",
+      "status" : "passed",
+      "time" : {
+        "start" : 1624366407823,
+        "stop" : 1624366437555,
+        "duration" : 29732
+      },
+      "flaky" : false,
+      "newFailed" : false,
+      "parameters" : [ ]
+    } ],
+    "uid" : "751ba247d999a04dbbe55f7e6483bd43"
+  } ]
+}
