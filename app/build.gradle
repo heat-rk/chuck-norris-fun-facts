@@ -37,6 +37,7 @@ android {
 
     testOptions {
         unitTests {
+            returnDefaultValues = true
             includeAndroidResources = true
         }
     }
@@ -51,11 +52,15 @@ dependencies {
     testImplementation "junit:junit:$junit_version"
     testImplementation "org.mockito.kotlin:mockito-kotlin:$mockito_version"
     testImplementation "com.google.truth:truth:$truth_version"
+    testImplementation "com.google.truth.extensions:truth-java8-extension:$truth_version"
     testImplementation "org.robolectric:robolectric:$robolectric_version"
+    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutines_test_version"
+    testImplementation "androidx.arch.core:core-testing:$arch_test_version"
 
     androidTestImplementation "com.kaspersky.android-components:kaspresso:$kaspresso_version"
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+    androidTestImplementation "androidx.arch.core:core-testing:$arch_test_version"
 
     // DI --------------------------------------------------------
     implementation "com.google.dagger:hilt-android:$dagger_version"
