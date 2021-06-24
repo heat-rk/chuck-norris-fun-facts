@@ -51,15 +51,19 @@ class SelectCategoryFragment: BaseFragment<FragmentSelectCategoryBinding>() {
     private fun initCategoriesObserver() {
         observe(selectCategoryViewModel.state) { state ->
             when (state) {
-                is SelectCategoryState.CategoriesLoadError -> {
+                is SelectCategoryState.Error -> {
                     setProgressBarVisibility(false)
                     setErrorVisibility(true, state.message)
                 }
-                SelectCategoryState.CategoriesLoading -> {
+                is SelectCategoryState.Empty -> {
+                    setProgressBarVisibility(false)
+                    setErrorVisibility(true, getString(R.string.error_not_found))
+                }
+                is SelectCategoryState.Loading -> {
                     setProgressBarVisibility(true)
                     setErrorVisibility(false)
                 }
-                is SelectCategoryState.CategoriesLoaded -> {
+                is SelectCategoryState.Loaded -> {
                     setProgressBarVisibility(false)
                     setErrorVisibility(false)
                     categoriesAdapter.newList(state.categories)

@@ -3,7 +3,8 @@ package ru.heatalways.chucknorrisfunfacts.presentation.screen.random_joke.select
 import ru.heatalways.chucknorrisfunfacts.data.entities.Category
 
 sealed class SelectCategoryState {
-    object CategoriesLoading: SelectCategoryState()
-    class CategoriesLoaded(val categories: List<Category>): SelectCategoryState()
-    class CategoriesLoadError(val message: String?): SelectCategoryState()
+    object Loading: SelectCategoryState()
+    object Empty: SelectCategoryState()
+    class Loaded(val categories: List<Category>): SelectCategoryState()
+    class Error(val message: String?): SelectCategoryState()
 }

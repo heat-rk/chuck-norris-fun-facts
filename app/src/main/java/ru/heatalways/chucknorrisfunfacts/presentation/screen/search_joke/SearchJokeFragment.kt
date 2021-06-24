@@ -46,6 +46,10 @@ class SearchJokeFragment: BaseFragment<FragmentSearchJokeBinding>() {
                     setProgressBarVisibility(false)
                     setErrorVisibility(true, state.message)
                 }
+                is SearchJokeState.Empty -> {
+                    setProgressBarVisibility(false)
+                    setErrorVisibility(true, getString(R.string.error_not_found))
+                }
                 is SearchJokeState.Loaded -> {
                     setProgressBarVisibility(false)
                     setErrorVisibility(false)

@@ -6,7 +6,6 @@ import androidx.lifecycle.viewModelScope
 import com.github.terrakok.cicerone.Router
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
-import ru.heatalways.chucknorrisfunfacts.R
 import ru.heatalways.chucknorrisfunfacts.data.entities.Category
 import ru.heatalways.chucknorrisfunfacts.domain.managers.chuck_norris_jokes.ChuckNorrisJokesManager
 import ru.heatalways.chucknorrisfunfacts.presentation.base.BaseViewModel
@@ -26,22 +25,22 @@ class SelectCategoryViewModel @Inject constructor(
 
     init {
         viewModelScope.launch {
-            mState.value = SelectCategoryState.CategoriesLoading
+            mState.value = SelectCategoryState.Loading
             val response = jokesManager.categories()
             if (response.isOk && response.value != null) {
                 categories = listOf(Category.Any).plus(response.value.map {
                     Category.Specific(it)
                 })
-                mState.value = SelectCategoryState.CategoriesLoaded(categories)
+                mState.value = SelectCategoryState.Loaded(categories)
             } else {
-                mState.value = SelectCategoryState.CategoriesLoadError(response.error?.message)
+                mState.value = SelectCategoryState.Error(response.error?.message)
             }
         }
     }
 
     fun searchCategories(query: String) {
         viewModelScope.launch {
-            mState.value = SelectCategoryState.CategoriesLoading
+            mState.value = SelectCategoryState.Loading
 
             val results = if (query.isEmpty())
                 categories
@@ -49,11 +48,9 @@ class SelectCategoryViewModel @Inject constructor(
                 categories.filter { it is Category.Specific && it.name.contains(query) }
 
             if (results.isNotEmpty())
-                mState.value = SelectCategoryState.CategoriesLoaded(results)
+                mState.value = SelectCategoryState.Loaded(results)
             else
-                mState.value = SelectCategoryState.CategoriesLoadError(
-                    getString(R.string.error_not_found)
-                )
+                mState.value = SelectCategoryState.Empty
         }
     }
 

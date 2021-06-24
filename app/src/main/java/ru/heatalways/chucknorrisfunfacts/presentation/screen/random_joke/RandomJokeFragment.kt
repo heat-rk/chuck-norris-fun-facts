@@ -41,16 +41,16 @@ class RandomJokeFragment: BaseFragment<FragmentRandomJokeBinding>() {
     private fun initRandomJokeObserver() {
         observe(randomJokeViewModel.state) { state ->
             when (state) {
-                is RandomJokeState.JokeLoading -> {
+                is RandomJokeState.Loading -> {
                     binding.buttonProgressBar.setVisibleOrGone(true)
                     binding.getJokeButton.setVisibleOrGone(false)
                 }
-                is RandomJokeState.JokeLoadError -> {
+                is RandomJokeState.Error -> {
                     binding.buttonProgressBar.setVisibleOrGone(false)
                     binding.getJokeButton.setVisibleOrGone(true)
                     showMessage(state.message)
                 }
-                is RandomJokeState.JokesLoaded -> {
+                is RandomJokeState.Loaded -> {
                     binding.buttonProgressBar.setVisibleOrGone(false)
                     binding.getJokeButton.setVisibleOrGone(true)
                 }

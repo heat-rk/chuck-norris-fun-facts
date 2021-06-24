@@ -5,7 +5,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
-import ru.heatalways.chucknorrisfunfacts.R
 import ru.heatalways.chucknorrisfunfacts.domain.managers.chuck_norris_jokes.ChuckNorrisJokesManager
 import ru.heatalways.chucknorrisfunfacts.presentation.base.BaseViewModel
 import javax.inject.Inject
@@ -25,7 +24,7 @@ class SearchJokeViewModel @Inject constructor(
                 if (response.value.isNotEmpty())
                     mState.value = SearchJokeState.Loaded(response.value)
                 else
-                    mState.value = SearchJokeState.Error(getString(R.string.error_not_found))
+                    mState.value = SearchJokeState.Empty
             } else {
                 mState.value = SearchJokeState.Error(response.error?.message)
             }

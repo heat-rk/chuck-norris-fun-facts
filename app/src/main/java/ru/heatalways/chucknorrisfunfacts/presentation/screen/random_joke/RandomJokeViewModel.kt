@@ -26,7 +26,7 @@ class RandomJokeViewModel @Inject constructor(
 
     fun fetchRandomJoke() {
         viewModelScope.launch {
-            mState.value = RandomJokeState.JokeLoading
+            mState.value = RandomJokeState.Loading
 
             selectedCategory.value.let { category ->
                 val response = jokesManager.random(
@@ -37,9 +37,9 @@ class RandomJokeViewModel @Inject constructor(
                 )
 
                 if (response.isOk && response.value != null) {
-                    mState.value = RandomJokeState.JokesLoaded(listOf(response.value))
+                    mState.value = RandomJokeState.Loaded(listOf(response.value))
                 } else {
-                    mState.value = RandomJokeState.JokeLoadError(response.error?.message)
+                    mState.value = RandomJokeState.Error(response.error?.message)
                 }
             }
         }
