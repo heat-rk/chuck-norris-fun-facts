@@ -13,7 +13,7 @@ object SearchJokeScreen: BaseScreen<SearchJokeScreen>() {
     val searchQueryView = KSearchQueryView { withId(R.id.searchView) }
     val recyclerView = KRecyclerView(
         {
-            withId(R.id.recyclerView)
+            withId(R.id.jokesRecyclerView)
         },
         {
             itemType(::JokeItem)

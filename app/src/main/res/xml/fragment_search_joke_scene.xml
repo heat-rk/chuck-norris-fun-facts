@@ -15,7 +15,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <Constraint
-            android:id="@id/recyclerView">
+            android:id="@id/jokesRecyclerView">
 
             <PropertySet app:visibilityMode="ignore"/>
 
@@ -40,7 +40,7 @@
         app:constraintSetStart="@id/start">
 
         <OnSwipe
-            app:touchAnchorId="@id/recyclerView"
+            app:touchAnchorId="@id/jokesRecyclerView"
             app:dragDirection="dragUp"
             app:dragScale="0.5"/>
 

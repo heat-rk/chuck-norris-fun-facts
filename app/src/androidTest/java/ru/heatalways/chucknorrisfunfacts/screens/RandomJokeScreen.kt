@@ -13,7 +13,7 @@ object RandomJokeScreen: BaseScreen<RandomJokeScreen>() {
     val selectCategoryButton = KButton { withId(R.id.selectCategoryButton) }
     val geJokeButton = KButton { withId(R.id.getJokeButton) }
     val recyclerView = KRecyclerView({
-            withId(R.id.recyclerView)
+            withId(R.id.historyRecyclerView)
         },
         {
             itemType(::JokeItem)

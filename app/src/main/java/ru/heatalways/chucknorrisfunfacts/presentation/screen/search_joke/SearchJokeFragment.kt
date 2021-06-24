@@ -18,19 +18,18 @@ class SearchJokeFragment: BaseFragment<FragmentSearchJokeBinding>() {
     private val viewModel: SearchJokeViewModel by viewModels()
     private val jokesAdapter = JokesAdapter()
 
-    override fun getBinding(inflater: LayoutInflater, container: ViewGroup?): FragmentSearchJokeBinding {
-        return FragmentSearchJokeBinding.inflate(layoutInflater, container, false)
-    }
+    override val bindingInflater: (LayoutInflater, ViewGroup?, Boolean) -> FragmentSearchJokeBinding
+        get() = FragmentSearchJokeBinding::inflate
 
-    override val contentId = R.id.recyclerView
+    override val contentId = R.id.jokesRecyclerView
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setTitle(R.string.search_joke_screen_title)
 
         binding.apply {
-            recyclerView.layoutManager = LinearLayoutManager(context)
-            recyclerView.adapter = jokesAdapter
+            jokesRecyclerView.layoutManager = LinearLayoutManager(context)
+            jokesRecyclerView.adapter = jokesAdapter
 
             searchView.onSearchExecute = { searchQuery ->
                 viewModel.onSearchQueryExecute(searchQuery)

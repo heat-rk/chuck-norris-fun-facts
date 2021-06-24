@@ -22,12 +22,8 @@ class SelectCategoryFragment: BaseFragment<FragmentSelectCategoryBinding>() {
 
     private val categoriesAdapter = CategoriesAdapter()
 
-    override fun getBinding(
-        inflater: LayoutInflater,
-        container: ViewGroup?
-    ): FragmentSelectCategoryBinding {
-        return FragmentSelectCategoryBinding.inflate(inflater, container, false)
-    }
+    override val bindingInflater: (LayoutInflater, ViewGroup?, Boolean) -> FragmentSelectCategoryBinding
+        get() = FragmentSelectCategoryBinding::inflate
 
     override val contentId = R.id.categoriesRecyclerView
 

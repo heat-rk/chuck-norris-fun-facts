@@ -4,31 +4,26 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ProgressBar
-import android.widget.TextView
 import android.widget.Toast
 import androidx.annotation.ColorRes
 import androidx.annotation.IdRes
 import androidx.annotation.StringRes
-import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.LiveData
 import androidx.viewbinding.ViewBinding
 import ru.heatalways.chucknorrisfunfacts.R
+import ru.heatalways.chucknorrisfunfacts.databinding.BaseFragmentBinding
 import ru.heatalways.chucknorrisfunfacts.extensions.setVisibleOrGone
 import ru.heatalways.chucknorrisfunfacts.presentation.screen.main.MainActivity
 
 abstract class BaseFragment<Binding: ViewBinding>: Fragment(), KeyboardChangeListener {
-    private lateinit var rootView: ViewGroup
-
-    private var mBinding: Binding? = null
-    protected val binding get() = mBinding!!
+    private lateinit var rootBinding: BaseFragmentBinding
+    protected lateinit var binding: Binding
 
     private val baseActivity get() = activity as BaseActivity<*>
 
-    protected abstract fun getBinding(inflater: LayoutInflater, container: ViewGroup?): Binding
-
+    protected abstract val bindingInflater: (LayoutInflater, ViewGroup?, Boolean) -> Binding
     @IdRes protected open val contentId = R.id.contentContainer
     @ColorRes protected open val backgroundColor = R.color.darkBackgroundColor
 
@@ -37,32 +32,16 @@ abstract class BaseFragment<Binding: ViewBinding>: Fragment(), KeyboardChangeLis
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        rootView = inflater.inflate(R.layout.base_fragment, container, false)
-                as ViewGroup
-
-        val contentContainer = rootView.findViewById<ViewGroup>(R.id.contentContainer)
-
-        mBinding = getBinding(
-            inflater = inflater,
-            container = container
-        )
-
-        contentContainer.addView(binding.root)
-
-        rootView.setBackgroundColor(
-            ContextCompat.getColor(requireContext(), backgroundColor)
-        )
-
-        rootView.findViewById<Toolbar>(R.id.toolbar)?.setNavigationOnClickListener {
-            activity?.onBackPressed()
+        rootBinding = BaseFragmentBinding.inflate(inflater, container, false).apply {
+            root.setBackgroundColor(ContextCompat.getColor(requireContext(), backgroundColor))
+            appbar.toolbar.setNavigationOnClickListener {
+                activity?.onBackPressed()
+            }
         }
 
-        return rootView
-    }
+        binding = bindingInflater(inflater, rootBinding.contentContainer, true)
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        mBinding = null
+        return rootBinding.root
     }
 
     override fun onResume() {
@@ -100,23 +79,23 @@ abstract class BaseFragment<Binding: ViewBinding>: Fragment(), KeyboardChangeLis
     }
 
     protected fun setErrorVisibility(isVisible: Boolean, message: String? = null) {
-        rootView.findViewById<View>(contentId)?.setVisibleOrGone(!isVisible)
-        rootView.findViewById<ViewGroup>(R.id.errorContainer).setVisibleOrGone(isVisible)
-        rootView.findViewById<TextView>(R.id.errorTextView).text = message ?: getString(R.string.error_unknown)
+        rootBinding.root.findViewById<View>(contentId)?.setVisibleOrGone(!isVisible)
+        rootBinding.errorContainer.setVisibleOrGone(isVisible)
+        rootBinding.errorTextView.text = message ?: getString(R.string.error_unknown)
     }
 
     protected fun setProgressBarVisibility(isVisible: Boolean) {
-        rootView.findViewById<View>(contentId)?.setVisibleOrGone(!isVisible)
-        rootView.findViewById<ViewGroup>(R.id.errorContainer).setVisibleOrGone(!isVisible)
-        rootView.findViewById<ProgressBar>(R.id.progressBar).setVisibleOrGone(isVisible)
+        rootBinding.root.findViewById<View>(contentId)?.setVisibleOrGone(!isVisible)
+        rootBinding.errorContainer.setVisibleOrGone(!isVisible)
+        rootBinding.progressBar.setVisibleOrGone(isVisible)
     }
 
     protected fun setTitle(@StringRes title: Int) {
-        rootView.findViewById<Toolbar>(R.id.toolbar)?.setTitle(title)
+        rootBinding.appbar.toolbar.setTitle(title)
     }
 
     protected fun setTitle(title: String) {
-        rootView.findViewById<Toolbar>(R.id.toolbar)?.title = title
+        rootBinding.appbar.toolbar.title = title
     }
 
     override fun onKeyboardChanged(isOpen: Boolean) {

@@ -17,12 +17,10 @@ import ru.heatalways.chucknorrisfunfacts.presentation.base.BaseFragment
 class RandomJokeFragment: BaseFragment<FragmentRandomJokeBinding>() {
     private val randomJokeViewModel: RandomJokeViewModel by activityViewModels()
 
-    override fun getBinding(
-        inflater: LayoutInflater,
-        container: ViewGroup?
-    ): FragmentRandomJokeBinding {
-        return FragmentRandomJokeBinding.inflate(inflater, container, false)
-    }
+    override val bindingInflater: (LayoutInflater, ViewGroup?, Boolean) -> FragmentRandomJokeBinding
+        get() = FragmentRandomJokeBinding::inflate
+
+    override val contentId = R.id.historyRecyclerView
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
