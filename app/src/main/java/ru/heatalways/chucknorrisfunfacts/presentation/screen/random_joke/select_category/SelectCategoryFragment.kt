@@ -8,12 +8,14 @@ import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.github.terrakok.cicerone.androidx.FragmentScreen
+import dagger.hilt.android.AndroidEntryPoint
 import ru.heatalways.chucknorrisfunfacts.R
 import ru.heatalways.chucknorrisfunfacts.databinding.FragmentSelectCategoryBinding
 import ru.heatalways.chucknorrisfunfacts.presentation.adapters.CategoriesAdapter
 import ru.heatalways.chucknorrisfunfacts.presentation.base.BaseFragment
 import ru.heatalways.chucknorrisfunfacts.presentation.screen.random_joke.RandomJokeViewModel
 
+@AndroidEntryPoint
 class SelectCategoryFragment: BaseFragment<FragmentSelectCategoryBinding>() {
     private val selectCategoryViewModel: SelectCategoryViewModel by viewModels()
     private val randomJokeViewModel: RandomJokeViewModel by activityViewModels()

@@ -7,11 +7,13 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.github.terrakok.cicerone.androidx.FragmentScreen
+import dagger.hilt.android.AndroidEntryPoint
 import ru.heatalways.chucknorrisfunfacts.R
 import ru.heatalways.chucknorrisfunfacts.databinding.FragmentSearchJokeBinding
 import ru.heatalways.chucknorrisfunfacts.presentation.adapters.JokesAdapter
 import ru.heatalways.chucknorrisfunfacts.presentation.base.BaseFragment
 
+@AndroidEntryPoint
 class SearchJokeFragment: BaseFragment<FragmentSearchJokeBinding>() {
     private val viewModel: SearchJokeViewModel by viewModels()
     private val jokesAdapter = JokesAdapter()

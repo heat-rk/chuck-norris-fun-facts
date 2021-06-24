@@ -3,18 +3,23 @@ package ru.heatalways.chucknorrisfunfacts.presentation.screen.main
 import android.os.Bundle
 import android.view.LayoutInflater
 import androidx.activity.viewModels
+import com.github.terrakok.cicerone.Router
+import dagger.hilt.android.AndroidEntryPoint
 import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEvent
 import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEventListener
 import net.yslibrary.android.keyboardvisibilityevent.Unregistrar
-import ru.heatalways.chucknorrisfunfacts.App
 import ru.heatalways.chucknorrisfunfacts.R
 import ru.heatalways.chucknorrisfunfacts.databinding.ActivityMainBinding
 import ru.heatalways.chucknorrisfunfacts.extensions.setVisibleOrGone
 import ru.heatalways.chucknorrisfunfacts.extensions.showSmoothly
 import ru.heatalways.chucknorrisfunfacts.presentation.base.BaseActivity
 import ru.heatalways.chucknorrisfunfacts.presentation.base.KeyboardChangeListener
+import javax.inject.Inject
 
-class MainActivity : BaseActivity<ActivityMainBinding>() {
+@AndroidEntryPoint
+class MainActivity: BaseActivity<ActivityMainBinding>() {
+    @Inject lateinit var router: Router
+
     private val mainViewModel: MainViewModel by viewModels()
 
     private var keyboardListenerUnregister: Unregistrar? = null
@@ -35,7 +40,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
         }
 
         mainViewModel.currentScreen.observe(this, {
-            App.appComponent.getRouter().replaceScreen(it)
+            router.replaceScreen(it)
         })
 
         keyboardListenerUnregister = KeyboardVisibilityEvent.registerEventListener(

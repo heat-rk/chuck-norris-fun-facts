@@ -3,13 +3,22 @@ package ru.heatalways.chucknorrisfunfacts.presentation.screen.random_joke.select
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.github.terrakok.cicerone.Router
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import ru.heatalways.chucknorrisfunfacts.R
 import ru.heatalways.chucknorrisfunfacts.data.entities.Category
+import ru.heatalways.chucknorrisfunfacts.domain.managers.chuck_norris_jokes.ChuckNorrisJokesManager
 import ru.heatalways.chucknorrisfunfacts.presentation.base.BaseViewModel
 import ru.heatalways.chucknorrisfunfacts.presentation.screen.random_joke.RandomJokeFragment
+import javax.inject.Inject
 
-class SelectCategoryViewModel: BaseViewModel() {
+@HiltViewModel
+class SelectCategoryViewModel @Inject constructor(
+    private val jokesManager: ChuckNorrisJokesManager,
+    private val router: Router
+): BaseViewModel() {
+
     var categories = emptyList<Category>()
 
     private val mState = MutableLiveData<SelectCategoryState>()

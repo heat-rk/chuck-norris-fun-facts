@@ -9,11 +9,6 @@ import androidx.lifecycle.ViewModel
 import ru.heatalways.chucknorrisfunfacts.App
 
 abstract class BaseViewModel: ViewModel() {
-    protected val router get() = App.appComponent.getRouter()
-
-    protected val jokesManager get() = App.appComponent.getChuckNorrisJokesManager()
-    protected val glideManager get() = App.appComponent.getImageLoaderManager()
-
     protected fun getString(@StringRes stringRes: Int)
             = App.instance.getString(stringRes)
 

@@ -9,18 +9,25 @@ import androidx.annotation.IdRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.viewbinding.ViewBinding
+import com.github.terrakok.cicerone.Cicerone
 import com.github.terrakok.cicerone.Navigator
+import com.github.terrakok.cicerone.Router
 import com.github.terrakok.cicerone.androidx.AppNavigator
+import dagger.hilt.android.AndroidEntryPoint
 import ru.heatalways.chucknorrisfunfacts.App
 import ru.heatalways.chucknorrisfunfacts.presentation.navigation.AnimatedNavigator
+import javax.inject.Inject
 
 abstract class BaseActivity<Binding: ViewBinding>: AppCompatActivity(){
+    @Inject lateinit var cicerone: Cicerone<Router>
+
     private var navigator: Navigator? = null
+
     protected lateinit var binding: Binding
 
-    protected abstract fun getBinding(inflater: LayoutInflater): Binding
-
     private val app get() = application as App
+
+    protected abstract fun getBinding(inflater: LayoutInflater): Binding
 
     @IdRes
     abstract fun getFragmentContainerId(): Int?
@@ -37,12 +44,12 @@ abstract class BaseActivity<Binding: ViewBinding>: AppCompatActivity(){
 
     override fun onResume() {
         super.onResume()
-        navigator?.let { app.setNavigator(it) }
+        navigator?.let { cicerone.getNavigatorHolder().setNavigator(it) }
     }
 
     override fun onPause() {
         super.onPause()
-        navigator?.let { app.removeNavigator() }
+        navigator?.let { cicerone.getNavigatorHolder().removeNavigator() }
     }
 
     fun showKeyboard(view: View) {

@@ -6,12 +6,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import com.github.terrakok.cicerone.androidx.FragmentScreen
+import dagger.hilt.android.AndroidEntryPoint
 import ru.heatalways.chucknorrisfunfacts.R
 import ru.heatalways.chucknorrisfunfacts.data.entities.Category
 import ru.heatalways.chucknorrisfunfacts.databinding.FragmentRandomJokeBinding
 import ru.heatalways.chucknorrisfunfacts.extensions.setVisibleOrGone
 import ru.heatalways.chucknorrisfunfacts.presentation.base.BaseFragment
 
+@AndroidEntryPoint
 class RandomJokeFragment: BaseFragment<FragmentRandomJokeBinding>() {
     private val randomJokeViewModel: RandomJokeViewModel by activityViewModels()
 

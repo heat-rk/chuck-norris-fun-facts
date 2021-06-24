@@ -2,12 +2,15 @@ package ru.heatalways.chucknorrisfunfacts.di.modules
 
 import dagger.Module
 import dagger.Provides
-import ru.heatalways.chucknorrisfunfacts.domain.network.api.ChuckNorrisJokesApi
+import dagger.hilt.InstallIn
+import dagger.hilt.components.SingletonComponent
 import ru.heatalways.chucknorrisfunfacts.domain.managers.chuck_norris_jokes.ChuckNorrisJokesManager
 import ru.heatalways.chucknorrisfunfacts.domain.managers.chuck_norris_jokes.ChuckNorrisJokesManagerImpl
+import ru.heatalways.chucknorrisfunfacts.domain.network.api.ChuckNorrisJokesApi
 import javax.inject.Singleton
 
 @Module(includes = [ApiModule::class])
+@InstallIn(SingletonComponent::class)
 class ChuckNorrisJokesModule {
     @Provides
     @Singleton
