@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import com.github.terrakok.cicerone.androidx.FragmentScreen
 import dagger.hilt.android.AndroidEntryPoint
 import ru.heatalways.chucknorrisfunfacts.R
@@ -12,10 +13,14 @@ import ru.heatalways.chucknorrisfunfacts.data.entities.Category
 import ru.heatalways.chucknorrisfunfacts.databinding.FragmentRandomJokeBinding
 import ru.heatalways.chucknorrisfunfacts.extensions.setVisibleOrGone
 import ru.heatalways.chucknorrisfunfacts.presentation.base.BaseFragment
+import ru.heatalways.chucknorrisfunfacts.presentation.screen.random_joke.select_category.SharedCategorySelectionViewModel
 
 @AndroidEntryPoint
 class RandomJokeFragment: BaseFragment<FragmentRandomJokeBinding>() {
-    private val randomJokeViewModel: RandomJokeViewModel by activityViewModels()
+    private val randomJokeViewModel: RandomJokeViewModel by viewModels()
+
+    private val sharedCategorySelectionViewModel:
+            SharedCategorySelectionViewModel by activityViewModels()
 
     override val bindingInflater: (LayoutInflater, ViewGroup?, Boolean) -> FragmentRandomJokeBinding
         get() = FragmentRandomJokeBinding::inflate
@@ -27,7 +32,9 @@ class RandomJokeFragment: BaseFragment<FragmentRandomJokeBinding>() {
         setTitle(R.string.random_joke_screen_title)
 
         binding.getJokeButton.setOnClickListener {
-            randomJokeViewModel.fetchRandomJoke()
+            sharedCategorySelectionViewModel.selectedCategory.value?.let { category ->
+                randomJokeViewModel.fetchRandomJoke(category)
+            }
         }
 
         binding.selectCategoryButton.setOnClickListener {
@@ -59,7 +66,7 @@ class RandomJokeFragment: BaseFragment<FragmentRandomJokeBinding>() {
     }
 
     private fun initCategorySelectionObserver() {
-        observe(randomJokeViewModel.selectedCategory) { category ->
+        observe(sharedCategorySelectionViewModel.selectedCategory) { category ->
             binding.selectCategoryButton.text = when(category) {
                 Category.Any -> getString(R.string.random_joke_any_category)
                 is Category.Specific -> category.name

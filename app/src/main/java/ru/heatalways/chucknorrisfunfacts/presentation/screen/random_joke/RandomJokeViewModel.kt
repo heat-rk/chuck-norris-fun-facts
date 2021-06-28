@@ -18,35 +18,26 @@ class RandomJokeViewModel @Inject constructor(
     private val router: Router
 ): BaseViewModel() {
 
-    private val mSelectedCategory = MutableLiveData<Category>(Category.Any)
-    val selectedCategory: LiveData<Category> = mSelectedCategory
-
     private val mState = MutableLiveData<RandomJokeState>()
     val state: LiveData<RandomJokeState> = mState
 
-    fun fetchRandomJoke() {
+    fun fetchRandomJoke(selectedCategory: Category) {
         viewModelScope.launch {
             mState.value = RandomJokeState.Loading
 
-            selectedCategory.value.let { category ->
-                val response = jokesManager.random(
-                    when (category) {
-                        is Category.Specific -> category.name
-                        else -> null
-                    }
-                )
-
-                if (response.isOk && response.value != null) {
-                    mState.value = RandomJokeState.Loaded(listOf(response.value))
-                } else {
-                    mState.value = RandomJokeState.Error(response.error?.message)
+            val response = jokesManager.random(
+                when (selectedCategory) {
+                    is Category.Specific -> selectedCategory.name
+                    else -> null
                 }
+            )
+
+            if (response.isOk && response.value != null) {
+                mState.value = RandomJokeState.Loaded(listOf(response.value))
+            } else {
+                mState.value = RandomJokeState.Error(response.error?.message)
             }
         }
-    }
-
-    fun selectCategory(category: Category) {
-        mSelectedCategory.value = category
     }
 
     fun navigateToCategorySelectionScreen() {

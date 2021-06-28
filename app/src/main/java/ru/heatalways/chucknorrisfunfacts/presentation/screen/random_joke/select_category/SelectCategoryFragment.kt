@@ -13,12 +13,14 @@ import ru.heatalways.chucknorrisfunfacts.R
 import ru.heatalways.chucknorrisfunfacts.databinding.FragmentSelectCategoryBinding
 import ru.heatalways.chucknorrisfunfacts.presentation.adapters.CategoriesAdapter
 import ru.heatalways.chucknorrisfunfacts.presentation.base.BaseFragment
-import ru.heatalways.chucknorrisfunfacts.presentation.screen.random_joke.RandomJokeViewModel
 
 @AndroidEntryPoint
 class SelectCategoryFragment: BaseFragment<FragmentSelectCategoryBinding>() {
-    private val selectCategoryViewModel: SelectCategoryViewModel by viewModels()
-    private val randomJokeViewModel: RandomJokeViewModel by activityViewModels()
+    private val selectCategoryViewModel:
+            SelectCategoryViewModel by viewModels()
+
+    private val sharedCategorySelectionViewModel:
+            SharedCategorySelectionViewModel by activityViewModels()
 
     private val categoriesAdapter = CategoriesAdapter()
 
@@ -32,7 +34,7 @@ class SelectCategoryFragment: BaseFragment<FragmentSelectCategoryBinding>() {
         setTitle(R.string.select_category_screen_title)
 
         categoriesAdapter.onCategoryClick = { category ->
-            randomJokeViewModel.selectCategory(category)
+            sharedCategorySelectionViewModel.selectCategory(category)
             selectCategoryViewModel.backToRandomJokeScreen()
         }
 
