@@ -94,6 +94,11 @@ dependencies {
     // NAVIGATION --------------------------------------------------------
     implementation "com.github.terrakok:cicerone:$cicerone_version"
 
+    // DATA STORAGE --------------------------------------------------------
+    implementation "androidx.room:room-runtime:$room_version"
+    implementation "androidx.room:room-ktx:$room_version"
+    kapt "androidx.room:room-compiler:$room_version"
+
     // OTHER STUFF --------------------------------------------------------
     implementation 'net.yslibrary.keyboardvisibilityevent:keyboardvisibilityevent:3.0.0-RC2'
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
