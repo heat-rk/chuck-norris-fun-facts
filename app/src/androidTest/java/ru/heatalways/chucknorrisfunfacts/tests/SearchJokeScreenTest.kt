@@ -20,55 +20,79 @@ class SearchJokeScreenTest: TestCase() {
     var rule = ActivityScenarioRule(MainActivity::class.java)
 
     @Test
-    fun testSearchView() {
+    fun testShortSearchQuery_shouldHideButton() {
         run {
             step("1. Enter short search query") {
-                SearchJokeScreen {
-                    searchQueryView.editText {
-                        flakySafely {
-                            isVisible()
-                            typeText("he")
-                        }
-                    }
-
-                    searchQueryView.searchButton {
-                        flakySafely { isGone() }
+                SearchJokeScreen.searchQueryView.editText {
+                    flakySafely {
+                        isVisible()
+                        typeText("he")
                     }
                 }
             }
 
-            step("2. Enter valid search query") {
-                SearchJokeScreen {
-                    searchQueryView.editText {
-                        flakySafely {
-                            isVisible()
-                            clearText()
-                            typeText("hey")
-                        }
-                    }
-
-                    searchQueryView.searchButton {
-                        flakySafely { isVisible() }
-                    }
+            step("2. Check search button visibility (should be GONE)") {
+                SearchJokeScreen.searchQueryView.searchButton {
+                    flakySafely { isGone() }
                 }
             }
+        }
+    }
 
-            step("3. Search button click") {
-                SearchJokeScreen {
-                    searchQueryView.searchButton {
-                        flakySafely { click() }
-                    }
+    @Test
+    fun testValidSearchQueryResults_shouldShowResults() = run {
+        step("1. Enter valid search query") {
+            SearchJokeScreen.searchQueryView.editText {
+                flakySafely {
+                    isVisible()
+                    typeText("hey")
                 }
             }
+        }
 
-            step("4. Check recycler view size") {
-                SearchJokeScreen {
-                    recyclerView {
-                        flakySafely {
-                            isVisible()
-                            assert(getSize() > 0)
-                        }
-                    }
+        step("2. Search button click") {
+            SearchJokeScreen.searchQueryView.searchButton {
+                flakySafely {
+                    isVisible()
+                    click()
+                }
+            }
+        }
+
+        step("3. Check recycler view size") {
+            SearchJokeScreen.recyclerView {
+                flakySafely {
+                    isVisible()
+                    assert(getSize() > 0)
+                }
+            }
+        }
+    }
+
+    @Test
+    fun testInvalidSearchQuery_shouldShowError() = run {
+        step("1. Enter invalid search query") {
+            SearchJokeScreen.searchQueryView.editText {
+                flakySafely {
+                    isVisible()
+                    typeText("heydkngkdognskmfkbnkfg")
+                }
+            }
+        }
+
+        step("2. Search button click") {
+            SearchJokeScreen.searchQueryView.searchButton {
+                flakySafely {
+                    isVisible()
+                    click()
+                }
+            }
+        }
+
+        step("3. Check error visibility (should be VISIBLE)") {
+            SearchJokeScreen.errorTextView {
+                flakySafely {
+                    isVisible()
                 }
             }
         }

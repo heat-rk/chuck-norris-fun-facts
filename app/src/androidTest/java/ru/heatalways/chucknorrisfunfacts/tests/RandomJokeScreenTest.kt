@@ -23,70 +23,61 @@ class RandomJokeScreenTest: TestCase() {
     var rule = ActivityScenarioRule(MainActivity::class.java)
 
     @Test
-    fun testCategorySelection() {
+    fun testCategorySelection_shouldSelectAnimal() {
         run {
             step("1. Open random joke screen") {
-                SearchJokeScreen {
-                    bottomNavigation {
-                        flakySafely {
-                            setSelectedItem(R.id.navJokeRandom)
-                        }
+                SearchJokeScreen.bottomNavigation {
+                    flakySafely {
+                        setSelectedItem(R.id.navJokeRandom)
                     }
                 }
             }
 
             step("2. Select category button click (navigate to categories screen)") {
-                RandomJokeScreen {
-                    selectCategoryButton {
-                        flakySafely {
-                            isVisible()
-                            click()
-                        }
+                RandomJokeScreen.selectCategoryButton {
+                    flakySafely {
+                        isVisible()
+                        click()
                     }
                 }
             }
 
-            step("3. Search animal category") {
-                CategorySelectionScreen {
-                    searchQueryView.editText {
-                        flakySafely {
-                            isVisible()
-                            typeText("animal")
-                        }
-                    }
-
-                    searchQueryView.searchButton {
-                        flakySafely {
-                            isVisible()
-                            click()
-                        }
+            step("3. Type search query") {
+                CategorySelectionScreen.searchQueryView.editText {
+                    flakySafely {
+                        isVisible()
+                        typeText("animal")
                     }
                 }
             }
 
-            step("4. Select animal category") {
-                CategorySelectionScreen {
-                    categories {
-                        firstChild<CategoryItem> {
-                            button {
-                                flakySafely {
-                                    isVisible()
-                                    hasText("animal")
-                                    click()
-                                }
+            step("4. Click search button") {
+                CategorySelectionScreen.searchQueryView.searchButton {
+                    flakySafely {
+                        isVisible()
+                        click()
+                    }
+                }
+            }
+
+            step("5. Select animal category") {
+                CategorySelectionScreen.categories {
+                    childWith<CategoryItem> { withText("animal") } perform {
+                        button {
+                            flakySafely {
+                                isVisible()
+                                click()
                             }
                         }
                     }
                 }
             }
 
-            step("5. Check selected category") {
-                RandomJokeScreen {
-                    selectCategoryButton {
-                        flakySafely {
-                            isVisible()
-                            hasText("animal")
-                        }
+            step("6. Check selected category") {
+                RandomJokeScreen.selectCategoryButton {
+                    flakySafely {
+                        isVisible()
+                        hasText("animal")
                     }
                 }
             }
