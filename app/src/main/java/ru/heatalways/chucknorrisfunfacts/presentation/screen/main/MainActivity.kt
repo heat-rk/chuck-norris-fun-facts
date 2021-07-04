@@ -25,9 +25,8 @@ class MainActivity: BaseActivity<ActivityMainBinding>() {
     private var keyboardListenerUnregister: Unregistrar? = null
     private val keyboardChangeListeners = mutableListOf<KeyboardChangeListener>()
 
-    override fun getBinding(inflater: LayoutInflater): ActivityMainBinding {
-        return ActivityMainBinding.inflate(inflater)
-    }
+    override val bindingInflater: (LayoutInflater) -> ActivityMainBinding
+        get() = ActivityMainBinding::inflate
 
     override fun getFragmentContainerId() = R.id.fragmentContainer
 

@@ -10,9 +10,8 @@ import ru.heatalways.chucknorrisfunfacts.presentation.base.BaseActivity
 import ru.heatalways.chucknorrisfunfacts.presentation.screen.main.MainActivity
 
 class SplashActivity: BaseActivity<ActivitySplashBinding>() {
-    override fun getBinding(inflater: LayoutInflater): ActivitySplashBinding {
-        return ActivitySplashBinding.inflate(inflater)
-    }
+    override val bindingInflater: (LayoutInflater) -> ActivitySplashBinding
+        get() = ActivitySplashBinding::inflate
 
     override fun getFragmentContainerId(): Nothing? = null
 

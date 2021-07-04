@@ -4,6 +4,7 @@ import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import androidx.annotation.IdRes
 import androidx.appcompat.app.AppCompatActivity
@@ -27,14 +28,14 @@ abstract class BaseActivity<Binding: ViewBinding>: AppCompatActivity(){
 
     private val app get() = application as App
 
-    protected abstract fun getBinding(inflater: LayoutInflater): Binding
+    protected abstract val bindingInflater: (LayoutInflater) -> Binding
 
     @IdRes
     abstract fun getFragmentContainerId(): Int?
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = getBinding(layoutInflater)
+        binding = bindingInflater(layoutInflater)
         setContentView(binding.root)
 
         getFragmentContainerId()?.let { fragmentContainerId ->
