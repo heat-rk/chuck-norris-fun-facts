@@ -9,6 +9,8 @@
 
     <!-- APP -->
     <style name="ApplicationTheme.NoActionBar" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorAccent">@color/colorAccent</item>
+
         <item name="actionMenuTextColor">@color/colorPrimary</item>
         <item name="actionMenuTextAppearance">@style/ToolbarTextAppearance</item>
     </style>
