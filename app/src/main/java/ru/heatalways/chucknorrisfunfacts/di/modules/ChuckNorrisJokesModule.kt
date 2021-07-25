@@ -15,7 +15,7 @@ import javax.inject.Singleton
 class ChuckNorrisJokesModule {
     @Provides
     @Singleton
-    fun provideChuckNorrisJokesService(
+    fun provideChuckNorrisJokesManager(
         api: ChuckNorrisJokesApi,
         database: AppDatabase
     ): ChuckNorrisJokesManager {
