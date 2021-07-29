@@ -5,26 +5,1339 @@
     "name" : "emulator-5554",
     "children" : [ {
       "name" : "RandomJokeScreenTest.testCategorySelection",
-      "uid" : "40a840215cb35da2",
+      "uid" : "3640224eacf18fb8",
       "parentUid" : "643c2cb5c2c641deecdc5712fbcf971f",
-      "status" : "passed",
+      "status" : "broken",
       "time" : {
-        "start" : 1624366400023,
-        "stop" : 1624366406427,
-        "duration" : 6404
+        "start" : 1624544875762,
+        "stop" : 1624544876988,
+        "duration" : 1226
       },
       "flaky" : false,
       "newFailed" : false,
       "parameters" : [ ]
     }, {
       "name" : "SearchJokeScreenTest.testSearchView",
-      "uid" : "392bb0a6bd5151f9",
+      "uid" : "eeb1f4d0332e6b7a",
       "parentUid" : "643c2cb5c2c641deecdc5712fbcf971f",
-      "status" : "passed",
+      "status" : "broken",
       "time" : {
-        "start" : 1624366407823,
-        "stop" : 1624366437555,
-        "duration" : 29732
+        "start" : 1624544972411,
+        "stop" : 1624544973809,
+        "duration" : 1398
+      },
+      "flaky" : false,
+      "newFailed" : false,
+      "parameters" : [ ]
+    }, {
+      "name" : "SearchJokeScreenTest.testSearchView",
+      "uid" : "f7a48c5311daca60",
+      "parentUid" : "643c2cb5c2c641deecdc5712fbcf971f",
+      "status" : "broken",
+      "time" : {
+        "start" : 1624544869984,
+        "stop" : 1624544871231,
+        "duration" : 1247
+      },
+      "flaky" : false,
+      "newFailed" : false,
+      "parameters" : [ ]
+    }, {
+      "name" : "SearchJokeScreenTest.testSearchView",
+      "uid" : "c4818a2ebe46c5dc",
+      "parentUid" : "643c2cb5c2c641deecdc5712fbcf971f",
+      "status" : "broken",
+      "time" : {
+        "start" : 1624544987804,
+        "stop" : 1624544989089,
+        "duration" : 1285
+      },
+      "flaky" : false,
+      "newFailed" : false,
+      "parameters" : [ ]
+    }, {
+      "name" : "RandomJokeScreenTest.testCategorySelection",
+      "uid" : "158d06d1e66a5034",
+      "parentUid" : "643c2cb5c2c641deecdc5712fbcf971f",
+      "status" : "broken",
+      "time" : {
+        "start" : 1624544954761,
+        "stop" : 1624544956192,
+        "duration" : 1431
+      },
+      "flaky" : false,
+      "newFailed" : false,
+      "parameters" : [ ]
+    }, {
+      "name" : "SearchJokeScreenTest.testSearchView",
+      "uid" : "7cb52d87d8e22a59",
+      "parentUid" : "643c2cb5c2c641deecdc5712fbcf971f",
+      "status" : "broken",
+      "time" : {
+        "start" : 1624544940841,
+        "stop" : 1624544942247,
+        "duration" : 1406
+      },
+      "flaky" : false,
+      "newFailed" : false,
+      "parameters" : [ ]
+    }, {
+      "name" : "SearchJokeScreenTest.testSearchView",
+      "uid" : "a4ecb0aa44262b6",
+      "parentUid" : "643c2cb5c2c641deecdc5712fbcf971f",
+      "status" : "broken",
+      "time" : {
+        "start" : 1624544874778,
+        "stop" : 1624544875761,
+        "duration" : 983
+      },
+      "flaky" : false,
+      "newFailed" : false,
+      "parameters" : [ ]
+    }, {
+      "name" : "RandomJokeScreenTest.testCategorySelection",
+      "uid" : "78dcb0899dc79e8f",
+      "parentUid" : "643c2cb5c2c641deecdc5712fbcf971f",
+      "status" : "broken",
+      "time" : {
+        "start" : 1624544929145,
+        "stop" : 1624544930528,
+        "duration" : 1383
+      },
+      "flaky" : false,
+      "newFailed" : false,
+      "parameters" : [ ]
+    }, {
+      "name" : "RandomJokeScreenTest.testCategorySelection",
+      "uid" : "88ffdfe5486d13ce",
+      "parentUid" : "643c2cb5c2c641deecdc5712fbcf971f",
+      "status" : "broken",
+      "time" : {
+        "start" : 1624544871234,
+        "stop" : 1624544872538,
+        "duration" : 1304
+      },
+      "flaky" : false,
+      "newFailed" : false,
+      "parameters" : [ ]
+    }, {
+      "name" : "RandomJokeScreenTest.testCategorySelection",
+      "uid" : "255daf68d18debe3",
+      "parentUid" : "643c2cb5c2c641deecdc5712fbcf971f",
+      "status" : "broken",
+      "time" : {
+        "start" : 1624544989092,
+        "stop" : 1624544990327,
+        "duration" : 1235
+      },
+      "flaky" : false,
+      "newFailed" : false,
+      "parameters" : [ ]
+    }, {
+      "name" : "RandomJokeScreenTest.testCategorySelection",
+      "uid" : "ec524ab87b1e7ffe",
+      "parentUid" : "643c2cb5c2c641deecdc5712fbcf971f",
+      "status" : "broken",
+      "time" : {
+        "start" : 1624544880981,
+        "stop" : 1624544882282,
+        "duration" : 1301
+      },
+      "flaky" : false,
+      "newFailed" : false,
+      "parameters" : [ ]
+    }, {
+      "name" : "RandomJokeScreenTest.testCategorySelection",
+      "uid" : "95410569e52cb3c9",
+      "parentUid" : "643c2cb5c2c641deecdc5712fbcf971f",
+      "status" : "broken",
+      "time" : {
+        "start" : 1624544905309,
+        "stop" : 1624544906316,
+        "duration" : 1007
+      },
+      "flaky" : false,
+      "newFailed" : false,
+      "parameters" : [ ]
+    }, {
+      "name" : "RandomJokeScreenTest.testCategorySelection",
+      "uid" : "53d81d41f7dc61b9",
+      "parentUid" : "643c2cb5c2c641deecdc5712fbcf971f",
+      "status" : "broken",
+      "time" : {
+        "start" : 1624544893552,
+        "stop" : 1624544894541,
+        "duration" : 989
+      },
+      "flaky" : false,
+      "newFailed" : false,
+      "parameters" : [ ]
+    }, {
+      "name" : "RandomJokeScreenTest.testCategorySelection",
+      "uid" : "79692fadcc4ae85d",
+      "parentUid" : "643c2cb5c2c641deecdc5712fbcf971f",
+      "status" : "broken",
+      "time" : {
+        "start" : 1624544869067,
+        "stop" : 1624544869982,
+        "duration" : 915
+      },
+      "flaky" : false,
+      "newFailed" : false,
+      "parameters" : [ ]
+    }, {
+      "name" : "RandomJokeScreenTest.testCategorySelection",
+      "uid" : "55f3d6d5884c0d6d",
+      "parentUid" : "643c2cb5c2c641deecdc5712fbcf971f",
+      "status" : "broken",
+      "time" : {
+        "start" : 1624544910936,
+        "stop" : 1624544912313,
+        "duration" : 1377
+      },
+      "flaky" : false,
+      "newFailed" : false,
+      "parameters" : [ ]
+    }, {
+      "name" : "SearchJokeScreenTest.testSearchView",
+      "uid" : "db8f7bd71afd0931",
+      "parentUid" : "643c2cb5c2c641deecdc5712fbcf971f",
+      "status" : "broken",
+      "time" : {
+        "start" : 1624544904338,
+        "stop" : 1624544905307,
+        "duration" : 969
+      },
+      "flaky" : false,
+      "newFailed" : false,
+      "parameters" : [ ]
+    }, {
+      "name" : "SearchJokeScreenTest.testSearchView",
+      "uid" : "a43a0b65ecc5a619",
+      "parentUid" : "643c2cb5c2c641deecdc5712fbcf971f",
+      "status" : "broken",
+      "time" : {
+        "start" : 1624544916955,
+        "stop" : 1624544918754,
+        "duration" : 1799
+      },
+      "flaky" : false,
+      "newFailed" : false,
+      "parameters" : [ ]
+    }, {
+      "name" : "RandomJokeScreenTest.testCategorySelection",
+      "uid" : "ed0485da73d0c69a",
+      "parentUid" : "643c2cb5c2c641deecdc5712fbcf971f",
+      "status" : "broken",
+      "time" : {
+        "start" : 1624544926563,
+        "stop" : 1624544927833,
+        "duration" : 1270
+      },
+      "flaky" : false,
+      "newFailed" : false,
+      "parameters" : [ ]
+    }, {
+      "name" : "RandomJokeScreenTest.testCategorySelection",
+      "uid" : "74984d1324510451",
+      "parentUid" : "643c2cb5c2c641deecdc5712fbcf971f",
+      "status" : "broken",
+      "time" : {
+        "start" : 1624544907371,
+        "stop" : 1624544909281,
+        "duration" : 1910
+      },
+      "flaky" : false,
+      "newFailed" : false,
+      "parameters" : [ ]
+    }, {
+      "name" : "RandomJokeScreenTest.testCategorySelection",
+      "uid" : "48bb0d6ceb1b3a52",
+      "parentUid" : "643c2cb5c2c641deecdc5712fbcf971f",
+      "status" : "broken",
+      "time" : {
+        "start" : 1624544924077,
+        "stop" : 1624544925470,
+        "duration" : 1393
+      },
+      "flaky" : false,
+      "newFailed" : false,
+      "parameters" : [ ]
+    }, {
+      "name" : "SearchJokeScreenTest.testSearchView",
+      "uid" : "40d95de9d5fe61f0",
+      "parentUid" : "643c2cb5c2c641deecdc5712fbcf971f",
+      "status" : "broken",
+      "time" : {
+        "start" : 1624544909283,
+        "stop" : 1624544910935,
+        "duration" : 1652
+      },
+      "flaky" : false,
+      "newFailed" : false,
+      "parameters" : [ ]
+    }, {
+      "name" : "SearchJokeScreenTest.testSearchView",
+      "uid" : "893ad4c995e73294",
+      "parentUid" : "643c2cb5c2c641deecdc5712fbcf971f",
+      "status" : "broken",
+      "time" : {
+        "start" : 1624544852004,
+        "stop" : 1624544853231,
+        "duration" : 1227
+      },
+      "flaky" : false,
+      "newFailed" : false,
+      "parameters" : [ ]
+    }, {
+      "name" : "SearchJokeScreenTest.testSearchView",
+      "uid" : "bb0b6ba9256b5553",
+      "parentUid" : "643c2cb5c2c641deecdc5712fbcf971f",
+      "status" : "broken",
+      "time" : {
+        "start" : 1624544894543,
+        "stop" : 1624544895841,
+        "duration" : 1298
+      },
+      "flaky" : false,
+      "newFailed" : false,
+      "parameters" : [ ]
+    }, {
+      "name" : "RandomJokeScreenTest.testCategorySelection",
+      "uid" : "4c64f4d437bea6cb",
+      "parentUid" : "643c2cb5c2c641deecdc5712fbcf971f",
+      "status" : "broken",
+      "time" : {
+        "start" : 1624544915696,
+        "stop" : 1624544916947,
+        "duration" : 1251
+      },
+      "flaky" : false,
+      "newFailed" : false,
+      "parameters" : [ ]
+    }, {
+      "name" : "RandomJokeScreenTest.testCategorySelection",
+      "uid" : "f9ac2f83f3a5926e",
+      "parentUid" : "643c2cb5c2c641deecdc5712fbcf971f",
+      "status" : "broken",
+      "time" : {
+        "start" : 1624544878328,
+        "stop" : 1624544879697,
+        "duration" : 1369
+      },
+      "flaky" : false,
+      "newFailed" : false,
+      "parameters" : [ ]
+    }, {
+      "name" : "SearchJokeScreenTest.testSearchView",
+      "uid" : "20faedf4ffd9d3b7",
+      "parentUid" : "643c2cb5c2c641deecdc5712fbcf971f",
+      "status" : "broken",
+      "time" : {
+        "start" : 1624544872540,
+        "stop" : 1624544873528,
+        "duration" : 988
+      },
+      "flaky" : false,
+      "newFailed" : false,
+      "parameters" : [ ]
+    }, {
+      "name" : "SearchJokeScreenTest.testSearchView",
+      "uid" : "298f9cb8b7244286",
+      "parentUid" : "643c2cb5c2c641deecdc5712fbcf971f",
+      "status" : "broken",
+      "time" : {
+        "start" : 1624544912315,
+        "stop" : 1624544914020,
+        "duration" : 1705
+      },
+      "flaky" : false,
+      "newFailed" : false,
+      "parameters" : [ ]
+    }, {
+      "name" : "RandomJokeScreenTest.testCategorySelection",
+      "uid" : "4380a3b9b1d37c1b",
+      "parentUid" : "643c2cb5c2c641deecdc5712fbcf971f",
+      "status" : "broken",
+      "time" : {
+        "start" : 1624544934907,
+        "stop" : 1624544934908,
+        "duration" : 1
+      },
+      "flaky" : false,
+      "newFailed" : false,
+      "parameters" : [ ]
+    }, {
+      "name" : "RandomJokeScreenTest.testCategorySelection",
+      "uid" : "4bc82f20923540b0",
+      "parentUid" : "643c2cb5c2c641deecdc5712fbcf971f",
+      "status" : "broken",
+      "time" : {
+        "start" : 1624544857710,
+        "stop" : 1624544858725,
+        "duration" : 1015
+      },
+      "flaky" : false,
+      "newFailed" : false,
+      "parameters" : [ ]
+    }, {
+      "name" : "SearchJokeScreenTest.testSearchView",
+      "uid" : "5d4d6302a2e5f4cb",
+      "parentUid" : "643c2cb5c2c641deecdc5712fbcf971f",
+      "status" : "broken",
+      "time" : {
+        "start" : 1624544961384,
+        "stop" : 1624544962748,
+        "duration" : 1364
+      },
+      "flaky" : false,
+      "newFailed" : false,
+      "parameters" : [ ]
+    }, {
+      "name" : "SearchJokeScreenTest.testSearchView",
+      "uid" : "49821ec1cd995ac0",
+      "parentUid" : "643c2cb5c2c641deecdc5712fbcf971f",
+      "status" : "broken",
+      "time" : {
+        "start" : 1624544899120,
+        "stop" : 1624544900639,
+        "duration" : 1519
+      },
+      "flaky" : false,
+      "newFailed" : false,
+      "parameters" : [ ]
+    }, {
+      "name" : "SearchJokeScreenTest.testSearchView",
+      "uid" : "6d6289630b7ba71a",
+      "parentUid" : "643c2cb5c2c641deecdc5712fbcf971f",
+      "status" : "broken",
+      "time" : {
+        "start" : 1624544953352,
+        "stop" : 1624544954756,
+        "duration" : 1404
+      },
+      "flaky" : false,
+      "newFailed" : false,
+      "parameters" : [ ]
+    }, {
+      "name" : "SearchJokeScreenTest.testSearchView",
+      "uid" : "d4412443b2688a07",
+      "parentUid" : "643c2cb5c2c641deecdc5712fbcf971f",
+      "status" : "broken",
+      "time" : {
+        "start" : 1624544860904,
+        "stop" : 1624544862134,
+        "duration" : 1230
+      },
+      "flaky" : false,
+      "newFailed" : false,
+      "parameters" : [ ]
+    }, {
+      "name" : "SearchJokeScreenTest.testSearchView",
+      "uid" : "706bbabfe0b83805",
+      "parentUid" : "643c2cb5c2c641deecdc5712fbcf971f",
+      "status" : "broken",
+      "time" : {
+        "start" : 1624544854182,
+        "stop" : 1624544855103,
+        "duration" : 921
+      },
+      "flaky" : false,
+      "newFailed" : false,
+      "parameters" : [ ]
+    }, {
+      "name" : "SearchJokeScreenTest.testSearchView",
+      "uid" : "42cab00d211da93c",
+      "parentUid" : "643c2cb5c2c641deecdc5712fbcf971f",
+      "status" : "broken",
+      "time" : {
+        "start" : 1624544892220,
+        "stop" : 1624544893550,
+        "duration" : 1330
+      },
+      "flaky" : false,
+      "newFailed" : false,
+      "parameters" : [ ]
+    }, {
+      "name" : "SearchJokeScreenTest.testSearchView",
+      "uid" : "d473b12d701e7527",
+      "parentUid" : "643c2cb5c2c641deecdc5712fbcf971f",
+      "status" : "broken",
+      "time" : {
+        "start" : 1624544867690,
+        "stop" : 1624544869064,
+        "duration" : 1374
+      },
+      "flaky" : false,
+      "newFailed" : false,
+      "parameters" : [ ]
+    }, {
+      "name" : "RandomJokeScreenTest.testCategorySelection",
+      "uid" : "ed38beccb658c36",
+      "parentUid" : "643c2cb5c2c641deecdc5712fbcf971f",
+      "status" : "broken",
+      "time" : {
+        "start" : 1624544965381,
+        "stop" : 1624544967008,
+        "duration" : 1627
+      },
+      "flaky" : false,
+      "newFailed" : false,
+      "parameters" : [ ]
+    }, {
+      "name" : "RandomJokeScreenTest.testCategorySelection",
+      "uid" : "22342b14b24b76f3",
+      "parentUid" : "643c2cb5c2c641deecdc5712fbcf971f",
+      "status" : "broken",
+      "time" : {
+        "start" : 1624544971037,
+        "stop" : 1624544972407,
+        "duration" : 1370
+      },
+      "flaky" : false,
+      "newFailed" : false,
+      "parameters" : [ ]
+    }, {
+      "name" : "RandomJokeScreenTest.testCategorySelection",
+      "uid" : "6ab694cd2bdf2f05",
+      "parentUid" : "643c2cb5c2c641deecdc5712fbcf971f",
+      "status" : "broken",
+      "time" : {
+        "start" : 1624544973814,
+        "stop" : 1624544975267,
+        "duration" : 1453
+      },
+      "flaky" : false,
+      "newFailed" : false,
+      "parameters" : [ ]
+    }, {
+      "name" : "SearchJokeScreenTest.testSearchView",
+      "uid" : "a4d1ee204bf3b1fe",
+      "parentUid" : "643c2cb5c2c641deecdc5712fbcf971f",
+      "status" : "broken",
+      "time" : {
+        "start" : 1624544927835,
+        "stop" : 1624544929140,
+        "duration" : 1305
+      },
+      "flaky" : false,
+      "newFailed" : false,
+      "parameters" : [ ]
+    }, {
+      "name" : "SearchJokeScreenTest.testSearchView",
+      "uid" : "5e27c5e851708d60",
+      "parentUid" : "643c2cb5c2c641deecdc5712fbcf971f",
+      "status" : "broken",
+      "time" : {
+        "start" : 1624544943573,
+        "stop" : 1624544944897,
+        "duration" : 1324
+      },
+      "flaky" : false,
+      "newFailed" : false,
+      "parameters" : [ ]
+    }, {
+      "name" : "RandomJokeScreenTest.testCategorySelection",
+      "uid" : "1d690a136437323",
+      "parentUid" : "643c2cb5c2c641deecdc5712fbcf971f",
+      "status" : "broken",
+      "time" : {
+        "start" : 1624544942250,
+        "stop" : 1624544943570,
+        "duration" : 1320
+      },
+      "flaky" : false,
+      "newFailed" : false,
+      "parameters" : [ ]
+    }, {
+      "name" : "SearchJokeScreenTest.testSearchView",
+      "uid" : "79bdf15c0b8222dc",
+      "parentUid" : "643c2cb5c2c641deecdc5712fbcf971f",
+      "status" : "broken",
+      "time" : {
+        "start" : 1624544963921,
+        "stop" : 1624544965379,
+        "duration" : 1458
+      },
+      "flaky" : false,
+      "newFailed" : false,
+      "parameters" : [ ]
+    }, {
+      "name" : "SearchJokeScreenTest.testSearchView",
+      "uid" : "698e969858cbcae2",
+      "parentUid" : "643c2cb5c2c641deecdc5712fbcf971f",
+      "status" : "broken",
+      "time" : {
+        "start" : 1624544930532,
+        "stop" : 1624544932548,
+        "duration" : 2016
+      },
+      "flaky" : false,
+      "newFailed" : false,
+      "parameters" : [ ]
+    }, {
+      "name" : "RandomJokeScreenTest.testCategorySelection",
+      "uid" : "5f8f8e42e45db693",
+      "parentUid" : "643c2cb5c2c641deecdc5712fbcf971f",
+      "status" : "broken",
+      "time" : {
+        "start" : 1624544902910,
+        "stop" : 1624544904336,
+        "duration" : 1426
+      },
+      "flaky" : false,
+      "newFailed" : false,
+      "parameters" : [ ]
+    }, {
+      "name" : "RandomJokeScreenTest.testCategorySelection",
+      "uid" : "cf12a1f2f0ba181",
+      "parentUid" : "643c2cb5c2c641deecdc5712fbcf971f",
+      "status" : "broken",
+      "time" : {
+        "start" : 1624544864165,
+        "stop" : 1624544865479,
+        "duration" : 1314
+      },
+      "flaky" : false,
+      "newFailed" : false,
+      "parameters" : [ ]
+    }, {
+      "name" : "RandomJokeScreenTest.testCategorySelection",
+      "uid" : "b48166732ee489c5",
+      "parentUid" : "643c2cb5c2c641deecdc5712fbcf971f",
+      "status" : "broken",
+      "time" : {
+        "start" : 1624544957335,
+        "stop" : 1624544958630,
+        "duration" : 1295
+      },
+      "flaky" : false,
+      "newFailed" : false,
+      "parameters" : [ ]
+    }, {
+      "name" : "RandomJokeScreenTest.testCategorySelection",
+      "uid" : "42a5bcb242bda889",
+      "parentUid" : "643c2cb5c2c641deecdc5712fbcf971f",
+      "status" : "broken",
+      "time" : {
+        "start" : 1624544862137,
+        "stop" : 1624544863175,
+        "duration" : 1038
+      },
+      "flaky" : false,
+      "newFailed" : false,
+      "parameters" : [ ]
+    }, {
+      "name" : "RandomJokeScreenTest.testCategorySelection",
+      "uid" : "620cebf380de9074",
+      "parentUid" : "643c2cb5c2c641deecdc5712fbcf971f",
+      "status" : "broken",
+      "time" : {
+        "start" : 1624544946840,
+        "stop" : 1624544948096,
+        "duration" : 1256
+      },
+      "flaky" : false,
+      "newFailed" : false,
+      "parameters" : [ ]
+    }, {
+      "name" : "SearchJokeScreenTest.testSearchView",
+      "uid" : "81d681c27e102885",
+      "parentUid" : "643c2cb5c2c641deecdc5712fbcf971f",
+      "status" : "broken",
+      "time" : {
+        "start" : 1624544948100,
+        "stop" : 1624544949398,
+        "duration" : 1298
+      },
+      "flaky" : false,
+      "newFailed" : false,
+      "parameters" : [ ]
+    }, {
+      "name" : "RandomJokeScreenTest.testCategorySelection",
+      "uid" : "bf3b838dffd05af1",
+      "parentUid" : "643c2cb5c2c641deecdc5712fbcf971f",
+      "status" : "broken",
+      "time" : {
+        "start" : 1624544982850,
+        "stop" : 1624544984052,
+        "duration" : 1202
+      },
+      "flaky" : false,
+      "newFailed" : false,
+      "parameters" : [ ]
+    }, {
+      "name" : "SearchJokeScreenTest.testSearchView",
+      "uid" : "e23ce96243f536b9",
+      "parentUid" : "643c2cb5c2c641deecdc5712fbcf971f",
+      "status" : "broken",
+      "time" : {
+        "start" : 1624544922787,
+        "stop" : 1624544924074,
+        "duration" : 1287
+      },
+      "flaky" : false,
+      "newFailed" : false,
+      "parameters" : [ ]
+    }, {
+      "name" : "SearchJokeScreenTest.testSearchView",
+      "uid" : "ef96d592e8419bbf",
+      "parentUid" : "643c2cb5c2c641deecdc5712fbcf971f",
+      "status" : "broken",
+      "time" : {
+        "start" : 1624544958644,
+        "stop" : 1624544959967,
+        "duration" : 1323
+      },
+      "flaky" : false,
+      "newFailed" : false,
+      "parameters" : [ ]
+    }, {
+      "name" : "RandomJokeScreenTest.testCategorySelection",
+      "uid" : "88fc07a61f9f6fd9",
+      "parentUid" : "643c2cb5c2c641deecdc5712fbcf971f",
+      "status" : "broken",
+      "time" : {
+        "start" : 1624544949401,
+        "stop" : 1624544950660,
+        "duration" : 1259
+      },
+      "flaky" : false,
+      "newFailed" : false,
+      "parameters" : [ ]
+    }, {
+      "name" : "SearchJokeScreenTest.testSearchView",
+      "uid" : "ee29a873785394b0",
+      "parentUid" : "643c2cb5c2c641deecdc5712fbcf971f",
+      "status" : "broken",
+      "time" : {
+        "start" : 1624544945914,
+        "stop" : 1624544946838,
+        "duration" : 924
+      },
+      "flaky" : false,
+      "newFailed" : false,
+      "parameters" : [ ]
+    }, {
+      "name" : "SearchJokeScreenTest.testSearchView",
+      "uid" : "be3e430413727338",
+      "parentUid" : "643c2cb5c2c641deecdc5712fbcf971f",
+      "status" : "broken",
+      "time" : {
+        "start" : 1624544865481,
+        "stop" : 1624544866437,
+        "duration" : 956
+      },
+      "flaky" : false,
+      "newFailed" : false,
+      "parameters" : [ ]
+    }, {
+      "name" : "RandomJokeScreenTest.testCategorySelection",
+      "uid" : "b23cb313bdecb279",
+      "parentUid" : "643c2cb5c2c641deecdc5712fbcf971f",
+      "status" : "broken",
+      "time" : {
+        "start" : 1624544859647,
+        "stop" : 1624544860902,
+        "duration" : 1255
+      },
+      "flaky" : false,
+      "newFailed" : false,
+      "parameters" : [ ]
+    }, {
+      "name" : "RandomJokeScreenTest.testCategorySelection",
+      "uid" : "f8fc86ff117d006a",
+      "parentUid" : "643c2cb5c2c641deecdc5712fbcf971f",
+      "status" : "broken",
+      "time" : {
+        "start" : 1624544853235,
+        "stop" : 1624544854181,
+        "duration" : 946
+      },
+      "flaky" : false,
+      "newFailed" : false,
+      "parameters" : [ ]
+    }, {
+      "name" : "RandomJokeScreenTest.testCategorySelection",
+      "uid" : "d9e43b29bb864294",
+      "parentUid" : "643c2cb5c2c641deecdc5712fbcf971f",
+      "status" : "broken",
+      "time" : {
+        "start" : 1624544976623,
+        "stop" : 1624544978121,
+        "duration" : 1498
+      },
+      "flaky" : false,
+      "newFailed" : false,
+      "parameters" : [ ]
+    }, {
+      "name" : "SearchJokeScreenTest.testSearchView",
+      "uid" : "4a2e5a3d389975d0",
+      "parentUid" : "643c2cb5c2c641deecdc5712fbcf971f",
+      "status" : "broken",
+      "time" : {
+        "start" : 1624544858728,
+        "stop" : 1624544859645,
+        "duration" : 917
+      },
+      "flaky" : false,
+      "newFailed" : false,
+      "parameters" : [ ]
+    }, {
+      "name" : "SearchJokeScreenTest.testSearchView",
+      "uid" : "8eb00e65e6422f41",
+      "parentUid" : "643c2cb5c2c641deecdc5712fbcf971f",
+      "status" : "broken",
+      "time" : {
+        "start" : 1624544925473,
+        "stop" : 1624544926560,
+        "duration" : 1087
+      },
+      "flaky" : false,
+      "newFailed" : false,
+      "parameters" : [ ]
+    }, {
+      "name" : "RandomJokeScreenTest.testCategorySelection",
+      "uid" : "f520c846f015a65",
+      "parentUid" : "643c2cb5c2c641deecdc5712fbcf971f",
+      "status" : "broken",
+      "time" : {
+        "start" : 1624544866439,
+        "stop" : 1624544867687,
+        "duration" : 1248
+      },
+      "flaky" : false,
+      "newFailed" : false,
+      "parameters" : [ ]
+    }, {
+      "name" : "RandomJokeScreenTest.testCategorySelection",
+      "uid" : "be83382ea17a88c9",
+      "parentUid" : "643c2cb5c2c641deecdc5712fbcf971f",
+      "status" : "broken",
+      "time" : {
+        "start" : 1624544890858,
+        "stop" : 1624544892218,
+        "duration" : 1360
+      },
+      "flaky" : false,
+      "newFailed" : false,
+      "parameters" : [ ]
+    }, {
+      "name" : "RandomJokeScreenTest.testCategorySelection",
+      "uid" : "410d0ca5de743c4b",
+      "parentUid" : "643c2cb5c2c641deecdc5712fbcf971f",
+      "status" : "broken",
+      "time" : {
+        "start" : 1624544952040,
+        "stop" : 1624544953350,
+        "duration" : 1310
+      },
+      "flaky" : false,
+      "newFailed" : false,
+      "parameters" : [ ]
+    }, {
+      "name" : "RandomJokeScreenTest.testCategorySelection",
+      "uid" : "395f2eea4fbe1baf",
+      "parentUid" : "643c2cb5c2c641deecdc5712fbcf971f",
+      "status" : "broken",
+      "time" : {
+        "start" : 1624544918765,
+        "stop" : 1624544920405,
+        "duration" : 1640
+      },
+      "flaky" : false,
+      "newFailed" : false,
+      "parameters" : [ ]
+    }, {
+      "name" : "RandomJokeScreenTest.testCategorySelection",
+      "uid" : "bb6410074dcfa4aa",
+      "parentUid" : "643c2cb5c2c641deecdc5712fbcf971f",
+      "status" : "broken",
+      "time" : {
+        "start" : 1624544850997,
+        "stop" : 1624544851993,
+        "duration" : 996
+      },
+      "flaky" : false,
+      "newFailed" : false,
+      "parameters" : [ ]
+    }, {
+      "name" : "RandomJokeScreenTest.testCategorySelection",
+      "uid" : "ed44f1a0004b9b93",
+      "parentUid" : "643c2cb5c2c641deecdc5712fbcf971f",
+      "status" : "broken",
+      "time" : {
+        "start" : 1624544897858,
+        "stop" : 1624544899117,
+        "duration" : 1259
+      },
+      "flaky" : false,
+      "newFailed" : false,
+      "parameters" : [ ]
+    }, {
+      "name" : "SearchJokeScreenTest.testSearchView",
+      "uid" : "b16e7a731c28be68",
+      "parentUid" : "643c2cb5c2c641deecdc5712fbcf971f",
+      "status" : "broken",
+      "time" : {
+        "start" : 1624544937542,
+        "stop" : 1624544938675,
+        "duration" : 1133
+      },
+      "flaky" : false,
+      "newFailed" : false,
+      "parameters" : [ ]
+    }, {
+      "name" : "RandomJokeScreenTest.testCategorySelection",
+      "uid" : "63f07efc194e70e8",
+      "parentUid" : "643c2cb5c2c641deecdc5712fbcf971f",
+      "status" : "broken",
+      "time" : {
+        "start" : 1624544888242,
+        "stop" : 1624544889470,
+        "duration" : 1228
+      },
+      "flaky" : false,
+      "newFailed" : false,
+      "parameters" : [ ]
+    }, {
+      "name" : "RandomJokeScreenTest.testCategorySelection",
+      "uid" : "13e6b53731641177",
+      "parentUid" : "643c2cb5c2c641deecdc5712fbcf971f",
+      "status" : "broken",
+      "time" : {
+        "start" : 1624544959972,
+        "stop" : 1624544961381,
+        "duration" : 1409
+      },
+      "flaky" : false,
+      "newFailed" : false,
+      "parameters" : [ ]
+    }, {
+      "name" : "RandomJokeScreenTest.testCategorySelection",
+      "uid" : "55b6735ada4e2ab5",
+      "parentUid" : "643c2cb5c2c641deecdc5712fbcf971f",
+      "status" : "broken",
+      "time" : {
+        "start" : 1624544921448,
+        "stop" : 1624544922785,
+        "duration" : 1337
+      },
+      "flaky" : false,
+      "newFailed" : false,
+      "parameters" : [ ]
+    }, {
+      "name" : "SearchJokeScreenTest.testSearchView",
+      "uid" : "75ddb76a96900118",
+      "parentUid" : "643c2cb5c2c641deecdc5712fbcf971f",
+      "status" : "broken",
+      "time" : {
+        "start" : 1624544896918,
+        "stop" : 1624544897855,
+        "duration" : 937
+      },
+      "flaky" : false,
+      "newFailed" : false,
+      "parameters" : [ ]
+    }, {
+      "name" : "SearchJokeScreenTest.testSearchView",
+      "uid" : "8d97dbfa7b26663d",
+      "parentUid" : "643c2cb5c2c641deecdc5712fbcf971f",
+      "status" : "broken",
+      "time" : {
+        "start" : 1624544990331,
+        "stop" : 1624544991662,
+        "duration" : 1331
+      },
+      "flaky" : false,
+      "newFailed" : false,
+      "parameters" : [ ]
+    }, {
+      "name" : "SearchJokeScreenTest.testSearchView",
+      "uid" : "f5fc4e49380ae596",
+      "parentUid" : "643c2cb5c2c641deecdc5712fbcf971f",
+      "status" : "broken",
+      "time" : {
+        "start" : 1624544984056,
+        "stop" : 1624544985939,
+        "duration" : 1883
+      },
+      "flaky" : false,
+      "newFailed" : false,
+      "parameters" : [ ]
+    }, {
+      "name" : "RandomJokeScreenTest.testCategorySelection",
+      "uid" : "9444d384d86520d8",
+      "parentUid" : "643c2cb5c2c641deecdc5712fbcf971f",
+      "status" : "broken",
+      "time" : {
+        "start" : 1624544938680,
+        "stop" : 1624544940838,
+        "duration" : 2158
+      },
+      "flaky" : false,
+      "newFailed" : false,
+      "parameters" : [ ]
+    }, {
+      "name" : "SearchJokeScreenTest.testSearchView",
+      "uid" : "f3b13b243b5a66b1",
+      "parentUid" : "643c2cb5c2c641deecdc5712fbcf971f",
+      "status" : "broken",
+      "time" : {
+        "start" : 1624544856367,
+        "stop" : 1624544857706,
+        "duration" : 1339
+      },
+      "flaky" : false,
+      "newFailed" : false,
+      "parameters" : [ ]
+    }, {
+      "name" : "SearchJokeScreenTest.testSearchView",
+      "uid" : "1368045038a2ded2",
+      "parentUid" : "643c2cb5c2c641deecdc5712fbcf971f",
+      "status" : "broken",
+      "time" : {
+        "start" : 1624544975270,
+        "stop" : 1624544976619,
+        "duration" : 1349
+      },
+      "flaky" : false,
+      "newFailed" : false,
+      "parameters" : [ ]
+    }, {
+      "name" : "RandomJokeScreenTest.testCategorySelection",
+      "uid" : "9ad1dccd45407859",
+      "parentUid" : "643c2cb5c2c641deecdc5712fbcf971f",
+      "status" : "broken",
+      "time" : {
+        "start" : 1624544962751,
+        "stop" : 1624544963919,
+        "duration" : 1168
+      },
+      "flaky" : false,
+      "newFailed" : false,
+      "parameters" : [ ]
+    }, {
+      "name" : "SearchJokeScreenTest.testSearchView",
+      "uid" : "dde7aef2437519e3",
+      "parentUid" : "643c2cb5c2c641deecdc5712fbcf971f",
+      "status" : "broken",
+      "time" : {
+        "start" : 1624544887012,
+        "stop" : 1624544888240,
+        "duration" : 1228
+      },
+      "flaky" : false,
+      "newFailed" : false,
+      "parameters" : [ ]
+    }, {
+      "name" : "SearchJokeScreenTest.testSearchView",
+      "uid" : "f86b1813f588c181",
+      "parentUid" : "643c2cb5c2c641deecdc5712fbcf971f",
+      "status" : "broken",
+      "time" : {
+        "start" : 1624544920408,
+        "stop" : 1624544921444,
+        "duration" : 1036
+      },
+      "flaky" : false,
+      "newFailed" : false,
+      "parameters" : [ ]
+    }, {
+      "name" : "RandomJokeScreenTest.testCategorySelection",
+      "uid" : "16d59bbdf2f15833",
+      "parentUid" : "643c2cb5c2c641deecdc5712fbcf971f",
+      "status" : "broken",
+      "time" : {
+        "start" : 1624544944900,
+        "stop" : 1624544945911,
+        "duration" : 1011
+      },
+      "flaky" : false,
+      "newFailed" : false,
+      "parameters" : [ ]
+    }, {
+      "name" : "RandomJokeScreenTest.testCategorySelection",
+      "uid" : "b0e3497bd685ca54",
+      "parentUid" : "643c2cb5c2c641deecdc5712fbcf971f",
+      "status" : "broken",
+      "time" : {
+        "start" : 1624544895843,
+        "stop" : 1624544896915,
+        "duration" : 1072
+      },
+      "flaky" : false,
+      "newFailed" : false,
+      "parameters" : [ ]
+    }, {
+      "name" : "RandomJokeScreenTest.testCategorySelection",
+      "uid" : "b5bcd942b02c3352",
+      "parentUid" : "643c2cb5c2c641deecdc5712fbcf971f",
+      "status" : "broken",
+      "time" : {
+        "start" : 1624544855106,
+        "stop" : 1624544856364,
+        "duration" : 1258
+      },
+      "flaky" : false,
+      "newFailed" : false,
+      "parameters" : [ ]
+    }, {
+      "name" : "SearchJokeScreenTest.testSearchView",
+      "uid" : "8101e14e5ea5dbb0",
+      "parentUid" : "643c2cb5c2c641deecdc5712fbcf971f",
+      "status" : "broken",
+      "time" : {
+        "start" : 1624544889472,
+        "stop" : 1624544890856,
+        "duration" : 1384
+      },
+      "flaky" : false,
+      "newFailed" : false,
+      "parameters" : [ ]
+    }, {
+      "name" : "RandomJokeScreenTest.testCategorySelection",
+      "uid" : "8d4f076c1f53602f",
+      "parentUid" : "643c2cb5c2c641deecdc5712fbcf971f",
+      "status" : "broken",
+      "time" : {
+        "start" : 1624544885696,
+        "stop" : 1624544887010,
+        "duration" : 1314
+      },
+      "flaky" : false,
+      "newFailed" : false,
+      "parameters" : [ ]
+    }, {
+      "name" : "SearchJokeScreenTest.testSearchView",
+      "uid" : "7ce296cfd4af8bca",
+      "parentUid" : "643c2cb5c2c641deecdc5712fbcf971f",
+      "status" : "broken",
+      "time" : {
+        "start" : 1624544876990,
+        "stop" : 1624544878325,
+        "duration" : 1335
+      },
+      "flaky" : false,
+      "newFailed" : false,
+      "parameters" : [ ]
+    }, {
+      "name" : "SearchJokeScreenTest.testSearchView",
+      "uid" : "bcf924bbe5e43868",
+      "parentUid" : "643c2cb5c2c641deecdc5712fbcf971f",
+      "status" : "broken",
+      "time" : {
+        "start" : 1624544882291,
+        "stop" : 1624544883532,
+        "duration" : 1241
+      },
+      "flaky" : false,
+      "newFailed" : false,
+      "parameters" : [ ]
+    }, {
+      "name" : "SearchJokeScreenTest.testSearchView",
+      "uid" : "c7144b44c488162b",
+      "parentUid" : "643c2cb5c2c641deecdc5712fbcf971f",
+      "status" : "broken",
+      "time" : {
+        "start" : 1624544901708,
+        "stop" : 1624544902909,
+        "duration" : 1201
+      },
+      "flaky" : false,
+      "newFailed" : false,
+      "parameters" : [ ]
+    }, {
+      "name" : "RandomJokeScreenTest.testCategorySelection",
+      "uid" : "666f8147d8f2eee4",
+      "parentUid" : "643c2cb5c2c641deecdc5712fbcf971f",
+      "status" : "broken",
+      "time" : {
+        "start" : 1624544968436,
+        "stop" : 1624544969681,
+        "duration" : 1245
+      },
+      "flaky" : false,
+      "newFailed" : false,
+      "parameters" : [ ]
+    }, {
+      "name" : "RandomJokeScreenTest.testCategorySelection",
+      "uid" : "b306e2fcfdf196ba",
+      "parentUid" : "643c2cb5c2c641deecdc5712fbcf971f",
+      "status" : "broken",
+      "time" : {
+        "start" : 1624544873531,
+        "stop" : 1624544874776,
+        "duration" : 1245
+      },
+      "flaky" : false,
+      "newFailed" : false,
+      "parameters" : [ ]
+    }, {
+      "name" : "RandomJokeScreenTest.testCategorySelection",
+      "uid" : "1c7c41e9defbdfb4",
+      "parentUid" : "643c2cb5c2c641deecdc5712fbcf971f",
+      "status" : "broken",
+      "time" : {
+        "start" : 1624544932550,
+        "stop" : 1624544934821,
+        "duration" : 2271
+      },
+      "flaky" : false,
+      "newFailed" : false,
+      "parameters" : [ ]
+    }, {
+      "name" : "SearchJokeScreenTest.testSearchView",
+      "uid" : "e5b0a8f1797ba0c4",
+      "parentUid" : "643c2cb5c2c641deecdc5712fbcf971f",
+      "status" : "broken",
+      "time" : {
+        "start" : 1624544906318,
+        "stop" : 1624544907369,
+        "duration" : 1051
+      },
+      "flaky" : false,
+      "newFailed" : false,
+      "parameters" : [ ]
+    }, {
+      "name" : "SearchJokeScreenTest.testSearchView",
+      "uid" : "c52eed71c5a4b46a",
+      "parentUid" : "643c2cb5c2c641deecdc5712fbcf971f",
+      "status" : "broken",
+      "time" : {
+        "start" : 1624544956196,
+        "stop" : 1624544957333,
+        "duration" : 1137
+      },
+      "flaky" : false,
+      "newFailed" : false,
+      "parameters" : [ ]
+    }, {
+      "name" : "SearchJokeScreenTest.testSearchView",
+      "uid" : "5c36da7f1fd20858",
+      "parentUid" : "643c2cb5c2c641deecdc5712fbcf971f",
+      "status" : "broken",
+      "time" : {
+        "start" : 1624544967011,
+        "stop" : 1624544968433,
+        "duration" : 1422
+      },
+      "flaky" : false,
+      "newFailed" : false,
+      "parameters" : [ ]
+    }, {
+      "name" : "SearchJokeScreenTest.testSearchView",
+      "uid" : "d99ac19e67bdb90b",
+      "parentUid" : "643c2cb5c2c641deecdc5712fbcf971f",
+      "status" : "broken",
+      "time" : {
+        "start" : 1624544863177,
+        "stop" : 1624544864163,
+        "duration" : 986
+      },
+      "flaky" : false,
+      "newFailed" : false,
+      "parameters" : [ ]
+    }, {
+      "name" : "RandomJokeScreenTest.testCategorySelection",
+      "uid" : "bef77ae14a11ef32",
+      "parentUid" : "643c2cb5c2c641deecdc5712fbcf971f",
+      "status" : "broken",
+      "time" : {
+        "start" : 1624544883535,
+        "stop" : 1624544884456,
+        "duration" : 921
+      },
+      "flaky" : false,
+      "newFailed" : false,
+      "parameters" : [ ]
+    }, {
+      "name" : "SearchJokeScreenTest.testSearchView",
+      "uid" : "4cadf15522f5009a",
+      "parentUid" : "643c2cb5c2c641deecdc5712fbcf971f",
+      "status" : "broken",
+      "time" : {
+        "start" : 1624544950664,
+        "stop" : 1624544952033,
+        "duration" : 1369
+      },
+      "flaky" : false,
+      "newFailed" : false,
+      "parameters" : [ ]
+    }, {
+      "name" : "SearchJokeScreenTest.testSearchView",
+      "uid" : "853233c20b01e397",
+      "parentUid" : "643c2cb5c2c641deecdc5712fbcf971f",
+      "status" : "broken",
+      "time" : {
+        "start" : 1624544969685,
+        "stop" : 1624544971032,
+        "duration" : 1347
+      },
+      "flaky" : false,
+      "newFailed" : false,
+      "parameters" : [ ]
+    }, {
+      "name" : "SearchJokeScreenTest.testSearchView",
+      "uid" : "42cf980408994978",
+      "parentUid" : "643c2cb5c2c641deecdc5712fbcf971f",
+      "status" : "broken",
+      "time" : {
+        "start" : 1624544879699,
+        "stop" : 1624544880978,
+        "duration" : 1279
+      },
+      "flaky" : false,
+      "newFailed" : false,
+      "parameters" : [ ]
+    }, {
+      "name" : "RandomJokeScreenTest.testCategorySelection",
+      "uid" : "bcd5de9a95e6d97f",
+      "parentUid" : "643c2cb5c2c641deecdc5712fbcf971f",
+      "status" : "broken",
+      "time" : {
+        "start" : 1624544900642,
+        "stop" : 1624544901707,
+        "duration" : 1065
+      },
+      "flaky" : false,
+      "newFailed" : false,
+      "parameters" : [ ]
+    }, {
+      "name" : "SearchJokeScreenTest.testSearchView",
+      "uid" : "596d6af9385b9883",
+      "parentUid" : "643c2cb5c2c641deecdc5712fbcf971f",
+      "status" : "broken",
+      "time" : {
+        "start" : 1624544978126,
+        "stop" : 1624544979805,
+        "duration" : 1679
+      },
+      "flaky" : false,
+      "newFailed" : false,
+      "parameters" : [ ]
+    }, {
+      "name" : "SearchJokeScreenTest.testSearchView",
+      "uid" : "d0139e1c88397cee",
+      "parentUid" : "643c2cb5c2c641deecdc5712fbcf971f",
+      "status" : "broken",
+      "time" : {
+        "start" : 1624544884457,
+        "stop" : 1624544885693,
+        "duration" : 1236
+      },
+      "flaky" : false,
+      "newFailed" : false,
+      "parameters" : [ ]
+    }, {
+      "name" : "RandomJokeScreenTest.testCategorySelection",
+      "uid" : "229caa528facdf6",
+      "parentUid" : "643c2cb5c2c641deecdc5712fbcf971f",
+      "status" : "broken",
+      "time" : {
+        "start" : 1624544985942,
+        "stop" : 1624544987802,
+        "duration" : 1860
       },
       "flaky" : false,
       "newFailed" : false,

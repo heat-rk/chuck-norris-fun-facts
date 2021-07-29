@@ -1,4 +1,4 @@
-package ru.heatalways.chucknorrisfunfacts.views
+package ru.heatalways.chucknorrisfunfacts.presentation.custom_view
 
 import io.github.kakaocup.kakao.common.builders.ViewBuilder
 import io.github.kakaocup.kakao.edit.KEditText

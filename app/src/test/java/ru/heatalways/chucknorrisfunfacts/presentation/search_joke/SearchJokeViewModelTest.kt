@@ -1,18 +1,17 @@
 package ru.heatalways.chucknorrisfunfacts.presentation.search_joke
 
 import com.google.common.truth.Truth.assertThat
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import org.junit.Before
 import org.junit.Test
 import ru.heatalways.chucknorrisfunfacts.domain.managers.ChuckNorrisJokesManagerFake
 import ru.heatalways.chucknorrisfunfacts.presentation.screen.search_joke.SearchJokeState
 import ru.heatalways.chucknorrisfunfacts.presentation.screen.search_joke.SearchJokeViewModel
-import ru.heatalways.chucknorrisfunfacts.utils.BaseTest
+import ru.heatalways.chucknorrisfunfacts.utils.BaseViewModelTest
 import ru.heatalways.chucknorrisfunfacts.utils.getOrAwaitValueTest
 
 @ExperimentalCoroutinesApi
-class SearchJokeViewModelTest: BaseTest() {
+class SearchJokeViewModelTest: BaseViewModelTest() {
     private val fakeManager =  ChuckNorrisJokesManagerFake()
     private lateinit var viewModel: SearchJokeViewModel
 

@@ -1,0 +1,45 @@
+{
+  "uid" : "bb6410074dcfa4aa",
+  "name" : "RandomJokeScreenTest.testCategorySelection",
+  "fullName" : "RandomJokeScreenTest.testCategorySelection",
+  "historyId" : "9a0656e30e3a88050a04db70dc5e5257",
+  "time" : {
+    "start" : 1624544850997,
+    "stop" : 1624544851993,
+    "duration" : 996
+  },
+  "status" : "broken",
+  "flaky" : false,
+  "newFailed" : false,
+  "beforeStages" : [ ],
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "host",
+    "value" : "emulator-5554"
+  }, {
+    "name" : "package",
+    "value" : "ru.heatalways.chucknorrisfunfacts.tests"
+  }, {
+    "name" : "testClass",
+    "value" : "RandomJokeScreenTest"
+  }, {
+    "name" : "testMethod",
+    "value" : "testCategorySelection"
+  }, {
+    "name" : "suite",
+    "value" : "ru.heatalways.chucknorrisfunfacts.tests.RandomJokeScreenTest"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure2"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : true,
+  "retry" : true,
+  "extra" : {
+    "categories" : [ ],
+    "tags" : [ ]
+  },
+  "source" : "bb6410074dcfa4aa.json",
+  "parameterValues" : [ ]
+}

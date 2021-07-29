@@ -1,0 +1,45 @@
+{
+  "uid" : "d99ac19e67bdb90b",
+  "name" : "SearchJokeScreenTest.testSearchView",
+  "fullName" : "SearchJokeScreenTest.testSearchView",
+  "historyId" : "eb98ac9f74c22b06620a67fd06a4b07f",
+  "time" : {
+    "start" : 1624544863177,
+    "stop" : 1624544864163,
+    "duration" : 986
+  },
+  "status" : "broken",
+  "flaky" : false,
+  "newFailed" : false,
+  "beforeStages" : [ ],
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "host",
+    "value" : "emulator-5554"
+  }, {
+    "name" : "package",
+    "value" : "ru.heatalways.chucknorrisfunfacts.tests"
+  }, {
+    "name" : "testClass",
+    "value" : "SearchJokeScreenTest"
+  }, {
+    "name" : "testMethod",
+    "value" : "testSearchView"
+  }, {
+    "name" : "suite",
+    "value" : "ru.heatalways.chucknorrisfunfacts.tests.SearchJokeScreenTest"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure2"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : true,
+  "retry" : true,
+  "extra" : {
+    "categories" : [ ],
+    "tags" : [ ]
+  },
+  "source" : "d99ac19e67bdb90b.json",
+  "parameterValues" : [ ]
+}

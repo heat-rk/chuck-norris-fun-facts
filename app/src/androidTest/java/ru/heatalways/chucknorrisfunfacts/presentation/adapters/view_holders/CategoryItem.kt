@@ -1,4 +1,4 @@
-package ru.heatalways.chucknorrisfunfacts.recycler_items
+package ru.heatalways.chucknorrisfunfacts.presentation.adapters.view_holders
 
 import android.view.View
 import io.github.kakaocup.kakao.recycler.KRecyclerItem

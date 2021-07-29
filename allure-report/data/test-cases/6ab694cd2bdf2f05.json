@@ -1,0 +1,47 @@
+{
+  "uid" : "6ab694cd2bdf2f05",
+  "name" : "RandomJokeScreenTest.testCategorySelection",
+  "fullName" : "RandomJokeScreenTest.testCategorySelection",
+  "historyId" : "9a0656e30e3a88050a04db70dc5e5257",
+  "time" : {
+    "start" : 1624544973814,
+    "stop" : 1624544975267,
+    "duration" : 1453
+  },
+  "status" : "broken",
+  "statusMessage" : "No test results",
+  "statusTrace" : "No test results\n\tat com.android.commands.am.Instrument.run(Instrument.java:410)\n\tat com.android.commands.am.Am.runInstrument(Am.java:232)\n\tat com.android.commands.am.Am.onRun(Am.java:125)\n\tat com.android.internal.os.BaseCommand.run(BaseCommand.java:54)\n\tat com.android.commands.am.Am.main(Am.java:95)\n\tat com.android.internal.os.RuntimeInit.nativeFinishInit(Native Method)\n\tat com.android.internal.os.RuntimeInit.main(RuntimeInit.java:284)",
+  "flaky" : false,
+  "newFailed" : false,
+  "beforeStages" : [ ],
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "host",
+    "value" : "emulator-5554"
+  }, {
+    "name" : "package",
+    "value" : "ru.heatalways.chucknorrisfunfacts.tests"
+  }, {
+    "name" : "testClass",
+    "value" : "RandomJokeScreenTest"
+  }, {
+    "name" : "testMethod",
+    "value" : "testCategorySelection"
+  }, {
+    "name" : "suite",
+    "value" : "ru.heatalways.chucknorrisfunfacts.tests.RandomJokeScreenTest"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure2"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : true,
+  "retry" : true,
+  "extra" : {
+    "categories" : [ ],
+    "tags" : [ ]
+  },
+  "source" : "6ab694cd2bdf2f05.json",
+  "parameterValues" : [ ]
+}

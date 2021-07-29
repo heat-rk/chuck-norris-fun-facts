@@ -3,26 +3,26 @@
   "name" : "behaviors",
   "children" : [ {
     "name" : "RandomJokeScreenTest.testCategorySelection",
-    "uid" : "40a840215cb35da2",
+    "uid" : "255daf68d18debe3",
     "parentUid" : "b1a8273437954620fa374b796ffaacdd",
-    "status" : "passed",
+    "status" : "broken",
     "time" : {
-      "start" : 1624366400023,
-      "stop" : 1624366406427,
-      "duration" : 6404
+      "start" : 1624544989092,
+      "stop" : 1624544990327,
+      "duration" : 1235
     },
     "flaky" : false,
     "newFailed" : false,
     "parameters" : [ ]
   }, {
     "name" : "SearchJokeScreenTest.testSearchView",
-    "uid" : "392bb0a6bd5151f9",
+    "uid" : "8d97dbfa7b26663d",
     "parentUid" : "b1a8273437954620fa374b796ffaacdd",
-    "status" : "passed",
+    "status" : "broken",
     "time" : {
-      "start" : 1624366407823,
-      "stop" : 1624366437555,
-      "duration" : 29732
+      "start" : 1624544990331,
+      "stop" : 1624544991662,
+      "duration" : 1331
     },
     "flaky" : false,
     "newFailed" : false,

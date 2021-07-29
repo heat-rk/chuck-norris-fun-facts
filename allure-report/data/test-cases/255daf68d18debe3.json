@@ -1,0 +1,495 @@
+{
+  "uid" : "255daf68d18debe3",
+  "name" : "RandomJokeScreenTest.testCategorySelection",
+  "fullName" : "RandomJokeScreenTest.testCategorySelection",
+  "historyId" : "9a0656e30e3a88050a04db70dc5e5257",
+  "time" : {
+    "start" : 1624544989092,
+    "stop" : 1624544990327,
+    "duration" : 1235
+  },
+  "status" : "broken",
+  "statusMessage" : "No test results",
+  "statusTrace" : "No test results",
+  "flaky" : false,
+  "newFailed" : false,
+  "beforeStages" : [ ],
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "host",
+    "value" : "emulator-5554"
+  }, {
+    "name" : "package",
+    "value" : "ru.heatalways.chucknorrisfunfacts.tests"
+  }, {
+    "name" : "testClass",
+    "value" : "RandomJokeScreenTest"
+  }, {
+    "name" : "testMethod",
+    "value" : "testCategorySelection"
+  }, {
+    "name" : "suite",
+    "value" : "ru.heatalways.chucknorrisfunfacts.tests.RandomJokeScreenTest"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure2"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ {
+      "uid" : "229caa528facdf6",
+      "status" : "broken",
+      "statusDetails" : "No test results",
+      "time" : {
+        "start" : 1624544985942,
+        "stop" : 1624544987802,
+        "duration" : 1860
+      }
+    }, {
+      "uid" : "bf3b838dffd05af1",
+      "status" : "broken",
+      "time" : {
+        "start" : 1624544982850,
+        "stop" : 1624544984052,
+        "duration" : 1202
+      }
+    }, {
+      "uid" : "d9e43b29bb864294",
+      "status" : "broken",
+      "statusDetails" : "No test results",
+      "time" : {
+        "start" : 1624544976623,
+        "stop" : 1624544978121,
+        "duration" : 1498
+      }
+    }, {
+      "uid" : "6ab694cd2bdf2f05",
+      "status" : "broken",
+      "statusDetails" : "No test results",
+      "time" : {
+        "start" : 1624544973814,
+        "stop" : 1624544975267,
+        "duration" : 1453
+      }
+    }, {
+      "uid" : "22342b14b24b76f3",
+      "status" : "broken",
+      "statusDetails" : "No test results",
+      "time" : {
+        "start" : 1624544971037,
+        "stop" : 1624544972407,
+        "duration" : 1370
+      }
+    }, {
+      "uid" : "666f8147d8f2eee4",
+      "status" : "broken",
+      "statusDetails" : "No test results",
+      "time" : {
+        "start" : 1624544968436,
+        "stop" : 1624544969681,
+        "duration" : 1245
+      }
+    }, {
+      "uid" : "ed38beccb658c36",
+      "status" : "broken",
+      "statusDetails" : "No test results",
+      "time" : {
+        "start" : 1624544965381,
+        "stop" : 1624544967008,
+        "duration" : 1627
+      }
+    }, {
+      "uid" : "9ad1dccd45407859",
+      "status" : "broken",
+      "time" : {
+        "start" : 1624544962751,
+        "stop" : 1624544963919,
+        "duration" : 1168
+      }
+    }, {
+      "uid" : "13e6b53731641177",
+      "status" : "broken",
+      "statusDetails" : "No test results",
+      "time" : {
+        "start" : 1624544959972,
+        "stop" : 1624544961381,
+        "duration" : 1409
+      }
+    }, {
+      "uid" : "b48166732ee489c5",
+      "status" : "broken",
+      "statusDetails" : "No test results",
+      "time" : {
+        "start" : 1624544957335,
+        "stop" : 1624544958630,
+        "duration" : 1295
+      }
+    }, {
+      "uid" : "158d06d1e66a5034",
+      "status" : "broken",
+      "statusDetails" : "No test results",
+      "time" : {
+        "start" : 1624544954761,
+        "stop" : 1624544956192,
+        "duration" : 1431
+      }
+    }, {
+      "uid" : "410d0ca5de743c4b",
+      "status" : "broken",
+      "statusDetails" : "No test results",
+      "time" : {
+        "start" : 1624544952040,
+        "stop" : 1624544953350,
+        "duration" : 1310
+      }
+    }, {
+      "uid" : "88fc07a61f9f6fd9",
+      "status" : "broken",
+      "statusDetails" : "No test results",
+      "time" : {
+        "start" : 1624544949401,
+        "stop" : 1624544950660,
+        "duration" : 1259
+      }
+    }, {
+      "uid" : "620cebf380de9074",
+      "status" : "broken",
+      "statusDetails" : "No test results",
+      "time" : {
+        "start" : 1624544946840,
+        "stop" : 1624544948096,
+        "duration" : 1256
+      }
+    }, {
+      "uid" : "16d59bbdf2f15833",
+      "status" : "broken",
+      "time" : {
+        "start" : 1624544944900,
+        "stop" : 1624544945911,
+        "duration" : 1011
+      }
+    }, {
+      "uid" : "1d690a136437323",
+      "status" : "broken",
+      "statusDetails" : "No test results",
+      "time" : {
+        "start" : 1624544942250,
+        "stop" : 1624544943570,
+        "duration" : 1320
+      }
+    }, {
+      "uid" : "9444d384d86520d8",
+      "status" : "broken",
+      "time" : {
+        "start" : 1624544938680,
+        "stop" : 1624544940838,
+        "duration" : 2158
+      }
+    }, {
+      "uid" : "4380a3b9b1d37c1b",
+      "status" : "broken",
+      "time" : {
+        "start" : 1624544934907,
+        "stop" : 1624544934908,
+        "duration" : 1
+      }
+    }, {
+      "uid" : "1c7c41e9defbdfb4",
+      "status" : "broken",
+      "time" : {
+        "start" : 1624544932550,
+        "stop" : 1624544934821,
+        "duration" : 2271
+      }
+    }, {
+      "uid" : "78dcb0899dc79e8f",
+      "status" : "broken",
+      "statusDetails" : "No test results",
+      "time" : {
+        "start" : 1624544929145,
+        "stop" : 1624544930528,
+        "duration" : 1383
+      }
+    }, {
+      "uid" : "ed0485da73d0c69a",
+      "status" : "broken",
+      "statusDetails" : "No test results",
+      "time" : {
+        "start" : 1624544926563,
+        "stop" : 1624544927833,
+        "duration" : 1270
+      }
+    }, {
+      "uid" : "48bb0d6ceb1b3a52",
+      "status" : "broken",
+      "statusDetails" : "No test results",
+      "time" : {
+        "start" : 1624544924077,
+        "stop" : 1624544925470,
+        "duration" : 1393
+      }
+    }, {
+      "uid" : "55b6735ada4e2ab5",
+      "status" : "broken",
+      "statusDetails" : "No test results",
+      "time" : {
+        "start" : 1624544921448,
+        "stop" : 1624544922785,
+        "duration" : 1337
+      }
+    }, {
+      "uid" : "395f2eea4fbe1baf",
+      "status" : "broken",
+      "statusDetails" : "No test results",
+      "time" : {
+        "start" : 1624544918765,
+        "stop" : 1624544920405,
+        "duration" : 1640
+      }
+    }, {
+      "uid" : "4c64f4d437bea6cb",
+      "status" : "broken",
+      "time" : {
+        "start" : 1624544915696,
+        "stop" : 1624544916947,
+        "duration" : 1251
+      }
+    }, {
+      "uid" : "55f3d6d5884c0d6d",
+      "status" : "broken",
+      "statusDetails" : "No test results",
+      "time" : {
+        "start" : 1624544910936,
+        "stop" : 1624544912313,
+        "duration" : 1377
+      }
+    }, {
+      "uid" : "74984d1324510451",
+      "status" : "broken",
+      "statusDetails" : "No test results",
+      "time" : {
+        "start" : 1624544907371,
+        "stop" : 1624544909281,
+        "duration" : 1910
+      }
+    }, {
+      "uid" : "95410569e52cb3c9",
+      "status" : "broken",
+      "time" : {
+        "start" : 1624544905309,
+        "stop" : 1624544906316,
+        "duration" : 1007
+      }
+    }, {
+      "uid" : "5f8f8e42e45db693",
+      "status" : "broken",
+      "statusDetails" : "No test results",
+      "time" : {
+        "start" : 1624544902910,
+        "stop" : 1624544904336,
+        "duration" : 1426
+      }
+    }, {
+      "uid" : "bcd5de9a95e6d97f",
+      "status" : "broken",
+      "time" : {
+        "start" : 1624544900642,
+        "stop" : 1624544901707,
+        "duration" : 1065
+      }
+    }, {
+      "uid" : "ed44f1a0004b9b93",
+      "status" : "broken",
+      "statusDetails" : "No test results",
+      "time" : {
+        "start" : 1624544897858,
+        "stop" : 1624544899117,
+        "duration" : 1259
+      }
+    }, {
+      "uid" : "b0e3497bd685ca54",
+      "status" : "broken",
+      "time" : {
+        "start" : 1624544895843,
+        "stop" : 1624544896915,
+        "duration" : 1072
+      }
+    }, {
+      "uid" : "53d81d41f7dc61b9",
+      "status" : "broken",
+      "time" : {
+        "start" : 1624544893552,
+        "stop" : 1624544894541,
+        "duration" : 989
+      }
+    }, {
+      "uid" : "be83382ea17a88c9",
+      "status" : "broken",
+      "statusDetails" : "No test results",
+      "time" : {
+        "start" : 1624544890858,
+        "stop" : 1624544892218,
+        "duration" : 1360
+      }
+    }, {
+      "uid" : "63f07efc194e70e8",
+      "status" : "broken",
+      "statusDetails" : "No test results",
+      "time" : {
+        "start" : 1624544888242,
+        "stop" : 1624544889470,
+        "duration" : 1228
+      }
+    }, {
+      "uid" : "8d4f076c1f53602f",
+      "status" : "broken",
+      "statusDetails" : "No test results",
+      "time" : {
+        "start" : 1624544885696,
+        "stop" : 1624544887010,
+        "duration" : 1314
+      }
+    }, {
+      "uid" : "bef77ae14a11ef32",
+      "status" : "broken",
+      "time" : {
+        "start" : 1624544883535,
+        "stop" : 1624544884456,
+        "duration" : 921
+      }
+    }, {
+      "uid" : "ec524ab87b1e7ffe",
+      "status" : "broken",
+      "statusDetails" : "No test results",
+      "time" : {
+        "start" : 1624544880981,
+        "stop" : 1624544882282,
+        "duration" : 1301
+      }
+    }, {
+      "uid" : "f9ac2f83f3a5926e",
+      "status" : "broken",
+      "statusDetails" : "No test results",
+      "time" : {
+        "start" : 1624544878328,
+        "stop" : 1624544879697,
+        "duration" : 1369
+      }
+    }, {
+      "uid" : "3640224eacf18fb8",
+      "status" : "broken",
+      "statusDetails" : "No test results",
+      "time" : {
+        "start" : 1624544875762,
+        "stop" : 1624544876988,
+        "duration" : 1226
+      }
+    }, {
+      "uid" : "b306e2fcfdf196ba",
+      "status" : "broken",
+      "statusDetails" : "No test results",
+      "time" : {
+        "start" : 1624544873531,
+        "stop" : 1624544874776,
+        "duration" : 1245
+      }
+    }, {
+      "uid" : "88ffdfe5486d13ce",
+      "status" : "broken",
+      "statusDetails" : "No test results",
+      "time" : {
+        "start" : 1624544871234,
+        "stop" : 1624544872538,
+        "duration" : 1304
+      }
+    }, {
+      "uid" : "79692fadcc4ae85d",
+      "status" : "broken",
+      "time" : {
+        "start" : 1624544869067,
+        "stop" : 1624544869982,
+        "duration" : 915
+      }
+    }, {
+      "uid" : "f520c846f015a65",
+      "status" : "broken",
+      "statusDetails" : "No test results",
+      "time" : {
+        "start" : 1624544866439,
+        "stop" : 1624544867687,
+        "duration" : 1248
+      }
+    }, {
+      "uid" : "cf12a1f2f0ba181",
+      "status" : "broken",
+      "statusDetails" : "No test results",
+      "time" : {
+        "start" : 1624544864165,
+        "stop" : 1624544865479,
+        "duration" : 1314
+      }
+    }, {
+      "uid" : "42a5bcb242bda889",
+      "status" : "broken",
+      "time" : {
+        "start" : 1624544862137,
+        "stop" : 1624544863175,
+        "duration" : 1038
+      }
+    }, {
+      "uid" : "b23cb313bdecb279",
+      "status" : "broken",
+      "statusDetails" : "No test results",
+      "time" : {
+        "start" : 1624544859647,
+        "stop" : 1624544860902,
+        "duration" : 1255
+      }
+    }, {
+      "uid" : "4bc82f20923540b0",
+      "status" : "broken",
+      "time" : {
+        "start" : 1624544857710,
+        "stop" : 1624544858725,
+        "duration" : 1015
+      }
+    }, {
+      "uid" : "b5bcd942b02c3352",
+      "status" : "broken",
+      "statusDetails" : "No test results",
+      "time" : {
+        "start" : 1624544855106,
+        "stop" : 1624544856364,
+        "duration" : 1258
+      }
+    }, {
+      "uid" : "f8fc86ff117d006a",
+      "status" : "broken",
+      "time" : {
+        "start" : 1624544853235,
+        "stop" : 1624544854181,
+        "duration" : 946
+      }
+    }, {
+      "uid" : "bb6410074dcfa4aa",
+      "status" : "broken",
+      "time" : {
+        "start" : 1624544850997,
+        "stop" : 1624544851993,
+        "duration" : 996
+      }
+    } ],
+    "categories" : [ {
+      "name" : "Test defects",
+      "matchedStatuses" : [ ],
+      "flaky" : false
+    } ],
+    "tags" : [ ]
+  },
+  "source" : "255daf68d18debe3.json",
+  "parameterValues" : [ ]
+}

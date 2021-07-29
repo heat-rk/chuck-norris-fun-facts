@@ -1,4 +1,4 @@
-package ru.heatalways.chucknorrisfunfacts.screens
+package ru.heatalways.chucknorrisfunfacts.presentation.screen
 
 import com.kaspersky.kaspresso.screens.KScreen
 import io.github.kakaocup.kakao.bottomnav.KBottomNavigationView

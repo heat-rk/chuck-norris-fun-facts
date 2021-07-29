@@ -6,7 +6,7 @@ import kotlinx.coroutines.test.runBlockingTest
 import org.junit.Rule
 
 @ExperimentalCoroutinesApi
-abstract class BaseTest {
+abstract class BaseViewModelTest {
     @get:Rule
     var instantTaskExecutorRule = InstantTaskExecutorRule()
 

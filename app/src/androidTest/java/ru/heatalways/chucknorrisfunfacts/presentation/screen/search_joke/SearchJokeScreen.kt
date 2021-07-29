@@ -1,10 +1,10 @@
-package ru.heatalways.chucknorrisfunfacts.screens
+package ru.heatalways.chucknorrisfunfacts.presentation.screen.search_joke
 
 import io.github.kakaocup.kakao.recycler.KRecyclerView
 import ru.heatalways.chucknorrisfunfacts.R
-import ru.heatalways.chucknorrisfunfacts.presentation.screen.search_joke.SearchJokeFragment
-import ru.heatalways.chucknorrisfunfacts.recycler_items.JokeItem
-import ru.heatalways.chucknorrisfunfacts.views.KSearchQueryView
+import ru.heatalways.chucknorrisfunfacts.presentation.adapters.view_holders.JokeItem
+import ru.heatalways.chucknorrisfunfacts.presentation.screen.BaseScreen
+import ru.heatalways.chucknorrisfunfacts.presentation.custom_view.KSearchQueryView
 
 object SearchJokeScreen: BaseScreen<SearchJokeScreen>() {
     override val layoutId = R.layout.fragment_search_joke

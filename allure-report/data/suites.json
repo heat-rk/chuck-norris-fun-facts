@@ -5,13 +5,13 @@
     "name" : "ru.heatalways.chucknorrisfunfacts.tests.RandomJokeScreenTest",
     "children" : [ {
       "name" : "RandomJokeScreenTest.testCategorySelection",
-      "uid" : "40a840215cb35da2",
+      "uid" : "255daf68d18debe3",
       "parentUid" : "b2c2d4878c704ad7caef0f6082985abd",
-      "status" : "passed",
+      "status" : "broken",
       "time" : {
-        "start" : 1624366400023,
-        "stop" : 1624366406427,
-        "duration" : 6404
+        "start" : 1624544989092,
+        "stop" : 1624544990327,
+        "duration" : 1235
       },
       "flaky" : false,
       "newFailed" : false,
@@ -22,13 +22,13 @@
     "name" : "ru.heatalways.chucknorrisfunfacts.tests.SearchJokeScreenTest",
     "children" : [ {
       "name" : "SearchJokeScreenTest.testSearchView",
-      "uid" : "392bb0a6bd5151f9",
+      "uid" : "8d97dbfa7b26663d",
       "parentUid" : "751ba247d999a04dbbe55f7e6483bd43",
-      "status" : "passed",
+      "status" : "broken",
       "time" : {
-        "start" : 1624366407823,
-        "stop" : 1624366437555,
-        "duration" : 29732
+        "start" : 1624544990331,
+        "stop" : 1624544991662,
+        "duration" : 1331
       },
       "flaky" : false,
       "newFailed" : false,

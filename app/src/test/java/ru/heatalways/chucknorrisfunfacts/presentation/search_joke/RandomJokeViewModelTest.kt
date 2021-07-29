@@ -9,12 +9,11 @@ import ru.heatalways.chucknorrisfunfacts.data.entities.Category
 import ru.heatalways.chucknorrisfunfacts.domain.managers.ChuckNorrisJokesManagerFake
 import ru.heatalways.chucknorrisfunfacts.presentation.screen.random_joke.RandomJokeState
 import ru.heatalways.chucknorrisfunfacts.presentation.screen.random_joke.RandomJokeViewModel
-import ru.heatalways.chucknorrisfunfacts.presentation.screen.search_joke.SearchJokeState
-import ru.heatalways.chucknorrisfunfacts.utils.BaseTest
+import ru.heatalways.chucknorrisfunfacts.utils.BaseViewModelTest
 import ru.heatalways.chucknorrisfunfacts.utils.getOrAwaitValueTest
 
 @ExperimentalCoroutinesApi
-class RandomJokeViewModelTest: BaseTest() {
+class RandomJokeViewModelTest: BaseViewModelTest() {
     private val fakeManager =  ChuckNorrisJokesManagerFake()
     private val router = Router()
     private lateinit var viewModel: RandomJokeViewModel

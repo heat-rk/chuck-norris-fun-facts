@@ -1,33 +1,19 @@
 {
-  "uid" : "392bb0a6bd5151f9",
+  "uid" : "d4412443b2688a07",
   "name" : "SearchJokeScreenTest.testSearchView",
   "fullName" : "SearchJokeScreenTest.testSearchView",
   "historyId" : "eb98ac9f74c22b06620a67fd06a4b07f",
   "time" : {
-    "start" : 1624366407823,
-    "stop" : 1624366437555,
-    "duration" : 29732
+    "start" : 1624544860904,
+    "stop" : 1624544862134,
+    "duration" : 1230
   },
-  "status" : "passed",
+  "status" : "broken",
+  "statusMessage" : "No test results",
+  "statusTrace" : "No test results",
   "flaky" : false,
   "newFailed" : false,
   "beforeStages" : [ ],
-  "testStage" : {
-    "status" : "passed",
-    "steps" : [ ],
-    "attachments" : [ {
-      "uid" : "2564d99633acd317",
-      "name" : "Log",
-      "source" : "2564d99633acd317.log",
-      "type" : "text/txt",
-      "size" : 0
-    } ],
-    "parameters" : [ ],
-    "attachmentsCount" : 1,
-    "shouldDisplayMessage" : false,
-    "stepsCount" : 0,
-    "hasContent" : true
-  },
   "afterStages" : [ ],
   "labels" : [ {
     "name" : "host",
@@ -50,14 +36,12 @@
   } ],
   "parameters" : [ ],
   "links" : [ ],
-  "hidden" : false,
-  "retry" : false,
+  "hidden" : true,
+  "retry" : true,
   "extra" : {
-    "severity" : "normal",
-    "retries" : [ ],
     "categories" : [ ],
     "tags" : [ ]
   },
-  "source" : "392bb0a6bd5151f9.json",
+  "source" : "d4412443b2688a07.json",
   "parameterValues" : [ ]
 }

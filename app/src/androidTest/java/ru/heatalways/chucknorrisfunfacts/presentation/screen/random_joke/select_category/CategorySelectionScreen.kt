@@ -1,10 +1,10 @@
-package ru.heatalways.chucknorrisfunfacts.screens
+package ru.heatalways.chucknorrisfunfacts.presentation.screen.random_joke.select_category
 
 import io.github.kakaocup.kakao.recycler.KRecyclerView
 import ru.heatalways.chucknorrisfunfacts.R
-import ru.heatalways.chucknorrisfunfacts.presentation.screen.random_joke.select_category.SelectCategoryFragment
-import ru.heatalways.chucknorrisfunfacts.recycler_items.CategoryItem
-import ru.heatalways.chucknorrisfunfacts.views.KSearchQueryView
+import ru.heatalways.chucknorrisfunfacts.presentation.adapters.view_holders.CategoryItem
+import ru.heatalways.chucknorrisfunfacts.presentation.screen.BaseScreen
+import ru.heatalways.chucknorrisfunfacts.presentation.custom_view.KSearchQueryView
 
 object CategorySelectionScreen: BaseScreen<CategorySelectionScreen>() {
     override val layoutId = R.layout.fragment_select_category
