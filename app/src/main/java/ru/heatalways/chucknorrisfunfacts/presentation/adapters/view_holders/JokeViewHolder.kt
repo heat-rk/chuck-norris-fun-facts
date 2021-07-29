@@ -5,6 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import dagger.hilt.EntryPoint
+import dagger.hilt.EntryPoints
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import ru.heatalways.chucknorrisfunfacts.R
@@ -12,19 +13,20 @@ import ru.heatalways.chucknorrisfunfacts.data.entities.ChuckJoke
 import ru.heatalways.chucknorrisfunfacts.databinding.ItemJokeHolderViewBinding
 import ru.heatalways.chucknorrisfunfacts.domain.managers.glide.ImageLoaderManager
 import ru.heatalways.chucknorrisfunfacts.domain.managers.glide.LoadPhotoConfig
-import ru.heatalways.chucknorrisfunfacts.extensions.entryPointOf
 
 class JokeViewHolder private constructor(rootView: View): RecyclerView.ViewHolder(rootView) {
     private val binding = ItemJokeHolderViewBinding.bind(rootView)
+    private val appContext = rootView.context.applicationContext
+    private val entryPoint get() = EntryPoints.get(appContext, JokeViewHolderEntryPoint::class.java)
 
     @EntryPoint
     @InstallIn(SingletonComponent::class)
     interface JokeViewHolderEntryPoint {
-        fun getImageLoader(): ImageLoaderManager
+        val imageLoader: ImageLoaderManager
     }
 
     fun bind(joke: ChuckJoke) {
-        entryPointOf(JokeViewHolderEntryPoint::class.java).getImageLoader().loadImage(
+        entryPoint.imageLoader.loadImage(
             config = LoadPhotoConfig(url = joke.iconUrl),
             imageView = binding.iconImageView
         )
