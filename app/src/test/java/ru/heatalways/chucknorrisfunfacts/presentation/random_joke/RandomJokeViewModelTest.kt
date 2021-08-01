@@ -1,4 +1,4 @@
-package ru.heatalways.chucknorrisfunfacts.presentation.search_joke
+package ru.heatalways.chucknorrisfunfacts.presentation.random_joke
 
 import com.github.terrakok.cicerone.Router
 import com.google.common.truth.Truth
