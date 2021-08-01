@@ -1,6 +1,7 @@
 package ru.heatalways.chucknorrisfunfacts.domain.database.dao
 
 import androidx.room.Dao
+import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
 import ru.heatalways.chucknorrisfunfacts.data.entities.ChuckJoke
@@ -15,4 +16,7 @@ interface SavedJokesDao {
 
     @Insert
     suspend fun insert(joke: ChuckJoke)
+
+    @Delete
+    suspend fun delete(joke: ChuckJoke)
 }
