@@ -5,19 +5,18 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 
 /**
- * Абстрактный класс, расширяющий возможности класса ListAdapter
+ * Abstract class, that "fixed" a problem with ListAdapter when you submit
+ * one list (they have the same address) a few times and recycler view
+ * doesn't update the view
  */
 abstract class BaseListAdapter<T, VH: RecyclerView.ViewHolder>(diffUtil: DiffUtil.ItemCallback<T>)
     : ListAdapter<T, VH>(diffUtil) {
 
-    /**
-     * Устанавливает новый список в адаптер RecyclerView.
-     * Используйте данный метод, если вам необходимо установить новый список в
-     * RecyclerView со "сбросом состояния" (после вызова данного метода список
-     * проскроллится наверх и отобразит новые данные)
-     */
-    fun newList(list: List<T>) {
-        submitList(null)
-        submitList(list)
+    override fun submitList(list: List<T>?) {
+        super.submitList(list?.let { ArrayList(it) })
+    }
+
+    override fun submitList(list: List<T>?, commitCallback: Runnable?) {
+        super.submitList(list?.let { ArrayList(it) }, commitCallback)
     }
 }
