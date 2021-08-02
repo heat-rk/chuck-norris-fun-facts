@@ -17,13 +17,13 @@ import ru.heatalways.chucknorrisfunfacts.presentation.base.BaseMviFragment
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class SelectCategoryFragment: BaseMviFragment<
+class CategorySelectionFragment: BaseMviFragment<
         FragmentSelectCategoryBinding,
         CategorySelectionContract.Action,
         CategorySelectionContract.State,
         CategorySelectionContract.Effect
 >() {
-    override val viewModel: SelectCategoryViewModel by viewModels()
+    override val viewModel: CategorySelectionViewModel by viewModels()
 
     private val sharedCategorySelectionViewModel:
             SharedCategorySelectionViewModel by activityViewModels()
@@ -74,7 +74,9 @@ class SelectCategoryFragment: BaseMviFragment<
             is CategorySelectionContract.State.Loaded -> {
                 setProgressBarVisibility(false)
                 setErrorVisibility(false)
-                categoriesAdapter.newList(state.categories)
+                categoriesAdapter.submitList(state.categories) {
+                    binding.categoriesRecyclerView.scrollToPosition(0)
+                }
             }
         }
     }
@@ -88,6 +90,6 @@ class SelectCategoryFragment: BaseMviFragment<
     }
 
     companion object {
-        fun getScreen() = FragmentScreen { SelectCategoryFragment() }
+        fun getScreen() = FragmentScreen { CategorySelectionFragment() }
     }
 }

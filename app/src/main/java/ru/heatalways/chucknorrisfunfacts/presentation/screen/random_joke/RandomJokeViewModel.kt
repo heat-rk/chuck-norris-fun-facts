@@ -1,29 +1,50 @@
 package ru.heatalways.chucknorrisfunfacts.presentation.screen.random_joke
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.github.terrakok.cicerone.Router
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import ru.heatalways.chucknorrisfunfacts.data.entities.Category
 import ru.heatalways.chucknorrisfunfacts.domain.managers.chuck_norris_jokes.ChuckNorrisJokesManager
-import ru.heatalways.chucknorrisfunfacts.presentation.base.BaseViewModel
-import ru.heatalways.chucknorrisfunfacts.presentation.screen.random_joke.select_category.SelectCategoryFragment
+import ru.heatalways.chucknorrisfunfacts.presentation.base.BaseMviViewModel
 import javax.inject.Inject
 
 @HiltViewModel
 class RandomJokeViewModel @Inject constructor(
-    private val jokesManager: ChuckNorrisJokesManager,
-    private val router: Router
-): BaseViewModel() {
+    private val jokesManager: ChuckNorrisJokesManager
+): BaseMviViewModel<RandomJokeContract.Action, RandomJokeContract.State, RandomJokeContract.Effect>() {
 
-    private val mState = MutableLiveData<RandomJokeState>()
-    val state: LiveData<RandomJokeState> = mState
+    override val initialState get() = RandomJokeContract.State.Loading
 
-    fun fetchRandomJoke(selectedCategory: Category) {
+    init {
+        fetchJokes()
+    }
+
+    override fun handleAction(action: RandomJokeContract.Action) {
+        when (action) {
+            is RandomJokeContract.Action.OnCategorySelectionButtonClick -> {
+                setEffect { RandomJokeContract.Effect.NavigateToCategorySelectionScreen }
+            }
+
+            is RandomJokeContract.Action.OnRandomJokeRequest -> {
+                fetchRandomJoke(action.category)
+            }
+        }
+    }
+
+    private fun fetchJokes() {
         viewModelScope.launch {
-            mState.value = RandomJokeState.Loading
+            val jokes = jokesManager.getAllSavedJokes()
+
+            if (jokes.isNotEmpty())
+                setState { RandomJokeContract.State.Loaded(jokes) }
+            else
+                setState { RandomJokeContract.State.Empty }
+        }
+    }
+
+    private fun fetchRandomJoke(selectedCategory: Category) {
+        viewModelScope.launch {
+            setState { RandomJokeContract.State.JokeLoading }
 
             val response = jokesManager.random(
                 when (selectedCategory) {
@@ -32,15 +53,12 @@ class RandomJokeViewModel @Inject constructor(
                 }
             )
 
-            if (response.isOk && response.value != null) {
-                mState.value = RandomJokeState.Loaded(listOf(response.value))
-            } else {
-                mState.value = RandomJokeState.Error(response.error?.message)
-            }
-        }
-    }
+            if (response.isOk && response.value != null)
+                jokesManager.saveJoke(response.value)
+            else
+                setEffect { RandomJokeContract.Effect.Error(response.error?.message) }
 
-    fun navigateToCategorySelectionScreen() {
-        router.navigateTo(SelectCategoryFragment.getScreen())
+            fetchJokes()
+        }
     }
 }

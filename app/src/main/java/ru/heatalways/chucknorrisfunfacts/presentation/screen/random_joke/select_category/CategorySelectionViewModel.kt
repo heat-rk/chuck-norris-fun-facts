@@ -9,7 +9,7 @@ import ru.heatalways.chucknorrisfunfacts.presentation.base.BaseMviViewModel
 import javax.inject.Inject
 
 @HiltViewModel
-class SelectCategoryViewModel @Inject constructor(
+class CategorySelectionViewModel @Inject constructor(
     private val jokesManager: ChuckNorrisJokesManager
 ): BaseMviViewModel<
         CategorySelectionContract.Action,

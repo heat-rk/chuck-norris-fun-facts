@@ -11,11 +11,17 @@ import dagger.hilt.android.AndroidEntryPoint
 import ru.heatalways.chucknorrisfunfacts.R
 import ru.heatalways.chucknorrisfunfacts.databinding.FragmentSearchJokeBinding
 import ru.heatalways.chucknorrisfunfacts.presentation.adapters.JokesAdapter
-import ru.heatalways.chucknorrisfunfacts.presentation.base.BaseFragment
+import ru.heatalways.chucknorrisfunfacts.presentation.base.BaseMviFragment
 
 @AndroidEntryPoint
-class SearchJokeFragment: BaseFragment<FragmentSearchJokeBinding>() {
-    private val viewModel: SearchJokeViewModel by viewModels()
+class SearchJokeFragment: BaseMviFragment<
+        FragmentSearchJokeBinding,
+        SearchJokeContract.Action,
+        SearchJokeContract.State,
+        SearchJokeContract.Effect
+>() {
+    override val viewModel: SearchJokeViewModel by viewModels()
+
     private val jokesAdapter = JokesAdapter()
 
     override val bindingInflater: (LayoutInflater, ViewGroup?, Boolean) -> FragmentSearchJokeBinding
@@ -32,36 +38,38 @@ class SearchJokeFragment: BaseFragment<FragmentSearchJokeBinding>() {
             jokesRecyclerView.adapter = jokesAdapter
 
             searchView.onSearchExecute = { searchQuery ->
-                viewModel.onSearchQueryExecute(searchQuery)
-            }
-        }
-
-        initJokesObserver()
-    }
-
-    private fun initJokesObserver() {
-        observe(viewModel.state) { state ->
-            when (state) {
-                is SearchJokeState.Error -> {
-                    setProgressBarVisibility(false)
-                    setErrorVisibility(true, state.message)
-                }
-                is SearchJokeState.Empty -> {
-                    setProgressBarVisibility(false)
-                    setErrorVisibility(true, getString(R.string.error_not_found))
-                }
-                is SearchJokeState.Loaded -> {
-                    setProgressBarVisibility(false)
-                    setErrorVisibility(false)
-                    jokesAdapter.submitList(state.jokes)
-                }
-                SearchJokeState.Loading -> {
-                    setProgressBarVisibility(true)
-                    setErrorVisibility(false)
-                }
+                action(SearchJokeContract.Action.OnSearchExecute(searchQuery))
             }
         }
     }
+
+    override fun renderState(state: SearchJokeContract.State) {
+        when (state) {
+            is SearchJokeContract.State.Default -> {
+                setProgressBarVisibility(false)
+                setErrorVisibility(true, getString(R.string.search_joke_empty_hint))
+            }
+            is SearchJokeContract.State.Error -> {
+                setProgressBarVisibility(false)
+                setErrorVisibility(true, state.message)
+            }
+            is SearchJokeContract.State.Empty -> {
+                setProgressBarVisibility(false)
+                setErrorVisibility(true, getString(R.string.error_not_found))
+            }
+            is SearchJokeContract.State.Loaded -> {
+                setProgressBarVisibility(false)
+                setErrorVisibility(false)
+                jokesAdapter.submitList(state.jokes)
+            }
+            is SearchJokeContract.State.Loading -> {
+                setProgressBarVisibility(true)
+                setErrorVisibility(false)
+            }
+        }
+    }
+
+    override fun handleEffect(effect: SearchJokeContract.Effect) = Unit
 
     companion object {
         fun getScreen() = FragmentScreen { SearchJokeFragment() }
