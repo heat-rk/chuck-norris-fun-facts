@@ -5,6 +5,7 @@ import ru.heatalways.chucknorrisfunfacts.data.entities.ChuckJoke
 import ru.heatalways.chucknorrisfunfacts.domain.database.AppDatabase
 import ru.heatalways.chucknorrisfunfacts.domain.network.api.ChuckNorrisJokesApi
 import ru.heatalways.chucknorrisfunfacts.domain.network.api_response.ApiResponse
+import java.util.*
 
 class ChuckNorrisJokesManagerImpl(
     private val api: ChuckNorrisJokesApi,
@@ -39,7 +40,9 @@ class ChuckNorrisJokesManagerImpl(
     }
 
     override suspend fun saveJoke(joke: ChuckJoke) {
-        appDatabase.savedJokesDao().insert(joke)
+        appDatabase.savedJokesDao().insert(joke.apply {
+            savedAt = Calendar.getInstance().timeInMillis
+        })
     }
 
     override suspend fun getSavedJokesBy(limit: Int, offset: Int): List<ChuckJoke> {
