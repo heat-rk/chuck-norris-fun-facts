@@ -13,6 +13,7 @@
     <string name="random_joke_select_category">Select category</string>
     <string name="random_joke_any_category">any</string>
     <string name="random_joke_get">Get joke!</string>
+    <string name="random_joke_empty_history">Your history is empty :(</string>
 
     <!-- SELECT CATEGORY FRAGMENT -->
     <string name="select_category_screen_title">Select category</string>
