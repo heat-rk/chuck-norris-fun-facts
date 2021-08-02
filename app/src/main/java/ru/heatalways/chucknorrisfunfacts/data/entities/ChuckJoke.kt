@@ -34,7 +34,10 @@ data class ChuckJoke(
 
     @SerializedName("value")
     @ColumnInfo(name = VALUE)
-    val value: String?
+    val value: String?,
+
+    @ColumnInfo(name = SAVED_AT)
+    var savedAt: Long?
 ) {
     companion object {
         const val TABLE_NAME = "db_chuck_jokes"
@@ -46,5 +49,6 @@ data class ChuckJoke(
         const val UPDATED_AT = "updated_at"
         const val URL = "url"
         const val VALUE = "value"
+        const val SAVED_AT = "saved_at"
     }
 }

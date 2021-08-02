@@ -7,17 +7,23 @@ import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.github.terrakok.cicerone.Router
 import com.github.terrakok.cicerone.androidx.FragmentScreen
 import dagger.hilt.android.AndroidEntryPoint
 import ru.heatalways.chucknorrisfunfacts.R
 import ru.heatalways.chucknorrisfunfacts.databinding.FragmentSelectCategoryBinding
 import ru.heatalways.chucknorrisfunfacts.presentation.adapters.CategoriesAdapter
-import ru.heatalways.chucknorrisfunfacts.presentation.base.BaseFragment
+import ru.heatalways.chucknorrisfunfacts.presentation.base.BaseMviFragment
+import javax.inject.Inject
 
 @AndroidEntryPoint
-class SelectCategoryFragment: BaseFragment<FragmentSelectCategoryBinding>() {
-    private val selectCategoryViewModel:
-            SelectCategoryViewModel by viewModels()
+class SelectCategoryFragment: BaseMviFragment<
+        FragmentSelectCategoryBinding,
+        CategorySelectionContract.Action,
+        CategorySelectionContract.State,
+        CategorySelectionContract.Effect
+>() {
+    override val viewModel: SelectCategoryViewModel by viewModels()
 
     private val sharedCategorySelectionViewModel:
             SharedCategorySelectionViewModel by activityViewModels()
@@ -29,13 +35,16 @@ class SelectCategoryFragment: BaseFragment<FragmentSelectCategoryBinding>() {
 
     override val contentId = R.id.categoriesRecyclerView
 
+    @Inject
+    lateinit var router: Router
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setTitle(R.string.select_category_screen_title)
 
         categoriesAdapter.onCategoryClick = { category ->
             sharedCategorySelectionViewModel.selectCategory(category)
-            selectCategoryViewModel.backToRandomJokeScreen()
+            action(CategorySelectionContract.Action.OnCategoryClick)
         }
 
         binding.apply {
@@ -43,33 +52,37 @@ class SelectCategoryFragment: BaseFragment<FragmentSelectCategoryBinding>() {
             categoriesRecyclerView.adapter = categoriesAdapter
 
             searchView.onSearchExecute = { query ->
-                selectCategoryViewModel.searchCategories(query)
+                action(CategorySelectionContract.Action.OnSearchExecute(query))
             }
         }
-
-        initCategoriesObserver()
     }
 
-    private fun initCategoriesObserver() {
-        observe(selectCategoryViewModel.state) { state ->
-            when (state) {
-                is SelectCategoryState.Error -> {
-                    setProgressBarVisibility(false)
-                    setErrorVisibility(true, state.message)
-                }
-                is SelectCategoryState.Empty -> {
-                    setProgressBarVisibility(false)
-                    setErrorVisibility(true, getString(R.string.error_not_found))
-                }
-                is SelectCategoryState.Loading -> {
-                    setProgressBarVisibility(true)
-                    setErrorVisibility(false)
-                }
-                is SelectCategoryState.Loaded -> {
-                    setProgressBarVisibility(false)
-                    setErrorVisibility(false)
-                    categoriesAdapter.newList(state.categories)
-                }
+    override fun renderState(state: CategorySelectionContract.State) {
+        when (state) {
+            is CategorySelectionContract.State.Error -> {
+                setProgressBarVisibility(false)
+                setErrorVisibility(true, state.message)
+            }
+            is CategorySelectionContract.State.Empty -> {
+                setProgressBarVisibility(false)
+                setErrorVisibility(true, getString(R.string.error_not_found))
+            }
+            is CategorySelectionContract.State.Loading -> {
+                setProgressBarVisibility(true)
+                setErrorVisibility(false)
+            }
+            is CategorySelectionContract.State.Loaded -> {
+                setProgressBarVisibility(false)
+                setErrorVisibility(false)
+                categoriesAdapter.newList(state.categories)
+            }
+        }
+    }
+
+    override fun handleEffect(effect: CategorySelectionContract.Effect) {
+        when (effect) {
+            CategorySelectionContract.Effect.GoBack -> {
+                router.exit()
             }
         }
     }
