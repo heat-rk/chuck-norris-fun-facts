@@ -12,7 +12,4 @@ abstract class BaseViewModelTest {
 
     @get:Rule
     val coroutineRule = MainCoroutineRule()
-
-    protected fun coroutineTest(function: () -> Unit) =
-        coroutineRule.runBlockingTest { function() }
 }
