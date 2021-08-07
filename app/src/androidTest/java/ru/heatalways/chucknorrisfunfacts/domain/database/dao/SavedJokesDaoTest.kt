@@ -52,7 +52,8 @@ class SavedJokesDaoTest {
             id = "2",
             updatedAt = null,
             url = null,
-            value = "never gonna give you up"
+            value = "never gonna give you up",
+            savedAt = 0
         ))
 
         assertThat(dao.getAll()).hasSize(1)
@@ -67,7 +68,8 @@ class SavedJokesDaoTest {
             id = "1",
             updatedAt = null,
             url = null,
-            value = "never gonna give you up"
+            value = "never gonna give you up",
+            savedAt = 0
         ))
 
         dao.insert(ChuckJoke(
@@ -77,7 +79,8 @@ class SavedJokesDaoTest {
             id = "2",
             updatedAt = null,
             url = null,
-            value = "never gonna let you down"
+            value = "never gonna let you down",
+            savedAt = 1
         ))
 
         dao.insert(ChuckJoke(
@@ -87,7 +90,8 @@ class SavedJokesDaoTest {
             id = "3",
             updatedAt = null,
             url = null,
-            value = "never gonna run around"
+            value = "never gonna run around",
+            savedAt = 2
         ))
 
         assertThat(dao.getAll()).hasSize(3)
@@ -102,7 +106,8 @@ class SavedJokesDaoTest {
             id = "1",
             updatedAt = null,
             url = null,
-            value = "never gonna give you up"
+            value = "never gonna give you up",
+            savedAt = 0
         ))
 
         dao.insert(ChuckJoke(
@@ -112,7 +117,8 @@ class SavedJokesDaoTest {
             id = "2",
             updatedAt = null,
             url = null,
-            value = "never gonna let you down"
+            value = "never gonna let you down",
+            savedAt = 1
         ))
 
         dao.insert(ChuckJoke(
@@ -122,7 +128,8 @@ class SavedJokesDaoTest {
             id = "3",
             updatedAt = null,
             url = null,
-            value = "never gonna run around"
+            value = "never gonna run around",
+            savedAt = 2
         ))
 
         assertThat(dao.getBy(limit = 2)).hasSize(2)
@@ -137,7 +144,8 @@ class SavedJokesDaoTest {
             id = "1",
             updatedAt = null,
             url = null,
-            value = "never gonna give you up"
+            value = "never gonna give you up",
+            savedAt = 0
         ))
 
         dao.insert(ChuckJoke(
@@ -147,7 +155,8 @@ class SavedJokesDaoTest {
             id = "2",
             updatedAt = null,
             url = null,
-            value = "never gonna let you down"
+            value = "never gonna let you down",
+            savedAt = 1
         ))
 
         dao.insert(ChuckJoke(
@@ -157,14 +166,15 @@ class SavedJokesDaoTest {
             id = "3",
             updatedAt = null,
             url = null,
-            value = "never gonna run around"
+            value = "never gonna run around",
+            savedAt = 2
         ))
 
         val result = dao.getBy(offset = 1)
 
         assertThat(result).hasSize(2)
         assertThat(result[0].id).isEqualTo("2")
-        assertThat(result[1].id).isEqualTo("3")
+        assertThat(result[1].id).isEqualTo("1")
     }
 
     @Test
@@ -176,7 +186,8 @@ class SavedJokesDaoTest {
             id = "1",
             updatedAt = null,
             url = null,
-            value = "never gonna give you up"
+            value = "never gonna give you up",
+            savedAt = 0
         ))
 
         dao.insert(ChuckJoke(
@@ -186,7 +197,8 @@ class SavedJokesDaoTest {
             id = "2",
             updatedAt = null,
             url = null,
-            value = "never gonna let you down"
+            value = "never gonna let you down",
+            savedAt = 1
         ))
 
         dao.insert(ChuckJoke(
@@ -196,7 +208,8 @@ class SavedJokesDaoTest {
             id = "3",
             updatedAt = null,
             url = null,
-            value = "never gonna run around"
+            value = "never gonna run around",
+            savedAt = 2
         ))
 
         val result = dao.getBy(offset = 1, limit = 1)
@@ -214,7 +227,8 @@ class SavedJokesDaoTest {
             id = "1",
             updatedAt = null,
             url = null,
-            value = "never gonna give you up"
+            value = "never gonna give you up",
+            savedAt = 0
         )
 
         dao.insert(item)
