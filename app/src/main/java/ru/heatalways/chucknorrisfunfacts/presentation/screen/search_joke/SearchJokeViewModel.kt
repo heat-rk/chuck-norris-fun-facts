@@ -22,19 +22,18 @@ class SearchJokeViewModel @Inject constructor(
 
     private fun onSearchQueryExecute(query: String) {
         viewModelScope.launch {
-            stateWhile(SearchJokeContract.State.Loading) {
-                val response = jokesManager.search(query)
+            setState { SearchJokeContract.State.Loading }
+            val response = jokesManager.search(query)
 
-                when {
-                    !response.isOk || response.value == null ->
-                        SearchJokeContract.State.Error(response.error?.message)
+            when {
+                !response.isOk || response.value == null ->
+                    setState { SearchJokeContract.State.Error(response.error?.message) }
 
-                    response.value.isEmpty() ->
-                        SearchJokeContract.State.Empty
+                response.value.isEmpty() ->
+                    setState { SearchJokeContract.State.Empty }
 
-                    else ->
-                        SearchJokeContract.State.Loaded(response.value)
-                }
+                else ->
+                    setState { SearchJokeContract.State.Loaded(response.value) }
             }
         }
     }

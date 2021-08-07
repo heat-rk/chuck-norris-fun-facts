@@ -50,17 +50,6 @@ abstract class BaseMviViewModel<Action: MviAction, State: MviState, Effect: MviE
     }
 
     /**
-     * Using [state] while executing reducer from previous (before [state]) state
-     */
-    protected inline fun stateWhile(state: State, reduce: State.() -> State) {
-        val rememberedState = currentState
-        setState { state }
-
-        val newState = rememberedState.reduce()
-        setState { newState }
-    }
-
-    /**
      * Start listening to Action
      */
     private fun subscribeActions() {

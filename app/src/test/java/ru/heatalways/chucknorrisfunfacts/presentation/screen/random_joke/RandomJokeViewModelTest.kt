@@ -7,7 +7,6 @@ import org.junit.Before
 import org.junit.Test
 import ru.heatalways.chucknorrisfunfacts.data.entities.Category
 import ru.heatalways.chucknorrisfunfacts.domain.managers.ChuckNorrisJokesManagerFake
-import ru.heatalways.chucknorrisfunfacts.presentation.screen.random_joke.RandomJokeState
 import ru.heatalways.chucknorrisfunfacts.presentation.screen.random_joke.RandomJokeViewModel
 import ru.heatalways.chucknorrisfunfacts.utils.BaseViewModelTest
 import ru.heatalways.chucknorrisfunfacts.utils.getOrAwaitValueTest
