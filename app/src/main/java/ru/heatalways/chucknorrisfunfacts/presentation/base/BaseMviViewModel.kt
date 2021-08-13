@@ -5,7 +5,13 @@ import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 
-abstract class BaseMviViewModel<Action: MviAction, State: MviState, Effect: MviEffect>: BaseViewModel() {
+abstract class BaseMviViewModel<
+        Action: MviAction,
+        State: MviState,
+        Effect: MviEffect,
+        PartialState
+>(private val reducer: MviReducer<State, PartialState>): BaseViewModel() {
+
     // Create Initial State of View
     private val _initialState : State by lazy { initialState }
     abstract val initialState : State
@@ -32,21 +38,22 @@ abstract class BaseMviViewModel<Action: MviAction, State: MviState, Effect: MviE
         viewModelScope.launch { _action.emit(event) }
     }
 
-
     /**
      * Set new Ui State
      */
-    protected fun setState(reduce: State.() -> State) {
-        val newState = currentState.reduce()
-        _state.value = newState
+    protected fun setState(state: State) {
+        _state.value = state
+    }
+
+    protected fun reduceState(partialState: PartialState) {
+        setState(reducer.reduce(currentState, partialState))
     }
 
     /**
      * Set new Effect
      */
-    protected fun setEffect(builder: () -> Effect) {
-        val effectValue = builder()
-        viewModelScope.launch { _effect.send(effectValue) }
+    protected fun setEffect(effect: Effect) {
+        viewModelScope.launch { _effect.send(effect) }
     }
 
     /**

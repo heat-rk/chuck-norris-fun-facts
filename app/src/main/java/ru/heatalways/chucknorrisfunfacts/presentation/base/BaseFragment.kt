@@ -17,8 +17,8 @@ import androidx.viewbinding.ViewBinding
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collect
 import ru.heatalways.chucknorrisfunfacts.R
+import ru.heatalways.chucknorrisfunfacts.data.utils.StringResource
 import ru.heatalways.chucknorrisfunfacts.databinding.BaseFragmentBinding
-import ru.heatalways.chucknorrisfunfacts.extensions.setVisibleOrGone
 import ru.heatalways.chucknorrisfunfacts.presentation.screen.main.MainActivity
 
 abstract class BaseFragment<Binding: ViewBinding>: Fragment(), KeyboardChangeListener {
@@ -88,10 +88,10 @@ abstract class BaseFragment<Binding: ViewBinding>: Fragment(), KeyboardChangeLis
         Toast.makeText(requireContext(), message ?: getString(R.string.error_unknown), length).show()
     }
 
-    protected fun setErrorVisibility(isVisible: Boolean, message: String? = null) {
+    protected fun setErrorVisibility(isVisible: Boolean, message: StringResource? = null) {
         rootBinding.root.findViewById<View>(contentId)?.isVisible = !isVisible
         rootBinding.errorContainer.isVisible = isVisible
-        rootBinding.errorTextView.text = message ?: getString(R.string.error_unknown)
+        rootBinding.errorTextView.text = getString(message) ?: getString(R.string.error_unknown)
     }
 
     protected fun setProgressBarVisibility(isVisible: Boolean) {
@@ -107,6 +107,9 @@ abstract class BaseFragment<Binding: ViewBinding>: Fragment(), KeyboardChangeLis
     protected fun setTitle(title: String) {
         rootBinding.appbar.toolbar.title = title
     }
+
+    protected fun getString(stringResource: StringResource?) =
+        stringResource?.getText(requireContext())
 
     override fun onKeyboardChanged(isOpen: Boolean) {
         val activity = baseActivity

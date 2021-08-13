@@ -11,7 +11,7 @@ abstract class BaseMviFragment<
         Effect: MviEffect
 >: BaseFragment<Binding>() {
 
-    abstract val viewModel: BaseMviViewModel<Event, State, Effect>
+    abstract val viewModel: BaseMviViewModel<Event, State, Effect, *>
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
