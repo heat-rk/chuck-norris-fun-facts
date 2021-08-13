@@ -15,6 +15,7 @@ import ru.heatalways.chucknorrisfunfacts.R
 import ru.heatalways.chucknorrisfunfacts.data.entities.Category
 import ru.heatalways.chucknorrisfunfacts.data.entities.ChuckJoke
 import ru.heatalways.chucknorrisfunfacts.databinding.FragmentRandomJokeBinding
+import ru.heatalways.chucknorrisfunfacts.extensions.toTextResource
 import ru.heatalways.chucknorrisfunfacts.presentation.adapters.JokesAdapter
 import ru.heatalways.chucknorrisfunfacts.presentation.base.BaseMviFragment
 import ru.heatalways.chucknorrisfunfacts.presentation.screen.random_joke.select_category.CategorySelectionFragment
@@ -67,12 +68,16 @@ class RandomJokeFragment: BaseMviFragment<
     }
 
     override fun renderState(state: RandomJokeContract.State) {
-        when (state) {
-            is RandomJokeContract.State.Loading -> loadingViewState()
-            is RandomJokeContract.State.JokeLoading -> jokeLoadingViewState()
-            is RandomJokeContract.State.Empty -> messageViewState(getString(R.string.random_joke_empty_history))
-            is RandomJokeContract.State.Loaded -> loadedViewState(state.jokes)
+        adapter.submitList(state.jokes) {
+            binding.historyRecyclerView.scrollToPosition(0)
         }
+
+        binding.buttonProgressBar.isVisible = state.isJokeLoading
+        binding.getJokeButton.isVisible = state.isJokeLoading.not()
+
+        setProgressBarVisibility(state.isLoading)
+
+        setErrorVisibility(state.message != null, state.message)
     }
 
     override fun handleEffect(effect: RandomJokeContract.Effect) {
@@ -92,38 +97,6 @@ class RandomJokeFragment: BaseMviFragment<
                 is Category.Any -> getString(R.string.random_joke_any_category)
                 is Category.Specific -> category.name
             }
-        }
-    }
-
-    private fun messageViewState(message: String?) {
-        binding.buttonProgressBar.isVisible = false
-        binding.getJokeButton.isVisible = true
-        setErrorVisibility(true, message)
-        setProgressBarVisibility(false)
-    }
-
-    private fun loadingViewState() {
-        binding.buttonProgressBar.isVisible = false
-        binding.getJokeButton.isVisible = true
-        setErrorVisibility(false)
-        setProgressBarVisibility(true)
-    }
-
-    private fun jokeLoadingViewState() {
-        binding.buttonProgressBar.isVisible = true
-        binding.getJokeButton.isVisible = false
-        setErrorVisibility(false)
-        setProgressBarVisibility(false)
-    }
-
-    private fun loadedViewState(jokes: List<ChuckJoke>) {
-        binding.buttonProgressBar.isVisible = false
-        binding.getJokeButton.isVisible = true
-
-        setErrorVisibility(false)
-        setProgressBarVisibility(false)
-        adapter.submitList(jokes) {
-            binding.historyRecyclerView.scrollToPosition(0)
         }
     }
 

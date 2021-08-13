@@ -44,29 +44,13 @@ class SearchJokeFragment: BaseMviFragment<
     }
 
     override fun renderState(state: SearchJokeContract.State) {
-        when (state) {
-            is SearchJokeContract.State.Default -> {
-                setProgressBarVisibility(false)
-                setErrorVisibility(true, getString(R.string.search_joke_empty_hint))
-            }
-            is SearchJokeContract.State.Error -> {
-                setProgressBarVisibility(false)
-                setErrorVisibility(true, state.message)
-            }
-            is SearchJokeContract.State.Empty -> {
-                setProgressBarVisibility(false)
-                setErrorVisibility(true, getString(R.string.error_not_found))
-            }
-            is SearchJokeContract.State.Loaded -> {
-                setProgressBarVisibility(false)
-                setErrorVisibility(false)
-                jokesAdapter.submitList(state.jokes)
-            }
-            is SearchJokeContract.State.Loading -> {
-                setProgressBarVisibility(true)
-                setErrorVisibility(false)
-            }
+        jokesAdapter.submitList(state.jokes) {
+            binding.jokesRecyclerView.scrollToPosition(0)
         }
+
+        setProgressBarVisibility(state.isLoading)
+
+        setErrorVisibility(state.message != null, state.message)
     }
 
     override fun handleEffect(effect: SearchJokeContract.Effect) = Unit

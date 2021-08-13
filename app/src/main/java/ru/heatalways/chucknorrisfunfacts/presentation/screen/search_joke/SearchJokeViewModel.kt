@@ -3,6 +3,8 @@ package ru.heatalways.chucknorrisfunfacts.presentation.screen.search_joke
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import ru.heatalways.chucknorrisfunfacts.R
+import ru.heatalways.chucknorrisfunfacts.data.utils.StringResource
 import ru.heatalways.chucknorrisfunfacts.domain.managers.chuck_norris_jokes.ChuckNorrisJokesManager
 import ru.heatalways.chucknorrisfunfacts.presentation.base.BaseMviViewModel
 import javax.inject.Inject
@@ -10,9 +12,16 @@ import javax.inject.Inject
 @HiltViewModel
 class SearchJokeViewModel @Inject constructor(
     private val jokesManager: ChuckNorrisJokesManager
-): BaseMviViewModel<SearchJokeContract.Action, SearchJokeContract.State, SearchJokeContract.Effect>() {
+): BaseMviViewModel<
+        SearchJokeContract.Action,
+        SearchJokeContract.State,
+        SearchJokeContract.Effect,
+        SearchJokeContract.PartialState
+>(SearchJokeContract.Reducer) {
 
-    override val initialState get() = SearchJokeContract.State.Default
+    override val initialState get() = SearchJokeContract.State(
+        message = StringResource.ByRes(R.string.search_joke_empty_hint)
+    )
 
     override fun handleAction(action: SearchJokeContract.Action) {
         when (action) {
@@ -22,18 +31,25 @@ class SearchJokeViewModel @Inject constructor(
 
     private fun onSearchQueryExecute(query: String) {
         viewModelScope.launch {
-            setState { SearchJokeContract.State.Loading }
+            reduceState(SearchJokeContract.PartialState.Loading)
             val response = jokesManager.search(query)
 
             when {
-                !response.isOk || response.value == null ->
-                    setState { SearchJokeContract.State.Error(response.error?.message) }
+                !response.isOk || response.value == null -> reduceState(
+                    SearchJokeContract.PartialState.Message(strRes(
+                        response.error?.message
+                    ))
+                )
 
-                response.value.isEmpty() ->
-                    setState { SearchJokeContract.State.Empty }
+                response.value.isEmpty() -> reduceState(
+                    SearchJokeContract.PartialState.Message(strRes(
+                        R.string.error_not_found
+                    ))
+                )
 
-                else ->
-                    setState { SearchJokeContract.State.Loaded(response.value) }
+                else -> reduceState(
+                    SearchJokeContract.PartialState.Jokes(response.value)
+                )
             }
         }
     }

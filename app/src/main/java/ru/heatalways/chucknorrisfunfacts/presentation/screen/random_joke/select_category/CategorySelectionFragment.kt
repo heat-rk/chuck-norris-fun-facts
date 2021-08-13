@@ -12,6 +12,7 @@ import com.github.terrakok.cicerone.androidx.FragmentScreen
 import dagger.hilt.android.AndroidEntryPoint
 import ru.heatalways.chucknorrisfunfacts.R
 import ru.heatalways.chucknorrisfunfacts.databinding.FragmentSelectCategoryBinding
+import ru.heatalways.chucknorrisfunfacts.extensions.toTextResource
 import ru.heatalways.chucknorrisfunfacts.presentation.adapters.CategoriesAdapter
 import ru.heatalways.chucknorrisfunfacts.presentation.base.BaseMviFragment
 import javax.inject.Inject
@@ -58,27 +59,13 @@ class CategorySelectionFragment: BaseMviFragment<
     }
 
     override fun renderState(state: CategorySelectionContract.State) {
-        when (state) {
-            is CategorySelectionContract.State.Error -> {
-                setProgressBarVisibility(false)
-                setErrorVisibility(true, state.message)
-            }
-            is CategorySelectionContract.State.Empty -> {
-                setProgressBarVisibility(false)
-                setErrorVisibility(true, getString(R.string.error_not_found))
-            }
-            is CategorySelectionContract.State.Loading -> {
-                setProgressBarVisibility(true)
-                setErrorVisibility(false)
-            }
-            is CategorySelectionContract.State.Loaded -> {
-                setProgressBarVisibility(false)
-                setErrorVisibility(false)
-                categoriesAdapter.submitList(state.categories) {
-                    binding.categoriesRecyclerView.scrollToPosition(0)
-                }
-            }
+        categoriesAdapter.submitList(state.categories) {
+            binding.categoriesRecyclerView.scrollToPosition(0)
         }
+
+        setProgressBarVisibility(state.isLoading)
+
+        setErrorVisibility(state.message != null, state.message)
     }
 
     override fun handleEffect(effect: CategorySelectionContract.Effect) {
