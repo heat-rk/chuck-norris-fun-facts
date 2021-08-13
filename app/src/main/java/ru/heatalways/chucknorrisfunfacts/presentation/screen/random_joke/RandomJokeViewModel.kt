@@ -5,6 +5,8 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import ru.heatalways.chucknorrisfunfacts.R
 import ru.heatalways.chucknorrisfunfacts.data.entities.Category
+import ru.heatalways.chucknorrisfunfacts.data.entities.ChuckJoke
+import ru.heatalways.chucknorrisfunfacts.data.utils.StringResource
 import ru.heatalways.chucknorrisfunfacts.domain.managers.chuck_norris_jokes.ChuckNorrisJokesManager
 import ru.heatalways.chucknorrisfunfacts.presentation.base.BaseMviViewModel
 import javax.inject.Inject
@@ -42,17 +44,15 @@ class RandomJokeViewModel @Inject constructor(
             val jokes = jokesManager.getAllSavedJokes()
 
             if (jokes.isNotEmpty())
-                reduceState(RandomJokeContract.PartialState.JokesLoaded(jokes))
+                reduceState(partialJokesLoaded(jokes))
             else
-                reduceState(RandomJokeContract.PartialState.Message(
-                    strRes(R.string.random_joke_empty_history)
-                ))
+                reduceState(partialMessage(strRes(R.string.random_joke_empty_history)))
         }
     }
 
     private fun fetchRandomJoke(selectedCategory: Category) {
         viewModelScope.launch {
-            reduceState(RandomJokeContract.PartialState.JokeLoading)
+            reduceState(partialJokeLoading())
 
             val response = jokesManager.random(
                 when (selectedCategory) {
@@ -63,10 +63,25 @@ class RandomJokeViewModel @Inject constructor(
 
             if (response.isOk && response.value != null) {
                 jokesManager.saveJoke(response.value)
-                reduceState(RandomJokeContract.PartialState.JokeLoaded(response.value))
+                reduceState(partialJokeLoaded(response.value))
             } else {
                 setEffect(RandomJokeContract.Effect.Error(response.error?.message))
             }
         }
     }
+
+    private fun partialLoading() =
+        RandomJokeContract.PartialState.Loading
+
+    private fun partialJokeLoading() =
+        RandomJokeContract.PartialState.JokeLoading
+
+    private fun partialMessage(message: StringResource) =
+        RandomJokeContract.PartialState.Message(message)
+
+    private fun partialJokeLoaded(joke: ChuckJoke) =
+        RandomJokeContract.PartialState.JokeLoaded(joke)
+
+    private fun partialJokesLoaded(jokes: List<ChuckJoke>) =
+        RandomJokeContract.PartialState.JokesLoaded(jokes)
 }

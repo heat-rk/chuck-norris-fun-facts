@@ -19,6 +19,8 @@ class CategorySelectionViewModel @Inject constructor(
         CategorySelectionContract.Effect,
         CategorySelectionContract.PartialState
 >(CategorySelectionContract.Reducer) {
+    private var categories: List<Category> = emptyList()
+
     override val initialState get() = CategorySelectionContract.State(
         isLoading = true
     )
@@ -42,7 +44,7 @@ class CategorySelectionViewModel @Inject constructor(
         viewModelScope.launch {
             val response = jokesManager.categories()
             if (response.isOk && response.value != null) {
-                val categories = listOf(Category.Any).plus(response.value.map {
+                categories = listOf(Category.Any).plus(response.value.map {
                     Category.Specific(it)
                 })
 
@@ -58,9 +60,9 @@ class CategorySelectionViewModel @Inject constructor(
             reduceState(partialLoading())
 
             val results = if (query.isEmpty())
-                currentState.categories
+                categories
             else
-                currentState.categories.filter { it is Category.Specific && it.name.contains(query) }
+                categories.filter { it is Category.Specific && it.name.contains(query) }
 
             if (results.isNotEmpty())
                 reduceState(partialCategories(results))

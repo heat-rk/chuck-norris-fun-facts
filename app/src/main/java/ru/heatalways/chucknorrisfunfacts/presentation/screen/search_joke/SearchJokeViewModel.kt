@@ -4,6 +4,7 @@ import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import ru.heatalways.chucknorrisfunfacts.R
+import ru.heatalways.chucknorrisfunfacts.data.entities.ChuckJoke
 import ru.heatalways.chucknorrisfunfacts.data.utils.StringResource
 import ru.heatalways.chucknorrisfunfacts.domain.managers.chuck_norris_jokes.ChuckNorrisJokesManager
 import ru.heatalways.chucknorrisfunfacts.presentation.base.BaseMviViewModel
@@ -31,26 +32,28 @@ class SearchJokeViewModel @Inject constructor(
 
     private fun onSearchQueryExecute(query: String) {
         viewModelScope.launch {
-            reduceState(SearchJokeContract.PartialState.Loading)
+            reduceState(partialLoading())
             val response = jokesManager.search(query)
 
             when {
-                !response.isOk || response.value == null -> reduceState(
-                    SearchJokeContract.PartialState.Message(strRes(
-                        response.error?.message
-                    ))
-                )
+                !response.isOk || response.value == null ->
+                    reduceState(partialMessage(strRes(response.error?.message)))
 
-                response.value.isEmpty() -> reduceState(
-                    SearchJokeContract.PartialState.Message(strRes(
-                        R.string.error_not_found
-                    ))
-                )
+                response.value.isEmpty() ->
+                    reduceState(partialMessage(strRes(R.string.error_not_found)))
 
-                else -> reduceState(
-                    SearchJokeContract.PartialState.Jokes(response.value)
-                )
+                else ->
+                    reduceState(partialJokes(response.value))
             }
         }
     }
+
+    private fun partialLoading() =
+        SearchJokeContract.PartialState.Loading
+
+    private fun partialMessage(message: StringResource) =
+        SearchJokeContract.PartialState.Message(message)
+
+    private fun partialJokes(jokes: List<ChuckJoke>) =
+        SearchJokeContract.PartialState.Jokes(jokes)
 }
