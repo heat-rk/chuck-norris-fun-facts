@@ -13,7 +13,7 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-class GsonModule {
+object GsonModule {
     @Provides
     @Singleton
     fun provideGson() = GsonBuilder()

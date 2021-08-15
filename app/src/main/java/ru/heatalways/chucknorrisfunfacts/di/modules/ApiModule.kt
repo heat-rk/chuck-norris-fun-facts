@@ -10,7 +10,7 @@ import javax.inject.Singleton
 
 @Module(includes = [RetrofitModule::class])
 @InstallIn(SingletonComponent::class)
-class ApiModule {
+object ApiModule {
     @Provides
     @Singleton
     fun provideChuckNorrisJokesApi(builder: Retrofit.Builder): ChuckNorrisJokesApi {

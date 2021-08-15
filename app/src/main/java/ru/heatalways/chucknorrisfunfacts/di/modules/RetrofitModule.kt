@@ -13,7 +13,7 @@ import javax.inject.Singleton
 
 @Module(includes = [GsonModule::class, HttpClientModule::class])
 @InstallIn(SingletonComponent::class)
-class RetrofitModule {
+object RetrofitModule {
     @Provides
     @Singleton
     fun provideRetrofitBuilder(gson: Gson, httpClient: OkHttpClient): Retrofit.Builder {

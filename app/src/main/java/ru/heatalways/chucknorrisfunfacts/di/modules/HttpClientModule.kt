@@ -10,7 +10,7 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-class HttpClientModule {
+object HttpClientModule {
     @Provides
     @Singleton
     fun provideHttpClient() = OkHttpClient.Builder()

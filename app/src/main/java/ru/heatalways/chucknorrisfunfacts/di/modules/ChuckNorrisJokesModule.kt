@@ -12,7 +12,7 @@ import javax.inject.Singleton
 
 @Module(includes = [ApiModule::class])
 @InstallIn(SingletonComponent::class)
-class ChuckNorrisJokesModule {
+object ChuckNorrisJokesModule {
     @Provides
     @Singleton
     fun provideChuckNorrisJokesManager(

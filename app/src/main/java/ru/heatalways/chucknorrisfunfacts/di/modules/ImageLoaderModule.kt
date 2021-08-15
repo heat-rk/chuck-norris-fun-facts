@@ -10,7 +10,7 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-class ImageLoaderModule {
+object ImageLoaderModule {
     @Provides
     @Singleton
     fun provideImageLoaderManager(): ImageLoaderManager = GlideImageLoaderManagerImpl()
