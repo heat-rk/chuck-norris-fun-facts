@@ -60,11 +60,8 @@ abstract class BaseMviViewModel<
      * Start listening to Action
      */
     private fun subscribeActions() {
-        viewModelScope.launch {
-            action.collect {
-                handleAction(it)
-            }
-        }
+        action.onEach { handleAction(it) }
+            .launchIn(viewModelScope)
     }
 
     /**
