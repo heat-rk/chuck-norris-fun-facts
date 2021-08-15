@@ -21,11 +21,11 @@ abstract class BaseMviFragment<
 
         viewModel.state
             .onEach { renderState(it) }
-            .launchIn(lifecycleScope)
+            .launchIn(viewLifecycleOwner.lifecycleScope)
 
         viewModel.effect
             .onEach { handleEffect(it) }
-            .launchIn(lifecycleScope)
+            .launchIn(viewLifecycleOwner.lifecycleScope)
     }
 
     abstract fun renderState(state: State)
