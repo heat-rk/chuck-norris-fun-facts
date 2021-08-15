@@ -74,16 +74,6 @@ abstract class BaseFragment<Binding: ViewBinding>: Fragment(), KeyboardChangeLis
         baseActivity.hideKeyboard()
     }
 
-    protected fun <T> observe(liveData: LiveData<T>, callback: (T) -> Unit) {
-        liveData.observe(viewLifecycleOwner, callback)
-    }
-
-    protected fun <T> collect(flow: Flow<T>, callback: (T) -> Unit) {
-        lifecycleScope.launchWhenStarted {
-            flow.collect { callback(it) }
-        }
-    }
-
     protected fun showMessage(message: String?, length: Int = Toast.LENGTH_SHORT) {
         Toast.makeText(requireContext(), message ?: getString(R.string.error_unknown), length).show()
     }

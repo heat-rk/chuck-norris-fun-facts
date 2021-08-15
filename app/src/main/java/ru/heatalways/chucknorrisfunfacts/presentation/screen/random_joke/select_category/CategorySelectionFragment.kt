@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.github.terrakok.cicerone.Router
@@ -12,7 +11,9 @@ import com.github.terrakok.cicerone.androidx.FragmentScreen
 import dagger.hilt.android.AndroidEntryPoint
 import ru.heatalways.chucknorrisfunfacts.R
 import ru.heatalways.chucknorrisfunfacts.databinding.FragmentSelectCategoryBinding
-import ru.heatalways.chucknorrisfunfacts.extensions.toTextResource
+import ru.heatalways.chucknorrisfunfacts.domain.interactors.random_joke.select_category.CategorySelectionAction
+import ru.heatalways.chucknorrisfunfacts.domain.interactors.random_joke.select_category.CategorySelectionEffect
+import ru.heatalways.chucknorrisfunfacts.domain.interactors.random_joke.select_category.CategorySelectionState
 import ru.heatalways.chucknorrisfunfacts.presentation.adapters.CategoriesAdapter
 import ru.heatalways.chucknorrisfunfacts.presentation.base.BaseMviFragment
 import javax.inject.Inject
@@ -20,14 +21,11 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class CategorySelectionFragment: BaseMviFragment<
         FragmentSelectCategoryBinding,
-        CategorySelectionContract.Action,
-        CategorySelectionContract.State,
-        CategorySelectionContract.Effect
+        CategorySelectionAction,
+        CategorySelectionState,
+        CategorySelectionEffect
 >() {
     override val viewModel: CategorySelectionViewModel by viewModels()
-
-    private val sharedCategorySelectionViewModel:
-            SharedCategorySelectionViewModel by activityViewModels()
 
     private val categoriesAdapter = CategoriesAdapter()
 
@@ -44,8 +42,7 @@ class CategorySelectionFragment: BaseMviFragment<
         setTitle(R.string.select_category_screen_title)
 
         categoriesAdapter.onCategoryClick = { category ->
-            sharedCategorySelectionViewModel.selectCategory(category)
-            action(CategorySelectionContract.Action.OnCategoryClick)
+            action(CategorySelectionAction.OnCategorySelect(category))
         }
 
         binding.apply {
@@ -53,12 +50,12 @@ class CategorySelectionFragment: BaseMviFragment<
             categoriesRecyclerView.adapter = categoriesAdapter
 
             searchView.onSearchExecute = { query ->
-                action(CategorySelectionContract.Action.OnSearchExecute(query))
+                action(CategorySelectionAction.OnSearchExecute(query))
             }
         }
     }
 
-    override fun renderState(state: CategorySelectionContract.State) {
+    override fun renderState(state: CategorySelectionState) {
         categoriesAdapter.submitList(state.categories) {
             binding.categoriesRecyclerView.scrollToPosition(0)
         }
@@ -68,9 +65,9 @@ class CategorySelectionFragment: BaseMviFragment<
         setErrorVisibility(state.message != null, state.message)
     }
 
-    override fun handleEffect(effect: CategorySelectionContract.Effect) {
+    override fun handleEffect(effect: CategorySelectionEffect) {
         when (effect) {
-            CategorySelectionContract.Effect.GoBack -> {
+            CategorySelectionEffect.GoBack -> {
                 router.exit()
             }
         }

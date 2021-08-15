@@ -12,3 +12,6 @@ sealed class StringResource {
         is ByRes -> context.getString(text)
     }
 }
+
+fun strRes(text: String?) = StringResource.ByString(text)
+fun strRes(text: Int) = StringResource.ByRes(text)

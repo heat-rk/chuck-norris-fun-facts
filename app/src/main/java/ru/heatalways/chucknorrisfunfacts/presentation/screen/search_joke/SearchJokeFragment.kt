@@ -10,15 +10,18 @@ import com.github.terrakok.cicerone.androidx.FragmentScreen
 import dagger.hilt.android.AndroidEntryPoint
 import ru.heatalways.chucknorrisfunfacts.R
 import ru.heatalways.chucknorrisfunfacts.databinding.FragmentSearchJokeBinding
+import ru.heatalways.chucknorrisfunfacts.domain.interactors.search_joke.SearchJokeAction
+import ru.heatalways.chucknorrisfunfacts.domain.interactors.search_joke.SearchJokeViewEffect
+import ru.heatalways.chucknorrisfunfacts.domain.interactors.search_joke.SearchJokeViewState
 import ru.heatalways.chucknorrisfunfacts.presentation.adapters.JokesAdapter
 import ru.heatalways.chucknorrisfunfacts.presentation.base.BaseMviFragment
 
 @AndroidEntryPoint
 class SearchJokeFragment: BaseMviFragment<
         FragmentSearchJokeBinding,
-        SearchJokeContract.Action,
-        SearchJokeContract.State,
-        SearchJokeContract.Effect
+        SearchJokeAction,
+        SearchJokeViewState,
+        SearchJokeViewEffect
 >() {
     override val viewModel: SearchJokeViewModel by viewModels()
 
@@ -38,22 +41,22 @@ class SearchJokeFragment: BaseMviFragment<
             jokesRecyclerView.adapter = jokesAdapter
 
             searchView.onSearchExecute = { searchQuery ->
-                action(SearchJokeContract.Action.OnSearchExecute(searchQuery))
+                action(SearchJokeAction.OnSearchExecute(searchQuery))
             }
         }
     }
 
-    override fun renderState(state: SearchJokeContract.State) {
-        jokesAdapter.submitList(state.jokes) {
-            binding.jokesRecyclerView.scrollToPosition(0)
-        }
+    override fun renderState(state: SearchJokeViewState) {
+        setErrorVisibility(state.message != null, state.message)
 
         setProgressBarVisibility(state.isLoading)
 
-        setErrorVisibility(state.message != null, state.message)
+        jokesAdapter.submitList(state.jokes) {
+            binding.jokesRecyclerView.scrollToPosition(0)
+        }
     }
 
-    override fun handleEffect(effect: SearchJokeContract.Effect) = Unit
+    override fun handleEffect(effect: SearchJokeViewEffect) = Unit
 
     companion object {
         fun getScreen() = FragmentScreen { SearchJokeFragment() }

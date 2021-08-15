@@ -2,7 +2,10 @@ package ru.heatalways.chucknorrisfunfacts.presentation.base
 
 import android.os.Bundle
 import android.view.View
+import androidx.lifecycle.lifecycleScope
 import androidx.viewbinding.ViewBinding
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 
 abstract class BaseMviFragment<
         Binding: ViewBinding,
@@ -16,8 +19,13 @@ abstract class BaseMviFragment<
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        collect(viewModel.state) { renderState(it) }
-        collect(viewModel.effect) { handleEffect(it) }
+        viewModel.state
+            .onEach { renderState(it) }
+            .launchIn(lifecycleScope)
+
+        viewModel.effect
+            .onEach { handleEffect(it) }
+            .launchIn(lifecycleScope)
     }
 
     abstract fun renderState(state: State)
