@@ -1,7 +1,7 @@
 package ru.heatalways.chucknorrisfunfacts.presentation.adapters.diff_utils
 
 import androidx.recyclerview.widget.DiffUtil
-import ru.heatalways.chucknorrisfunfacts.data.entities.Category
+import ru.heatalways.chucknorrisfunfacts.business.datasource.network.chuck_norris_jokes.Category
 
 class CategoryDiffUtil: DiffUtil.ItemCallback<Category>() {
     override fun areItemsTheSame(oldItem: Category, newItem: Category): Boolean {

@@ -5,7 +5,7 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import retrofit2.Retrofit
-import ru.heatalways.chucknorrisfunfacts.domain.network.api.ChuckNorrisJokesApi
+import ru.heatalways.chucknorrisfunfacts.business.datasource.network.chuck_norris_jokes.ChuckNorrisJokesApi
 import javax.inject.Singleton
 
 @Module(includes = [RetrofitModule::class])

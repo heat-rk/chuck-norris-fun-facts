@@ -11,11 +11,11 @@ import com.github.terrakok.cicerone.Router
 import com.github.terrakok.cicerone.androidx.FragmentScreen
 import dagger.hilt.android.AndroidEntryPoint
 import ru.heatalways.chucknorrisfunfacts.R
-import ru.heatalways.chucknorrisfunfacts.data.entities.Category
+import ru.heatalways.chucknorrisfunfacts.business.datasource.network.chuck_norris_jokes.Category
 import ru.heatalways.chucknorrisfunfacts.databinding.FragmentRandomJokeBinding
-import ru.heatalways.chucknorrisfunfacts.domain.interactors.random_joke.RandomJokeAction
-import ru.heatalways.chucknorrisfunfacts.domain.interactors.random_joke.RandomJokeViewEffect
-import ru.heatalways.chucknorrisfunfacts.domain.interactors.random_joke.RandomJokeViewState
+import ru.heatalways.chucknorrisfunfacts.business.interactors.random_joke.RandomJokeAction
+import ru.heatalways.chucknorrisfunfacts.business.interactors.random_joke.RandomJokeViewEffect
+import ru.heatalways.chucknorrisfunfacts.business.interactors.random_joke.RandomJokeViewState
 import ru.heatalways.chucknorrisfunfacts.presentation.adapters.JokesAdapter
 import ru.heatalways.chucknorrisfunfacts.presentation.base.BaseMviFragment
 import ru.heatalways.chucknorrisfunfacts.presentation.screen.random_joke.select_category.CategorySelectionFragment

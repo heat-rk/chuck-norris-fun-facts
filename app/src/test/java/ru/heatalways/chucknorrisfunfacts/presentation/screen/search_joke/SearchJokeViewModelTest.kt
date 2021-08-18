@@ -6,19 +6,19 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runBlockingTest
 import org.junit.Before
 import org.junit.Test
-import ru.heatalways.chucknorrisfunfacts.domain.managers.ChuckNorrisJokesManagerFake
+import ru.heatalways.chucknorrisfunfacts.business.datasource.repositories.chuck_norris_jokes.ChuckNorrisJokesRepositoryFake
 import ru.heatalways.chucknorrisfunfacts.utils.BaseViewModelTest
 import kotlin.time.ExperimentalTime
 
 @ExperimentalTime
 @ExperimentalCoroutinesApi
 class SearchJokeViewModelTest: BaseViewModelTest() {
-    private lateinit var fakeManager: ChuckNorrisJokesManagerFake
+    private lateinit var fakeManager: ChuckNorrisJokesRepositoryFake
     private lateinit var viewModel: SearchJokeViewModel
 
     @Before
     fun setup() {
-        fakeManager = ChuckNorrisJokesManagerFake()
+        fakeManager = ChuckNorrisJokesRepositoryFake()
         viewModel = SearchJokeViewModel(fakeManager)
     }
 

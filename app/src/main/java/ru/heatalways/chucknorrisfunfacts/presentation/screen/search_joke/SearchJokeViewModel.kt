@@ -2,13 +2,11 @@ package ru.heatalways.chucknorrisfunfacts.presentation.screen.search_joke
 
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
-import kotlinx.coroutines.launch
 import ru.heatalways.chucknorrisfunfacts.R
-import ru.heatalways.chucknorrisfunfacts.data.utils.StringResource
-import ru.heatalways.chucknorrisfunfacts.domain.interactors.search_joke.*
+import ru.heatalways.chucknorrisfunfacts.business.domain.utils.StringResource
+import ru.heatalways.chucknorrisfunfacts.business.interactors.search_joke.*
 import ru.heatalways.chucknorrisfunfacts.presentation.base.BaseMviViewModel
 import javax.inject.Inject
 

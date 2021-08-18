@@ -11,13 +11,9 @@ import androidx.annotation.StringRes
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.lifecycleScope
 import androidx.viewbinding.ViewBinding
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.collect
 import ru.heatalways.chucknorrisfunfacts.R
-import ru.heatalways.chucknorrisfunfacts.data.utils.StringResource
+import ru.heatalways.chucknorrisfunfacts.business.domain.utils.StringResource
 import ru.heatalways.chucknorrisfunfacts.databinding.BaseFragmentBinding
 import ru.heatalways.chucknorrisfunfacts.presentation.screen.main.MainActivity
 

@@ -8,7 +8,7 @@ import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import ru.heatalways.chucknorrisfunfacts.domain.network.adapter.ApiResponseAdapter
+import ru.heatalways.chucknorrisfunfacts.business.datasource.network.util.adapter.ApiResponseAdapter
 import javax.inject.Singleton
 
 @Module(includes = [GsonModule::class, HttpClientModule::class])

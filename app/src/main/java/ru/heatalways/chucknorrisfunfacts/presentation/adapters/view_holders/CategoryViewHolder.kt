@@ -4,9 +4,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import ru.heatalways.chucknorrisfunfacts.App
 import ru.heatalways.chucknorrisfunfacts.R
-import ru.heatalways.chucknorrisfunfacts.data.entities.Category
+import ru.heatalways.chucknorrisfunfacts.business.datasource.network.chuck_norris_jokes.Category
 import ru.heatalways.chucknorrisfunfacts.databinding.ItemCategoryHolderViewBinding
 
 class CategoryViewHolder private constructor(

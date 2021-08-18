@@ -4,8 +4,8 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import ru.heatalways.chucknorrisfunfacts.domain.managers.glide.ImageLoaderManager
-import ru.heatalways.chucknorrisfunfacts.domain.managers.glide.GlideImageLoaderManagerImpl
+import ru.heatalways.chucknorrisfunfacts.business.domain.repositories.image_loader.ImageLoader
+import ru.heatalways.chucknorrisfunfacts.business.datasource.repositories.image_loader.GlideImageLoaderImpl
 import javax.inject.Singleton
 
 @Module
@@ -13,5 +13,5 @@ import javax.inject.Singleton
 object ImageLoaderModule {
     @Provides
     @Singleton
-    fun provideImageLoaderManager(): ImageLoaderManager = GlideImageLoaderManagerImpl()
+    fun provideImageLoaderManager(): ImageLoader = GlideImageLoaderImpl()
 }

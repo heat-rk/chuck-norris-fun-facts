@@ -10,9 +10,9 @@ import com.github.terrakok.cicerone.androidx.FragmentScreen
 import dagger.hilt.android.AndroidEntryPoint
 import ru.heatalways.chucknorrisfunfacts.R
 import ru.heatalways.chucknorrisfunfacts.databinding.FragmentSearchJokeBinding
-import ru.heatalways.chucknorrisfunfacts.domain.interactors.search_joke.SearchJokeAction
-import ru.heatalways.chucknorrisfunfacts.domain.interactors.search_joke.SearchJokeViewEffect
-import ru.heatalways.chucknorrisfunfacts.domain.interactors.search_joke.SearchJokeViewState
+import ru.heatalways.chucknorrisfunfacts.business.interactors.search_joke.SearchJokeAction
+import ru.heatalways.chucknorrisfunfacts.business.interactors.search_joke.SearchJokeViewEffect
+import ru.heatalways.chucknorrisfunfacts.business.interactors.search_joke.SearchJokeViewState
 import ru.heatalways.chucknorrisfunfacts.presentation.adapters.JokesAdapter
 import ru.heatalways.chucknorrisfunfacts.presentation.base.BaseMviFragment
 
