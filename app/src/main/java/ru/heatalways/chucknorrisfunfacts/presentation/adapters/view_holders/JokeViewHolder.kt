@@ -9,11 +9,10 @@ import dagger.hilt.EntryPoints
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import ru.heatalways.chucknorrisfunfacts.R
-import ru.heatalways.chucknorrisfunfacts.business.datasource.network.chuck_norris_jokes.ChuckJokeNetwork
-import ru.heatalways.chucknorrisfunfacts.business.domain.repositories.chuck_norris_jokes.ChuckJoke
+import ru.heatalways.chucknorrisfunfacts.domain.repositories.chuck_norris_jokes.ChuckJoke
 import ru.heatalways.chucknorrisfunfacts.databinding.ItemJokeHolderViewBinding
-import ru.heatalways.chucknorrisfunfacts.business.domain.repositories.image_loader.ImageLoader
-import ru.heatalways.chucknorrisfunfacts.business.domain.repositories.image_loader.LoadPhotoConfig
+import ru.heatalways.chucknorrisfunfacts.domain.repositories.image_loader.ImageLoader
+import ru.heatalways.chucknorrisfunfacts.domain.repositories.image_loader.LoadPhotoConfig
 
 class JokeViewHolder private constructor(rootView: View): RecyclerView.ViewHolder(rootView) {
     private val binding = ItemJokeHolderViewBinding.bind(rootView)

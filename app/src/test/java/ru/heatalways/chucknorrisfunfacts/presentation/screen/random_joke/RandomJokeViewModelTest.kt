@@ -6,8 +6,8 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runBlockingTest
 import org.junit.Before
 import org.junit.Test
-import ru.heatalways.chucknorrisfunfacts.business.domain.repositories.chuck_norris_jokes.Category
-import ru.heatalways.chucknorrisfunfacts.business.datasource.repositories.chuck_norris_jokes.ChuckNorrisJokesRepositoryFake
+import ru.heatalways.chucknorrisfunfacts.domain.repositories.chuck_norris_jokes.Category
+import ru.heatalways.chucknorrisfunfacts.domain.repositories.chuck_norris_jokes.ChuckNorrisJokesRepositoryFake
 import ru.heatalways.chucknorrisfunfacts.utils.BaseViewModelTest
 import kotlin.time.ExperimentalTime
 

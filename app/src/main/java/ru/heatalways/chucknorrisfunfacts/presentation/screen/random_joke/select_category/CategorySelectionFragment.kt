@@ -11,9 +11,9 @@ import com.github.terrakok.cicerone.androidx.FragmentScreen
 import dagger.hilt.android.AndroidEntryPoint
 import ru.heatalways.chucknorrisfunfacts.R
 import ru.heatalways.chucknorrisfunfacts.databinding.FragmentSelectCategoryBinding
-import ru.heatalways.chucknorrisfunfacts.business.interactors.random_joke.select_category.CategorySelectionAction
-import ru.heatalways.chucknorrisfunfacts.business.interactors.random_joke.select_category.CategorySelectionEffect
-import ru.heatalways.chucknorrisfunfacts.business.interactors.random_joke.select_category.CategorySelectionState
+import ru.heatalways.chucknorrisfunfacts.domain.interactors.random_joke.select_category.CategorySelectionAction
+import ru.heatalways.chucknorrisfunfacts.domain.interactors.random_joke.select_category.CategorySelectionEffect
+import ru.heatalways.chucknorrisfunfacts.domain.interactors.random_joke.select_category.CategorySelectionState
 import ru.heatalways.chucknorrisfunfacts.presentation.adapters.CategoriesAdapter
 import ru.heatalways.chucknorrisfunfacts.presentation.base.BaseMviFragment
 import javax.inject.Inject

@@ -4,10 +4,10 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import ru.heatalways.chucknorrisfunfacts.business.datasource.database.AppDatabase
-import ru.heatalways.chucknorrisfunfacts.business.domain.repositories.chuck_norris_jokes.ChuckNorrisJokesRepository
-import ru.heatalways.chucknorrisfunfacts.business.domain.repositories.chuck_norris_jokes.ChuckNorrisJokesRepositoryImpl
-import ru.heatalways.chucknorrisfunfacts.business.datasource.network.chuck_norris_jokes.ChuckNorrisJokesApi
+import ru.heatalways.chucknorrisfunfacts.data.database.AppDatabase
+import ru.heatalways.chucknorrisfunfacts.domain.repositories.chuck_norris_jokes.ChuckNorrisJokesRepository
+import ru.heatalways.chucknorrisfunfacts.domain.repositories.chuck_norris_jokes.ChuckNorrisJokesRepositoryImpl
+import ru.heatalways.chucknorrisfunfacts.data.network.chuck_norris_jokes.ChuckNorrisJokesApi
 import javax.inject.Singleton
 
 @Module(includes = [ApiModule::class])

@@ -1,7 +1,7 @@
 package ru.heatalways.chucknorrisfunfacts.presentation.adapters
 
 import android.view.ViewGroup
-import ru.heatalways.chucknorrisfunfacts.business.domain.repositories.chuck_norris_jokes.Category
+import ru.heatalways.chucknorrisfunfacts.domain.repositories.chuck_norris_jokes.Category
 import ru.heatalways.chucknorrisfunfacts.presentation.adapters.diff_utils.CategoryDiffUtil
 import ru.heatalways.chucknorrisfunfacts.presentation.adapters.view_holders.CategoryViewHolder
 import ru.heatalways.chucknorrisfunfacts.presentation.base.BaseListAdapter
