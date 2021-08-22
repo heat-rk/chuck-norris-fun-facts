@@ -1,7 +1,7 @@
 package ru.heatalways.chucknorrisfunfacts.business.interactors.random_joke
 
-import ru.heatalways.chucknorrisfunfacts.business.datasource.network.chuck_norris_jokes.Category
-import ru.heatalways.chucknorrisfunfacts.business.datasource.network.chuck_norris_jokes.ChuckJoke
+import ru.heatalways.chucknorrisfunfacts.business.domain.repositories.chuck_norris_jokes.Category
+import ru.heatalways.chucknorrisfunfacts.business.domain.repositories.chuck_norris_jokes.ChuckJoke
 import ru.heatalways.chucknorrisfunfacts.business.domain.utils.StringResource
 
 sealed class RandomJokePartialState {

@@ -5,7 +5,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.flow
 import ru.heatalways.chucknorrisfunfacts.R
-import ru.heatalways.chucknorrisfunfacts.business.datasource.network.chuck_norris_jokes.Category
+import ru.heatalways.chucknorrisfunfacts.business.domain.repositories.chuck_norris_jokes.Category
 import ru.heatalways.chucknorrisfunfacts.business.domain.utils.strRes
 import ru.heatalways.chucknorrisfunfacts.business.domain.repositories.chuck_norris_jokes.ChuckNorrisJokesRepository
 
@@ -21,9 +21,7 @@ class CategorySelectionInteractorImpl(
     override fun fetchCategories(): Flow<CategorySelectionPartialState> = flow {
         val response = chuckNorrisJokesRepository.categories()
         if (response.isOk && response.value != null) {
-            categories = listOf(Category.Any).plus(response.value.map {
-                Category.Specific(it)
-            })
+            categories = listOf(Category.Any).plus(response.value)
 
             emit(CategorySelectionPartialState.Categories(
                 categories

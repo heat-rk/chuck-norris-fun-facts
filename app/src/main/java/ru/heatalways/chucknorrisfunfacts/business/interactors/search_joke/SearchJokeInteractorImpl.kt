@@ -3,8 +3,8 @@ package ru.heatalways.chucknorrisfunfacts.business.interactors.search_joke
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import ru.heatalways.chucknorrisfunfacts.R
-import ru.heatalways.chucknorrisfunfacts.business.domain.utils.strRes
 import ru.heatalways.chucknorrisfunfacts.business.domain.repositories.chuck_norris_jokes.ChuckNorrisJokesRepository
+import ru.heatalways.chucknorrisfunfacts.business.domain.utils.strRes
 
 class SearchJokeInteractorImpl(
     val chuckNorrisJokesRepository: ChuckNorrisJokesRepository

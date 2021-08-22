@@ -1,4 +1,4 @@
-package ru.heatalways.chucknorrisfunfacts.business.datasource.repositories.image_loader
+package ru.heatalways.chucknorrisfunfacts.business.domain.repositories.image_loader
 
 import android.widget.ImageView
 import com.bumptech.glide.Glide

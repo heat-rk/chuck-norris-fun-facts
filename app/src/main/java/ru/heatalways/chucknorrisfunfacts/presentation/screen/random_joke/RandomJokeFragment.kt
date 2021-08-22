@@ -11,7 +11,7 @@ import com.github.terrakok.cicerone.Router
 import com.github.terrakok.cicerone.androidx.FragmentScreen
 import dagger.hilt.android.AndroidEntryPoint
 import ru.heatalways.chucknorrisfunfacts.R
-import ru.heatalways.chucknorrisfunfacts.business.datasource.network.chuck_norris_jokes.Category
+import ru.heatalways.chucknorrisfunfacts.business.domain.repositories.chuck_norris_jokes.Category
 import ru.heatalways.chucknorrisfunfacts.databinding.FragmentRandomJokeBinding
 import ru.heatalways.chucknorrisfunfacts.business.interactors.random_joke.RandomJokeAction
 import ru.heatalways.chucknorrisfunfacts.business.interactors.random_joke.RandomJokeViewEffect

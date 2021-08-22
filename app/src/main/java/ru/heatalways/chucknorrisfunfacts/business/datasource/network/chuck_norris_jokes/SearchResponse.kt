@@ -4,5 +4,5 @@ import com.google.gson.annotations.SerializedName
 
 data class SearchResponse(
     @SerializedName("total") val total: Int?,
-    @SerializedName("result") val result: List<ChuckJoke>?
+    @SerializedName("result") val result: List<ChuckJokeNetwork>?
 )

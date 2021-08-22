@@ -1,7 +1,7 @@
 package ru.heatalways.chucknorrisfunfacts.business.datasource.repositories.chuck_norris_jokes
 
 import retrofit2.Response
-import ru.heatalways.chucknorrisfunfacts.business.datasource.network.chuck_norris_jokes.ChuckJoke
+import ru.heatalways.chucknorrisfunfacts.business.datasource.network.chuck_norris_jokes.ChuckJokeNetwork
 import ru.heatalways.chucknorrisfunfacts.business.domain.repositories.chuck_norris_jokes.ChuckNorrisJokesRepository
 import ru.heatalways.chucknorrisfunfacts.business.datasource.network.util.api_response.ApiError
 import ru.heatalways.chucknorrisfunfacts.business.datasource.network.util.api_response.ApiResponse
@@ -11,7 +11,7 @@ class ChuckNorrisJokesRepositoryFake: ChuckNorrisJokesRepository {
     private val categories = listOf("animal", "career")
 
     private val jokes = listOf(
-        ChuckJoke(
+        ChuckJokeNetwork(
             categories = emptyList(),
             createdAt = null,
             iconUrl = null,
@@ -21,7 +21,7 @@ class ChuckNorrisJokesRepositoryFake: ChuckNorrisJokesRepository {
             value = "that joke said hey",
             savedAt = null
         ),
-        ChuckJoke(
+        ChuckJokeNetwork(
             categories = listOf(categories[0], categories[1]),
             createdAt = null,
             iconUrl = null,
@@ -31,7 +31,7 @@ class ChuckNorrisJokesRepositoryFake: ChuckNorrisJokesRepository {
             value = "never gonna give you up",
             savedAt = null
         ),
-        ChuckJoke(
+        ChuckJokeNetwork(
             categories = listOf(categories[0]),
             createdAt = null,
             iconUrl = null,
@@ -43,11 +43,11 @@ class ChuckNorrisJokesRepositoryFake: ChuckNorrisJokesRepository {
         )
     )
 
-    private val savedJokes = mutableListOf<ChuckJoke>()
+    private val savedJokes = mutableListOf<ChuckJokeNetwork>()
 
     var shouldReturnErrorResponse = false
 
-    override suspend fun random(category: String?): ApiResponse<ChuckJoke> {
+    override suspend fun random(category: String?): ApiResponse<ChuckJokeNetwork> {
         return if (shouldReturnErrorResponse) {
             ApiResponse(ApiError.ServerUnknownError(404))
         } else {
@@ -66,7 +66,7 @@ class ChuckNorrisJokesRepositoryFake: ChuckNorrisJokesRepository {
         }
     }
 
-    override suspend fun search(query: String): ApiResponse<List<ChuckJoke>> {
+    override suspend fun search(query: String): ApiResponse<List<ChuckJokeNetwork>> {
         return if (shouldReturnErrorResponse) {
             ApiResponse(ApiError.ServerUnknownError(404))
         } else {
@@ -74,13 +74,13 @@ class ChuckNorrisJokesRepositoryFake: ChuckNorrisJokesRepository {
         }
     }
 
-    override suspend fun saveJoke(joke: ChuckJoke) {
+    override suspend fun saveJoke(joke: ChuckJokeNetwork) {
         savedJokes.add(joke.apply {
             savedAt = Calendar.getInstance().timeInMillis
         })
     }
 
-    override suspend fun getSavedJokesBy(limit: Int, offset: Int): List<ChuckJoke> {
+    override suspend fun getSavedJokesBy(limit: Int, offset: Int): List<ChuckJokeNetwork> {
         val from = offset
         val to = from + limit
 
@@ -93,7 +93,7 @@ class ChuckNorrisJokesRepositoryFake: ChuckNorrisJokesRepository {
         ).sortedByDescending { it.savedAt }
     }
 
-    override suspend fun getAllSavedJokes(): List<ChuckJoke> {
+    override suspend fun getAllSavedJokes(): List<ChuckJokeNetwork> {
         return savedJokes.sortedByDescending { it.savedAt }
     }
 }

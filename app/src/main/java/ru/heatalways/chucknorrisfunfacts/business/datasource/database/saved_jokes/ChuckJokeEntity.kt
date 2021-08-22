@@ -1,43 +1,35 @@
-package ru.heatalways.chucknorrisfunfacts.business.datasource.network.chuck_norris_jokes
+package ru.heatalways.chucknorrisfunfacts.business.datasource.database.saved_jokes
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.google.gson.annotations.SerializedName
 
-@Entity(tableName = ChuckJoke.TABLE_NAME)
-data class ChuckJoke(
-    @SerializedName("categories")
+@Entity(tableName = ChuckJokeEntity.TABLE_NAME)
+data class ChuckJokeEntity(
     @ColumnInfo(name = CATEGORIES)
     val categories: List<String>?,
 
-    @SerializedName("created_at")
     @ColumnInfo(name = CREATED_AT)
-    val createdAt: String?,
+    val createdAt: Long?,
 
-    @SerializedName("icon_url")
     @ColumnInfo(name = ICON_URL)
     val iconUrl: String?,
 
-    @SerializedName("id")
     @ColumnInfo(name = ID)
     @PrimaryKey
     val id: String,
 
-    @SerializedName("updated_at")
     @ColumnInfo(name = UPDATED_AT)
-    val updatedAt: String?,
+    val updatedAt: Long?,
 
-    @SerializedName("url")
     @ColumnInfo(name = URL)
     val url: String?,
 
-    @SerializedName("value")
     @ColumnInfo(name = VALUE)
     val value: String?,
 
     @ColumnInfo(name = SAVED_AT)
-    var savedAt: Long?
+    val savedAt: Long?
 ) {
     companion object {
         const val TABLE_NAME = "db_chuck_jokes"

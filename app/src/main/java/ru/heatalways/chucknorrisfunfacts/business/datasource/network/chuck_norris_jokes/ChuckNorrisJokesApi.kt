@@ -8,7 +8,7 @@ interface ChuckNorrisJokesApi {
     @GET("random")
     suspend fun random(
         @Query("category") category: String? = null
-    ): ApiResponse<ChuckJoke>
+    ): ApiResponse<ChuckJokeNetwork>
 
     @GET("categories")
     suspend fun categories(): ApiResponse<List<String>>

@@ -11,7 +11,7 @@ import org.junit.After
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
-import ru.heatalways.chucknorrisfunfacts.business.datasource.network.chuck_norris_jokes.ChuckJoke
+import ru.heatalways.chucknorrisfunfacts.business.datasource.network.chuck_norris_jokes.ChuckJokeNetwork
 import ru.heatalways.chucknorrisfunfacts.business.datasource.database.AppDatabase
 import javax.inject.Inject
 import javax.inject.Named
@@ -46,7 +46,7 @@ class SavedJokesDaoTest {
     @Test
     fun testJokeInsertion_shouldHasOneJokeInDatabase() = runBlockingTest {
         dao.insert(
-            ChuckJoke(
+            ChuckJokeNetwork(
             categories = listOf("test", "fake"),
             createdAt = null,
             iconUrl = null,
@@ -64,7 +64,7 @@ class SavedJokesDaoTest {
     @Test
     fun test3JokesInsertion_shouldHas3JokesInDatabase() = runBlockingTest {
         dao.insert(
-            ChuckJoke(
+            ChuckJokeNetwork(
             categories = listOf("test", "fake"),
             createdAt = null,
             iconUrl = null,
@@ -77,7 +77,7 @@ class SavedJokesDaoTest {
         )
 
         dao.insert(
-            ChuckJoke(
+            ChuckJokeNetwork(
             categories = emptyList(),
             createdAt = null,
             iconUrl = null,
@@ -90,7 +90,7 @@ class SavedJokesDaoTest {
         )
 
         dao.insert(
-            ChuckJoke(
+            ChuckJokeNetwork(
             categories = emptyList(),
             createdAt = null,
             iconUrl = null,
@@ -108,7 +108,7 @@ class SavedJokesDaoTest {
     @Test
     fun testLimit_shouldReturn2Jokes() = runBlockingTest {
         dao.insert(
-            ChuckJoke(
+            ChuckJokeNetwork(
             categories = listOf("test", "fake"),
             createdAt = null,
             iconUrl = null,
@@ -121,7 +121,7 @@ class SavedJokesDaoTest {
         )
 
         dao.insert(
-            ChuckJoke(
+            ChuckJokeNetwork(
             categories = emptyList(),
             createdAt = null,
             iconUrl = null,
@@ -134,7 +134,7 @@ class SavedJokesDaoTest {
         )
 
         dao.insert(
-            ChuckJoke(
+            ChuckJokeNetwork(
             categories = emptyList(),
             createdAt = null,
             iconUrl = null,
@@ -152,7 +152,7 @@ class SavedJokesDaoTest {
     @Test
     fun testOffset_shouldReturn2JokesStartingWithId2() = runBlockingTest {
         dao.insert(
-            ChuckJoke(
+            ChuckJokeNetwork(
             categories = listOf("test", "fake"),
             createdAt = null,
             iconUrl = null,
@@ -165,7 +165,7 @@ class SavedJokesDaoTest {
         )
 
         dao.insert(
-            ChuckJoke(
+            ChuckJokeNetwork(
             categories = emptyList(),
             createdAt = null,
             iconUrl = null,
@@ -178,7 +178,7 @@ class SavedJokesDaoTest {
         )
 
         dao.insert(
-            ChuckJoke(
+            ChuckJokeNetwork(
             categories = emptyList(),
             createdAt = null,
             iconUrl = null,
@@ -200,7 +200,7 @@ class SavedJokesDaoTest {
     @Test
     fun testOffsetAndLimit_shouldReturnJokeWithId2() = runBlockingTest {
         dao.insert(
-            ChuckJoke(
+            ChuckJokeNetwork(
             categories = listOf("test", "fake"),
             createdAt = null,
             iconUrl = null,
@@ -213,7 +213,7 @@ class SavedJokesDaoTest {
         )
 
         dao.insert(
-            ChuckJoke(
+            ChuckJokeNetwork(
             categories = emptyList(),
             createdAt = null,
             iconUrl = null,
@@ -226,7 +226,7 @@ class SavedJokesDaoTest {
         )
 
         dao.insert(
-            ChuckJoke(
+            ChuckJokeNetwork(
             categories = emptyList(),
             createdAt = null,
             iconUrl = null,
@@ -246,7 +246,7 @@ class SavedJokesDaoTest {
 
     @Test
     fun testDelete_shouldReturnEmptyList() = runBlockingTest {
-        val item = ChuckJoke(
+        val item = ChuckJokeNetwork(
             categories = listOf("test", "fake"),
             createdAt = null,
             iconUrl = null,

@@ -3,9 +3,9 @@ package ru.heatalways.chucknorrisfunfacts.business.interactors.random_joke
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import ru.heatalways.chucknorrisfunfacts.R
-import ru.heatalways.chucknorrisfunfacts.business.datasource.network.chuck_norris_jokes.Category
-import ru.heatalways.chucknorrisfunfacts.business.domain.utils.strRes
+import ru.heatalways.chucknorrisfunfacts.business.domain.repositories.chuck_norris_jokes.Category
 import ru.heatalways.chucknorrisfunfacts.business.domain.repositories.chuck_norris_jokes.ChuckNorrisJokesRepository
+import ru.heatalways.chucknorrisfunfacts.business.domain.utils.strRes
 
 class RandomJokeInteractorImpl(
     private val chuckNorrisJokesRepository: ChuckNorrisJokesRepository
