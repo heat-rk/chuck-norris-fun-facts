@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.github.terrakok.cicerone.Router
@@ -32,8 +33,6 @@ class CategorySelectionFragment: BaseMviFragment<
     override val bindingInflater: (LayoutInflater, ViewGroup?, Boolean) -> FragmentSelectCategoryBinding
         get() = FragmentSelectCategoryBinding::inflate
 
-    override val contentId = R.id.categoriesRecyclerView
-
     @Inject
     lateinit var router: Router
 
@@ -56,6 +55,9 @@ class CategorySelectionFragment: BaseMviFragment<
     }
 
     override fun renderState(state: CategorySelectionState) {
+        binding.categoriesRecyclerView.isVisible =
+            !state.isLoading && state.message == null
+
         categoriesAdapter.submitList(state.categories) {
             binding.categoriesRecyclerView.scrollToPosition(0)
         }

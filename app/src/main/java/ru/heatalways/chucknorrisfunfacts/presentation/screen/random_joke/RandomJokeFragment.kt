@@ -36,8 +36,6 @@ class RandomJokeFragment: BaseMviFragment<
     override val bindingInflater: (LayoutInflater, ViewGroup?, Boolean) -> FragmentRandomJokeBinding
         get() = FragmentRandomJokeBinding::inflate
 
-    override val contentId = R.id.historyRecyclerView
-
     @Inject
     lateinit var router: Router
 
@@ -60,9 +58,12 @@ class RandomJokeFragment: BaseMviFragment<
     }
 
     override fun renderState(state: RandomJokeViewState) {
-        setErrorVisibility(state.message != null, state.message)
+        binding.historyRecyclerView.isVisible =
+            !state.isLoading && state.message == null
 
-        setProgressBarVisibility(state.isLoading)
+        adapter.submitList(state.jokes) {
+            binding.historyRecyclerView.scrollToPosition(0)
+        }
 
         binding.buttonProgressBar.isVisible = state.isJokeLoading
         binding.getJokeButton.isVisible = state.isJokeLoading.not()
@@ -72,9 +73,9 @@ class RandomJokeFragment: BaseMviFragment<
             is Category.Specific -> state.category.name
         }
 
-        adapter.submitList(state.jokes) {
-            binding.historyRecyclerView.scrollToPosition(0)
-        }
+        setProgressBarVisibility(state.isLoading)
+
+        setErrorVisibility(state.message != null, state.message)
     }
 
     override fun handleEffect(effect: RandomJokeViewEffect) {

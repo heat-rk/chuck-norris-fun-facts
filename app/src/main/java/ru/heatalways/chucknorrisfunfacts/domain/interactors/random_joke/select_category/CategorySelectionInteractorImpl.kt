@@ -5,6 +5,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.flow
 import ru.heatalways.chucknorrisfunfacts.R
+import ru.heatalways.chucknorrisfunfacts.domain.interactors.utils.handle
 import ru.heatalways.chucknorrisfunfacts.domain.repositories.chuck_norris_jokes.Category
 import ru.heatalways.chucknorrisfunfacts.domain.utils.strRes
 import ru.heatalways.chucknorrisfunfacts.domain.repositories.chuck_norris_jokes.ChuckNorrisJokesRepository
@@ -20,17 +21,14 @@ class CategorySelectionInteractorImpl(
 
     override fun fetchCategories(): Flow<CategorySelectionPartialState> = flow {
         val response = chuckNorrisJokesRepository.categories()
-        if (response.isOk && response.value != null) {
-            categories = listOf(Category.Any).plus(response.value)
 
-            emit(CategorySelectionPartialState.Categories(
-                categories
-            ))
-        } else {
-            emit(CategorySelectionPartialState.Message(
-                strRes(response.error?.message)
-            ))
-        }
+        emit(response.handle(
+            onFailed = { CategorySelectionPartialState.Message(it) },
+            onSuccess = { categoriesStrings ->
+                categories = listOf(Category.Any).plus(categoriesStrings)
+                CategorySelectionPartialState.Categories(categories)
+            }
+        ))
     }
 
     override fun searchCategories(query: String): Flow<CategorySelectionPartialState> = flow {

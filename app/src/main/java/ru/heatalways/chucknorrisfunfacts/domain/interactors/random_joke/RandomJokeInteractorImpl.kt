@@ -3,6 +3,7 @@ package ru.heatalways.chucknorrisfunfacts.domain.interactors.random_joke
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import ru.heatalways.chucknorrisfunfacts.R
+import ru.heatalways.chucknorrisfunfacts.domain.interactors.utils.handle
 import ru.heatalways.chucknorrisfunfacts.domain.repositories.chuck_norris_jokes.Category
 import ru.heatalways.chucknorrisfunfacts.domain.repositories.chuck_norris_jokes.ChuckNorrisJokesRepository
 import ru.heatalways.chucknorrisfunfacts.domain.utils.strRes
@@ -30,13 +31,12 @@ class RandomJokeInteractorImpl(
             }
         )
 
-        if (response.isOk && response.value != null) {
-            chuckNorrisJokesRepository.saveJoke(response.value)
-            emit(RandomJokePartialState.JokeLoaded(response.value))
-        } else {
-            emit(RandomJokePartialState.JokeLoadingError(
-                strRes(response.error?.message)
-            ))
-        }
+        emit(response.handle(
+            onFailed = { RandomJokePartialState.JokeLoadingError(it) },
+            onSuccess = { joke ->
+                chuckNorrisJokesRepository.saveJoke(joke)
+                RandomJokePartialState.JokeLoaded(joke)
+            }
+        ))
     }
 }

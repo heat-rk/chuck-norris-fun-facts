@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.ColorRes
-import androidx.annotation.IdRes
 import androidx.annotation.StringRes
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
@@ -24,7 +23,6 @@ abstract class BaseFragment<Binding: ViewBinding>: Fragment(), KeyboardChangeLis
     protected lateinit var binding: Binding
 
     protected abstract val bindingInflater: (LayoutInflater, ViewGroup?, Boolean) -> Binding
-    @IdRes protected open val contentId = R.id.contentContainer
     @ColorRes protected open val backgroundColor = R.color.darkBackgroundColor
 
     override fun onCreateView(
@@ -63,13 +61,11 @@ abstract class BaseFragment<Binding: ViewBinding>: Fragment(), KeyboardChangeLis
     }
 
     protected fun setErrorVisibility(isVisible: Boolean, message: StringResource? = null) {
-        rootBinding.root.findViewById<View>(contentId)?.isVisible = !isVisible
         rootBinding.errorContainer.isVisible = isVisible
         rootBinding.errorTextView.text = getString(message) ?: getString(R.string.error_unknown)
     }
 
     protected fun setProgressBarVisibility(isVisible: Boolean) {
-        rootBinding.root.findViewById<View>(contentId)?.isVisible = !isVisible
         if (isVisible) rootBinding.errorContainer.isVisible = false
         rootBinding.progressBar.isVisible = isVisible
     }

@@ -22,5 +22,6 @@
     <!-- ERRORS -->
     <string name="error_unknown">Unknown error :(</string>
     <string name="error_not_found">Nothing found :(</string>
+    <string name="error_network">Network error :( Check your internet connection</string>
     <string name="empty_field">—</string>
 </resources>

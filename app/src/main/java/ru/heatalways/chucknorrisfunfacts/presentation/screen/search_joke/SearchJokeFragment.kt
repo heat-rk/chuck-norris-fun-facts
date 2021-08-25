@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.github.terrakok.cicerone.androidx.FragmentScreen
@@ -30,8 +31,6 @@ class SearchJokeFragment: BaseMviFragment<
     override val bindingInflater: (LayoutInflater, ViewGroup?, Boolean) -> FragmentSearchJokeBinding
         get() = FragmentSearchJokeBinding::inflate
 
-    override val contentId = R.id.jokesRecyclerView
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setTitle(R.string.search_joke_screen_title)
@@ -47,13 +46,16 @@ class SearchJokeFragment: BaseMviFragment<
     }
 
     override fun renderState(state: SearchJokeViewState) {
-        setErrorVisibility(state.message != null, state.message)
-
-        setProgressBarVisibility(state.isLoading)
+        binding.jokesRecyclerView.isVisible =
+            !state.isLoading && state.message == null
 
         jokesAdapter.submitList(state.jokes) {
             binding.jokesRecyclerView.scrollToPosition(0)
         }
+
+        setProgressBarVisibility(state.isLoading)
+
+        setErrorVisibility(state.message != null, state.message)
     }
 
     override fun handleEffect(effect: SearchJokeViewEffect) = Unit

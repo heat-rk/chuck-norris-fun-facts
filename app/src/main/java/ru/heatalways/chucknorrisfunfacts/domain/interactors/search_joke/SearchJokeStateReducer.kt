@@ -27,6 +27,7 @@ object SearchJokeStateReducer: MviReducer<
             state.copy(
                 isLoading = false,
                 message = partialState.message,
+                jokes = emptyList()
             )
         }
     }
