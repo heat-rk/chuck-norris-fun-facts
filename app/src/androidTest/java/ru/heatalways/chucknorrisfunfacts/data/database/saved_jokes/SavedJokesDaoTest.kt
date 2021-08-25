@@ -11,7 +11,6 @@ import org.junit.After
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
-import ru.heatalways.chucknorrisfunfacts.data.network.chuck_norris_jokes.ChuckJokeNetwork
 import ru.heatalways.chucknorrisfunfacts.data.database.AppDatabase
 import javax.inject.Inject
 import javax.inject.Named
@@ -45,150 +44,34 @@ class SavedJokesDaoTest {
 
     @Test
     fun testJokeInsertion_shouldHasOneJokeInDatabase() = runBlockingTest {
-        dao.insert(
-            ChuckJokeNetwork(
-            categories = listOf("test", "fake"),
-            createdAt = null,
-            iconUrl = null,
-            id = "2",
-            updatedAt = null,
-            url = null,
-            value = "never gonna give you up",
-            savedAt = 0
-        )
-        )
+        dao.insert(entities.first())
 
         assertThat(dao.getAll()).hasSize(1)
     }
 
     @Test
     fun test3JokesInsertion_shouldHas3JokesInDatabase() = runBlockingTest {
-        dao.insert(
-            ChuckJokeNetwork(
-            categories = listOf("test", "fake"),
-            createdAt = null,
-            iconUrl = null,
-            id = "1",
-            updatedAt = null,
-            url = null,
-            value = "never gonna give you up",
-            savedAt = 0
-        )
-        )
-
-        dao.insert(
-            ChuckJokeNetwork(
-            categories = emptyList(),
-            createdAt = null,
-            iconUrl = null,
-            id = "2",
-            updatedAt = null,
-            url = null,
-            value = "never gonna let you down",
-            savedAt = 1
-        )
-        )
-
-        dao.insert(
-            ChuckJokeNetwork(
-            categories = emptyList(),
-            createdAt = null,
-            iconUrl = null,
-            id = "3",
-            updatedAt = null,
-            url = null,
-            value = "never gonna run around",
-            savedAt = 2
-        )
-        )
+        dao.insert(entities[0])
+        dao.insert(entities[1])
+        dao.insert(entities[2])
 
         assertThat(dao.getAll()).hasSize(3)
     }
 
     @Test
     fun testLimit_shouldReturn2Jokes() = runBlockingTest {
-        dao.insert(
-            ChuckJokeNetwork(
-            categories = listOf("test", "fake"),
-            createdAt = null,
-            iconUrl = null,
-            id = "1",
-            updatedAt = null,
-            url = null,
-            value = "never gonna give you up",
-            savedAt = 0
-        )
-        )
-
-        dao.insert(
-            ChuckJokeNetwork(
-            categories = emptyList(),
-            createdAt = null,
-            iconUrl = null,
-            id = "2",
-            updatedAt = null,
-            url = null,
-            value = "never gonna let you down",
-            savedAt = 1
-        )
-        )
-
-        dao.insert(
-            ChuckJokeNetwork(
-            categories = emptyList(),
-            createdAt = null,
-            iconUrl = null,
-            id = "3",
-            updatedAt = null,
-            url = null,
-            value = "never gonna run around",
-            savedAt = 2
-        )
-        )
+        dao.insert(entities[0])
+        dao.insert(entities[1])
+        dao.insert(entities[2])
 
         assertThat(dao.getBy(limit = 2)).hasSize(2)
     }
 
     @Test
     fun testOffset_shouldReturn2JokesStartingWithId2() = runBlockingTest {
-        dao.insert(
-            ChuckJokeNetwork(
-            categories = listOf("test", "fake"),
-            createdAt = null,
-            iconUrl = null,
-            id = "1",
-            updatedAt = null,
-            url = null,
-            value = "never gonna give you up",
-            savedAt = 0
-        )
-        )
-
-        dao.insert(
-            ChuckJokeNetwork(
-            categories = emptyList(),
-            createdAt = null,
-            iconUrl = null,
-            id = "2",
-            updatedAt = null,
-            url = null,
-            value = "never gonna let you down",
-            savedAt = 1
-        )
-        )
-
-        dao.insert(
-            ChuckJokeNetwork(
-            categories = emptyList(),
-            createdAt = null,
-            iconUrl = null,
-            id = "3",
-            updatedAt = null,
-            url = null,
-            value = "never gonna run around",
-            savedAt = 2
-        )
-        )
+        dao.insert(entities[0])
+        dao.insert(entities[1])
+        dao.insert(entities[2])
 
         val result = dao.getBy(offset = 1)
 
@@ -199,44 +82,9 @@ class SavedJokesDaoTest {
 
     @Test
     fun testOffsetAndLimit_shouldReturnJokeWithId2() = runBlockingTest {
-        dao.insert(
-            ChuckJokeNetwork(
-            categories = listOf("test", "fake"),
-            createdAt = null,
-            iconUrl = null,
-            id = "1",
-            updatedAt = null,
-            url = null,
-            value = "never gonna give you up",
-            savedAt = 0
-        )
-        )
-
-        dao.insert(
-            ChuckJokeNetwork(
-            categories = emptyList(),
-            createdAt = null,
-            iconUrl = null,
-            id = "2",
-            updatedAt = null,
-            url = null,
-            value = "never gonna let you down",
-            savedAt = 1
-        )
-        )
-
-        dao.insert(
-            ChuckJokeNetwork(
-            categories = emptyList(),
-            createdAt = null,
-            iconUrl = null,
-            id = "3",
-            updatedAt = null,
-            url = null,
-            value = "never gonna run around",
-            savedAt = 2
-        )
-        )
+        dao.insert(entities[0])
+        dao.insert(entities[1])
+        dao.insert(entities[2])
 
         val result = dao.getBy(offset = 1, limit = 1)
 
@@ -246,20 +94,47 @@ class SavedJokesDaoTest {
 
     @Test
     fun testDelete_shouldReturnEmptyList() = runBlockingTest {
-        val item = ChuckJokeNetwork(
-            categories = listOf("test", "fake"),
-            createdAt = null,
-            iconUrl = null,
-            id = "1",
-            updatedAt = null,
-            url = null,
-            value = "never gonna give you up",
-            savedAt = 0
-        )
+        val item = entities[0]
 
         dao.insert(item)
         dao.delete(item)
 
         assertThat(dao.getAll()).isEmpty()
+    }
+
+
+    companion object {
+        private val entities = listOf(
+            ChuckJokeEntity(
+                categories = listOf("test", "fake"),
+                createdAt = null,
+                iconUrl = null,
+                id = "1",
+                updatedAt = null,
+                url = null,
+                value = "never gonna give you up",
+                savedAt = 0
+            ),
+            ChuckJokeEntity(
+                categories = emptyList(),
+                createdAt = null,
+                iconUrl = null,
+                id = "2",
+                updatedAt = null,
+                url = null,
+                value = "never gonna let you down",
+                savedAt = 1
+            ),
+            ChuckJokeEntity(
+                categories = emptyList(),
+                createdAt = null,
+                iconUrl = null,
+                id = "3",
+                updatedAt = null,
+                url = null,
+                value = "never gonna run around",
+                savedAt = 2
+            )
+        )
     }
 }
