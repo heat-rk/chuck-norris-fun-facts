@@ -2,26 +2,32 @@ package ru.heatalways.chucknorrisfunfacts.domain.interactors.search_joke
 
 import ru.heatalways.chucknorrisfunfacts.presentation.base.MviReducer
 
-object SearchJokeStateReducer: MviReducer<SearchJokeViewState, SearchJokePartialState>({ partialState ->
-    when (partialState) {
+object SearchJokeStateReducer: MviReducer<
+        SearchJokeViewState,
+        SearchJokePartialState
+> {
+    override fun reduce(
+        state: SearchJokeViewState,
+        partialState: SearchJokePartialState
+    ) = when (partialState) {
         is SearchJokePartialState.Jokes -> {
-            copy(
+            state.copy(
                 isLoading = false,
                 message = null,
                 jokes = partialState.jokes
             )
         }
         is SearchJokePartialState.Loading -> {
-            copy(
+            state.copy(
                 isLoading = true,
                 message = null
             )
         }
         is SearchJokePartialState.Message -> {
-            copy(
+            state.copy(
                 isLoading = false,
                 message = partialState.message,
             )
         }
     }
-})
+}

@@ -42,7 +42,12 @@ class RandomJokeViewModel @Inject constructor(
                 randomJokeInteractor.fetchRandomJoke(
                     categorySelectionInteractor.selectedCategory.value
                 )
-                    .onEach { reduceState(it) }
+                    .onEach {
+                        if (it is RandomJokePartialState.JokeLoadingError)
+                            setEffect(RandomJokeViewEffect.Error(it.message))
+
+                        reduceState(it)
+                    }
                     .launchIn(viewModelScope)
         }
     }

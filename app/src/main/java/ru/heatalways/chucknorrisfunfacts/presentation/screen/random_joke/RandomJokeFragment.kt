@@ -16,6 +16,7 @@ import ru.heatalways.chucknorrisfunfacts.databinding.FragmentRandomJokeBinding
 import ru.heatalways.chucknorrisfunfacts.domain.interactors.random_joke.RandomJokeAction
 import ru.heatalways.chucknorrisfunfacts.domain.interactors.random_joke.RandomJokeViewEffect
 import ru.heatalways.chucknorrisfunfacts.domain.interactors.random_joke.RandomJokeViewState
+import ru.heatalways.chucknorrisfunfacts.extensions.showToast
 import ru.heatalways.chucknorrisfunfacts.presentation.adapters.JokesAdapter
 import ru.heatalways.chucknorrisfunfacts.presentation.base.BaseMviFragment
 import ru.heatalways.chucknorrisfunfacts.presentation.screen.random_joke.select_category.CategorySelectionFragment
@@ -82,7 +83,7 @@ class RandomJokeFragment: BaseMviFragment<
                 router.navigateTo(CategorySelectionFragment.getScreen())
             }
             is RandomJokeViewEffect.Error -> {
-                showMessage(effect.message)
+                showToast(effect.message)
             }
         }
     }

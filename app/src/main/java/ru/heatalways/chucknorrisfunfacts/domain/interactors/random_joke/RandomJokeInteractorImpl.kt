@@ -34,7 +34,9 @@ class RandomJokeInteractorImpl(
             chuckNorrisJokesRepository.saveJoke(response.value)
             emit(RandomJokePartialState.JokeLoaded(response.value))
         } else {
-            //setEffect(RandomJokeViewEffect.Error(response.error?.message))
+            emit(RandomJokePartialState.JokeLoadingError(
+                strRes(response.error?.message)
+            ))
         }
     }
 }

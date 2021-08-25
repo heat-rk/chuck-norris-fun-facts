@@ -9,6 +9,7 @@ sealed class RandomJokePartialState {
     object JokeLoading: RandomJokePartialState()
     class Message(val message: StringResource): RandomJokePartialState()
     class JokeLoaded(val joke: ChuckJoke): RandomJokePartialState()
+    class JokeLoadingError(val message: StringResource): RandomJokePartialState()
     class JokesLoaded(val jokes: List<ChuckJoke>): RandomJokePartialState()
     class CategorySelected(val category: Category): RandomJokePartialState()
 }

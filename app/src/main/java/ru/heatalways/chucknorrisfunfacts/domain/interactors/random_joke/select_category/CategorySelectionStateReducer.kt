@@ -5,27 +5,29 @@ import ru.heatalways.chucknorrisfunfacts.presentation.base.MviReducer
 object CategorySelectionStateReducer: MviReducer<
         CategorySelectionState,
         CategorySelectionPartialState
->({ partialState ->
-
-    when (partialState) {
+>{
+    override fun reduce(
+        state: CategorySelectionState,
+        partialState: CategorySelectionPartialState
+    ) = when (partialState) {
         is CategorySelectionPartialState.Categories -> {
-            copy(
+            state.copy(
                 isLoading = false,
                 message = null,
                 categories = partialState.categories
             )
         }
         is CategorySelectionPartialState.Loading -> {
-            copy(
+            state.copy(
                 isLoading = true,
                 message = null
             )
         }
         is CategorySelectionPartialState.Message -> {
-            copy(
+            state.copy(
                 isLoading = false,
                 message = partialState.message
             )
         }
     }
-})
+}

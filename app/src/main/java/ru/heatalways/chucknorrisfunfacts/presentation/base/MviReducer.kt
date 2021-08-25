@@ -1,5 +1,6 @@
 package ru.heatalways.chucknorrisfunfacts.presentation.base
 
-abstract class MviReducer<State: MviState, PartialState>(
-    val reduce: State.(partialState: PartialState) -> State
-)
+
+interface MviReducer<State, PartialState> {
+    fun reduce(state: State, partialState: PartialState): State
+}
