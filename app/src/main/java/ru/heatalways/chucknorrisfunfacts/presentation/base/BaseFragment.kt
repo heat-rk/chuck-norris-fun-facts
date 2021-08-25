@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.annotation.ColorRes
 import androidx.annotation.IdRes
 import androidx.annotation.StringRes
@@ -13,15 +12,16 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.viewbinding.ViewBinding
 import ru.heatalways.chucknorrisfunfacts.R
-import ru.heatalways.chucknorrisfunfacts.domain.utils.StringResource
 import ru.heatalways.chucknorrisfunfacts.databinding.BaseFragmentBinding
+import ru.heatalways.chucknorrisfunfacts.domain.utils.StringResource
+import ru.heatalways.chucknorrisfunfacts.extensions.baseActivity
+import ru.heatalways.chucknorrisfunfacts.extensions.getString
+import ru.heatalways.chucknorrisfunfacts.extensions.hideKeyboard
 import ru.heatalways.chucknorrisfunfacts.presentation.screen.main.MainActivity
 
 abstract class BaseFragment<Binding: ViewBinding>: Fragment(), KeyboardChangeListener {
     private lateinit var rootBinding: BaseFragmentBinding
     protected lateinit var binding: Binding
-
-    private val baseActivity get() = activity as BaseActivity<*>
 
     protected abstract val bindingInflater: (LayoutInflater, ViewGroup?, Boolean) -> Binding
     @IdRes protected open val contentId = R.id.contentContainer
@@ -62,18 +62,6 @@ abstract class BaseFragment<Binding: ViewBinding>: Fragment(), KeyboardChangeLis
         }
     }
 
-    fun showKeyboard(viewId: Int) {
-        baseActivity.showKeyboard(viewId)
-    }
-
-    fun hideKeyboard() {
-        baseActivity.hideKeyboard()
-    }
-
-    protected fun showMessage(message: String?, length: Int = Toast.LENGTH_SHORT) {
-        Toast.makeText(requireContext(), message ?: getString(R.string.error_unknown), length).show()
-    }
-
     protected fun setErrorVisibility(isVisible: Boolean, message: StringResource? = null) {
         rootBinding.root.findViewById<View>(contentId)?.isVisible = !isVisible
         rootBinding.errorContainer.isVisible = isVisible
@@ -93,9 +81,6 @@ abstract class BaseFragment<Binding: ViewBinding>: Fragment(), KeyboardChangeLis
     protected fun setTitle(title: String) {
         rootBinding.appbar.toolbar.title = title
     }
-
-    protected fun getString(stringResource: StringResource?) =
-        stringResource?.getText(requireContext())
 
     override fun onKeyboardChanged(isOpen: Boolean) {
         val activity = baseActivity
