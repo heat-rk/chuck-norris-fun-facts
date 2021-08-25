@@ -1,4 +1,4 @@
-package ru.heatalways.chucknorrisfunfacts.domain.interactors.utils
+package ru.heatalways.chucknorrisfunfacts.extensions
 
 import ru.heatalways.chucknorrisfunfacts.data.network.util.ResultWrapper
 import ru.heatalways.chucknorrisfunfacts.domain.utils.StringResource
