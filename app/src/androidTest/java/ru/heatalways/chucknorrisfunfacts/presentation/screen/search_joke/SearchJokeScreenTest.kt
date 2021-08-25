@@ -24,24 +24,23 @@ class SearchJokeScreenTest: TestCase() {
     var rule = ActivityScenarioRule(MainActivity::class.java)
 
     @Test
-    fun testShortSearchQuery_shouldHideButton() {
-        run {
-            step("1. Enter short search query") {
-                SearchJokeScreen.searchQueryView.editText {
-                    flakySafely {
-                        isVisible()
-                        typeText("he")
-                    }
-                }
-            }
-
-            step("2. Check search button visibility (should be GONE)") {
-                SearchJokeScreen.searchQueryView.searchButton {
-                    flakySafely { isGone() }
+    fun testShortSearchQuery_shouldHideButton() = run {
+        step("1. Enter short search query") {
+            SearchJokeScreen.searchQueryView.editText {
+                flakySafely {
+                    isVisible()
+                    typeText("he")
                 }
             }
         }
+
+        step("2. Check search button visibility (should be GONE)") {
+            SearchJokeScreen.searchQueryView.searchButton {
+                flakySafely { isGone() }
+            }
+        }
     }
+
 
     @Test
     fun testValidSearchQueryResults_shouldShowResults() = run {
@@ -63,7 +62,15 @@ class SearchJokeScreenTest: TestCase() {
             }
         }
 
-        step("3. Check recycler view size") {
+        step("3. Check if progress bar is visible") {
+            SearchJokeScreen.progressBar {
+                flakySafely {
+                    isVisible()
+                }
+            }
+        }
+
+        step("4. Check recycler view size") {
             SearchJokeScreen.recyclerView {
                 flakySafely {
                     isVisible()
@@ -93,7 +100,15 @@ class SearchJokeScreenTest: TestCase() {
             }
         }
 
-        step("3. Check error visibility (should be VISIBLE)") {
+        step("3. Check if progress bar is visible") {
+            SearchJokeScreen.progressBar {
+                flakySafely {
+                    isVisible()
+                }
+            }
+        }
+
+        step("4. Check error visibility (should be VISIBLE)") {
             SearchJokeScreen.errorTextView {
                 flakySafely {
                     isVisible()

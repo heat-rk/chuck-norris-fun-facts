@@ -1,5 +1,6 @@
 package ru.heatalways.chucknorrisfunfacts.presentation.screen.random_joke
 
+import io.github.kakaocup.kakao.progress.KProgressBar
 import io.github.kakaocup.kakao.recycler.KRecyclerView
 import io.github.kakaocup.kakao.text.KButton
 import ru.heatalways.chucknorrisfunfacts.R
@@ -12,6 +13,7 @@ object RandomJokeScreen: BaseScreen<RandomJokeScreen>() {
 
     val selectCategoryButton = KButton { withId(R.id.selectCategoryButton) }
     val geJokeButton = KButton { withId(R.id.getJokeButton) }
+    val buttonProgressBar = KProgressBar { withId(R.id.buttonProgressBar) }
     val recyclerView = KRecyclerView({
             withId(R.id.historyRecyclerView)
         },
