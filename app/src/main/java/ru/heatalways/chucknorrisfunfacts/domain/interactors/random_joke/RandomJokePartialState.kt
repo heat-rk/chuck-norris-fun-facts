@@ -7,9 +7,9 @@ import ru.heatalways.chucknorrisfunfacts.domain.utils.StringResource
 sealed class RandomJokePartialState {
     object Loading: RandomJokePartialState()
     object JokeLoading: RandomJokePartialState()
-    class Message(val message: StringResource): RandomJokePartialState()
-    class JokeLoaded(val joke: ChuckJoke): RandomJokePartialState()
-    class JokeLoadingError(val message: StringResource): RandomJokePartialState()
-    class JokesLoaded(val jokes: List<ChuckJoke>): RandomJokePartialState()
-    class CategorySelected(val category: Category): RandomJokePartialState()
+    data class Message(val message: StringResource): RandomJokePartialState()
+    data class JokeLoaded(val joke: ChuckJoke): RandomJokePartialState()
+    data class JokeLoadingError(val message: StringResource): RandomJokePartialState()
+    data class JokesLoaded(val jokes: List<ChuckJoke>): RandomJokePartialState()
+    data class CategorySelected(val category: Category): RandomJokePartialState()
 }

@@ -5,6 +5,6 @@ import ru.heatalways.chucknorrisfunfacts.domain.utils.StringResource
 
 sealed class SearchJokePartialState {
     object Loading: SearchJokePartialState()
-    class Message(val message: StringResource): SearchJokePartialState()
-    class Jokes(val jokes: List<ChuckJoke>): SearchJokePartialState()
+    data class Message(val message: StringResource): SearchJokePartialState()
+    data class Jokes(val jokes: List<ChuckJoke>): SearchJokePartialState()
 }

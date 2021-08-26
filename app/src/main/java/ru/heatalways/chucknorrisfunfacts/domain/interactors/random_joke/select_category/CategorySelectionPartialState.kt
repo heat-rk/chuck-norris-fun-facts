@@ -5,6 +5,6 @@ import ru.heatalways.chucknorrisfunfacts.domain.utils.StringResource
 
 sealed class CategorySelectionPartialState {
     object Loading: CategorySelectionPartialState()
-    class Categories(val categories: List<Category>): CategorySelectionPartialState()
-    class Message(val message: StringResource?): CategorySelectionPartialState()
+    data class Categories(val categories: List<Category>): CategorySelectionPartialState()
+    data class Message(val message: StringResource?): CategorySelectionPartialState()
 }
