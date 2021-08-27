@@ -4,4 +4,5 @@ import ru.heatalways.chucknorrisfunfacts.presentation.base.MviEffect
 
 sealed class CategorySelectionEffect: MviEffect {
     object GoBack: CategorySelectionEffect()
+    object ScrollUp: CategorySelectionEffect()
 }

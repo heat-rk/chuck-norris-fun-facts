@@ -4,26 +4,36 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <EditText
-        android:id="@+id/searchQueryEditText"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/searchQueryLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
-        android:imeOptions="actionSearch"
-        android:inputType="text"
-        android:maxLength="120"
-        style="@style/RoundedWhiteEditText"/>
+        app:hintAnimationEnabled="false"
+        app:hintEnabled="false"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/searchQueryEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:imeOptions="actionSearch"
+            android:inputType="text"
+            android:maxLength="120"
+            style="@style/RoundedWhiteEditText"/>
+
+    </com.google.android.material.textfield.TextInputLayout>
 
     <ImageView
         android:id="@+id/searchButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="@id/searchQueryEditText"
-        app:layout_constraintBottom_toBottomOf="@id/searchQueryEditText"
-        app:layout_constraintEnd_toEndOf="@id/searchQueryEditText"
+        app:layout_constraintTop_toTopOf="@id/searchQueryLayout"
+        app:layout_constraintBottom_toBottomOf="@id/searchQueryLayout"
+        app:layout_constraintEnd_toEndOf="@id/searchQueryLayout"
         android:layout_marginEnd="@dimen/paddingMD"
         android:src="@drawable/ic_search"
         android:visibility="gone"
+        android:contentDescription="@string/search"
         app:tint="@color/colorPrimary"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

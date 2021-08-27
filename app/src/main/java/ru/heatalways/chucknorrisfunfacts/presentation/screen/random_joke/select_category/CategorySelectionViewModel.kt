@@ -38,7 +38,12 @@ class CategorySelectionViewModel @Inject constructor(
 
             is CategorySelectionAction.OnSearchExecute ->
                 categorySelectionInteractor.searchCategories(action.query)
-                    .onEach { reduceState(it) }
+                    .onEach {
+                        reduceState(it)
+
+                        if (it is CategorySelectionPartialState.Categories)
+                            setEffect(CategorySelectionEffect.ScrollUp)
+                    }
                     .launchIn(viewModelScope)
         }
     }

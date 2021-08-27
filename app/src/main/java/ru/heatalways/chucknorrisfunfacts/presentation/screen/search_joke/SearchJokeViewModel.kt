@@ -28,7 +28,12 @@ class SearchJokeViewModel @Inject constructor(
         when (action) {
             is SearchJokeAction.OnSearchExecute ->
                 searchJokeInteractor.search(action.query)
-                    .onEach { reduceState(it) }
+                    .onEach {
+                        reduceState(it)
+
+                        if (it is SearchJokePartialState.Jokes)
+                            setEffect(SearchJokeViewEffect.ScrollUp)
+                    }
                     .launchIn(viewModelScope)
         }
     }

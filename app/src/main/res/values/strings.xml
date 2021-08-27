@@ -2,6 +2,7 @@
     <string name="app_name">Chuck Norris Fun Facts!</string>
     <string name="user_info">Search</string>
     <string name="user_Info_history">Random</string>
+    <string name="search">Search</string>
 
     <!-- SEARCH JOKE FRAGMENT -->
     <string name="search_joke_screen_title">Search Chuck Norris Joke!</string>

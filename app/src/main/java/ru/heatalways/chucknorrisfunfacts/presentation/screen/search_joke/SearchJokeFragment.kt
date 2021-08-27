@@ -14,6 +14,7 @@ import ru.heatalways.chucknorrisfunfacts.databinding.FragmentSearchJokeBinding
 import ru.heatalways.chucknorrisfunfacts.domain.interactors.search_joke.SearchJokeAction
 import ru.heatalways.chucknorrisfunfacts.domain.interactors.search_joke.SearchJokeViewEffect
 import ru.heatalways.chucknorrisfunfacts.domain.interactors.search_joke.SearchJokeViewState
+import ru.heatalways.chucknorrisfunfacts.extensions.hideKeyboard
 import ru.heatalways.chucknorrisfunfacts.presentation.adapters.JokesAdapter
 import ru.heatalways.chucknorrisfunfacts.presentation.base.BaseMviFragment
 
@@ -41,6 +42,8 @@ class SearchJokeFragment: BaseMviFragment<
 
             searchView.onSearchExecute = { searchQuery ->
                 action(SearchJokeAction.OnSearchExecute(searchQuery))
+                searchView.clearFocus()
+                hideKeyboard()
             }
         }
     }
@@ -49,16 +52,22 @@ class SearchJokeFragment: BaseMviFragment<
         binding.jokesRecyclerView.isVisible =
             !state.isLoading && state.message == null
 
-        jokesAdapter.submitList(state.jokes) {
-            binding.jokesRecyclerView.scrollToPosition(0)
-        }
+        jokesAdapter.submitList(state.jokes)
 
         setProgressBarVisibility(state.isLoading)
 
         setErrorVisibility(state.message != null, state.message)
     }
 
-    override fun handleEffect(effect: SearchJokeViewEffect) = Unit
+    override fun handleEffect(effect: SearchJokeViewEffect) {
+        when (effect) {
+            SearchJokeViewEffect.ScrollUp -> {
+                binding.jokesRecyclerView.post {
+                    binding.jokesRecyclerView.scrollToPosition(0)
+                }
+            }
+        }
+    }
 
     companion object {
         fun getScreen() = FragmentScreen { SearchJokeFragment() }

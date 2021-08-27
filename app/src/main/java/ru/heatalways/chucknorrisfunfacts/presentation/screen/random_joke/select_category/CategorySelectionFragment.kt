@@ -15,6 +15,7 @@ import ru.heatalways.chucknorrisfunfacts.databinding.FragmentSelectCategoryBindi
 import ru.heatalways.chucknorrisfunfacts.domain.interactors.random_joke.select_category.CategorySelectionAction
 import ru.heatalways.chucknorrisfunfacts.domain.interactors.random_joke.select_category.CategorySelectionEffect
 import ru.heatalways.chucknorrisfunfacts.domain.interactors.random_joke.select_category.CategorySelectionState
+import ru.heatalways.chucknorrisfunfacts.extensions.hideKeyboard
 import ru.heatalways.chucknorrisfunfacts.presentation.adapters.CategoriesAdapter
 import ru.heatalways.chucknorrisfunfacts.presentation.base.BaseMviFragment
 import javax.inject.Inject
@@ -50,6 +51,8 @@ class CategorySelectionFragment: BaseMviFragment<
 
             searchView.onSearchExecute = { query ->
                 action(CategorySelectionAction.OnSearchExecute(query))
+                searchView.clearFocus()
+                hideKeyboard()
             }
         }
     }
@@ -58,9 +61,7 @@ class CategorySelectionFragment: BaseMviFragment<
         binding.categoriesRecyclerView.isVisible =
             !state.isLoading && state.message == null
 
-        categoriesAdapter.submitList(state.categories) {
-            binding.categoriesRecyclerView.scrollToPosition(0)
-        }
+        categoriesAdapter.submitList(state.categories)
 
         setProgressBarVisibility(state.isLoading)
 
@@ -71,6 +72,12 @@ class CategorySelectionFragment: BaseMviFragment<
         when (effect) {
             CategorySelectionEffect.GoBack -> {
                 router.exit()
+            }
+
+            CategorySelectionEffect.ScrollUp -> {
+                binding.categoriesRecyclerView.post {
+                    binding.categoriesRecyclerView.scrollToPosition(0)
+                }
             }
         }
     }
