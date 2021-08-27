@@ -59,6 +59,8 @@ class CategorySelectionFragment: BaseMviFragment<
     }
 
     override fun renderState(state: CategorySelectionState) {
+        binding.searchView.setSearchButtonVisibility(!state.isLoading)
+
         binding.categoriesRecyclerView.isVisible =
             !state.isLoading && state.message == null
 
