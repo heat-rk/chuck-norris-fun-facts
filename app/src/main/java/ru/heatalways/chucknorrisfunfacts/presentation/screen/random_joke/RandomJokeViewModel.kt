@@ -49,6 +49,9 @@ class RandomJokeViewModel @Inject constructor(
                             setEffect(RandomJokeViewEffect.Error(it.message))
 
                         reduceState(it)
+
+                        if (it is RandomJokePartialState.JokeLoaded)
+                            setEffect(RandomJokeViewEffect.ScrollUp)
                     }
                     .launchIn(viewModelScope)
         }

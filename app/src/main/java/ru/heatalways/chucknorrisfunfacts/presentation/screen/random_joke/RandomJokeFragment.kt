@@ -16,6 +16,7 @@ import ru.heatalways.chucknorrisfunfacts.databinding.FragmentRandomJokeBinding
 import ru.heatalways.chucknorrisfunfacts.domain.interactors.random_joke.RandomJokeAction
 import ru.heatalways.chucknorrisfunfacts.domain.interactors.random_joke.RandomJokeViewEffect
 import ru.heatalways.chucknorrisfunfacts.domain.interactors.random_joke.RandomJokeViewState
+import ru.heatalways.chucknorrisfunfacts.extensions.postScrollToPosition
 import ru.heatalways.chucknorrisfunfacts.extensions.showToast
 import ru.heatalways.chucknorrisfunfacts.presentation.adapters.JokesAdapter
 import ru.heatalways.chucknorrisfunfacts.presentation.base.BaseMviFragment
@@ -61,9 +62,7 @@ class RandomJokeFragment: BaseMviFragment<
         binding.historyRecyclerView.isVisible =
             !state.isLoading && state.message == null
 
-        adapter.submitList(state.jokes) {
-            binding.historyRecyclerView.scrollToPosition(0)
-        }
+        adapter.submitList(state.jokes)
 
         binding.buttonProgressBar.isVisible = state.isJokeLoading
         binding.getJokeButton.isVisible = state.isJokeLoading.not()
@@ -80,12 +79,14 @@ class RandomJokeFragment: BaseMviFragment<
 
     override fun handleEffect(effect: RandomJokeViewEffect) {
         when (effect) {
-            is RandomJokeViewEffect.NavigateToCategorySelectionScreen -> {
+            is RandomJokeViewEffect.NavigateToCategorySelectionScreen ->
                 router.navigateTo(CategorySelectionFragment.getScreen())
-            }
-            is RandomJokeViewEffect.Error -> {
+
+            is RandomJokeViewEffect.Error ->
                 showToast(effect.message)
-            }
+
+            RandomJokeViewEffect.ScrollUp ->
+                binding.historyRecyclerView.postScrollToPosition(0)
         }
     }
 
