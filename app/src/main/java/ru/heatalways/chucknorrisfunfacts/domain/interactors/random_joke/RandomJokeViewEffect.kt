@@ -5,5 +5,5 @@ import ru.heatalways.chucknorrisfunfacts.presentation.base.MviEffect
 
 sealed class RandomJokeViewEffect: MviEffect {
     object NavigateToCategorySelectionScreen: RandomJokeViewEffect()
-    class Error(val message: StringResource?): RandomJokeViewEffect()
+    data class Error(val message: StringResource?): RandomJokeViewEffect()
 }

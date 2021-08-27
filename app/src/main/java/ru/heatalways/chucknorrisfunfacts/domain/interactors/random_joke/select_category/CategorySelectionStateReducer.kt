@@ -26,7 +26,8 @@ object CategorySelectionStateReducer: MviReducer<
         is CategorySelectionPartialState.Message -> {
             state.copy(
                 isLoading = false,
-                message = partialState.message
+                message = partialState.message,
+                categories = emptyList()
             )
         }
     }
