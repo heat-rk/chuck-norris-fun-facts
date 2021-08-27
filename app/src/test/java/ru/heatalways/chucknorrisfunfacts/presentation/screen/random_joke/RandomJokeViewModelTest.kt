@@ -1,71 +1,157 @@
 package ru.heatalways.chucknorrisfunfacts.presentation.screen.random_joke
 
 import app.cash.turbine.test
-import com.google.common.truth.Truth
+import com.google.common.truth.Truth.assertThat
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runBlockingTest
 import org.junit.Before
 import org.junit.Test
+import ru.heatalways.chucknorrisfunfacts.R
+import ru.heatalways.chucknorrisfunfacts.domain.interactors.random_joke.RandomJokeAction
+import ru.heatalways.chucknorrisfunfacts.domain.interactors.random_joke.RandomJokeInteractor
+import ru.heatalways.chucknorrisfunfacts.domain.interactors.random_joke.RandomJokeInteractorImpl
+import ru.heatalways.chucknorrisfunfacts.domain.interactors.random_joke.RandomJokeViewEffect
+import ru.heatalways.chucknorrisfunfacts.domain.interactors.random_joke.select_category.CategorySelectionInteractor
+import ru.heatalways.chucknorrisfunfacts.domain.interactors.random_joke.select_category.CategorySelectionInteractorImpl
 import ru.heatalways.chucknorrisfunfacts.domain.repositories.chuck_norris_jokes.Category
 import ru.heatalways.chucknorrisfunfacts.domain.repositories.chuck_norris_jokes.ChuckNorrisJokesRepositoryFake
+import ru.heatalways.chucknorrisfunfacts.domain.utils.strRes
+import ru.heatalways.chucknorrisfunfacts.mappers.toEntity
 import ru.heatalways.chucknorrisfunfacts.utils.BaseViewModelTest
 import kotlin.time.ExperimentalTime
 
 @ExperimentalTime
 @ExperimentalCoroutinesApi
 class RandomJokeViewModelTest: BaseViewModelTest() {
-    private lateinit var fakeManager: ChuckNorrisJokesRepositoryFake
+    private lateinit var repository: ChuckNorrisJokesRepositoryFake
+    private lateinit var randomJokeInteractor: RandomJokeInteractor
+    private lateinit var categorySelectionInteractor: CategorySelectionInteractor
     private lateinit var viewModel: RandomJokeViewModel
 
     @Before
     fun setup() {
-        fakeManager = ChuckNorrisJokesRepositoryFake()
-        viewModel = RandomJokeViewModel(fakeManager)
+        repository = ChuckNorrisJokesRepositoryFake()
+        randomJokeInteractor = RandomJokeInteractorImpl(repository)
+        categorySelectionInteractor = CategorySelectionInteractorImpl(repository)
+        viewModel = RandomJokeViewModel(randomJokeInteractor, categorySelectionInteractor)
     }
 
     @Test
-    fun `fetch joke from ANY category, returns list with new element`() = coroutineRule.runBlockingTest {
+    fun `test viewModel init, should return jokes`() = coroutineRule.runBlockingTest {
+        repository.savedJokes.add(repository.jokes.first().toEntity())
+
         viewModel.state.test {
-            viewModel.setAction(RandomJokeContract.Action.OnRandomJokeRequest(Category.Any))
+            viewModel.onFirstViewAttach()
 
-            val value = expectMostRecentItem()
+            val loadingState = awaitItem()
+            assertThat(loadingState.isLoading).isTrue()
+            assertThat(loadingState.message).isNull()
+            assertThat(loadingState.jokes).isEmpty()
 
-            Truth.assertThat(value).isInstanceOf(RandomJokeContract.State.Loaded::class.java)
-            if (value is RandomJokeContract.State.Loaded) {
-                Truth.assertThat(value.jokes).hasSize(1)
-            }
-            cancelAndIgnoreRemainingEvents()
+            val loadedState = awaitItem()
+            assertThat(loadedState.isLoading).isFalse()
+            assertThat(loadedState.message).isNull()
+            assertThat(loadedState.jokes).hasSize(1)
+
+            assertThat(cancelAndConsumeRemainingEvents().size).isEqualTo(0)
         }
     }
 
     @Test
-    fun `fetch joke from CAREER category, returns list with new element`() = coroutineRule.runBlockingTest {
+    fun `test viewModel init, should return empty list with message`() = coroutineRule.runBlockingTest {
         viewModel.state.test {
-            viewModel.setAction(RandomJokeContract.Action.OnRandomJokeRequest(
-                Category.Specific("career")
-            ))
+            viewModel.onFirstViewAttach()
 
-            val value = expectMostRecentItem()
+            val loadingState = awaitItem()
+            assertThat(loadingState.isLoading).isTrue()
+            assertThat(loadingState.message).isNull()
+            assertThat(loadingState.jokes).isEmpty()
 
-            Truth.assertThat(value).isInstanceOf(RandomJokeContract.State.Loaded::class.java)
-            if (value is RandomJokeContract.State.Loaded) {
-                Truth.assertThat(value.jokes).hasSize(1)
-                Truth.assertThat(value.jokes.first().categories).contains("career")
-            }
-            cancelAndIgnoreRemainingEvents()
+            val loadedState = awaitItem()
+            assertThat(loadedState.isLoading).isFalse()
+            assertThat(loadedState.message).isEqualTo(strRes(R.string.random_joke_empty_history))
+            assertThat(loadedState.jokes).isEmpty()
+
+            assertThat(cancelAndConsumeRemainingEvents().size).isEqualTo(0)
         }
     }
+
+    @Test
+    fun `fetch joke from ANY category, returns list with new element`() =
+        coroutineRule.runBlockingTest {
+            viewModel.onFirstViewAttach()
+
+            viewModel.state.test {
+                viewModel.setAction(RandomJokeAction.OnRandomJokeRequest)
+
+                awaitItem() // skip state before action
+
+                val jokeLoadingState = awaitItem()
+                assertThat(jokeLoadingState.isJokeLoading).isTrue()
+
+                val successState = awaitItem()
+                assertThat(successState.isLoading).isFalse()
+                assertThat(successState.jokes).hasSize(1)
+                assertThat(successState.message).isNull()
+
+                assertThat(cancelAndConsumeRemainingEvents().size).isEqualTo(0)
+            }
+        }
+
+    @Test
+    fun `fetch joke from CAREER category, returns list with new element`() =
+        coroutineRule.runBlockingTest {
+            viewModel.onFirstViewAttach()
+
+            viewModel.state.test {
+                categorySelectionInteractor.selectCategory(Category.Specific("career"))
+                viewModel.setAction(RandomJokeAction.OnRandomJokeRequest)
+
+                awaitItem() // skip state before action
+
+                val categorySelectedState = awaitItem()
+                assertThat(categorySelectedState.category).isEqualTo(
+                    Category.Specific("career")
+                )
+
+                val jokeLoadingState = awaitItem()
+                assertThat(jokeLoadingState.isJokeLoading).isTrue()
+
+                val successState = awaitItem()
+                assertThat(successState.isLoading).isFalse()
+                assertThat(successState.jokes).hasSize(1)
+                assertThat(successState.jokes.first().categories)
+                    .contains(Category.Specific("career"))
+                assertThat(successState.message).isNull()
+
+                assertThat(cancelAndConsumeRemainingEvents().size).isEqualTo(0)
+            }
+        }
 
     @Test
     fun `fetch joke from ANY category, returns error`() = coroutineRule.runBlockingTest {
-        fakeManager.shouldReturnErrorResponse = true
-        viewModel.effect.test {
-            viewModel.setAction(RandomJokeContract.Action.OnRandomJokeRequest(Category.Any))
+        repository.shouldReturnErrorResponse = true
+        viewModel.onFirstViewAttach()
 
-            val value = expectMostRecentItem()
+        viewModel.state.test {
+            viewModel.setAction(RandomJokeAction.OnRandomJokeRequest)
 
-            Truth.assertThat(value).isInstanceOf(RandomJokeContract.Effect.Error::class.java)
-            cancelAndIgnoreRemainingEvents()
+            awaitItem() // skip state before action
+
+            val jokeLoadingState = awaitItem()
+            assertThat(jokeLoadingState.isJokeLoading).isTrue()
+
+            val errorState = awaitItem()
+            assertThat(errorState.isJokeLoading).isFalse()
+            assertThat(errorState.jokes).hasSize(0)
+            viewModel.effect.test {
+                val effectState = awaitItem()
+                assertThat(effectState).isEqualTo(RandomJokeViewEffect.Error(
+                    strRes(R.string.error_network)
+                ))
+            }
+
+            assertThat(cancelAndConsumeRemainingEvents().size).isEqualTo(0)
         }
     }
 }
