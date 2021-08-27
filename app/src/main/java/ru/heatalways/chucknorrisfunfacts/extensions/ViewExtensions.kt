@@ -11,6 +11,7 @@ import android.view.ViewGroup
 import android.view.animation.DecelerateInterpolator
 import android.widget.EditText
 import androidx.core.view.isVisible
+import androidx.recyclerview.widget.RecyclerView
 
 fun EditText.maxLength(max: Int){
     this.filters = arrayOf<InputFilter>(InputFilter.LengthFilter(max))
@@ -26,6 +27,10 @@ fun View.setVisibleOrInvisible(isVisible: Boolean) {
 
 fun View.showHideSmoothly(toPopup: Boolean) {
     if (toPopup) showSmoothly() else hideSmoothly()
+}
+
+fun RecyclerView.postScrollToPosition(position: Int) {
+    post { scrollToPosition(position) }
 }
 
 fun View.showSmoothly() {

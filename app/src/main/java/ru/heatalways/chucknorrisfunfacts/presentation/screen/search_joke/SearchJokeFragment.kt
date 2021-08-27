@@ -15,6 +15,7 @@ import ru.heatalways.chucknorrisfunfacts.domain.interactors.search_joke.SearchJo
 import ru.heatalways.chucknorrisfunfacts.domain.interactors.search_joke.SearchJokeViewEffect
 import ru.heatalways.chucknorrisfunfacts.domain.interactors.search_joke.SearchJokeViewState
 import ru.heatalways.chucknorrisfunfacts.extensions.hideKeyboard
+import ru.heatalways.chucknorrisfunfacts.extensions.postScrollToPosition
 import ru.heatalways.chucknorrisfunfacts.presentation.adapters.JokesAdapter
 import ru.heatalways.chucknorrisfunfacts.presentation.base.BaseMviFragment
 
@@ -61,11 +62,8 @@ class SearchJokeFragment: BaseMviFragment<
 
     override fun handleEffect(effect: SearchJokeViewEffect) {
         when (effect) {
-            SearchJokeViewEffect.ScrollUp -> {
-                binding.jokesRecyclerView.post {
-                    binding.jokesRecyclerView.scrollToPosition(0)
-                }
-            }
+            SearchJokeViewEffect.ScrollUp ->
+                binding.jokesRecyclerView.postScrollToPosition(0)
         }
     }
 
