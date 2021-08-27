@@ -89,6 +89,11 @@ class RandomJokeFragment: BaseMviFragment<
         }
     }
 
+    override fun onDestroyView() {
+        binding.historyRecyclerView.adapter = null
+        super.onDestroyView()
+    }
+
     companion object {
         fun getScreen() = FragmentScreen { RandomJokeFragment() }
     }

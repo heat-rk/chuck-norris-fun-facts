@@ -67,6 +67,11 @@ class SearchJokeFragment: BaseMviFragment<
         }
     }
 
+    override fun onDestroyView() {
+        binding.jokesRecyclerView.adapter = null
+        super.onDestroyView()
+    }
+
     companion object {
         fun getScreen() = FragmentScreen { SearchJokeFragment() }
     }

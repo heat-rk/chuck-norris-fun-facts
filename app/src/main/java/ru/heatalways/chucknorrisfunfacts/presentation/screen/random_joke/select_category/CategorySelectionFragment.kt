@@ -76,8 +76,12 @@ class CategorySelectionFragment: BaseMviFragment<
 
             CategorySelectionEffect.ScrollUp ->
                 binding.categoriesRecyclerView.postScrollToPosition(0)
-
         }
+    }
+
+    override fun onDestroyView() {
+        binding.categoriesRecyclerView.adapter = null
+        super.onDestroyView()
     }
 
     companion object {
