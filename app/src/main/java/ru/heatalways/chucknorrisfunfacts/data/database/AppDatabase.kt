@@ -15,6 +15,6 @@ abstract class AppDatabase: RoomDatabase() {
 
     companion object {
         const val NAME = "appDatabase"
-        const val VERSION = 2
+        const val VERSION = 3
     }
 }

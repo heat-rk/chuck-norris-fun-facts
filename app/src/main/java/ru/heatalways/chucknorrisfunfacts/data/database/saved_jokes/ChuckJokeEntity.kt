@@ -6,6 +6,10 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = ChuckJokeEntity.TABLE_NAME)
 data class ChuckJokeEntity(
+    @ColumnInfo(name = ACTUAL_ID)
+    @PrimaryKey(autoGenerate = true)
+    val actualId: Long = 0,
+
     @ColumnInfo(name = CATEGORIES)
     val categories: List<String>?,
 
@@ -16,7 +20,6 @@ data class ChuckJokeEntity(
     val iconUrl: String?,
 
     @ColumnInfo(name = ID)
-    @PrimaryKey
     val id: String,
 
     @ColumnInfo(name = UPDATED_AT)
@@ -34,6 +37,7 @@ data class ChuckJokeEntity(
     companion object {
         const val TABLE_NAME = "db_chuck_jokes"
 
+        const val ACTUAL_ID = "actual_id"
         const val CATEGORIES = "categories"
         const val CREATED_AT = "created_at"
         const val ICON_URL = "icon_url"

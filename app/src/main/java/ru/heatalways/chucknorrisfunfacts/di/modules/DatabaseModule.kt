@@ -9,6 +9,7 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import ru.heatalways.chucknorrisfunfacts.data.database.AppDatabase
 import ru.heatalways.chucknorrisfunfacts.data.database.MIGRATION_1_2
+import ru.heatalways.chucknorrisfunfacts.data.database.MIGRATION_2_3
 import javax.inject.Singleton
 
 @Module
@@ -21,6 +22,6 @@ object DatabaseModule {
         AppDatabase::class.java,
         AppDatabase.NAME
     )
-        .addMigrations(MIGRATION_1_2)
+        .addMigrations(MIGRATION_1_2, MIGRATION_2_3)
         .build()
 }
