@@ -26,6 +26,9 @@ abstract class BaseMviFragment<
         viewModel.effect
             .onEach { handleEffect(it) }
             .launchIn(viewLifecycleOwner.lifecycleScope)
+
+        if (savedInstanceState == null)
+            viewModel.onFirstViewAttach()
     }
 
     abstract fun renderState(state: State)

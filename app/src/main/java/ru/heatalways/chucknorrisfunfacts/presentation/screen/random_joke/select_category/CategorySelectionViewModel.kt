@@ -21,6 +21,14 @@ class CategorySelectionViewModel @Inject constructor(
         isLoading = true
     )
 
+    override fun onFirstViewAttach() {
+        super.onFirstViewAttach()
+
+        categorySelectionInteractor.fetchCategories()
+            .onEach { reduceState(it) }
+            .launchIn(viewModelScope)
+    }
+
     override fun handleAction(action: CategorySelectionAction) {
         when (action) {
             is CategorySelectionAction.OnCategorySelect -> {
@@ -33,11 +41,5 @@ class CategorySelectionViewModel @Inject constructor(
                     .onEach { reduceState(it) }
                     .launchIn(viewModelScope)
         }
-    }
-
-    init {
-        categorySelectionInteractor.fetchCategories()
-            .onEach { reduceState(it) }
-            .launchIn(viewModelScope)
     }
 }

@@ -22,7 +22,9 @@ class RandomJokeViewModel @Inject constructor(
 
     override val initialState get() = RandomJokeViewState(isLoading = true)
 
-    init {
+    override fun onFirstViewAttach() {
+        super.onFirstViewAttach()
+
         randomJokeInteractor.fetchJokes()
             .onEach { reduceState(it) }
             .launchIn(viewModelScope)

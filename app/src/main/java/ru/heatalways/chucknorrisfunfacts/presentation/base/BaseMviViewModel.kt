@@ -68,4 +68,6 @@ abstract class BaseMviViewModel<
      * Handle each event
      */
     protected abstract fun handleAction(action : Action)
+
+    open fun onFirstViewAttach() = Unit
 }
