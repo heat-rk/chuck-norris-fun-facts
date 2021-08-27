@@ -10,17 +10,23 @@ import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEventList
 import net.yslibrary.android.keyboardvisibilityevent.Unregistrar
 import ru.heatalways.chucknorrisfunfacts.R
 import ru.heatalways.chucknorrisfunfacts.databinding.ActivityMainBinding
+import ru.heatalways.chucknorrisfunfacts.domain.interactors.main.MainAction
+import ru.heatalways.chucknorrisfunfacts.domain.interactors.main.MainViewEffect
+import ru.heatalways.chucknorrisfunfacts.domain.interactors.main.MainViewState
 import ru.heatalways.chucknorrisfunfacts.extensions.setVisibleOrGone
 import ru.heatalways.chucknorrisfunfacts.extensions.showSmoothly
-import ru.heatalways.chucknorrisfunfacts.presentation.base.BaseActivity
+import ru.heatalways.chucknorrisfunfacts.presentation.base.BaseMviActivity
 import ru.heatalways.chucknorrisfunfacts.presentation.base.KeyboardChangeListener
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class MainActivity: BaseActivity<ActivityMainBinding>() {
+class MainActivity: BaseMviActivity<
+        ActivityMainBinding, MainAction,
+        MainViewState, MainViewEffect
+>() {
     @Inject lateinit var router: Router
 
-    private val mainViewModel: MainViewModel by viewModels()
+    override val viewModel: MainViewModel by viewModels()
 
     private var keyboardListenerUnregister: Unregistrar? = null
     private val keyboardChangeListeners = mutableListOf<KeyboardChangeListener>()
@@ -33,14 +39,10 @@ class MainActivity: BaseActivity<ActivityMainBinding>() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        binding.bottomNavigationBar.setOnNavigationItemSelectedListener {
-            mainViewModel.onMenuItemSelect(it.itemId)
-            return@setOnNavigationItemSelectedListener true
+        binding.bottomNavigationBar.setOnItemSelectedListener {
+            action(MainAction.OnBottomItemChange(it.itemId))
+            return@setOnItemSelectedListener true
         }
-
-        mainViewModel.currentScreen.observe(this, {
-            router.replaceScreen(it)
-        })
 
         keyboardListenerUnregister = KeyboardVisibilityEvent.registerEventListener(
             activity = this,
@@ -52,6 +54,15 @@ class MainActivity: BaseActivity<ActivityMainBinding>() {
                 }
             }
         )
+    }
+
+    override fun renderState(state: MainViewState) = Unit
+
+    override fun handleEffect(effect: MainViewEffect) {
+        when (effect) {
+            is MainViewEffect.SelectFragment ->
+                router.replaceScreen(effect.screen)
+        }
     }
 
     override fun onDestroy() {

@@ -1,28 +1,35 @@
 package ru.heatalways.chucknorrisfunfacts.presentation.screen.main
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import com.github.terrakok.cicerone.androidx.FragmentScreen
 import ru.heatalways.chucknorrisfunfacts.R
-import ru.heatalways.chucknorrisfunfacts.presentation.base.BaseViewModel
+import ru.heatalways.chucknorrisfunfacts.domain.interactors.main.*
+import ru.heatalways.chucknorrisfunfacts.presentation.base.BaseMviViewModel
 import ru.heatalways.chucknorrisfunfacts.presentation.screen.random_joke.RandomJokeFragment
 import ru.heatalways.chucknorrisfunfacts.presentation.screen.search_joke.SearchJokeFragment
 
-class MainViewModel: BaseViewModel() {
-    private val mCurrentScreen = MutableLiveData<FragmentScreen>()
-    val currentScreen: LiveData<FragmentScreen> = mCurrentScreen
+class MainViewModel: BaseMviViewModel<
+        MainAction, MainViewState,
+        MainViewEffect, MainPartialState
+>(MainStateReducer) {
+    override val initialState: MainViewState
+        get() = MainViewState()
 
-    init {
-        mCurrentScreen.value = SearchJokeFragment.getScreen()
+    override fun onFirstViewAttach() {
+        super.onFirstViewAttach()
+        setEffect(MainViewEffect.SelectFragment(SearchJokeFragment.getScreen()))
     }
 
-    fun onMenuItemSelect(itemId: Int) {
-        val screen = when(itemId) {
-            R.id.navJokeSearch -> SearchJokeFragment.getScreen()
-            R.id.navJokeRandom -> RandomJokeFragment.getScreen()
-            else -> null
-        }
+    override fun handleAction(action: MainAction) {
+        when (action) {
+            is MainAction.OnBottomItemChange -> {
+                val screen = when(action.itemId) {
+                    R.id.navJokeSearch -> SearchJokeFragment.getScreen()
+                    R.id.navJokeRandom -> RandomJokeFragment.getScreen()
+                    else -> null
+                }
 
-        screen?.let { mCurrentScreen.value = it }
+                if (screen != null)
+                    setEffect(MainViewEffect.SelectFragment(screen))
+            }
+        }
     }
 }
