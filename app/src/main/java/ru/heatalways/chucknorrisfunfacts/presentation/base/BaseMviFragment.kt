@@ -14,18 +14,22 @@ abstract class BaseMviFragment<
         Effect: MviEffect
 >: BaseFragment<Binding>() {
 
-    abstract val viewModel: BaseMviViewModel<Event, State, Effect, *>
+    protected abstract val viewModel: BaseMviViewModel<Event, State, Effect, *>
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel.state
-            .onEach { renderState(it) }
-            .launchIn(viewLifecycleOwner.lifecycleScope)
+        viewLifecycleOwner.lifecycleScope.launchWhenStarted {
+            viewModel.state
+                .onEach { renderState(it) }
+                .launchIn(this)
+        }
 
-        viewModel.effect
-            .onEach { handleEffect(it) }
-            .launchIn(viewLifecycleOwner.lifecycleScope)
+        viewLifecycleOwner.lifecycleScope.launchWhenStarted {
+            viewModel.effect
+                .onEach { handleEffect(it) }
+                .launchIn(this)
+        }
 
         if (savedInstanceState == null)
             viewModel.onFirstViewAttach()
