@@ -1,18 +1,21 @@
 package ru.heatalways.chucknorrisfunfacts.presentation.screen.random_joke
 
+import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import ru.heatalways.chucknorrisfunfacts.domain.interactors.random_joke.*
 import ru.heatalways.chucknorrisfunfacts.domain.interactors.random_joke.select_category.CategorySelectionInteractor
+import ru.heatalways.chucknorrisfunfacts.domain.repositories.chuck_norris_jokes.Category
 import ru.heatalways.chucknorrisfunfacts.presentation.base.BaseMviViewModel
 import javax.inject.Inject
 
 @HiltViewModel
 class RandomJokeViewModel @Inject constructor(
     private val randomJokeInteractor: RandomJokeInteractor,
-    private val categorySelectionInteractor: CategorySelectionInteractor
+    private val categorySelectionInteractor: CategorySelectionInteractor,
+    private val savedStateHandle: SavedStateHandle
 ): BaseMviViewModel<
         RandomJokeAction,
         RandomJokeViewState,
@@ -22,15 +25,30 @@ class RandomJokeViewModel @Inject constructor(
 
     override val initialState get() = RandomJokeViewState(isLoading = true)
 
-    override fun onFirstViewAttach() {
-        super.onFirstViewAttach()
+    init {
+        handleSavedState()
+        collectSelectedCategory()
+        fetchJokes()
+    }
 
+    fun handleSavedState() {
+        savedStateHandle.get<Category?>(SAVED_SELECTED_CATEGORY)?.let { category ->
+            categorySelectionInteractor.selectCategory(category)
+        }
+    }
+
+    fun collectSelectedCategory() {
+        categorySelectionInteractor.selectedCategory
+            .onEach {
+                reduceState(RandomJokePartialState.CategorySelected(it))
+                savedStateHandle.set(SAVED_SELECTED_CATEGORY, it)
+            }
+            .launchIn(viewModelScope)
+    }
+
+    fun fetchJokes() {
         randomJokeInteractor.fetchJokes()
             .onEach { reduceState(it) }
-            .launchIn(viewModelScope)
-
-        categorySelectionInteractor.selectedCategory
-            .onEach { reduceState(RandomJokePartialState.CategorySelected(it)) }
             .launchIn(viewModelScope)
     }
 
@@ -55,5 +73,10 @@ class RandomJokeViewModel @Inject constructor(
                     }
                     .launchIn(viewModelScope)
         }
+    }
+
+    companion object {
+        private const val SAVED_SELECTED_CATEGORY =
+            "screen.random_joke.saved_selected_category"
     }
 }

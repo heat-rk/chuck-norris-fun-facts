@@ -5,10 +5,10 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.flow
 import ru.heatalways.chucknorrisfunfacts.R
-import ru.heatalways.chucknorrisfunfacts.extensions.handle
 import ru.heatalways.chucknorrisfunfacts.domain.repositories.chuck_norris_jokes.Category
-import ru.heatalways.chucknorrisfunfacts.domain.utils.strRes
 import ru.heatalways.chucknorrisfunfacts.domain.repositories.chuck_norris_jokes.ChuckNorrisJokesRepository
+import ru.heatalways.chucknorrisfunfacts.domain.utils.strRes
+import ru.heatalways.chucknorrisfunfacts.extensions.handle
 
 class CategorySelectionInteractorImpl(
     val chuckNorrisJokesRepository: ChuckNorrisJokesRepository
@@ -23,7 +23,10 @@ class CategorySelectionInteractorImpl(
         val response = chuckNorrisJokesRepository.categories()
 
         emit(response.handle(
-            onFailed = { CategorySelectionPartialState.Message(it) },
+            onFailed = {
+                categories = emptyList()
+                CategorySelectionPartialState.Message(it)
+            },
             onSuccess = { categoriesStrings ->
                 categories = listOf(Category.Any).plus(categoriesStrings)
                 CategorySelectionPartialState.Categories(categories)

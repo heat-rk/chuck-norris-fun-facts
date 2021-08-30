@@ -1,7 +1,6 @@
 package ru.heatalways.chucknorrisfunfacts.presentation.base
 
 import android.os.Bundle
-import android.view.View
 import androidx.lifecycle.lifecycleScope
 import androidx.viewbinding.ViewBinding
 import kotlinx.coroutines.flow.launchIn
@@ -31,9 +30,6 @@ abstract class BaseMviActivity<
                 .onEach { handleEffect(it) }
                 .launchIn(this)
         }
-
-        if (savedInstanceState == null)
-            viewModel.onFirstViewAttach()
     }
 
     abstract fun renderState(state: State)

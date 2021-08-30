@@ -25,7 +25,7 @@ abstract class BaseMviViewModel<
     private val _effect : Channel<Effect> = Channel()
     val effect = _effect.receiveAsFlow()
 
-    protected val currentState: State get() = state.value
+    private val currentState: State get() = state.value
 
     init {
         subscribeActions()
@@ -69,5 +69,7 @@ abstract class BaseMviViewModel<
      */
     protected abstract fun handleAction(action : Action)
 
-    open fun onFirstViewAttach() = Unit
+    fun resetState() {
+        _state.value = _initialState
+    }
 }

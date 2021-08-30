@@ -12,6 +12,13 @@
             android:alpha="1"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <Constraint
+            android:id="@id/historyRecyclerView">
+
+            <PropertySet app:visibilityMode="ignore"/>
+
+        </Constraint>
+
     </ConstraintSet>
 
     <ConstraintSet android:id="@+id/end">
@@ -23,6 +30,13 @@
             android:layout_marginTop="@dimen/paddingMD"
             android:alpha="0"
             app:layout_constraintBottom_toTopOf="parent" />
+
+        <Constraint
+            android:id="@id/historyRecyclerView">
+
+            <PropertySet app:visibilityMode="ignore"/>
+
+        </Constraint>
 
     </ConstraintSet>
 

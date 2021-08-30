@@ -33,6 +33,13 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintBottom_toTopOf="parent"/>
 
+        <Constraint
+            android:id="@id/jokesRecyclerView">
+
+            <PropertySet app:visibilityMode="ignore"/>
+
+        </Constraint>
+
     </ConstraintSet>
 
     <Transition

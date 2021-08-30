@@ -30,9 +30,6 @@ abstract class BaseMviFragment<
                 .onEach { handleEffect(it) }
                 .launchIn(this)
         }
-
-        if (savedInstanceState == null)
-            viewModel.onFirstViewAttach()
     }
 
     abstract fun renderState(state: State)
