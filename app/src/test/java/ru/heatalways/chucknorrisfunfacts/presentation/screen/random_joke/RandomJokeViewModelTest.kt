@@ -1,5 +1,6 @@
 package ru.heatalways.chucknorrisfunfacts.presentation.screen.random_joke
 
+import androidx.lifecycle.SavedStateHandle
 import app.cash.turbine.test
 import com.google.common.truth.Truth.assertThat
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -33,7 +34,12 @@ class RandomJokeViewModelTest: BaseViewModelTest() {
         repository = ChuckNorrisJokesRepositoryFake()
         randomJokeInteractor = RandomJokeInteractorImpl(repository)
         categorySelectionInteractor = CategorySelectionInteractorImpl(repository)
-        viewModel = RandomJokeViewModel(randomJokeInteractor, categorySelectionInteractor)
+        viewModel = RandomJokeViewModel(
+            randomJokeInteractor,
+            categorySelectionInteractor,
+            SavedStateHandle()
+        )
+        viewModel.resetState()
     }
 
     @Test
@@ -41,7 +47,8 @@ class RandomJokeViewModelTest: BaseViewModelTest() {
         repository.savedJokes.add(repository.jokes.first().toEntity())
 
         viewModel.state.test {
-            viewModel.onFirstViewAttach()
+            viewModel.collectSelectedCategory()
+            viewModel.fetchJokes()
 
             val loadingState = awaitItem()
             assertThat(loadingState.isLoading).isTrue()
@@ -60,7 +67,8 @@ class RandomJokeViewModelTest: BaseViewModelTest() {
     @Test
     fun `test viewModel init, should return empty list with message`() = coroutineRule.runBlockingTest {
         viewModel.state.test {
-            viewModel.onFirstViewAttach()
+            viewModel.collectSelectedCategory()
+            viewModel.fetchJokes()
 
             val loadingState = awaitItem()
             assertThat(loadingState.isLoading).isTrue()
@@ -79,7 +87,8 @@ class RandomJokeViewModelTest: BaseViewModelTest() {
     @Test
     fun `fetch joke from ANY category, returns list with new element`() =
         coroutineRule.runBlockingTest {
-            viewModel.onFirstViewAttach()
+            viewModel.collectSelectedCategory()
+            viewModel.fetchJokes()
 
             viewModel.state.test {
                 viewModel.setAction(RandomJokeAction.OnRandomJokeRequest)
@@ -101,7 +110,8 @@ class RandomJokeViewModelTest: BaseViewModelTest() {
     @Test
     fun `fetch joke from CAREER category, returns list with new element`() =
         coroutineRule.runBlockingTest {
-            viewModel.onFirstViewAttach()
+            viewModel.collectSelectedCategory()
+            viewModel.fetchJokes()
 
             viewModel.state.test {
                 categorySelectionInteractor.selectCategory(Category.Specific("career"))
@@ -131,7 +141,8 @@ class RandomJokeViewModelTest: BaseViewModelTest() {
     @Test
     fun `fetch joke from ANY category, returns error`() = coroutineRule.runBlockingTest {
         repository.shouldReturnErrorResponse = true
-        viewModel.onFirstViewAttach()
+        viewModel.collectSelectedCategory()
+        viewModel.fetchJokes()
 
         viewModel.state.test {
             viewModel.setAction(RandomJokeAction.OnRandomJokeRequest)

@@ -1,5 +1,6 @@
 package ru.heatalways.chucknorrisfunfacts.presentation.screen.search_joke
 
+import androidx.lifecycle.SavedStateHandle
 import app.cash.turbine.test
 import com.google.common.truth.Truth.assertThat
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -26,13 +27,11 @@ class SearchJokeViewModelTest: BaseViewModelTest() {
     fun setup() {
         repository = ChuckNorrisJokesRepositoryFake()
         interactor = SearchJokeInteractorImpl(repository)
-        viewModel = SearchJokeViewModel(interactor)
+        viewModel = SearchJokeViewModel(interactor, SavedStateHandle())
     }
 
     @Test
     fun `valid search query, returns 1 element`() = coroutineRule.runBlockingTest {
-        viewModel.onFirstViewAttach()
-
         viewModel.state.test {
             viewModel.setAction(SearchJokeAction.OnSearchExecute("hey"))
 
@@ -52,8 +51,6 @@ class SearchJokeViewModelTest: BaseViewModelTest() {
 
     @Test
     fun `invalid search query, returns empty list`() = coroutineRule.runBlockingTest {
-        viewModel.onFirstViewAttach()
-
         viewModel.state.test {
             viewModel.setAction(SearchJokeAction.OnSearchExecute("heyvsdvdbjhdfjdf"))
 
@@ -75,8 +72,6 @@ class SearchJokeViewModelTest: BaseViewModelTest() {
     @Test
     fun `valid search query, returns error`() = coroutineRule.runBlockingTest {
         repository.shouldReturnErrorResponse = true
-        viewModel.onFirstViewAttach()
-
         viewModel.state.test {
             viewModel.setAction(SearchJokeAction.OnSearchExecute("hey"))
 
