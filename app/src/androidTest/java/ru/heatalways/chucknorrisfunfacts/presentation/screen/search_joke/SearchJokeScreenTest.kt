@@ -100,15 +100,7 @@ class SearchJokeScreenTest: TestCase() {
             }
         }
 
-        step("3. Check if progress bar is visible") {
-            SearchJokeScreen.progressBar {
-                flakySafely {
-                    isVisible()
-                }
-            }
-        }
-
-        step("4. Check error visibility (should be VISIBLE)") {
+        step("3. Check error visibility (should be VISIBLE)") {
             SearchJokeScreen.errorTextView {
                 flakySafely {
                     isVisible()

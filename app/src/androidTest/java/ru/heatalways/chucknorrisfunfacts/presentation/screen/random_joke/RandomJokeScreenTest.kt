@@ -47,15 +47,7 @@ class RandomJokeScreenTest: TestCase() {
             }
         }
 
-        step("3. Check if progress bar is visible") {
-            SearchJokeScreen.progressBar {
-                flakySafely {
-                    isVisible()
-                }
-            }
-        }
-
-        step("4. Type search query") {
+        step("3. Type search query") {
             CategorySelectionScreen.searchQueryView.editText {
                 flakySafely {
                     isVisible()
@@ -64,7 +56,7 @@ class RandomJokeScreenTest: TestCase() {
             }
         }
 
-        step("5. Click search button") {
+        step("4. Click search button") {
             CategorySelectionScreen.searchQueryView.searchButton {
                 flakySafely {
                     isVisible()
@@ -73,7 +65,7 @@ class RandomJokeScreenTest: TestCase() {
             }
         }
 
-        step("6. Select animal category") {
+        step("5. Select animal category") {
             CategorySelectionScreen.categories {
                 childWith<CategoryItem> { withText("animal") } perform {
                     button {
@@ -86,7 +78,7 @@ class RandomJokeScreenTest: TestCase() {
             }
         }
 
-        step("7. Check selected category") {
+        step("6. Check selected category") {
             RandomJokeScreen.selectCategoryButton {
                 flakySafely {
                     isVisible()
