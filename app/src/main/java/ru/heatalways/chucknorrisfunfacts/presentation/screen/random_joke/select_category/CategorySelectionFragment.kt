@@ -41,6 +41,7 @@ class CategorySelectionFragment: BaseMviFragment<
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setTitle(R.string.select_category_screen_title)
+        initToolbarBackButton()
 
         categoriesAdapter.onCategoryClick = { category ->
             action(CategorySelectionAction.OnCategorySelect(category))

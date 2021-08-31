@@ -3,6 +3,7 @@
     <string name="user_info">Search</string>
     <string name="user_Info_history">Random</string>
     <string name="search">Search</string>
+    <string name="navigation_back">Go to previous screen</string>
 
     <!-- SEARCH JOKE FRAGMENT -->
     <string name="search_joke_screen_title">Search Chuck Norris Joke!</string>

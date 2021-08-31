@@ -78,6 +78,14 @@ abstract class BaseFragment<Binding: ViewBinding>: Fragment(), KeyboardChangeLis
         rootBinding.appbar.toolbar.title = title
     }
 
+    protected fun initToolbarBackButton() {
+        rootBinding.appbar.toolbar.navigationIcon =
+            ContextCompat.getDrawable(requireContext(), R.drawable.ic_back_arrow)
+
+        rootBinding.appbar.toolbar.navigationContentDescription =
+            getString(R.string.navigation_back)
+    }
+
     override fun onKeyboardChanged(isOpen: Boolean) {
         val activity = baseActivity
         if (activity is MainActivity) {
