@@ -7,8 +7,9 @@ import ru.heatalways.chucknorrisfunfacts.extensions.handle
 import ru.heatalways.chucknorrisfunfacts.domain.repositories.chuck_norris_jokes.Category
 import ru.heatalways.chucknorrisfunfacts.domain.repositories.chuck_norris_jokes.ChuckNorrisJokesRepository
 import ru.heatalways.chucknorrisfunfacts.domain.utils.strRes
+import javax.inject.Inject
 
-class RandomJokeInteractorImpl(
+class RandomJokeInteractorImpl @Inject constructor(
     private val chuckNorrisJokesRepository: ChuckNorrisJokesRepository
 ): RandomJokeInteractor {
 

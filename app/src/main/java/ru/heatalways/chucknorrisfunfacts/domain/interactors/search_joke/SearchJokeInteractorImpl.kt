@@ -6,8 +6,9 @@ import ru.heatalways.chucknorrisfunfacts.R
 import ru.heatalways.chucknorrisfunfacts.extensions.handle
 import ru.heatalways.chucknorrisfunfacts.domain.repositories.chuck_norris_jokes.ChuckNorrisJokesRepository
 import ru.heatalways.chucknorrisfunfacts.domain.utils.strRes
+import javax.inject.Inject
 
-class SearchJokeInteractorImpl(
+class SearchJokeInteractorImpl @Inject constructor(
     private val chuckNorrisJokesRepository: ChuckNorrisJokesRepository
 ): SearchJokeInteractor {
     override fun search(query: String): Flow<SearchJokePartialState> = flow {

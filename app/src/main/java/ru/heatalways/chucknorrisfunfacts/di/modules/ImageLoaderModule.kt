@@ -1,17 +1,19 @@
 package ru.heatalways.chucknorrisfunfacts.di.modules
 
+import dagger.Binds
 import dagger.Module
-import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import ru.heatalways.chucknorrisfunfacts.domain.repositories.image_loader.ImageLoader
 import ru.heatalways.chucknorrisfunfacts.domain.repositories.image_loader.GlideImageLoaderImpl
+import ru.heatalways.chucknorrisfunfacts.domain.repositories.image_loader.ImageLoader
 import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-object ImageLoaderModule {
-    @Provides
+abstract class ImageLoaderModule {
+    @Binds
     @Singleton
-    fun provideImageLoaderManager(): ImageLoader = GlideImageLoaderImpl()
+    abstract fun bindImageLoader(
+        imageLoaderImpl: GlideImageLoaderImpl
+    ): ImageLoader
 }

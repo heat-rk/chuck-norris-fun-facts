@@ -9,8 +9,9 @@ import ru.heatalways.chucknorrisfunfacts.domain.repositories.chuck_norris_jokes.
 import ru.heatalways.chucknorrisfunfacts.domain.repositories.chuck_norris_jokes.ChuckNorrisJokesRepository
 import ru.heatalways.chucknorrisfunfacts.domain.utils.strRes
 import ru.heatalways.chucknorrisfunfacts.extensions.handle
+import javax.inject.Inject
 
-class CategorySelectionInteractorImpl(
+class CategorySelectionInteractorImpl @Inject constructor(
     val chuckNorrisJokesRepository: ChuckNorrisJokesRepository
 ): CategorySelectionInteractor {
 

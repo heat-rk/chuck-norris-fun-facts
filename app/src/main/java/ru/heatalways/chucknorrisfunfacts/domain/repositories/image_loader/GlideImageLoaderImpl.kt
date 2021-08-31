@@ -2,8 +2,9 @@ package ru.heatalways.chucknorrisfunfacts.domain.repositories.image_loader
 
 import android.widget.ImageView
 import com.bumptech.glide.Glide
+import javax.inject.Inject
 
-class GlideImageLoaderImpl: ImageLoader {
+class GlideImageLoaderImpl @Inject constructor(): ImageLoader {
     override fun loadImage(config: LoadPhotoConfig, imageView: ImageView) {
         var builder = Glide
             .with(imageView.context)

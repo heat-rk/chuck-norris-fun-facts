@@ -1,7 +1,7 @@
 package ru.heatalways.chucknorrisfunfacts.di.modules
 
+import dagger.Binds
 import dagger.Module
-import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import ru.heatalways.chucknorrisfunfacts.domain.interactors.random_joke.RandomJokeInteractor
@@ -10,30 +10,26 @@ import ru.heatalways.chucknorrisfunfacts.domain.interactors.random_joke.select_c
 import ru.heatalways.chucknorrisfunfacts.domain.interactors.random_joke.select_category.CategorySelectionInteractorImpl
 import ru.heatalways.chucknorrisfunfacts.domain.interactors.search_joke.SearchJokeInteractor
 import ru.heatalways.chucknorrisfunfacts.domain.interactors.search_joke.SearchJokeInteractorImpl
-import ru.heatalways.chucknorrisfunfacts.domain.repositories.chuck_norris_jokes.ChuckNorrisJokesRepository
 import javax.inject.Singleton
 
 @Module(includes = [ChuckNorrisJokesModule::class])
 @InstallIn(SingletonComponent::class)
-object InteractorModule {
-    @Provides
+abstract class InteractorModule {
+    @Binds
     @Singleton
-    fun provideCategorySelectionInteractor(
-        jokesRepository: ChuckNorrisJokesRepository
-    ): CategorySelectionInteractor =
-        CategorySelectionInteractorImpl(jokesRepository)
+    abstract fun bindCategorySelectionInteractor(
+        interactorImpl: CategorySelectionInteractorImpl
+    ): CategorySelectionInteractor
 
-    @Provides
+    @Binds
     @Singleton
-    fun provideRandomJokeInteractor(
-        jokesRepository: ChuckNorrisJokesRepository
-    ): RandomJokeInteractor =
-        RandomJokeInteractorImpl(jokesRepository)
+    abstract fun bindRandomJokeInteractor(
+        interactorImpl: RandomJokeInteractorImpl
+    ): RandomJokeInteractor
 
-    @Provides
+    @Binds
     @Singleton
-    fun provideSearchJokeInteractor(
-        jokesRepository: ChuckNorrisJokesRepository
-    ): SearchJokeInteractor =
-        SearchJokeInteractorImpl(jokesRepository)
+    abstract fun bindSearchJokeInteractor(
+        interactorImpl: SearchJokeInteractorImpl
+    ): SearchJokeInteractor
 }

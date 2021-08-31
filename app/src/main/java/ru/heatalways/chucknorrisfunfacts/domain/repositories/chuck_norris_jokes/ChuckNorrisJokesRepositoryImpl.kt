@@ -1,19 +1,20 @@
 package ru.heatalways.chucknorrisfunfacts.domain.repositories.chuck_norris_jokes
 
 import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import ru.heatalways.chucknorrisfunfacts.data.database.AppDatabase
 import ru.heatalways.chucknorrisfunfacts.data.network.chuck_norris_jokes.ChuckNorrisJokesApi
 import ru.heatalways.chucknorrisfunfacts.data.network.util.safeApiCall
+import ru.heatalways.chucknorrisfunfacts.di.modules.IoDispatcher
 import ru.heatalways.chucknorrisfunfacts.mappers.toDomain
 import ru.heatalways.chucknorrisfunfacts.mappers.toEntity
 import java.util.*
+import javax.inject.Inject
 
-class ChuckNorrisJokesRepositoryImpl(
+class ChuckNorrisJokesRepositoryImpl @Inject constructor(
     private val api: ChuckNorrisJokesApi,
     private val appDatabase: AppDatabase,
-    private val dispatcher: CoroutineDispatcher = Dispatchers.IO
+    @IoDispatcher private val dispatcher: CoroutineDispatcher
 ): ChuckNorrisJokesRepository {
 
     override suspend fun random(category: String?) = safeApiCall(dispatcher) {
