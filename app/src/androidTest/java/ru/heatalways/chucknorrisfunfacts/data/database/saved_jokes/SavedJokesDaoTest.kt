@@ -26,7 +26,6 @@ class SavedJokesDaoTest {
     var instantTaskExecutorRule = InstantTaskExecutorRule()
 
     @Inject
-    @Named("test_app_db")
     lateinit var database: AppDatabase
 
     private lateinit var dao: SavedJokesDao

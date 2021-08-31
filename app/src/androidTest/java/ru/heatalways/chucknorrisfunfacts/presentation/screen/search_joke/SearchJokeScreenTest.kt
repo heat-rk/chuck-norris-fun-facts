@@ -2,15 +2,18 @@ package ru.heatalways.chucknorrisfunfacts.presentation.screen.search_joke
 
 import android.Manifest
 import androidx.test.ext.junit.rules.ActivityScenarioRule
+import androidx.test.filters.LargeTest
 import androidx.test.rule.GrantPermissionRule
 import com.kaspersky.kaspresso.testcases.api.testcase.TestCase
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
+import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import ru.heatalways.chucknorrisfunfacts.presentation.screen.main.MainActivity
 
 @HiltAndroidTest
+@LargeTest
 class SearchJokeScreenTest: TestCase() {
     @get:Rule(order = 0)
     var hiltRule = HiltAndroidRule(this)
@@ -22,6 +25,11 @@ class SearchJokeScreenTest: TestCase() {
 
     @get:Rule(order = 2)
     var rule = ActivityScenarioRule(MainActivity::class.java)
+
+    @Before
+    fun setup() {
+        hiltRule.inject()
+    }
 
     @Test
     fun testShortSearchQuery_shouldHideButton() = run {
