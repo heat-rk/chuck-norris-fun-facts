@@ -11,5 +11,6 @@ data class ChuckJoke(
     val savedAt: Date?,
     val iconUrl: String?,
     val url: String?,
-    val value: StringResource
+    val value: StringResource,
+    var isUpdating: Boolean = false
 )

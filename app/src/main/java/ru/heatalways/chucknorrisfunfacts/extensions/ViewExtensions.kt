@@ -11,6 +11,7 @@ import android.view.ViewGroup
 import android.view.animation.DecelerateInterpolator
 import android.widget.EditText
 import androidx.core.view.isVisible
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
 fun EditText.maxLength(max: Int){
@@ -31,6 +32,22 @@ fun View.showHideSmoothly(toPopup: Boolean) {
 
 fun RecyclerView.postScrollToPosition(position: Int) {
     post { scrollToPosition(position) }
+}
+
+fun RecyclerView.onScrolledToLastItem(callback: () -> Unit) {
+    addOnScrollListener(object : RecyclerView.OnScrollListener() {
+        override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+            super.onScrolled(recyclerView, dx, dy)
+            val visibleItemCount = (layoutManager as LinearLayoutManager).childCount
+            val totalItemCount = (layoutManager as LinearLayoutManager).itemCount
+            val firstVisibleItemPosition = (layoutManager as LinearLayoutManager).findLastVisibleItemPosition()
+
+            if ((visibleItemCount + firstVisibleItemPosition) >= totalItemCount
+                && firstVisibleItemPosition >= 0) {
+                callback()
+            }
+        }
+    })
 }
 
 fun View.showSmoothly() {

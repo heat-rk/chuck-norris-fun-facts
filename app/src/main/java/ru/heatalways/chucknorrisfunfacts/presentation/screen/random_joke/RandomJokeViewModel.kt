@@ -8,6 +8,7 @@ import kotlinx.coroutines.flow.onEach
 import ru.heatalways.chucknorrisfunfacts.domain.interactors.random_joke.*
 import ru.heatalways.chucknorrisfunfacts.domain.interactors.random_joke.select_category.CategorySelectionInteractor
 import ru.heatalways.chucknorrisfunfacts.domain.repositories.chuck_norris_jokes.Category
+import ru.heatalways.chucknorrisfunfacts.domain.utils.paging.PagingConfig
 import ru.heatalways.chucknorrisfunfacts.presentation.base.BaseMviViewModel
 import javax.inject.Inject
 
@@ -47,7 +48,7 @@ class RandomJokeViewModel @Inject constructor(
     }
 
     fun fetchJokes() {
-        randomJokeInteractor.fetchJokes()
+        randomJokeInteractor.fetchJokes(PagingConfig.Initial)
             .onEach { reduceState(it) }
             .launchIn(viewModelScope)
     }
@@ -71,6 +72,13 @@ class RandomJokeViewModel @Inject constructor(
                         if (it is RandomJokePartialState.JokeLoaded)
                             setEffect(RandomJokeViewEffect.ScrollUp)
                     }
+                    .launchIn(viewModelScope)
+
+            is RandomJokeAction.OnNextPage ->
+                randomJokeInteractor.fetchJokes(PagingConfig.Update(
+                    itemsCount = state.value.jokes.size
+                ))
+                    .onEach { reduceState(it) }
                     .launchIn(viewModelScope)
         }
     }

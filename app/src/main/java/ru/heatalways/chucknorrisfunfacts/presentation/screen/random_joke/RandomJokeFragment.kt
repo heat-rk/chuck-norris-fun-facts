@@ -16,6 +16,7 @@ import ru.heatalways.chucknorrisfunfacts.databinding.FragmentRandomJokeBinding
 import ru.heatalways.chucknorrisfunfacts.domain.interactors.random_joke.RandomJokeAction
 import ru.heatalways.chucknorrisfunfacts.domain.interactors.random_joke.RandomJokeViewEffect
 import ru.heatalways.chucknorrisfunfacts.domain.interactors.random_joke.RandomJokeViewState
+import ru.heatalways.chucknorrisfunfacts.extensions.onScrolledToLastItem
 import ru.heatalways.chucknorrisfunfacts.extensions.postScrollToPosition
 import ru.heatalways.chucknorrisfunfacts.extensions.showToast
 import ru.heatalways.chucknorrisfunfacts.presentation.adapters.JokesAdapter
@@ -55,6 +56,9 @@ class RandomJokeFragment: BaseMviFragment<
 
             historyRecyclerView.layoutManager = LinearLayoutManager(requireContext())
             historyRecyclerView.adapter = adapter
+            historyRecyclerView.onScrolledToLastItem {
+                action(RandomJokeAction.OnNextPage)
+            }
         }
     }
 
@@ -91,6 +95,7 @@ class RandomJokeFragment: BaseMviFragment<
     }
 
     override fun onDestroyView() {
+        binding.historyRecyclerView.clearOnScrollListeners()
         binding.historyRecyclerView.adapter = null
         super.onDestroyView()
     }

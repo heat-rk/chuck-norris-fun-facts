@@ -3,6 +3,7 @@ package ru.heatalways.chucknorrisfunfacts.presentation.adapters.view_holders
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import dagger.hilt.EntryPoint
 import dagger.hilt.EntryPoints
@@ -13,6 +14,7 @@ import ru.heatalways.chucknorrisfunfacts.domain.repositories.chuck_norris_jokes.
 import ru.heatalways.chucknorrisfunfacts.databinding.ItemJokeHolderViewBinding
 import ru.heatalways.chucknorrisfunfacts.domain.repositories.image_loader.ImageLoader
 import ru.heatalways.chucknorrisfunfacts.domain.repositories.image_loader.LoadPhotoConfig
+import ru.heatalways.chucknorrisfunfacts.extensions.setVisibleOrInvisible
 
 class JokeViewHolder private constructor(rootView: View): RecyclerView.ViewHolder(rootView) {
     private val binding = ItemJokeHolderViewBinding.bind(rootView)
@@ -32,6 +34,9 @@ class JokeViewHolder private constructor(rootView: View): RecyclerView.ViewHolde
         )
 
         binding.jokeTextView.text = joke.value.getText(itemView.context)
+
+        binding.mainLayout.setVisibleOrInvisible(!joke.isUpdating)
+        binding.progressBar.isVisible = joke.isUpdating
     }
 
     companion object {
