@@ -9,6 +9,7 @@ import org.junit.Test
 import ru.heatalways.chucknorrisfunfacts.R
 import ru.heatalways.chucknorrisfunfacts.domain.repositories.chuck_norris_jokes.Category
 import ru.heatalways.chucknorrisfunfacts.domain.repositories.chuck_norris_jokes.ChuckNorrisJokesRepositoryFake
+import ru.heatalways.chucknorrisfunfacts.domain.utils.paging.PagingConfig
 import ru.heatalways.chucknorrisfunfacts.domain.utils.strRes
 import ru.heatalways.chucknorrisfunfacts.mappers.toEntity
 
@@ -26,7 +27,7 @@ class RandomJokeInteractorTest {
     @Test
     fun `fetch saved jokes, returns list with one element`() = runBlockingTest {
         repositoryFake.savedJokes.add(repositoryFake.jokes.first().toEntity())
-        val responses = interactor.fetchJokes().toList()
+        val responses = interactor.fetchJokes(PagingConfig.Initial).toList()
 
         assertThat(responses).hasSize(1)
         assertThat(responses.first()).isEqualTo(
@@ -36,7 +37,7 @@ class RandomJokeInteractorTest {
 
     @Test
     fun `fetch saved jokes, returns empty list with message`() = runBlockingTest {
-        val responses = interactor.fetchJokes().toList()
+        val responses = interactor.fetchJokes(PagingConfig.Initial).toList()
 
         assertThat(responses).hasSize(1)
         assertThat(responses.first()).isEqualTo(

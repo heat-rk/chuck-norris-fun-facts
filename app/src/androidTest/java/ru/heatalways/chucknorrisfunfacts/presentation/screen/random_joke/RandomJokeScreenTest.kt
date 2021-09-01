@@ -106,7 +106,7 @@ class RandomJokeScreenTest: TestCase() {
             }
         }
 
-        val previousListSize = RandomJokeScreen.recyclerView.getSize()
+
 
         step("2. Click get joke button") {
             RandomJokeScreen.geJokeButton {
@@ -128,7 +128,7 @@ class RandomJokeScreenTest: TestCase() {
         step("4. Check that recycler view size is increased by one") {
             RandomJokeScreen.recyclerView {
                 flakySafely {
-                    assert(getSize() - previousListSize == 1)
+                    assert(getSize() == 1)
                 }
             }
         }
