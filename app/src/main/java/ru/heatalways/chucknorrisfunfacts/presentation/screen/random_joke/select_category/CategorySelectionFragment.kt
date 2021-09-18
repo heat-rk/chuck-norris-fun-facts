@@ -16,6 +16,7 @@ import ru.heatalways.chucknorrisfunfacts.extensions.hideKeyboard
 import ru.heatalways.chucknorrisfunfacts.extensions.postScrollToPosition
 import ru.heatalways.chucknorrisfunfacts.presentation.adapters.CategoriesAdapter
 import ru.heatalways.chucknorrisfunfacts.presentation.base.BaseMviFragment
+import ru.heatalways.chucknorrisfunfacts.presentation.util.TrackedReference
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -24,17 +25,24 @@ class CategorySelectionFragment: BaseMviFragment<
         CategorySelectionAction,
         CategorySelectionState
 >() {
-    private var onSelect: ((Category) -> Unit)? = null
-
     @Inject
     lateinit var assistedFactory: CategorySelectionViewModel.Factory
 
     override val viewModel: CategorySelectionViewModel by viewModels {
+        val onSelectReference =
+            arguments?.getParcelable<TrackedReference<(Category) -> Unit>>(
+                ON_SELECT_EXTRA
+            )
+
+        val onSelect = onSelectReference?.get ?: {}
+
+        onSelectReference?.removeStrongReference()
+
         CategorySelectionViewModel.provideFactory(
             assistedFactory = assistedFactory,
             owner = this,
             defaultArgs = arguments,
-            onSelect = onSelect ?: {}
+            onSelect = onSelect
         )
     }
 
@@ -86,9 +94,15 @@ class CategorySelectionFragment: BaseMviFragment<
     }
 
     companion object {
+        private const val ON_SELECT_EXTRA = "category_selection_fragment.on_select"
+
         fun getScreen(onSelect: (Category) -> Unit) =
             FragmentScreen {
-                CategorySelectionFragment().apply { this.onSelect = onSelect }
+                CategorySelectionFragment().apply {
+                    arguments = Bundle().apply {
+                        putParcelable(ON_SELECT_EXTRA, TrackedReference(onSelect))
+                    }
+                }
             }
     }
 }
