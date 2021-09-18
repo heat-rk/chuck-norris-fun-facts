@@ -13,6 +13,9 @@ buildscript {
         robolectric_version = "4.4"
         turbine_version = "0.6.0"
 
+        // LEAK CANARY
+        leak_canary_version = "2.7"
+
         // DI
         dagger_version = "2.37"
 

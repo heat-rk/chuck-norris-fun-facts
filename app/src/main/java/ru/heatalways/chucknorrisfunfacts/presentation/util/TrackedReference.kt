@@ -18,6 +18,10 @@ data class TrackedReference<ReferenceType: Any> private constructor(
     val get: ReferenceType?
         get() = referenceMap[uniqueID] as? ReferenceType
 
+    fun safeGet(): ReferenceType? {
+        return get.also { removeStrongReference() }
+    }
+
     fun removeStrongReference() {
         get?.let { referenceMap[uniqueID] = WeakReference(it) }
     }

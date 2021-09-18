@@ -12,8 +12,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import ru.heatalways.chucknorrisfunfacts.R
 import ru.heatalways.chucknorrisfunfacts.databinding.FragmentSelectCategoryBinding
 import ru.heatalways.chucknorrisfunfacts.domain.repositories.chuck_norris_jokes.Category
-import ru.heatalways.chucknorrisfunfacts.extensions.hideKeyboard
-import ru.heatalways.chucknorrisfunfacts.extensions.postScrollToPosition
+import ru.heatalways.chucknorrisfunfacts.extensions.*
 import ru.heatalways.chucknorrisfunfacts.presentation.adapters.CategoriesAdapter
 import ru.heatalways.chucknorrisfunfacts.presentation.base.BaseMviFragment
 import ru.heatalways.chucknorrisfunfacts.presentation.util.TrackedReference
@@ -29,20 +28,11 @@ class CategorySelectionFragment: BaseMviFragment<
     lateinit var assistedFactory: CategorySelectionViewModel.Factory
 
     override val viewModel: CategorySelectionViewModel by viewModels {
-        val onSelectReference =
-            arguments?.getParcelable<TrackedReference<(Category) -> Unit>>(
-                ON_SELECT_EXTRA
-            )
-
-        val onSelect = onSelectReference?.get ?: {}
-
-        onSelectReference?.removeStrongReference()
-
         CategorySelectionViewModel.provideFactory(
             assistedFactory = assistedFactory,
             owner = this,
             defaultArgs = arguments,
-            onSelect = onSelect
+            onSelect = getSafeTrackedArgument(ON_SELECT_EXTRA) ?: {}
         )
     }
 
@@ -99,9 +89,7 @@ class CategorySelectionFragment: BaseMviFragment<
         fun getScreen(onSelect: (Category) -> Unit) =
             FragmentScreen {
                 CategorySelectionFragment().apply {
-                    arguments = Bundle().apply {
-                        putParcelable(ON_SELECT_EXTRA, TrackedReference(onSelect))
-                    }
+                    putTrackedReference(ON_SELECT_EXTRA, onSelect)
                 }
             }
     }

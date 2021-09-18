@@ -1,6 +1,7 @@
 package ru.heatalways.chucknorrisfunfacts.extensions
 
 import android.content.Context
+import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.Fragment
@@ -8,6 +9,7 @@ import com.google.android.material.snackbar.Snackbar
 import ru.heatalways.chucknorrisfunfacts.R
 import ru.heatalways.chucknorrisfunfacts.domain.utils.StringResource
 import ru.heatalways.chucknorrisfunfacts.presentation.base.BaseActivity
+import ru.heatalways.chucknorrisfunfacts.presentation.util.TrackedReference
 
 val Fragment.baseActivity get() = activity as BaseActivity<*>
 
@@ -31,4 +33,15 @@ fun Fragment.getString(stringResource: StringResource?) =
 
 fun Fragment.hideKeyboard() {
     baseActivity.hideKeyboard()
+}
+
+fun <T: Any> Fragment.getTrackedArgument(key: String) =
+    arguments?.getTrackedReference<T>(key)
+
+fun <T: Any> Fragment.getSafeTrackedArgument(key: String) =
+    arguments?.getTrackedReference<T>(key)?.safeGet()
+
+fun <T: Any> Fragment.putTrackedReference(key: String, value: T) {
+    if (arguments == null) arguments = Bundle()
+    arguments?.putTrackedReference(key, value)
 }
