@@ -57,6 +57,8 @@ cmake-build-*/
 # IntelliJ
 out/
 
+.idea/deploymentTargetDropDown.xml
+
 # mpeltonen/sbt-idea plugin
 .idea_modules/
 
