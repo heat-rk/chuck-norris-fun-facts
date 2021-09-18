@@ -87,8 +87,10 @@ class RandomJokeFragment: BaseMviFragment<
             )
         else hideSnackbar()
 
-        if (state.isScrollingUp)
+        if (state.isScrollingUp) {
+            binding.root.transitionToStart()
             binding.historyRecyclerView.postScrollToPosition(0)
+        }
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

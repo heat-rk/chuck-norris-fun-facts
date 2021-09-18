@@ -110,6 +110,7 @@ class RandomJokeViewModel @Inject constructor(
                         showToast(it.message)
 
                     is InteractorEvent.Success -> {
+                        scrollUp()
                         reduceState(RandomJokePartialState.JokesMessage(
                             strRes(R.string.random_joke_empty_history)
                         ))
