@@ -8,10 +8,6 @@ import kotlinx.coroutines.test.runBlockingTest
 import org.junit.Before
 import org.junit.Test
 import ru.heatalways.chucknorrisfunfacts.R
-import ru.heatalways.chucknorrisfunfacts.domain.interactors.random_joke.RandomJokeAction
-import ru.heatalways.chucknorrisfunfacts.domain.interactors.random_joke.RandomJokeInteractor
-import ru.heatalways.chucknorrisfunfacts.domain.interactors.random_joke.RandomJokeInteractorImpl
-import ru.heatalways.chucknorrisfunfacts.domain.interactors.random_joke.RandomJokeViewEffect
 import ru.heatalways.chucknorrisfunfacts.domain.interactors.random_joke.select_category.CategorySelectionInteractor
 import ru.heatalways.chucknorrisfunfacts.domain.interactors.random_joke.select_category.CategorySelectionInteractorImpl
 import ru.heatalways.chucknorrisfunfacts.domain.repositories.chuck_norris_jokes.Category
@@ -157,7 +153,7 @@ class RandomJokeViewModelTest: BaseViewModelTest() {
             assertThat(errorState.jokes).hasSize(0)
             viewModel.effect.test {
                 val effectState = awaitItem()
-                assertThat(effectState).isEqualTo(RandomJokeViewEffect.Error(
+                assertThat(effectState).isEqualTo(RandomJokeViewEffect.Toast(
                     strRes(R.string.error_network)
                 ))
             }

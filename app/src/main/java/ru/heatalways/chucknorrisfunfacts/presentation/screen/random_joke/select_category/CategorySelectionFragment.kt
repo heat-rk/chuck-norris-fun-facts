@@ -7,14 +7,11 @@ import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.github.terrakok.cicerone.Router
 import com.github.terrakok.cicerone.androidx.FragmentScreen
 import dagger.hilt.android.AndroidEntryPoint
 import ru.heatalways.chucknorrisfunfacts.R
 import ru.heatalways.chucknorrisfunfacts.databinding.FragmentSelectCategoryBinding
-import ru.heatalways.chucknorrisfunfacts.domain.interactors.random_joke.select_category.CategorySelectionAction
-import ru.heatalways.chucknorrisfunfacts.domain.interactors.random_joke.select_category.CategorySelectionEffect
-import ru.heatalways.chucknorrisfunfacts.domain.interactors.random_joke.select_category.CategorySelectionState
+import ru.heatalways.chucknorrisfunfacts.domain.repositories.chuck_norris_jokes.Category
 import ru.heatalways.chucknorrisfunfacts.extensions.hideKeyboard
 import ru.heatalways.chucknorrisfunfacts.extensions.postScrollToPosition
 import ru.heatalways.chucknorrisfunfacts.presentation.adapters.CategoriesAdapter
@@ -25,18 +22,26 @@ import javax.inject.Inject
 class CategorySelectionFragment: BaseMviFragment<
         FragmentSelectCategoryBinding,
         CategorySelectionAction,
-        CategorySelectionState,
-        CategorySelectionEffect
+        CategorySelectionState
 >() {
-    override val viewModel: CategorySelectionViewModel by viewModels()
+    private var onSelect: ((Category) -> Unit)? = null
+
+    @Inject
+    lateinit var assistedFactory: CategorySelectionViewModel.Factory
+
+    override val viewModel: CategorySelectionViewModel by viewModels {
+        CategorySelectionViewModel.provideFactory(
+            assistedFactory = assistedFactory,
+            owner = this,
+            defaultArgs = arguments,
+            onSelect = onSelect ?: {}
+        )
+    }
 
     private val categoriesAdapter = CategoriesAdapter()
 
     override val bindingInflater: (LayoutInflater, ViewGroup?, Boolean) -> FragmentSelectCategoryBinding
         get() = FragmentSelectCategoryBinding::inflate
-
-    @Inject
-    lateinit var router: Router
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -60,26 +65,19 @@ class CategorySelectionFragment: BaseMviFragment<
     }
 
     override fun renderState(state: CategorySelectionState) {
-        binding.searchView.setSearchButtonVisibility(!state.isLoading)
-
-        binding.categoriesRecyclerView.isVisible =
-            !state.isLoading && state.message == null
+        binding.searchView.setSearchButtonVisibility(!state.isCategoriesLoading)
 
         categoriesAdapter.submitList(state.categories)
 
-        setProgressBarVisibility(state.isLoading)
+        binding.categoriesRecyclerView.isVisible =
+            !state.isCategoriesLoading && state.categoriesMessage == null
 
-        setErrorVisibility(state.message != null, state.message)
-    }
+        setProgressBarVisibility(state.isCategoriesLoading)
 
-    override fun handleEffect(effect: CategorySelectionEffect) {
-        when (effect) {
-            CategorySelectionEffect.GoBack ->
-                router.exit()
+        setErrorVisibility(state.categoriesMessage != null, state.categoriesMessage)
 
-            CategorySelectionEffect.ScrollUp ->
-                binding.categoriesRecyclerView.postScrollToPosition(0)
-        }
+        if (state.isScrollingUp)
+            binding.categoriesRecyclerView.postScrollToPosition(0)
     }
 
     override fun onDestroyView() {
@@ -88,6 +86,9 @@ class CategorySelectionFragment: BaseMviFragment<
     }
 
     companion object {
-        fun getScreen() = FragmentScreen { CategorySelectionFragment() }
+        fun getScreen(onSelect: (Category) -> Unit) =
+            FragmentScreen {
+                CategorySelectionFragment().apply { this.onSelect = onSelect }
+            }
     }
 }

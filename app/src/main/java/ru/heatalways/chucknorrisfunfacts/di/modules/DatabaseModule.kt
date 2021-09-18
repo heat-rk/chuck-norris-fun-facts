@@ -8,6 +8,7 @@ import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import ru.heatalways.chucknorrisfunfacts.data.database.AppDatabase
+import ru.heatalways.chucknorrisfunfacts.data.database.InMemoryDatabase
 import ru.heatalways.chucknorrisfunfacts.data.database.MIGRATION_1_2
 import ru.heatalways.chucknorrisfunfacts.data.database.MIGRATION_2_3
 import javax.inject.Singleton
@@ -17,11 +18,20 @@ import javax.inject.Singleton
 object DatabaseModule {
     @Provides
     @Singleton
-    fun provideAppDatabase(@ApplicationContext context: Context) = Room.databaseBuilder(
-        context,
-        AppDatabase::class.java,
-        AppDatabase.NAME
-    )
-        .addMigrations(MIGRATION_1_2, MIGRATION_2_3)
-        .build()
+    fun provideAppDatabase(@ApplicationContext context: Context) =
+        Room.databaseBuilder(
+            context,
+            AppDatabase::class.java,
+            AppDatabase.NAME
+        )
+            .addMigrations(MIGRATION_1_2, MIGRATION_2_3)
+            .build()
+
+    @Provides
+    @Singleton
+    fun provideInMemoryDatabase(@ApplicationContext context: Context) =
+        Room.inMemoryDatabaseBuilder(
+            context,
+            InMemoryDatabase::class.java
+        ).build()
 }

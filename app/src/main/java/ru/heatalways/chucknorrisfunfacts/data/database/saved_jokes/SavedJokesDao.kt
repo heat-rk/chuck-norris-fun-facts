@@ -13,6 +13,12 @@ interface SavedJokesDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(joke: ChuckJokeEntity)
 
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insert(joke: List<ChuckJokeEntity>)
+
     @Delete
     suspend fun delete(joke: ChuckJokeEntity)
+
+    @Query("DELETE FROM ${ChuckJokeEntity.TABLE_NAME}")
+    suspend fun clear(): Int
 }

@@ -9,6 +9,7 @@ import org.junit.Test
 import ru.heatalways.chucknorrisfunfacts.R
 import ru.heatalways.chucknorrisfunfacts.domain.repositories.chuck_norris_jokes.ChuckNorrisJokesRepositoryFake
 import ru.heatalways.chucknorrisfunfacts.domain.utils.strRes
+import ru.heatalways.chucknorrisfunfacts.presentation.screen.random_joke.select_category.CategorySelectionPartialState
 
 @ExperimentalCoroutinesApi
 class CategorySelectionInteractorTest {
@@ -27,9 +28,9 @@ class CategorySelectionInteractorTest {
 
         assertThat(responses).hasSize(1)
         assertThat(responses.first()).isInstanceOf(
-            CategorySelectionPartialState.Categories::class.java
+            CategorySelectionPartialState.CategoriesLoaded::class.java
         )
-        assertThat((responses.first() as CategorySelectionPartialState.Categories).categories)
+        assertThat((responses.first() as CategorySelectionPartialState.CategoriesLoaded).categories)
             .hasSize(3)
     }
 
@@ -40,10 +41,10 @@ class CategorySelectionInteractorTest {
 
         assertThat(responses).hasSize(1)
         assertThat(responses.first()).isInstanceOf(
-            CategorySelectionPartialState.Message::class.java
+            CategorySelectionPartialState.CategoriesMessage::class.java
         )
         assertThat(responses.first()).isEqualTo(
-            CategorySelectionPartialState.Message(strRes(R.string.error_network))
+            CategorySelectionPartialState.CategoriesMessage(strRes(R.string.error_network))
         )
     }
 
@@ -53,11 +54,11 @@ class CategorySelectionInteractorTest {
         val responses = interactor.searchCategories("animal").toList()
 
         assertThat(responses).hasSize(2)
-        assertThat(responses.first()).isEqualTo(CategorySelectionPartialState.Loading)
+        assertThat(responses.first()).isEqualTo(CategorySelectionPartialState.CategoriesLoading)
         assertThat(responses.last()).isInstanceOf(
-            CategorySelectionPartialState.Categories::class.java
+            CategorySelectionPartialState.CategoriesLoaded::class.java
         )
-        assertThat((responses.last() as CategorySelectionPartialState.Categories).categories)
+        assertThat((responses.last() as CategorySelectionPartialState.CategoriesLoaded).categories)
             .hasSize(1)
     }
 
@@ -67,9 +68,9 @@ class CategorySelectionInteractorTest {
         val responses = interactor.searchCategories("animalsdgsdg").toList()
 
         assertThat(responses).hasSize(2)
-        assertThat(responses.first()).isEqualTo(CategorySelectionPartialState.Loading)
+        assertThat(responses.first()).isEqualTo(CategorySelectionPartialState.CategoriesLoading)
         assertThat(responses.last()).isEqualTo(
-            CategorySelectionPartialState.Message(strRes(R.string.error_not_found))
+            CategorySelectionPartialState.CategoriesMessage(strRes(R.string.error_not_found))
         )
     }
 
@@ -80,9 +81,9 @@ class CategorySelectionInteractorTest {
         val responses = interactor.searchCategories("animal").toList()
 
         assertThat(responses).hasSize(2)
-        assertThat(responses.first()).isEqualTo(CategorySelectionPartialState.Loading)
+        assertThat(responses.first()).isEqualTo(CategorySelectionPartialState.CategoriesLoading)
         assertThat(responses.last()).isEqualTo(
-            CategorySelectionPartialState.Message(strRes(R.string.error_not_found))
+            CategorySelectionPartialState.CategoriesMessage(strRes(R.string.error_not_found))
         )
     }
 }

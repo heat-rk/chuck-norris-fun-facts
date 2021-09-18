@@ -6,3 +6,5 @@ fun <T> List<T>.editLast(reducer: T.() -> T) =
             this[this.lastIndex] = last.reducer()
         }
     }
+
+fun <T> T?.singleList() = this?.let { listOf(it) } ?: emptyList()

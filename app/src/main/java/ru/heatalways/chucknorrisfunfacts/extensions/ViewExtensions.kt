@@ -30,9 +30,8 @@ fun View.showHideSmoothly(toPopup: Boolean) {
     if (toPopup) showSmoothly() else hideSmoothly()
 }
 
-fun RecyclerView.postScrollToPosition(position: Int) {
+fun RecyclerView.postScrollToPosition(position: Int) =
     post { scrollToPosition(position) }
-}
 
 fun RecyclerView.onScrolledToLastItem(callback: () -> Unit) {
     addOnScrollListener(object : RecyclerView.OnScrollListener() {

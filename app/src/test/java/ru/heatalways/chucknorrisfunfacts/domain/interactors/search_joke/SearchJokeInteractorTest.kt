@@ -9,6 +9,7 @@ import org.junit.Test
 import ru.heatalways.chucknorrisfunfacts.R
 import ru.heatalways.chucknorrisfunfacts.domain.repositories.chuck_norris_jokes.ChuckNorrisJokesRepositoryFake
 import ru.heatalways.chucknorrisfunfacts.domain.utils.strRes
+import ru.heatalways.chucknorrisfunfacts.presentation.screen.search_joke.SearchJokePartialState
 
 @ExperimentalCoroutinesApi
 class SearchJokeInteractorTest {
@@ -29,10 +30,10 @@ class SearchJokeInteractorTest {
 
         assertThat(responses).hasSize(2)
         assertThat(responses.first()).isEqualTo(
-            SearchJokePartialState.Loading
+            SearchJokePartialState.JokesLoading
         )
         assertThat(responses.last()).isEqualTo(
-            SearchJokePartialState.Message(strRes(R.string.error_network))
+            SearchJokePartialState.JokesMessage(strRes(R.string.error_network))
         )
     }
 
@@ -42,10 +43,10 @@ class SearchJokeInteractorTest {
 
         assertThat(responses).hasSize(2)
         assertThat(responses.first()).isEqualTo(
-            SearchJokePartialState.Loading
+            SearchJokePartialState.JokesLoading
         )
         assertThat(responses.last()).isEqualTo(
-            SearchJokePartialState.Jokes(jokes = listOf(repositoryFake.jokes.first()))
+            SearchJokePartialState.JokesLoaded(jokes = listOf(repositoryFake.jokes.first()))
         )
     }
 }

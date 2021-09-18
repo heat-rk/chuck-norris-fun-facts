@@ -1,7 +1,7 @@
 package ru.heatalways.chucknorrisfunfacts.domain.repositories.chuck_norris_jokes
 
 import ru.heatalways.chucknorrisfunfacts.data.database.saved_jokes.ChuckJokeEntity
-import ru.heatalways.chucknorrisfunfacts.data.network.util.ResultWrapper
+import ru.heatalways.chucknorrisfunfacts.data.network.util.ResultNetwork
 import ru.heatalways.chucknorrisfunfacts.domain.utils.StringResource
 import ru.heatalways.chucknorrisfunfacts.domain.utils.strRes
 import ru.heatalways.chucknorrisfunfacts.mappers.toDomain
@@ -51,6 +51,7 @@ class ChuckNorrisJokesRepositoryFake @Inject constructor(
     )
 
     var savedJokes = mutableListOf<ChuckJokeEntity>()
+    var trashJokes = mutableListOf<ChuckJokeEntity>()
 
     var shouldReturnErrorResponse = false
 
@@ -62,37 +63,37 @@ class ChuckNorrisJokesRepositoryFake @Inject constructor(
             .randomOrNull()
 
 
-    override suspend fun random(category: String?): ResultWrapper<ChuckJoke> {
+    override suspend fun random(category: String?): ResultNetwork<ChuckJoke> {
         return if (shouldReturnErrorResponse) {
-            ResultWrapper.NetworkError
+            ResultNetwork.NetworkError
         } else {
-            if (category == null) ResultWrapper.Success(jokes.random())
+            if (category == null) ResultNetwork.Success(jokes.random())
             else {
                 val joke = randomByCategory(category)
 
                 if (joke != null)
-                    ResultWrapper.Success(joke)
+                    ResultNetwork.Success(joke)
                 else
-                    ResultWrapper.GenericError(
+                    ResultNetwork.GenericError(
                         message = "No jokes for category \"blablabla\" found."
                     )
             }
         }
     }
 
-    override suspend fun categories(): ResultWrapper<List<Category>> {
+    override suspend fun categories(): ResultNetwork<List<Category>> {
         return if (shouldReturnErrorResponse) {
-            ResultWrapper.NetworkError
+            ResultNetwork.NetworkError
         } else {
-            ResultWrapper.Success(categories)
+            ResultNetwork.Success(categories)
         }
     }
 
-    override suspend fun search(query: String): ResultWrapper<List<ChuckJoke>> {
+    override suspend fun search(query: String): ResultNetwork<List<ChuckJoke>> {
         return if (shouldReturnErrorResponse) {
-            ResultWrapper.NetworkError
+            ResultNetwork.NetworkError
         } else {
-            ResultWrapper.Success(jokes.filter {
+            ResultNetwork.Success(jokes.filter {
                 (it.value as StringResource.ByString).text?.contains(query) ?: false
             })
         }
@@ -119,5 +120,27 @@ class ChuckNorrisJokesRepositoryFake @Inject constructor(
 
     override suspend fun getAllSavedJokes(): List<ChuckJoke> {
         return savedJokes.sortedByDescending { it.savedAt }.map { it.toDomain() }
+    }
+
+    override suspend fun saveJokes(jokes: List<ChuckJoke>) {
+        savedJokes.addAll(jokes.map { it.toEntity().copy(
+            savedAt = Calendar.getInstance().timeInMillis
+        ) })
+    }
+
+    override suspend fun removeAllSavedJokes(): Int {
+        return savedJokes.size.also { savedJokes.clear() }
+    }
+
+    override suspend fun saveJokesToTrash() {
+        trashJokes.clear()
+        trashJokes.addAll(savedJokes)
+        savedJokes.clear()
+    }
+
+    override suspend fun restoreJokesFromTrash(): List<ChuckJoke> {
+        savedJokes.addAll(trashJokes)
+        trashJokes.clear()
+        return savedJokes.map { it.toDomain() }
     }
 }

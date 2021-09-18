@@ -10,11 +10,10 @@ import kotlinx.coroutines.flow.onEach
 abstract class BaseMviFragment<
         Binding: ViewBinding,
         Event: MviAction,
-        State: MviState,
-        Effect: MviEffect
+        State: MviState
 >: BaseFragment<Binding>() {
 
-    protected abstract val viewModel: BaseMviViewModel<Event, State, Effect, *>
+    protected abstract val viewModel: BaseMviViewModel<Event, State, *>
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -24,16 +23,9 @@ abstract class BaseMviFragment<
                 .onEach { renderState(it) }
                 .launchIn(this)
         }
-
-        viewLifecycleOwner.lifecycleScope.launchWhenStarted {
-            viewModel.effect
-                .onEach { handleEffect(it) }
-                .launchIn(this)
-        }
     }
 
     abstract fun renderState(state: State)
-    abstract fun handleEffect(effect: Effect)
 
     protected fun action(event: Event) {
         viewModel.setAction(event)

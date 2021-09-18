@@ -8,7 +8,6 @@ import kotlinx.coroutines.test.runBlockingTest
 import org.junit.Before
 import org.junit.Test
 import ru.heatalways.chucknorrisfunfacts.R
-import ru.heatalways.chucknorrisfunfacts.domain.interactors.search_joke.SearchJokeAction
 import ru.heatalways.chucknorrisfunfacts.domain.interactors.search_joke.SearchJokeInteractor
 import ru.heatalways.chucknorrisfunfacts.domain.interactors.search_joke.SearchJokeInteractorImpl
 import ru.heatalways.chucknorrisfunfacts.domain.repositories.chuck_norris_jokes.ChuckNorrisJokesRepositoryFake

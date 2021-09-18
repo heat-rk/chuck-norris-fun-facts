@@ -1,5 +1,6 @@
 package ru.heatalways.chucknorrisfunfacts.data.network.util
 
+import android.util.Log
 import com.google.gson.JsonParseException
 import com.google.gson.JsonParser
 import com.google.gson.JsonSyntaxException
@@ -7,48 +8,56 @@ import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
 import okhttp3.ResponseBody
 import retrofit2.HttpException
+import ru.heatalways.chucknorrisfunfacts.BuildConfig
 import java.io.IOException
 
-suspend fun <T> safeApiCall(dispatcher: CoroutineDispatcher, apiCall: suspend () -> T): ResultWrapper<T> {
+suspend fun <T> safeApiCall(dispatcher: CoroutineDispatcher, apiCall: suspend () -> T): ResultNetwork<T> {
     return withContext(dispatcher) {
         try {
-            ResultWrapper.Success(apiCall.invoke())
+            ResultNetwork.Success(apiCall.invoke())
         } catch (throwable: Throwable) {
+            logError(throwable.message, throwable)
             when (throwable) {
-                is IOException -> ResultWrapper.NetworkError
+                is IOException -> {
+                    ResultNetwork.NetworkError
+                }
                 is HttpException -> {
                     val code = throwable.code()
                     convertErrorBody(code, throwable)
                 }
                 else -> {
-                    ResultWrapper.UnknownError()
+                    ResultNetwork.UnknownError()
                 }
             }
         }
     }
 }
 
-private fun <T> convertErrorBody(code: Int, throwable: HttpException): ResultWrapper<T> {
-    return throwable.response()?.errorBody()?.let {
-        parseErrorBody(it, code)
-    } ?: ResultWrapper.UnknownError(code)
+private fun logError(message: String?, throwable: Throwable) {
+    if (BuildConfig.DEBUG) Log.e("SafeApiCall", message, throwable)
 }
 
-private fun <T> parseErrorBody(errorBody: ResponseBody?, code: Int): ResultWrapper<T> {
+private fun <T> convertErrorBody(code: Int, throwable: HttpException): ResultNetwork<T> {
+    return throwable.response()?.errorBody()?.let {
+        parseErrorBody(it, code)
+    } ?: ResultNetwork.UnknownError(code)
+}
+
+private fun <T> parseErrorBody(errorBody: ResponseBody?, code: Int): ResultNetwork<T> {
     val errorMessage = errorBody?.string() ?: ""
 
     return try {
         val errorJson = JsonParser().parse(errorMessage).asJsonObject
-        ResultWrapper.GenericError(
+        ResultNetwork.GenericError(
             status = errorJson.get(STATUS).asInt,
             message = errorJson.get(MESSAGE).asString,
             timestamp = errorJson.get(TIMESTAMP).asString,
             error = errorJson.get(ERROR).asString
         )
     } catch (e: JsonParseException) {
-        return ResultWrapper.UnknownError(code)
+        return ResultNetwork.UnknownError(code)
     } catch (e: JsonSyntaxException) {
-        return ResultWrapper.UnknownError(code)
+        return ResultNetwork.UnknownError(code)
     }
 }
 

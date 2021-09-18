@@ -1,18 +1,18 @@
 package ru.heatalways.chucknorrisfunfacts.data.network.util
 
-sealed class ResultWrapper<out T> {
-    data class Success<out T>(val value: T): ResultWrapper<T>()
+sealed class ResultNetwork<out T> {
+    data class Success<out T>(val value: T): ResultNetwork<T>()
     
     data class GenericError(
         val timestamp: String? = null,
         val error: String? = null,
         val message: String? = null,
         val status: Int = -1
-    ): ResultWrapper<Nothing>()
+    ): ResultNetwork<Nothing>()
 
     class UnknownError(
         val code: Int? = null
-    ): ResultWrapper<Nothing>()
+    ): ResultNetwork<Nothing>()
 
-    object NetworkError: ResultWrapper<Nothing>()
+    object NetworkError: ResultNetwork<Nothing>()
 }

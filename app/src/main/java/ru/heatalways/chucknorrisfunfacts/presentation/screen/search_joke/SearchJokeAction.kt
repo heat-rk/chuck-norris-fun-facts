@@ -1,4 +1,4 @@
-package ru.heatalways.chucknorrisfunfacts.domain.interactors.search_joke
+package ru.heatalways.chucknorrisfunfacts.presentation.screen.search_joke
 
 import ru.heatalways.chucknorrisfunfacts.presentation.base.MviAction
 

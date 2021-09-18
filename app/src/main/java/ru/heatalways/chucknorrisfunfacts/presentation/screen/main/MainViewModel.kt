@@ -1,17 +1,22 @@
 package ru.heatalways.chucknorrisfunfacts.presentation.screen.main
 
 import androidx.lifecycle.SavedStateHandle
+import com.github.terrakok.cicerone.Router
+import dagger.hilt.android.lifecycle.HiltViewModel
 import ru.heatalways.chucknorrisfunfacts.R
-import ru.heatalways.chucknorrisfunfacts.domain.interactors.main.*
 import ru.heatalways.chucknorrisfunfacts.presentation.base.BaseMviViewModel
 import ru.heatalways.chucknorrisfunfacts.presentation.screen.random_joke.RandomJokeFragment
 import ru.heatalways.chucknorrisfunfacts.presentation.screen.search_joke.SearchJokeFragment
+import javax.inject.Inject
 
-class MainViewModel(
-    private val savedStateHandle: SavedStateHandle
+@HiltViewModel
+class MainViewModel @Inject constructor(
+    private val savedStateHandle: SavedStateHandle,
+    private val router: Router
 ): BaseMviViewModel<
-        MainAction, MainViewState,
-        MainViewEffect, MainPartialState
+        MainAction,
+        MainViewState,
+        MainPartialState
 >(MainStateReducer) {
     override val initialState: MainViewState
         get() = MainViewState()
@@ -20,7 +25,7 @@ class MainViewModel(
         val isAlreadyNavigated = savedStateHandle.get<Boolean?>(ALREADY_NAVIGATED) ?: false
 
         if (!isAlreadyNavigated)
-            setEffect(MainViewEffect.SelectFragment(SearchJokeFragment.getScreen()))
+            setAction(MainAction.OnBottomItemChange(R.id.navJokeSearch))
     }
 
     override fun handleAction(action: MainAction) {
@@ -40,7 +45,7 @@ class MainViewModel(
         }
 
         if (screen != null)
-            setEffect(MainViewEffect.SelectFragment(screen))
+            router.replaceScreen(screen)
     }
 
     companion object {

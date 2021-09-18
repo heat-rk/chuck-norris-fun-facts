@@ -3,29 +3,22 @@ package ru.heatalways.chucknorrisfunfacts.presentation.screen.main
 import android.os.Bundle
 import android.view.LayoutInflater
 import androidx.activity.viewModels
-import com.github.terrakok.cicerone.Router
 import dagger.hilt.android.AndroidEntryPoint
 import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEvent
 import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEventListener
 import net.yslibrary.android.keyboardvisibilityevent.Unregistrar
 import ru.heatalways.chucknorrisfunfacts.R
 import ru.heatalways.chucknorrisfunfacts.databinding.ActivityMainBinding
-import ru.heatalways.chucknorrisfunfacts.domain.interactors.main.MainAction
-import ru.heatalways.chucknorrisfunfacts.domain.interactors.main.MainViewEffect
-import ru.heatalways.chucknorrisfunfacts.domain.interactors.main.MainViewState
 import ru.heatalways.chucknorrisfunfacts.extensions.setVisibleOrGone
 import ru.heatalways.chucknorrisfunfacts.extensions.showSmoothly
 import ru.heatalways.chucknorrisfunfacts.presentation.base.BaseMviActivity
 import ru.heatalways.chucknorrisfunfacts.presentation.base.KeyboardChangeListener
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity: BaseMviActivity<
         ActivityMainBinding, MainAction,
-        MainViewState, MainViewEffect
+        MainViewState
 >() {
-    @Inject lateinit var router: Router
-
     override val viewModel: MainViewModel by viewModels()
 
     private var keyboardListenerUnregister: Unregistrar? = null
@@ -57,13 +50,6 @@ class MainActivity: BaseMviActivity<
     }
 
     override fun renderState(state: MainViewState) = Unit
-
-    override fun handleEffect(effect: MainViewEffect) {
-        when (effect) {
-            is MainViewEffect.SelectFragment ->
-                router.replaceScreen(effect.screen)
-        }
-    }
 
     override fun onDestroy() {
         super.onDestroy()

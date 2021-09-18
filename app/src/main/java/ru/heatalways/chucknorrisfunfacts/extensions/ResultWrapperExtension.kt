@@ -1,23 +1,23 @@
 package ru.heatalways.chucknorrisfunfacts.extensions
 
-import ru.heatalways.chucknorrisfunfacts.data.network.util.ResultWrapper
+import ru.heatalways.chucknorrisfunfacts.data.network.util.ResultNetwork
 import ru.heatalways.chucknorrisfunfacts.domain.utils.StringResource
 import ru.heatalways.chucknorrisfunfacts.domain.utils.strRes
 import ru.heatalways.chucknorrisfunfacts.R
 
-suspend fun <Body, Result> ResultWrapper<Body>.handle(
+suspend fun <Body, Result> ResultNetwork<Body>.handle(
     onSuccess: suspend (Body) -> Result,
     onFailed: suspend (StringResource) -> Result
 ) = when (this) {
-    is ResultWrapper.UnknownError ->
+    is ResultNetwork.UnknownError ->
         onFailed(strRes(R.string.error_unknown))
 
-    is ResultWrapper.GenericError ->
+    is ResultNetwork.GenericError ->
         onFailed(strRes(message))
 
-    is ResultWrapper.NetworkError ->
+    is ResultNetwork.NetworkError ->
         onFailed(strRes(R.string.error_network))
 
-    is ResultWrapper.Success ->
+    is ResultNetwork.Success ->
         onSuccess(value)
 }

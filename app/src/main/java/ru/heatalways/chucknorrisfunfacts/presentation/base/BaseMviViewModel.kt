@@ -1,14 +1,12 @@
 package ru.heatalways.chucknorrisfunfacts.presentation.base
 
 import androidx.lifecycle.viewModelScope
-import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 
 abstract class BaseMviViewModel<
         Action: MviAction,
         State: MviState,
-        Effect: MviEffect,
         PartialState
 >(private val reducer: MviReducer<State, PartialState>): BaseViewModel() {
 
@@ -21,9 +19,6 @@ abstract class BaseMviViewModel<
 
     private val _action : MutableSharedFlow<Action> = MutableSharedFlow()
     val action = _action.asSharedFlow()
-
-    private val _effect : Channel<Effect> = Channel()
-    val effect = _effect.receiveAsFlow()
 
     private val currentState: State get() = state.value
 
@@ -47,13 +42,6 @@ abstract class BaseMviViewModel<
 
     protected fun reduceState(partialState: PartialState) {
         setState(reducer.reduce(currentState, partialState))
-    }
-
-    /**
-     * Set new Effect
-     */
-    protected fun setEffect(effect: Effect) {
-        viewModelScope.launch { _effect.send(effect) }
     }
 
     /**

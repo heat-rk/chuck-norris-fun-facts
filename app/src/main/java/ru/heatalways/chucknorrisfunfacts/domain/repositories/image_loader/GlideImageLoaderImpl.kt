@@ -6,7 +6,7 @@ import javax.inject.Inject
 
 class GlideImageLoaderImpl @Inject constructor(): ImageLoader {
     override fun loadImage(config: LoadPhotoConfig, imageView: ImageView) {
-        var builder = Glide
+        Glide
             .with(imageView.context)
             .load(config.url)
             .placeholder(config.placeholder ?: -1)

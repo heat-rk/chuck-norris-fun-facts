@@ -12,6 +12,7 @@ import ru.heatalways.chucknorrisfunfacts.domain.repositories.chuck_norris_jokes.
 import ru.heatalways.chucknorrisfunfacts.domain.utils.paging.PagingConfig
 import ru.heatalways.chucknorrisfunfacts.domain.utils.strRes
 import ru.heatalways.chucknorrisfunfacts.mappers.toEntity
+import ru.heatalways.chucknorrisfunfacts.presentation.screen.random_joke.RandomJokePartialState
 
 @ExperimentalCoroutinesApi
 class RandomJokeInteractorTest {
@@ -41,7 +42,7 @@ class RandomJokeInteractorTest {
 
         assertThat(responses).hasSize(1)
         assertThat(responses.first()).isEqualTo(
-            RandomJokePartialState.Message(strRes(R.string.random_joke_empty_history))
+            RandomJokePartialState.Error(strRes(R.string.random_joke_empty_history))
         )
     }
 

@@ -1,4 +1,4 @@
-package ru.heatalways.chucknorrisfunfacts.domain.interactors.main
+package ru.heatalways.chucknorrisfunfacts.presentation.screen.main
 
 import ru.heatalways.chucknorrisfunfacts.presentation.base.MviAction
 

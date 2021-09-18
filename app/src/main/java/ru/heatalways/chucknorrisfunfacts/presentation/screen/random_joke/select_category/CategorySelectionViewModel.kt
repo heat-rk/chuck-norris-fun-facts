@@ -1,28 +1,34 @@
 package ru.heatalways.chucknorrisfunfacts.presentation.screen.random_joke.select_category
 
-import androidx.lifecycle.SavedStateHandle
-import androidx.lifecycle.viewModelScope
+import android.os.Bundle
+import androidx.lifecycle.*
+import androidx.savedstate.SavedStateRegistryOwner
+import com.github.terrakok.cicerone.Router
+import dagger.assisted.Assisted
+import dagger.assisted.AssistedFactory
+import dagger.assisted.AssistedInject
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.launchIn
-import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onEach
-import kotlinx.coroutines.flow.toList
-import ru.heatalways.chucknorrisfunfacts.domain.interactors.random_joke.select_category.*
+import ru.heatalways.chucknorrisfunfacts.domain.interactors.chuck_norris_jokes.ChuckNorrisJokesInteractor
+import ru.heatalways.chucknorrisfunfacts.domain.repositories.chuck_norris_jokes.Category
+import ru.heatalways.chucknorrisfunfacts.domain.utils.InteractorEvent
 import ru.heatalways.chucknorrisfunfacts.presentation.base.BaseMviViewModel
 import javax.inject.Inject
 
-@HiltViewModel
-class CategorySelectionViewModel @Inject constructor(
-    private val categorySelectionInteractor: CategorySelectionInteractor,
-    private val savedStateHandle: SavedStateHandle
+class CategorySelectionViewModel @AssistedInject constructor(
+    @Assisted("onSelect") private val onSelect: (Category) -> Unit,
+    @Assisted("savedState") private val savedStateHandle: SavedStateHandle,
+    private val interactor: ChuckNorrisJokesInteractor,
+    private val router: Router
 ): BaseMviViewModel<
         CategorySelectionAction,
         CategorySelectionState,
-        CategorySelectionEffect,
         CategorySelectionPartialState
 >(CategorySelectionStateReducer) {
+
     override val initialState get() = CategorySelectionState(
-        isLoading = true
+        isCategoriesLoading = true
     )
 
     init {
@@ -30,45 +36,105 @@ class CategorySelectionViewModel @Inject constructor(
         fetchCategories()
     }
 
-    fun handleSavedState() {
+    private fun handleSavedState() {
         savedStateHandle.get<String?>(SAVED_SEARCH_QUERY)?.let { query ->
-            categorySelectionInteractor.fetchCategories()
-                .map {
-                    categorySelectionInteractor.searchCategories(query).toList().last()
-                }
-                .onEach { reduceState(it) }
-                .launchIn(viewModelScope)
+            search(query)
         }
     }
 
     fun fetchCategories() {
-        categorySelectionInteractor.fetchCategories()
-            .onEach { reduceState(it) }
+        interactor.fetchCategories()
+            .onEach {
+                when(it) {
+                    is InteractorEvent.Error ->
+                        reduceState(CategorySelectionPartialState.CategoriesMessage(
+                            it.message
+                        ))
+
+                    is InteractorEvent.Loading ->
+                        reduceState(CategorySelectionPartialState.CategoriesLoading)
+
+                    is InteractorEvent.Success ->
+                        reduceState(CategorySelectionPartialState.CategoriesLoaded(
+                            it.body
+                        ))
+                }
+            }
             .launchIn(viewModelScope)
     }
 
     override fun handleAction(action: CategorySelectionAction) {
         when (action) {
-            is CategorySelectionAction.OnCategorySelect -> {
-                categorySelectionInteractor.selectCategory(action.category)
-                setEffect(CategorySelectionEffect.GoBack)
-            }
+            is CategorySelectionAction.OnCategorySelect ->
+                selectCategory(action.category)
 
             is CategorySelectionAction.OnSearchExecute ->
-                categorySelectionInteractor.searchCategories(action.query)
-                    .onEach {
-                        reduceState(it)
-
-                        if (it is CategorySelectionPartialState.Categories)
-                            setEffect(CategorySelectionEffect.ScrollUp)
-                    }
-                    .launchIn(viewModelScope)
+                search(action.query)
                     .also { savedStateHandle.set(SAVED_SEARCH_QUERY, action.query) }
         }
+    }
+
+    private fun selectCategory(category: Category) {
+        onSelect(category)
+        router.exit()
+    }
+
+    private fun search(query: String) {
+        interactor.searchCategories(query)
+            .onEach {
+                when(it) {
+                    is InteractorEvent.Error ->
+                        reduceState(CategorySelectionPartialState.CategoriesMessage(
+                            it.message
+                        ))
+
+                    is InteractorEvent.Loading ->
+                        reduceState(CategorySelectionPartialState.CategoriesLoading)
+
+                    is InteractorEvent.Success -> {
+                        reduceState(
+                            CategorySelectionPartialState.CategoriesLoaded(
+                                it.body
+                            )
+                        )
+                        scrollUp()
+                    }
+                }
+            }
+            .launchIn(viewModelScope)
+    }
+
+    private fun scrollUp() {
+        reduceState(CategorySelectionPartialState.ScrollUp(true))
+        reduceState(CategorySelectionPartialState.ScrollUp(false))
+    }
+
+    @AssistedFactory
+    interface Factory {
+        fun create(
+            @Assisted("onSelect") config: (Category) -> Unit,
+            @Assisted("savedState") savedStateHandle: SavedStateHandle
+        ): CategorySelectionViewModel
     }
 
     companion object {
         private const val SAVED_SEARCH_QUERY =
             "screen.random_joke.select_category.search_query"
+
+        @Suppress("UNCHECKED_CAST")
+        fun provideFactory(
+            assistedFactory: Factory,
+            owner: SavedStateRegistryOwner,
+            defaultArgs: Bundle? = null,
+            onSelect: (Category) -> Unit
+        ) = object : AbstractSavedStateViewModelFactory(owner, defaultArgs) {
+            override fun <T : ViewModel?> create(
+                key: String,
+                modelClass: Class<T>,
+                handle: SavedStateHandle
+            ): T {
+                return assistedFactory.create(onSelect, handle) as T
+            }
+        }
     }
 }

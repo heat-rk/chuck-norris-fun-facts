@@ -4,6 +4,11 @@
     <string name="user_Info_history">Random</string>
     <string name="search">Search</string>
     <string name="navigation_back">Go to previous screen</string>
+    <string name="remove_all">Remove all</string>
+    <string name="remove_all_success">Items removed successful!</string>
+    <string name="no_saved_jokes_error">There are no jokes already!</string>
+    <string name="remove_all_error">Remove failed :(</string>
+    <string name="undo">Undo</string>
 
     <!-- SEARCH JOKE FRAGMENT -->
     <string name="search_joke_screen_title">Search Chuck Norris Joke!</string>
