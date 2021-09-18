@@ -8,8 +8,8 @@ import kotlinx.coroutines.test.runBlockingTest
 import org.junit.Before
 import org.junit.Test
 import ru.heatalways.chucknorrisfunfacts.R
-import ru.heatalways.chucknorrisfunfacts.domain.interactors.search_joke.SearchJokeInteractor
-import ru.heatalways.chucknorrisfunfacts.domain.interactors.search_joke.SearchJokeInteractorImpl
+import ru.heatalways.chucknorrisfunfacts.domain.interactors.chuck_norris_jokes.ChuckNorrisJokesInteractor
+import ru.heatalways.chucknorrisfunfacts.domain.interactors.chuck_norris_jokes.ChuckNorrisJokesInteractorImpl
 import ru.heatalways.chucknorrisfunfacts.domain.repositories.chuck_norris_jokes.ChuckNorrisJokesRepositoryFake
 import ru.heatalways.chucknorrisfunfacts.domain.utils.strRes
 import ru.heatalways.chucknorrisfunfacts.utils.BaseViewModelTest
@@ -19,13 +19,13 @@ import kotlin.time.ExperimentalTime
 @ExperimentalCoroutinesApi
 class SearchJokeViewModelTest: BaseViewModelTest() {
     private lateinit var repository: ChuckNorrisJokesRepositoryFake
-    private lateinit var interactor: SearchJokeInteractor
+    private lateinit var interactor: ChuckNorrisJokesInteractor
     private lateinit var viewModel: SearchJokeViewModel
 
     @Before
     fun setup() {
         repository = ChuckNorrisJokesRepositoryFake()
-        interactor = SearchJokeInteractorImpl(repository)
+        interactor = ChuckNorrisJokesInteractorImpl(repository)
         viewModel = SearchJokeViewModel(interactor, SavedStateHandle())
     }
 
@@ -37,12 +37,18 @@ class SearchJokeViewModelTest: BaseViewModelTest() {
             awaitItem() // skip state before action
 
             val loadingState = awaitItem()
-            assertThat(loadingState.isLoading).isTrue()
+            assertThat(loadingState.isJokesLoading).isTrue()
 
             val successState = awaitItem()
-            assertThat(successState.isLoading).isFalse()
+            assertThat(successState.isJokesLoading).isFalse()
             assertThat(successState.jokes).hasSize(1)
-            assertThat(successState.message).isNull()
+            assertThat(successState.jokesMessage).isNull()
+
+            val scrollingUpState = awaitItem()
+            assertThat(scrollingUpState.isScrollingUp).isTrue()
+
+            val scrollFinishedState = awaitItem()
+            assertThat(scrollFinishedState.isScrollingUp).isFalse()
 
             assertThat(cancelAndConsumeRemainingEvents().size).isEqualTo(0)
         }
@@ -56,13 +62,13 @@ class SearchJokeViewModelTest: BaseViewModelTest() {
             awaitItem() // skip state before action
 
             val loadingState = awaitItem()
-            assertThat(loadingState.isLoading).isTrue()
+            assertThat(loadingState.isJokesLoading).isTrue()
 
             val errorState = awaitItem()
-            assertThat(errorState.isLoading).isFalse()
+            assertThat(errorState.isJokesLoading).isFalse()
             assertThat(errorState.jokes).isEmpty()
-            assertThat(errorState.message).isNotNull()
-            assertThat(errorState.message).isEqualTo(strRes(R.string.error_not_found))
+            assertThat(errorState.jokesMessage).isNotNull()
+            assertThat(errorState.jokesMessage).isEqualTo(strRes(R.string.error_not_found))
 
             assertThat(cancelAndConsumeRemainingEvents().size).isEqualTo(0)
         }
@@ -77,13 +83,13 @@ class SearchJokeViewModelTest: BaseViewModelTest() {
             awaitItem() // skip state before action
 
             val loadingState = awaitItem()
-            assertThat(loadingState.isLoading).isTrue()
+            assertThat(loadingState.isJokesLoading).isTrue()
 
             val errorState = awaitItem()
-            assertThat(errorState.isLoading).isFalse()
+            assertThat(errorState.isJokesLoading).isFalse()
             assertThat(errorState.jokes).isEmpty()
-            assertThat(errorState.message).isNotNull()
-            assertThat(errorState.message).isEqualTo(strRes(R.string.error_network))
+            assertThat(errorState.jokesMessage).isNotNull()
+            assertThat(errorState.jokesMessage).isEqualTo(strRes(R.string.error_network))
 
             assertThat(cancelAndConsumeRemainingEvents().size).isEqualTo(0)
         }

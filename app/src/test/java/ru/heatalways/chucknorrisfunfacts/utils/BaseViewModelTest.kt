@@ -2,7 +2,6 @@ package ru.heatalways.chucknorrisfunfacts.utils
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.test.runBlockingTest
 import org.junit.Rule
 
 @ExperimentalCoroutinesApi

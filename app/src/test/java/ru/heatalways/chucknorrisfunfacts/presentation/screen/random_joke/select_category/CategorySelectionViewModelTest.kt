@@ -1,14 +1,16 @@
 package ru.heatalways.chucknorrisfunfacts.presentation.screen.random_joke.select_category
 
 import androidx.lifecycle.SavedStateHandle
+import app.cash.turbine.test
+import com.github.terrakok.cicerone.Router
 import com.google.common.truth.Truth.assertThat
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runBlockingTest
 import org.junit.Before
 import org.junit.Test
 import ru.heatalways.chucknorrisfunfacts.R
-import ru.heatalways.chucknorrisfunfacts.domain.interactors.random_joke.select_category.CategorySelectionInteractor
-import ru.heatalways.chucknorrisfunfacts.domain.interactors.random_joke.select_category.CategorySelectionInteractorImpl
+import ru.heatalways.chucknorrisfunfacts.domain.interactors.chuck_norris_jokes.ChuckNorrisJokesInteractor
+import ru.heatalways.chucknorrisfunfacts.domain.interactors.chuck_norris_jokes.ChuckNorrisJokesInteractorImpl
 import ru.heatalways.chucknorrisfunfacts.domain.repositories.chuck_norris_jokes.Category
 import ru.heatalways.chucknorrisfunfacts.domain.repositories.chuck_norris_jokes.ChuckNorrisJokesRepositoryFake
 import ru.heatalways.chucknorrisfunfacts.domain.utils.strRes
@@ -19,14 +21,19 @@ import kotlin.time.ExperimentalTime
 @ExperimentalCoroutinesApi
 class CategorySelectionViewModelTest: BaseViewModelTest() {
     private lateinit var repositoryFake: ChuckNorrisJokesRepositoryFake
-    private lateinit var interactor: CategorySelectionInteractor
+    private lateinit var interactor: ChuckNorrisJokesInteractor
     private lateinit var viewModel: CategorySelectionViewModel
 
     @Before
     fun setup() {
         repositoryFake = ChuckNorrisJokesRepositoryFake()
-        interactor = CategorySelectionInteractorImpl(repositoryFake)
-        viewModel = CategorySelectionViewModel(interactor, SavedStateHandle())
+        interactor = ChuckNorrisJokesInteractorImpl(repositoryFake)
+        viewModel = CategorySelectionViewModel(
+            onSelect = {},
+            savedStateHandle = SavedStateHandle(),
+            interactor = interactor,
+            router = Router()
+        )
         viewModel.resetState()
     }
 
@@ -36,11 +43,11 @@ class CategorySelectionViewModelTest: BaseViewModelTest() {
             viewModel.fetchCategories()
 
             val loadingState = awaitItem()
-            assertThat(loadingState.isLoading).isTrue()
+            assertThat(loadingState.isCategoriesLoading).isTrue()
             assertThat(loadingState.categories).isEmpty()
 
             val loadedState = awaitItem()
-            assertThat(loadedState.isLoading).isFalse()
+            assertThat(loadedState.isCategoriesLoading).isFalse()
             assertThat(loadedState.categories).hasSize(3)
         }
     }
@@ -52,13 +59,13 @@ class CategorySelectionViewModelTest: BaseViewModelTest() {
             viewModel.fetchCategories()
 
             val loadingState = awaitItem()
-            assertThat(loadingState.isLoading).isTrue()
+            assertThat(loadingState.isCategoriesLoading).isTrue()
             assertThat(loadingState.categories).isEmpty()
 
             val loadedState = awaitItem()
-            assertThat(loadedState.isLoading).isFalse()
+            assertThat(loadedState.isCategoriesLoading).isFalse()
             assertThat(loadedState.categories).isEmpty()
-            assertThat(loadedState.message).isEqualTo(strRes(R.string.error_network))
+            assertThat(loadedState.categoriesMessage).isEqualTo(strRes(R.string.error_network))
 
             assertThat(cancelAndConsumeRemainingEvents().size).isEqualTo(0)
         }
@@ -66,14 +73,8 @@ class CategorySelectionViewModelTest: BaseViewModelTest() {
 
     @Test
     fun `test category selection, returns effect GoBack`() = coroutineRule.runBlockingTest {
-        viewModel.effect.test {
-            viewModel.setAction(CategorySelectionAction.OnCategorySelect(Category.Any))
-
-            val goBack = awaitItem()
-            assertThat(goBack).isEqualTo(CategorySelectionEffect.GoBack)
-
-            assertThat(cancelAndConsumeRemainingEvents().size).isEqualTo(0)
-        }
+        viewModel.setAction(CategorySelectionAction.OnCategorySelect(Category.Any))
+        // TODO: test navigation in future
     }
 
     @Test
@@ -85,15 +86,21 @@ class CategorySelectionViewModelTest: BaseViewModelTest() {
             awaitItem() // skip state before action
 
             val searchLoadingState = awaitItem()
-            assertThat(searchLoadingState.isLoading).isTrue()
+            assertThat(searchLoadingState.isCategoriesLoading).isTrue()
             assertThat(searchLoadingState.categories).hasSize(3)
 
             val successState = awaitItem()
-            assertThat(successState.isLoading).isFalse()
+            assertThat(successState.isCategoriesLoading).isFalse()
             assertThat(successState.categories).hasSize(1)
             assertThat(
                 (successState.categories.first() as Category.Specific).name
             ).contains("animal")
+
+            val scrollingUpState = awaitItem()
+            assertThat(scrollingUpState.isScrollingUp).isTrue()
+
+            val scrollFinishedState = awaitItem()
+            assertThat(scrollFinishedState.isScrollingUp).isFalse()
 
             assertThat(cancelAndConsumeRemainingEvents().size).isEqualTo(0)
         }
@@ -108,13 +115,13 @@ class CategorySelectionViewModelTest: BaseViewModelTest() {
             awaitItem() // skip state before action
 
             val searchLoadingState = awaitItem()
-            assertThat(searchLoadingState.isLoading).isTrue()
+            assertThat(searchLoadingState.isCategoriesLoading).isTrue()
             assertThat(searchLoadingState.categories).hasSize(3)
 
             val errorState = awaitItem()
-            assertThat(errorState.isLoading).isFalse()
-            assertThat(errorState.message).isNotNull()
-            assertThat(errorState.message).isEqualTo(strRes(R.string.error_not_found))
+            assertThat(errorState.isCategoriesLoading).isFalse()
+            assertThat(errorState.categoriesMessage).isNotNull()
+            assertThat(errorState.categoriesMessage).isEqualTo(strRes(R.string.error_not_found))
             assertThat(errorState.categories).isEmpty()
 
             assertThat(cancelAndConsumeRemainingEvents().size).isEqualTo(0)
@@ -132,12 +139,14 @@ class CategorySelectionViewModelTest: BaseViewModelTest() {
             awaitItem() // skip state before action
 
             val searchLoadingState = awaitItem()
-            assertThat(searchLoadingState.isLoading).isTrue()
+            assertThat(searchLoadingState.isCategoriesLoading).isTrue()
             assertThat(searchLoadingState.categories).isEmpty()
 
             val errorState = awaitItem()
-            assertThat(errorState.isLoading).isFalse()
-            assertThat(errorState.message).isEqualTo(strRes(R.string.error_not_found))
+            assertThat(errorState.isCategoriesLoading).isFalse()
+            assertThat(errorState.categoriesMessage).isEqualTo(
+                strRes(R.string.error_network)
+            )
             assertThat(errorState.categories).isEmpty()
 
             assertThat(cancelAndConsumeRemainingEvents().size).isEqualTo(0)

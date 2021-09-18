@@ -66,10 +66,14 @@ class RandomJokeViewModel @Inject constructor(
         }
     }
 
+    fun selectCategory(category: Category) {
+        reduceState(RandomJokePartialState.CategorySelected(category))
+        savedStateHandle.set(SAVED_SELECTED_CATEGORY, category)
+    }
+
     private fun navigateToCategorySelectionScreen() {
         router.navigateTo(CategorySelectionFragment.getScreen { category ->
-            reduceState(RandomJokePartialState.CategorySelected(category))
-            savedStateHandle.set(SAVED_SELECTED_CATEGORY, category)
+            selectCategory(category)
         })
     }
 

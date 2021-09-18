@@ -100,7 +100,8 @@ class ChuckNorrisJokesRepositoryFake @Inject constructor(
     }
 
     override suspend fun searchCategories(query: String): ResultNetwork<List<Category>> {
-        return ResultNetwork.Success(categories.filter { it.name.contains(query) })
+        return if (shouldReturnErrorResponse) ResultNetwork.NetworkError
+        else ResultNetwork.Success(categories.filter { it.name.contains(query) })
     }
 
     override suspend fun saveJoke(joke: ChuckJoke) {
