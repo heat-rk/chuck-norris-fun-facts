@@ -36,11 +36,11 @@ object RandomJokeStateReducer: MviReducer<
         )
 
         is RandomJokePartialState.JokesUpdating -> state.copy(
-            jokes = state.jokes.editLast { copy(isUpdating = true) }
+            jokes = state.jokes.toMutableList().editLast { copy(isUpdating = true) }
         )
 
         is RandomJokePartialState.JokesUpdated -> state.copy(
-            jokes = state.jokes.editLast { copy(isUpdating = false) } +
+            jokes = state.jokes.toMutableList().editLast { copy(isUpdating = false) } +
                     partialState.jokes
         )
         is RandomJokePartialState.JokesMessage -> state.copy(
