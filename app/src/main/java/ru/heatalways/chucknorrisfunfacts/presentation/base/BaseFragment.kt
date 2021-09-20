@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.ColorRes
+import androidx.annotation.IdRes
 import androidx.annotation.MenuRes
 import androidx.annotation.StringRes
 import androidx.core.content.ContextCompat
@@ -66,6 +67,7 @@ abstract class BaseFragment<Binding: ViewBinding>: Fragment(), KeyboardChangeLis
 
     protected fun showSnackbar(
         view: View,
+        @IdRes anchorView: Int? = null,
         message: StringResource,
         buttonText: StringResource? = null,
         buttonCallback: () -> Unit = {}
@@ -77,6 +79,9 @@ abstract class BaseFragment<Binding: ViewBinding>: Fragment(), KeyboardChangeLis
         ).apply {
             if (buttonText != null)
                 setAction(getString(buttonText)) { buttonCallback() }
+
+            if (anchorView != null)
+                setAnchorView(anchorView)
 
             show()
         }

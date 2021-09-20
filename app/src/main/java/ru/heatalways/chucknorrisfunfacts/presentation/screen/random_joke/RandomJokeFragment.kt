@@ -115,6 +115,7 @@ class RandomJokeFragment: BaseMviFragment<
             if (snackbarState is SnackbarState.Shown)
                 showSnackbar(
                     view = binding.root,
+                    anchorView = R.id.bottomNavigationBar,
                     message = snackbarState.message,
                     buttonText = snackbarState.buttonText,
                     buttonCallback = snackbarState.buttonCallback
