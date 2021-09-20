@@ -35,4 +35,9 @@ abstract class BaseMviFragment<
     protected fun action(event: Event) {
         viewModel.setAction(event)
     }
+
+    override fun onDestroyView() {
+        previousState = null
+        super.onDestroyView()
+    }
 }
