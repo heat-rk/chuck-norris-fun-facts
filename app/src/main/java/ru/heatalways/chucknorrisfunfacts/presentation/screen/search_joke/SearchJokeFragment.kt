@@ -11,6 +11,8 @@ import com.github.terrakok.cicerone.androidx.FragmentScreen
 import dagger.hilt.android.AndroidEntryPoint
 import ru.heatalways.chucknorrisfunfacts.R
 import ru.heatalways.chucknorrisfunfacts.databinding.FragmentSearchJokeBinding
+import ru.heatalways.chucknorrisfunfacts.domain.repositories.chuck_norris_jokes.ChuckJoke
+import ru.heatalways.chucknorrisfunfacts.domain.utils.StringResource
 import ru.heatalways.chucknorrisfunfacts.extensions.hideKeyboard
 import ru.heatalways.chucknorrisfunfacts.extensions.postScrollToPosition
 import ru.heatalways.chucknorrisfunfacts.presentation.adapters.JokesAdapter
@@ -49,14 +51,33 @@ class SearchJokeFragment: BaseMviFragment<
         binding.jokesRecyclerView.isVisible =
             !state.isJokesLoading && state.jokesMessage == null
 
-        jokesAdapter.submitList(state.jokes)
+        renderList(state.jokes)
+        renderLoading(state.isJokesLoading)
+        renderError(state.jokesMessage)
+        renderScrolling(state.isScrollingUp)
+    }
 
-        setProgressBarVisibility(state.isJokesLoading)
+    private fun renderLoading(isLoading: Boolean) {
+        if (previousState?.isJokesLoading != isLoading)
+            setProgressBarVisibility(isLoading)
+    }
 
-        setErrorVisibility(state.jokesMessage != null, state.jokesMessage)
+    private fun renderError(message: StringResource?) {
+        if (previousState?.jokesMessage != message)
+            setErrorVisibility(message != null, message)
+    }
 
-        if (state.isScrollingUp)
-            binding.jokesRecyclerView.postScrollToPosition(0)
+    private fun renderList(jokes: List<ChuckJoke>) {
+        if (previousState?.jokes != jokes)
+            jokesAdapter.submitList(jokes)
+    }
+
+    private fun renderScrolling(isScrollingUp: Boolean) {
+        if (previousState?.isScrollingUp != isScrollingUp)
+            if (isScrollingUp) {
+                binding.root.transitionToStart()
+                binding.jokesRecyclerView.postScrollToPosition(0)
+            }
     }
 
     override fun onDestroyView() {

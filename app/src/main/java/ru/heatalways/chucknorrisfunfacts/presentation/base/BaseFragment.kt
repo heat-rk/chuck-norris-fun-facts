@@ -84,6 +84,7 @@ abstract class BaseFragment<Binding: ViewBinding>: Fragment(), KeyboardChangeLis
 
     protected fun hideSnackbar() {
         snackbar?.dismiss()
+        snackbar = null
     }
 
     protected fun setErrorVisibility(isVisible: Boolean, message: StringResource? = null) {
@@ -92,7 +93,6 @@ abstract class BaseFragment<Binding: ViewBinding>: Fragment(), KeyboardChangeLis
     }
 
     protected fun setProgressBarVisibility(isVisible: Boolean) {
-        if (isVisible) rootBinding.errorContainer.isVisible = false
         rootBinding.progressBar.isVisible = isVisible
     }
 

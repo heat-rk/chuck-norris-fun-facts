@@ -12,10 +12,13 @@ import dagger.hilt.android.AndroidEntryPoint
 import ru.heatalways.chucknorrisfunfacts.R
 import ru.heatalways.chucknorrisfunfacts.databinding.FragmentSelectCategoryBinding
 import ru.heatalways.chucknorrisfunfacts.domain.repositories.chuck_norris_jokes.Category
-import ru.heatalways.chucknorrisfunfacts.extensions.*
+import ru.heatalways.chucknorrisfunfacts.domain.utils.StringResource
+import ru.heatalways.chucknorrisfunfacts.extensions.getSafeTrackedArgument
+import ru.heatalways.chucknorrisfunfacts.extensions.hideKeyboard
+import ru.heatalways.chucknorrisfunfacts.extensions.postScrollToPosition
+import ru.heatalways.chucknorrisfunfacts.extensions.putTrackedReference
 import ru.heatalways.chucknorrisfunfacts.presentation.adapters.CategoriesAdapter
 import ru.heatalways.chucknorrisfunfacts.presentation.base.BaseMviFragment
-import ru.heatalways.chucknorrisfunfacts.presentation.util.TrackedReference
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -63,19 +66,36 @@ class CategorySelectionFragment: BaseMviFragment<
     }
 
     override fun renderState(state: CategorySelectionState) {
-        binding.searchView.setSearchButtonVisibility(!state.isCategoriesLoading)
-
-        categoriesAdapter.submitList(state.categories)
-
         binding.categoriesRecyclerView.isVisible =
             !state.isCategoriesLoading && state.categoriesMessage == null
 
-        setProgressBarVisibility(state.isCategoriesLoading)
+        renderList(state.categories)
+        renderLoading(state.isCategoriesLoading)
+        renderError(state.categoriesMessage)
+        renderScrolling(state.isScrollingUp)
+    }
 
-        setErrorVisibility(state.categoriesMessage != null, state.categoriesMessage)
+    private fun renderLoading(isLoading: Boolean) {
+        if (previousState?.isCategoriesLoading != isLoading) {
+            binding.searchView.setSearchButtonVisibility(!isLoading)
+            setProgressBarVisibility(isLoading)
+        }
+    }
 
-        if (state.isScrollingUp)
-            binding.categoriesRecyclerView.postScrollToPosition(0)
+    private fun renderError(message: StringResource?) {
+        if (previousState?.categoriesMessage != message)
+            setErrorVisibility(message != null, message)
+    }
+
+    private fun renderList(categories: List<Category>) {
+        if (previousState?.categories != categories)
+            categoriesAdapter.submitList(categories)
+    }
+
+    private fun renderScrolling(isScrollingUp: Boolean) {
+        if (previousState?.isScrollingUp != isScrollingUp)
+            if (isScrollingUp)
+                binding.categoriesRecyclerView.postScrollToPosition(0)
     }
 
     override fun onDestroyView() {

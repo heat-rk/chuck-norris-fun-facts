@@ -15,12 +15,17 @@ abstract class BaseMviFragment<
 
     protected abstract val viewModel: BaseMviViewModel<Event, State, *>
 
+    protected var previousState: State? = null
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         viewLifecycleOwner.lifecycleScope.launchWhenStarted {
             viewModel.state
-                .onEach { renderState(it) }
+                .onEach {
+                    renderState(it)
+                    previousState = it
+                }
                 .launchIn(this)
         }
     }

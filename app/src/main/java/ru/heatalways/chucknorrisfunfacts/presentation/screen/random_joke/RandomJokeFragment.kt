@@ -13,7 +13,9 @@ import dagger.hilt.android.AndroidEntryPoint
 import ru.heatalways.chucknorrisfunfacts.R
 import ru.heatalways.chucknorrisfunfacts.databinding.FragmentRandomJokeBinding
 import ru.heatalways.chucknorrisfunfacts.domain.repositories.chuck_norris_jokes.Category
+import ru.heatalways.chucknorrisfunfacts.domain.repositories.chuck_norris_jokes.ChuckJoke
 import ru.heatalways.chucknorrisfunfacts.domain.utils.SnackbarState
+import ru.heatalways.chucknorrisfunfacts.domain.utils.StringResource
 import ru.heatalways.chucknorrisfunfacts.domain.utils.ToastState
 import ru.heatalways.chucknorrisfunfacts.extensions.onScrolledToLastItem
 import ru.heatalways.chucknorrisfunfacts.extensions.postScrollToPosition
@@ -57,40 +59,76 @@ class RandomJokeFragment: BaseMviFragment<
     }
 
     override fun renderState(state: RandomJokeViewState) {
-        adapter.submitList(state.jokes)
-
         binding.historyRecyclerView.isVisible =
             !state.isLoading && state.message == null
 
-        binding.buttonProgressBar.isVisible = state.isJokeLoading
-        binding.getJokeButton.isVisible = state.isJokeLoading.not()
-
-        binding.selectCategoryButton.text = when(state.category) {
-            is Category.Any -> getString(R.string.random_joke_any_category)
-            is Category.Specific -> state.category.name
-        }
-
-        setProgressBarVisibility(state.isLoading)
-
-        setErrorVisibility(state.message != null, state.message)
+        renderList(state.jokes)
+        renderJokeLoading(state.isJokeLoading)
+        renderSelectedCategory(state.category)
+        renderLoading(state.isLoading)
+        renderError(state.message)
 
         // single live events
-        if (state.toastState is ToastState.Shown)
-            showToast(state.toastState.message)
+        renderToast(state.toastState)
+        renderSnackbar(state.snackbarState)
+        renderScrolling(state.isScrollingUp)
+    }
 
-        if (state.snackbarState is SnackbarState.Shown)
-            showSnackbar(
-                view = binding.root,
-                message = state.snackbarState.message,
-                buttonText = state.snackbarState.buttonText,
-                buttonCallback = state.snackbarState.buttonCallback
-            )
-        else hideSnackbar()
+    private fun renderLoading(isLoading: Boolean) {
+        if (previousState?.isLoading != isLoading)
+            setProgressBarVisibility(isLoading)
+    }
 
-        if (state.isScrollingUp) {
-            binding.root.transitionToStart()
-            binding.historyRecyclerView.postScrollToPosition(0)
+    private fun renderError(message: StringResource?) {
+        if (previousState?.message != message)
+            setErrorVisibility(message != null, message)
+    }
+
+    private fun renderList(jokes: List<ChuckJoke>) {
+        if (previousState?.jokes != jokes)
+            adapter.submitList(jokes)
+    }
+
+    private fun renderJokeLoading(isVisible: Boolean) {
+        if (previousState?.isJokeLoading != isVisible) {
+            binding.buttonProgressBar.isVisible = isVisible
+            binding.getJokeButton.isVisible = isVisible.not()
         }
+    }
+
+    private fun renderSelectedCategory(category: Category) {
+        if (previousState?.category != category)
+            binding.selectCategoryButton.text = when(category) {
+                is Category.Any -> getString(R.string.random_joke_any_category)
+                is Category.Specific -> category.name
+            }
+    }
+
+    private fun renderToast(toastState: ToastState) {
+        if (previousState?.toastState != toastState)
+            if (toastState is ToastState.Shown)
+                showToast(toastState.message)
+    }
+
+    private fun renderSnackbar(snackbarState: SnackbarState) {
+        if (previousState?.snackbarState != snackbarState)
+            if (snackbarState is SnackbarState.Shown)
+                showSnackbar(
+                    view = binding.root,
+                    message = snackbarState.message,
+                    buttonText = snackbarState.buttonText,
+                    buttonCallback = snackbarState.buttonCallback
+                )
+            else
+                hideSnackbar()
+    }
+
+    private fun renderScrolling(isScrollingUp: Boolean) {
+        if (previousState?.isScrollingUp != isScrollingUp)
+            if (isScrollingUp) {
+                binding.root.transitionToStart()
+                binding.historyRecyclerView.postScrollToPosition(0)
+            }
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
