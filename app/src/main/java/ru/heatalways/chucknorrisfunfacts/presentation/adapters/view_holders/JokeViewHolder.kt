@@ -5,36 +5,19 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
-import dagger.hilt.EntryPoint
-import dagger.hilt.EntryPoints
-import dagger.hilt.InstallIn
-import dagger.hilt.components.SingletonComponent
 import ru.heatalways.chucknorrisfunfacts.R
-import ru.heatalways.chucknorrisfunfacts.domain.repositories.chuck_norris_jokes.ChuckJoke
 import ru.heatalways.chucknorrisfunfacts.databinding.ItemJokeHolderViewBinding
-import ru.heatalways.chucknorrisfunfacts.domain.repositories.image_loader.ImageLoader
-import ru.heatalways.chucknorrisfunfacts.domain.repositories.image_loader.LoadPhotoConfig
+import ru.heatalways.chucknorrisfunfacts.domain.repositories.chuck_norris_jokes.ChuckJoke
+import ru.heatalways.chucknorrisfunfacts.domain.utils.LoadPhotoConfig
+import ru.heatalways.chucknorrisfunfacts.extensions.loadImage
 import ru.heatalways.chucknorrisfunfacts.extensions.setVisibleOrInvisible
 
 class JokeViewHolder private constructor(rootView: View): RecyclerView.ViewHolder(rootView) {
     private val binding = ItemJokeHolderViewBinding.bind(rootView)
-    private val appContext = rootView.context.applicationContext
-    private val entryPoint get() = EntryPoints.get(appContext, JokeViewHolderEntryPoint::class.java)
-
-    @EntryPoint
-    @InstallIn(SingletonComponent::class)
-    interface JokeViewHolderEntryPoint {
-        val imageLoader: ImageLoader
-    }
 
     fun bind(joke: ChuckJoke) {
-        entryPoint.imageLoader.loadImage(
-            config = LoadPhotoConfig(url = joke.iconUrl),
-            imageView = binding.iconImageView
-        )
-
+        binding.iconImageView.loadImage(LoadPhotoConfig(url = joke.iconUrl))
         binding.jokeTextView.text = joke.value.getText(itemView.context)
-
         binding.mainLayout.setVisibleOrInvisible(!joke.isUpdating)
         binding.progressBar.isVisible = joke.isUpdating
     }

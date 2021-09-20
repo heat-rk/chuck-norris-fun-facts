@@ -2,17 +2,25 @@ package ru.heatalways.chucknorrisfunfacts.extensions
 
 import android.animation.Animator
 import android.animation.ValueAnimator
-import android.text.Editable
 import android.text.InputFilter
-import android.text.TextWatcher
-import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.DecelerateInterpolator
 import android.widget.EditText
+import android.widget.ImageView
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import ru.heatalways.chucknorrisfunfacts.domain.utils.LoadPhotoConfig
+
+fun ImageView.loadImage(config: LoadPhotoConfig) =
+    Glide
+        .with(context)
+        .load(config.url)
+        .placeholder(config.placeholder ?: -1)
+        .error(config.placeholder ?: -1)
+        .into(this)
 
 fun EditText.maxLength(max: Int){
     this.filters = arrayOf<InputFilter>(InputFilter.LengthFilter(max))

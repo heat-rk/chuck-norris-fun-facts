@@ -1,4 +1,4 @@
-package ru.heatalways.chucknorrisfunfacts.domain.repositories.image_loader
+package ru.heatalways.chucknorrisfunfacts.domain.utils
 
 import androidx.annotation.DrawableRes
 
