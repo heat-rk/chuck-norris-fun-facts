@@ -43,24 +43,25 @@ class CategorySelectionViewModel @AssistedInject constructor(
     }
 
     fun fetchCategories() {
-        interactor.fetchCategories()
-            .onEach {
-                when(it) {
-                    is InteractorEvent.Error ->
-                        reduceState(CategorySelectionPartialState.CategoriesMessage(
-                            it.message
-                        ))
+        if (savedStateHandle.contains(SAVED_SEARCH_QUERY).not())
+            interactor.fetchCategories()
+                .onEach {
+                    when(it) {
+                        is InteractorEvent.Error ->
+                            reduceState(CategorySelectionPartialState.CategoriesMessage(
+                                it.message
+                            ))
 
-                    is InteractorEvent.Loading ->
-                        reduceState(CategorySelectionPartialState.CategoriesLoading)
+                        is InteractorEvent.Loading ->
+                            reduceState(CategorySelectionPartialState.CategoriesLoading)
 
-                    is InteractorEvent.Success ->
-                        reduceState(CategorySelectionPartialState.CategoriesLoaded(
-                            it.body
-                        ))
+                        is InteractorEvent.Success ->
+                            reduceState(CategorySelectionPartialState.CategoriesLoaded(
+                                it.body
+                            ))
+                    }
                 }
-            }
-            .launchIn(viewModelScope)
+                .launchIn(viewModelScope)
     }
 
     override fun handleAction(action: CategorySelectionAction) {
