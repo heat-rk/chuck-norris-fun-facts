@@ -18,6 +18,7 @@ import ru.heatalways.chucknorrisfunfacts.domain.utils.StringResource
 import ru.heatalways.chucknorrisfunfacts.extensions.hideKeyboard
 import ru.heatalways.chucknorrisfunfacts.extensions.postScrollToPosition
 import ru.heatalways.chucknorrisfunfacts.presentation.adapters.JokesAdapter
+import ru.heatalways.chucknorrisfunfacts.presentation.adapters.decorators.MarginItemDecoration
 import ru.heatalways.chucknorrisfunfacts.presentation.base.BaseMviFragment
 
 @AndroidEntryPoint
@@ -37,9 +38,10 @@ class SearchJokeFragment: BaseMviFragment<
         super.onViewCreated(view, savedInstanceState)
         setTitle(R.string.search_joke_screen_title)
 
-        with(binding) {
-            jokesRecyclerView.layoutManager = LinearLayoutManager(context)
-            jokesRecyclerView.adapter = jokesAdapter
+        with(binding.jokesRecyclerView) {
+            addItemDecoration(MarginItemDecoration(R.dimen.paddingMD))
+            layoutManager = LinearLayoutManager(context)
+            adapter = jokesAdapter
         }
     }
 

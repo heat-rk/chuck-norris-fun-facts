@@ -23,6 +23,7 @@ import ru.heatalways.chucknorrisfunfacts.extensions.postScrollToPosition
 import ru.heatalways.chucknorrisfunfacts.extensions.scrollsToLastItem
 import ru.heatalways.chucknorrisfunfacts.extensions.showToast
 import ru.heatalways.chucknorrisfunfacts.presentation.adapters.JokesAdapter
+import ru.heatalways.chucknorrisfunfacts.presentation.adapters.decorators.MarginItemDecoration
 import ru.heatalways.chucknorrisfunfacts.presentation.base.BaseMviFragment
 import ru.ldralighieri.corbind.appcompat.itemClicks
 import ru.ldralighieri.corbind.view.clicks
@@ -35,7 +36,7 @@ class RandomJokeFragment: BaseMviFragment<
 >() {
     override val viewModel: RandomJokeViewModel by viewModels()
 
-    private val adapter = JokesAdapter()
+    private val jokesAdapter = JokesAdapter()
 
     override val bindingInflater: (LayoutInflater, ViewGroup?, Boolean) -> FragmentRandomJokeBinding
         get() = FragmentRandomJokeBinding::inflate
@@ -45,9 +46,10 @@ class RandomJokeFragment: BaseMviFragment<
         setTitle(R.string.random_joke_screen_title)
         initMenu(R.menu.random_jokes_history_menu)
 
-        with(binding) {
-            historyRecyclerView.layoutManager = LinearLayoutManager(requireContext())
-            historyRecyclerView.adapter = adapter
+        with(binding.historyRecyclerView) {
+            addItemDecoration(MarginItemDecoration(R.dimen.paddingMD))
+            layoutManager = LinearLayoutManager(requireContext())
+            adapter = jokesAdapter
         }
     }
 
@@ -94,7 +96,7 @@ class RandomJokeFragment: BaseMviFragment<
 
     private fun renderList(jokes: List<ChuckJoke>) {
         if (previousState?.jokes != jokes)
-            adapter.submitList(jokes)
+            jokesAdapter.submitList(jokes)
     }
 
     private fun renderJokeLoading(isVisible: Boolean) {

@@ -20,6 +20,7 @@ import ru.heatalways.chucknorrisfunfacts.extensions.hideKeyboard
 import ru.heatalways.chucknorrisfunfacts.extensions.postScrollToPosition
 import ru.heatalways.chucknorrisfunfacts.extensions.putTrackedReference
 import ru.heatalways.chucknorrisfunfacts.presentation.adapters.CategoriesAdapter
+import ru.heatalways.chucknorrisfunfacts.presentation.adapters.decorators.MarginItemDecoration
 import ru.heatalways.chucknorrisfunfacts.presentation.base.BaseMviFragment
 import javax.inject.Inject
 
@@ -51,9 +52,10 @@ class CategorySelectionFragment: BaseMviFragment<
         setTitle(R.string.select_category_screen_title)
         initToolbarBackButton()
 
-        with(binding) {
-            categoriesRecyclerView.layoutManager = LinearLayoutManager(context)
-            categoriesRecyclerView.adapter = categoriesAdapter
+        with(binding.categoriesRecyclerView) {
+            addItemDecoration(MarginItemDecoration(R.dimen.paddingMD))
+            layoutManager = LinearLayoutManager(context)
+            adapter = categoriesAdapter
         }
     }
 
