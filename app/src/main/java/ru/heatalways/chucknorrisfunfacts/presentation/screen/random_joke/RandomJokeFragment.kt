@@ -122,8 +122,7 @@ class RandomJokeFragment: BaseMviFragment<
         if (previousState?.snackbarState != snackbarState)
             if (snackbarState is SnackbarState.Shown)
                 showSnackbar(
-                    view = binding.root,
-                    anchorView = R.id.bottomNavigationBar,
+                    view = binding.coordinatorLayout,
                     message = snackbarState.message,
                     buttonText = snackbarState.buttonText,
                     buttonCallback = snackbarState.buttonCallback
@@ -135,7 +134,7 @@ class RandomJokeFragment: BaseMviFragment<
     private fun renderScrolling(isScrollingUp: Boolean) {
         if (previousState?.isScrollingUp != isScrollingUp)
             if (isScrollingUp) {
-                binding.root.transitionToStart()
+                binding.motionLayout.transitionToStart()
                 binding.historyRecyclerView.postScrollToPosition(0)
             }
     }
