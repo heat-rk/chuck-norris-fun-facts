@@ -58,8 +58,10 @@ class RandomJokeViewModel @Inject constructor(
             is RandomJokeAction.OnRandomJokeRequest ->
                 fetchRandomJoke()
 
-            is RandomJokeAction.RemoveAll ->
-                removeSavedJokes()
+            is RandomJokeAction.OnMenuItemSelect ->
+                when (action.itemId) {
+                    R.id.removeAll -> removeSavedJokes()
+                }
 
             is RandomJokeAction.OnNextPage ->
                 nextPage()

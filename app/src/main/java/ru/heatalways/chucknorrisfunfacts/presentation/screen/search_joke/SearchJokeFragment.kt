@@ -9,6 +9,7 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.github.terrakok.cicerone.androidx.FragmentScreen
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.merge
 import ru.heatalways.chucknorrisfunfacts.R
@@ -45,14 +46,15 @@ class SearchJokeFragment: BaseMviFragment<
         }
     }
 
-    override fun actions() = merge(
-        binding.searchView.searches()
-            .map {
-                binding.searchView.clearFocus()
-                hideKeyboard()
-                SearchJokeAction.OnSearchExecute(it)
-            }
-    )
+    override val actions get() =
+        merge(
+            binding.searchView.searches()
+                .map {
+                    binding.searchView.clearFocus()
+                    hideKeyboard()
+                    SearchJokeAction.OnSearchExecute(it)
+                }
+        )
 
     override fun renderState(state: SearchJokeViewState) {
         binding.jokesRecyclerView.isVisible =

@@ -18,6 +18,8 @@ abstract class BaseMviFragment<
 
     protected var previousState: State? = null
 
+    protected abstract val actions: Flow<Action>
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -29,17 +31,13 @@ abstract class BaseMviFragment<
                 }
                 .launchIn(this)
 
-            actions().onEach { action(it) }.launchIn(this)
+            actions
+                .onEach { viewModel.setAction(it) }
+                .launchIn(this)
         }
     }
 
-    protected abstract fun actions(): Flow<Action>
-
     abstract fun renderState(state: State)
-
-    protected fun action(event: Action) {
-        viewModel.setAction(event)
-    }
 
     override fun onDestroyView() {
         previousState = null

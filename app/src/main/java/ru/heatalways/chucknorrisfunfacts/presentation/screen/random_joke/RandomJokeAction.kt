@@ -4,7 +4,7 @@ import ru.heatalways.chucknorrisfunfacts.presentation.base.MviAction
 
 sealed class RandomJokeAction: MviAction {
     object OnNextPage: RandomJokeAction()
-    object RemoveAll: RandomJokeAction()
     object OnRandomJokeRequest: RandomJokeAction()
     object OnCategorySelectionButtonClick: RandomJokeAction()
+    data class OnMenuItemSelect(val itemId: Int): RandomJokeAction()
 }

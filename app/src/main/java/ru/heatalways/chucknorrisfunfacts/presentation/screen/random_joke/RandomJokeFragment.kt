@@ -53,20 +53,20 @@ class RandomJokeFragment: BaseMviFragment<
         }
     }
 
-    override fun actions() = merge(
-        binding.getJokeButton.clicks()
-            .map { RandomJokeAction.OnRandomJokeRequest },
+    override val actions get() =
+        merge(
+            binding.getJokeButton.clicks()
+                .map { RandomJokeAction.OnRandomJokeRequest },
 
-        binding.selectCategoryButton.clicks()
-            .map { RandomJokeAction.OnCategorySelectionButtonClick },
+            binding.selectCategoryButton.clicks()
+                .map { RandomJokeAction.OnCategorySelectionButtonClick },
 
-        binding.historyRecyclerView.scrollsToLastItem()
-            .map { RandomJokeAction.OnNextPage },
+            binding.historyRecyclerView.scrollsToLastItem()
+                .map { RandomJokeAction.OnNextPage },
 
-        toolbar.itemClicks()
-            .filter { it.itemId == R.id.removeAll }
-            .map { RandomJokeAction.RemoveAll }
-    )
+            toolbar.itemClicks()
+                .map { RandomJokeAction.OnMenuItemSelect(it.itemId) }
+        )
 
     override fun renderState(state: RandomJokeViewState) {
         binding.historyRecyclerView.isVisible =

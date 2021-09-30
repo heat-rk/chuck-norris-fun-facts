@@ -59,17 +59,18 @@ class CategorySelectionFragment: BaseMviFragment<
         }
     }
 
-    override fun actions() = merge(
-        categoriesAdapter.categoryClicks()
-            .map { CategorySelectionAction.OnCategorySelect(it) },
+    override val actions get() =
+        merge(
+            categoriesAdapter.categoryClicks()
+                .map { CategorySelectionAction.OnCategorySelect(it) },
 
-        binding.searchView.searches()
-            .map { query ->
-                binding.searchView.clearFocus()
-                hideKeyboard()
-                CategorySelectionAction.OnSearchExecute(query)
-            }
-    )
+            binding.searchView.searches()
+                .map { query ->
+                    binding.searchView.clearFocus()
+                    hideKeyboard()
+                    CategorySelectionAction.OnSearchExecute(query)
+                }
+        )
 
     override fun renderState(state: CategorySelectionState) {
         binding.categoriesRecyclerView.isVisible =

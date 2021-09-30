@@ -4,6 +4,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import androidx.activity.viewModels
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.drop
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.merge
 import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEvent
 import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEventListener
 import net.yslibrary.android.keyboardvisibilityevent.Unregistrar
@@ -13,6 +16,7 @@ import ru.heatalways.chucknorrisfunfacts.extensions.setVisibleOrGone
 import ru.heatalways.chucknorrisfunfacts.extensions.showSmoothly
 import ru.heatalways.chucknorrisfunfacts.presentation.base.BaseMviActivity
 import ru.heatalways.chucknorrisfunfacts.presentation.base.KeyboardChangeListener
+import ru.ldralighieri.corbind.material.itemSelections
 
 @AndroidEntryPoint
 class MainActivity: BaseMviActivity<
@@ -32,11 +36,6 @@ class MainActivity: BaseMviActivity<
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        binding.bottomNavigationBar.setOnItemSelectedListener {
-            action(MainAction.OnBottomItemChange(it.itemId))
-            return@setOnItemSelectedListener true
-        }
-
         keyboardListenerUnregister = KeyboardVisibilityEvent.registerEventListener(
             activity = this,
             listener = object: KeyboardVisibilityEventListener {
@@ -48,6 +47,13 @@ class MainActivity: BaseMviActivity<
             }
         )
     }
+
+    override val actions get() =
+        merge(
+            binding.bottomNavigationBar.itemSelections()
+                .drop(1)
+                .map { MainAction.OnBottomItemChange(it.itemId) }
+        )
 
     override fun renderState(state: MainViewState) = Unit
 

@@ -30,14 +30,14 @@ class MainViewModel @Inject constructor(
 
     override fun handleAction(action: MainAction) {
         when (action) {
-            is MainAction.OnBottomItemChange -> {
-                savedStateHandle.set(ALREADY_NAVIGATED, true)
+            is MainAction.OnBottomItemChange ->
                 navigateByItemId(action.itemId)
-            }
         }
     }
 
     private fun navigateByItemId(id: Int) {
+        savedStateHandle.set(ALREADY_NAVIGATED, true)
+
         val screen = when(id) {
             R.id.navJokeSearch -> SearchJokeFragment.getScreen()
             R.id.navJokeRandom -> RandomJokeFragment.getScreen()
