@@ -9,6 +9,8 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.github.terrakok.cicerone.androidx.FragmentScreen
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.merge
 import ru.heatalways.chucknorrisfunfacts.R
 import ru.heatalways.chucknorrisfunfacts.databinding.FragmentSearchJokeBinding
 import ru.heatalways.chucknorrisfunfacts.domain.repositories.chuck_norris_jokes.ChuckJoke
@@ -35,17 +37,20 @@ class SearchJokeFragment: BaseMviFragment<
         super.onViewCreated(view, savedInstanceState)
         setTitle(R.string.search_joke_screen_title)
 
-        binding.apply {
+        with(binding) {
             jokesRecyclerView.layoutManager = LinearLayoutManager(context)
             jokesRecyclerView.adapter = jokesAdapter
-
-            searchView.onSearchExecute = { searchQuery ->
-                action(SearchJokeAction.OnSearchExecute(searchQuery))
-                searchView.clearFocus()
-                hideKeyboard()
-            }
         }
     }
+
+    override fun actions() = merge(
+        binding.searchView.searches()
+            .map {
+                binding.searchView.clearFocus()
+                hideKeyboard()
+                SearchJokeAction.OnSearchExecute(it)
+            }
+    )
 
     override fun renderState(state: SearchJokeViewState) {
         binding.jokesRecyclerView.isVisible =
@@ -81,7 +86,11 @@ class SearchJokeFragment: BaseMviFragment<
     }
 
     override fun onDestroyView() {
-        binding.jokesRecyclerView.adapter = null
+        with(binding) {
+            searchView.clearListeners()
+            jokesRecyclerView.adapter = null
+        }
+
         super.onDestroyView()
     }
 

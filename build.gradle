@@ -36,6 +36,9 @@ buildscript {
 
         // DATA STORAGE
         room_version = "2.3.0"
+
+        // CORBIND
+        corbind_verison = "1.5.2"
     }
 
     repositories {

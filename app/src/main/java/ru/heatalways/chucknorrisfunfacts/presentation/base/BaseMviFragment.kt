@@ -4,16 +4,17 @@ import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.lifecycleScope
 import androidx.viewbinding.ViewBinding
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 
 abstract class BaseMviFragment<
         Binding: ViewBinding,
-        Event: MviAction,
+        Action: MviAction,
         State: MviState
 >: BaseFragment<Binding>() {
 
-    protected abstract val viewModel: BaseMviViewModel<Event, State, *>
+    protected abstract val viewModel: BaseMviViewModel<Action, State, *>
 
     protected var previousState: State? = null
 
@@ -27,12 +28,16 @@ abstract class BaseMviFragment<
                     previousState = it
                 }
                 .launchIn(this)
+
+            actions().onEach { action(it) }.launchIn(this)
         }
     }
 
+    protected abstract fun actions(): Flow<Action>
+
     abstract fun renderState(state: State)
 
-    protected fun action(event: Event) {
+    protected fun action(event: Action) {
         viewModel.setAction(event)
     }
 

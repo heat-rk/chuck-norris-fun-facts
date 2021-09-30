@@ -93,11 +93,9 @@ class CategorySelectionViewModel @AssistedInject constructor(
                         reduceState(CategorySelectionPartialState.CategoriesLoading)
 
                     is InteractorEvent.Success -> {
-                        reduceState(
-                            CategorySelectionPartialState.CategoriesLoaded(
-                                it.body
-                            )
-                        )
+                        reduceState(CategorySelectionPartialState.CategoriesLoaded(
+                            it.body
+                        ))
                         scrollUp()
                     }
                 }

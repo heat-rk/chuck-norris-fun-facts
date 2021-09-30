@@ -2,7 +2,6 @@ package ru.heatalways.chucknorrisfunfacts.presentation.screen.random_joke
 
 import android.os.Bundle
 import android.view.LayoutInflater
-import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
@@ -10,6 +9,9 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.github.terrakok.cicerone.androidx.FragmentScreen
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.filter
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.merge
 import ru.heatalways.chucknorrisfunfacts.R
 import ru.heatalways.chucknorrisfunfacts.databinding.FragmentRandomJokeBinding
 import ru.heatalways.chucknorrisfunfacts.domain.repositories.chuck_norris_jokes.Category
@@ -17,11 +19,13 @@ import ru.heatalways.chucknorrisfunfacts.domain.repositories.chuck_norris_jokes.
 import ru.heatalways.chucknorrisfunfacts.domain.utils.SnackbarState
 import ru.heatalways.chucknorrisfunfacts.domain.utils.StringResource
 import ru.heatalways.chucknorrisfunfacts.domain.utils.ToastState
-import ru.heatalways.chucknorrisfunfacts.extensions.onScrolledToLastItem
 import ru.heatalways.chucknorrisfunfacts.extensions.postScrollToPosition
+import ru.heatalways.chucknorrisfunfacts.extensions.scrollsToLastItem
 import ru.heatalways.chucknorrisfunfacts.extensions.showToast
 import ru.heatalways.chucknorrisfunfacts.presentation.adapters.JokesAdapter
 import ru.heatalways.chucknorrisfunfacts.presentation.base.BaseMviFragment
+import ru.ldralighieri.corbind.appcompat.itemClicks
+import ru.ldralighieri.corbind.view.clicks
 
 @AndroidEntryPoint
 class RandomJokeFragment: BaseMviFragment<
@@ -41,22 +45,26 @@ class RandomJokeFragment: BaseMviFragment<
         setTitle(R.string.random_joke_screen_title)
         initMenu(R.menu.random_jokes_history_menu)
 
-        binding.apply {
-            getJokeButton.setOnClickListener {
-                action(RandomJokeAction.OnRandomJokeRequest)
-            }
-
-            selectCategoryButton.setOnClickListener {
-                action(RandomJokeAction.OnCategorySelectionButtonClick)
-            }
-
+        with(binding) {
             historyRecyclerView.layoutManager = LinearLayoutManager(requireContext())
             historyRecyclerView.adapter = adapter
-            historyRecyclerView.onScrolledToLastItem {
-                action(RandomJokeAction.OnNextPage)
-            }
         }
     }
+
+    override fun actions() = merge(
+        binding.getJokeButton.clicks()
+            .map { RandomJokeAction.OnRandomJokeRequest },
+
+        binding.selectCategoryButton.clicks()
+            .map { RandomJokeAction.OnCategorySelectionButtonClick },
+
+        binding.historyRecyclerView.scrollsToLastItem()
+            .map { RandomJokeAction.OnNextPage },
+
+        toolbar.itemClicks()
+            .filter { it.itemId == R.id.removeAll }
+            .map { RandomJokeAction.RemoveAll }
+    )
 
     override fun renderState(state: RandomJokeViewState) {
         binding.historyRecyclerView.isVisible =
@@ -132,17 +140,12 @@ class RandomJokeFragment: BaseMviFragment<
             }
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            R.id.removeAll -> action(RandomJokeAction.RemoveAll)
+    override fun onDestroyView() {
+        with(binding) {
+            historyRecyclerView.clearOnScrollListeners()
+            historyRecyclerView.adapter = null
         }
 
-        return true
-    }
-
-    override fun onDestroyView() {
-        binding.historyRecyclerView.clearOnScrollListeners()
-        binding.historyRecyclerView.adapter = null
         super.onDestroyView()
     }
 

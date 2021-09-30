@@ -9,6 +9,8 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.github.terrakok.cicerone.androidx.FragmentScreen
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.merge
 import ru.heatalways.chucknorrisfunfacts.R
 import ru.heatalways.chucknorrisfunfacts.databinding.FragmentSelectCategoryBinding
 import ru.heatalways.chucknorrisfunfacts.domain.repositories.chuck_norris_jokes.Category
@@ -49,21 +51,23 @@ class CategorySelectionFragment: BaseMviFragment<
         setTitle(R.string.select_category_screen_title)
         initToolbarBackButton()
 
-        categoriesAdapter.onCategoryClick = { category ->
-            action(CategorySelectionAction.OnCategorySelect(category))
-        }
-
-        binding.apply {
+        with(binding) {
             categoriesRecyclerView.layoutManager = LinearLayoutManager(context)
             categoriesRecyclerView.adapter = categoriesAdapter
-
-            searchView.onSearchExecute = { query ->
-                action(CategorySelectionAction.OnSearchExecute(query))
-                searchView.clearFocus()
-                hideKeyboard()
-            }
         }
     }
+
+    override fun actions() = merge(
+        categoriesAdapter.categoryClicks()
+            .map { CategorySelectionAction.OnCategorySelect(it) },
+
+        binding.searchView.searches()
+            .map { query ->
+                binding.searchView.clearFocus()
+                hideKeyboard()
+                CategorySelectionAction.OnSearchExecute(query)
+            }
+    )
 
     override fun renderState(state: CategorySelectionState) {
         binding.categoriesRecyclerView.isVisible =
@@ -99,7 +103,12 @@ class CategorySelectionFragment: BaseMviFragment<
     }
 
     override fun onDestroyView() {
-        binding.categoriesRecyclerView.adapter = null
+        with(binding) {
+            searchView.clearListeners()
+            categoriesRecyclerView.clearOnScrollListeners()
+            categoriesRecyclerView.adapter = null
+        }
+
         super.onDestroyView()
     }
 

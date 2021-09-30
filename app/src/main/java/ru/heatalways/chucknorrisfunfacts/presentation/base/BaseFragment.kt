@@ -8,6 +8,7 @@ import androidx.annotation.ColorRes
 import androidx.annotation.IdRes
 import androidx.annotation.MenuRes
 import androidx.annotation.StringRes
+import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
@@ -29,6 +30,9 @@ abstract class BaseFragment<Binding: ViewBinding>: Fragment(), KeyboardChangeLis
     @ColorRes protected open val backgroundColor = R.color.darkBackgroundColor
 
     protected var snackbar: Snackbar? = null
+
+    protected val toolbar: Toolbar
+        get() = rootBinding.appbar.toolbar
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -119,9 +123,6 @@ abstract class BaseFragment<Binding: ViewBinding>: Fragment(), KeyboardChangeLis
 
     protected fun initMenu(@MenuRes menuRes: Int) {
         rootBinding.appbar.toolbar.inflateMenu(menuRes)
-        rootBinding.appbar.toolbar.setOnMenuItemClickListener {
-            onOptionsItemSelected(it)
-        }
     }
 
     override fun onKeyboardChanged(isOpen: Boolean) {

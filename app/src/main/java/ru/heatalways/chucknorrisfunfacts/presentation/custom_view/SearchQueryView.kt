@@ -1,11 +1,16 @@
 package ru.heatalways.chucknorrisfunfacts.presentation.custom_view
 
 import android.content.Context
+import android.text.TextWatcher
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.inputmethod.EditorInfo
 import android.widget.FrameLayout
 import androidx.core.widget.doAfterTextChanged
+import kotlinx.coroutines.channels.awaitClose
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.channelFlow
+import kotlinx.coroutines.isActive
 import ru.heatalways.chucknorrisfunfacts.R
 import ru.heatalways.chucknorrisfunfacts.databinding.IncSearchLayoutBinding
 import ru.heatalways.chucknorrisfunfacts.extensions.maxLength
@@ -17,13 +22,15 @@ class SearchQueryView: FrameLayout {
     private var minQueryLength: Int = 0
     private var maxQueryLength: Int = Int.MAX_VALUE
 
+    private var textWatcher: TextWatcher? = null
+
     val isQueryLengthValid
         get() = binding?.searchQueryEditText?.length() in minQueryLength..maxQueryLength
 
     val searchQuery
         get() = binding?.searchQueryEditText?.text.toString()
 
-    var onSearchExecute: (query: String) -> Unit = {}
+    var onSearchExecute: ((query: String) -> Unit)? = null
 
     constructor(context: Context) : super(context) {
         initView(null)
@@ -51,13 +58,13 @@ class SearchQueryView: FrameLayout {
     private fun initListeners() {
         binding?.apply {
             searchQueryEditText.apply {
-                doAfterTextChanged {
+                textWatcher = doAfterTextChanged {
                     searchButton.showHideSmoothly(isQueryLengthValid)
                 }
 
                 setOnEditorActionListener { _, actionId,_ ->
                     if (actionId == EditorInfo.IME_ACTION_SEARCH && isQueryLengthValid) {
-                        onSearchExecute(searchQuery)
+                        onSearchExecute?.invoke(searchQuery)
                         return@setOnEditorActionListener true
                     }
                     return@setOnEditorActionListener false
@@ -65,7 +72,7 @@ class SearchQueryView: FrameLayout {
             }
 
             searchButton.setOnClickListener {
-                onSearchExecute(searchQuery)
+                onSearchExecute?.invoke(searchQuery)
             }
         }
     }
@@ -85,5 +92,17 @@ class SearchQueryView: FrameLayout {
 
     fun setMinQueryLength(length: Int) {
         minQueryLength = length
+    }
+
+    fun searches(): Flow<String> = channelFlow {
+        onSearchExecute = { if (isActive) { trySend(it) } }
+        awaitClose { onSearchExecute = {} }
+    }
+
+    fun clearListeners() {
+        binding?.searchQueryEditText?.removeTextChangedListener(textWatcher)
+        binding?.searchButton?.setOnClickListener(null)
+        onSearchExecute = null
+        textWatcher = null
     }
 }

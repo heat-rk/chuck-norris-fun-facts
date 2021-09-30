@@ -32,42 +32,52 @@ class SearchJokeViewModel @Inject constructor(
     }
 
     private fun handleSavedData() {
-        savedStateHandle.get<String?>(SAVED_QUERY)?.let { query -> interactor.search(query)
-            .onEach {
-                when (it) {
-                    is InteractorEvent.Error ->
-                        reduceState(SearchJokePartialState.JokesMessage(it.message))
+        savedStateHandle.get<String?>(SAVED_QUERY)?.let { query ->
+            interactor.search(query)
+                .onEach {
+                    when (it) {
+                        is InteractorEvent.Error ->
+                            reduceState(SearchJokePartialState.JokesMessage(
+                                it.message
+                            ))
 
-                    is InteractorEvent.Loading ->
-                        reduceState(SearchJokePartialState.JokesLoading)
+                        is InteractorEvent.Loading ->
+                            reduceState(SearchJokePartialState.JokesLoading)
 
-                    is InteractorEvent.Success ->
-                        reduceState(SearchJokePartialState.JokesLoaded(it.body))
+                        is InteractorEvent.Success ->
+                            reduceState(SearchJokePartialState.JokesLoaded(
+                                it.body
+                            ))
+                    }
                 }
-            }
-            .launchIn(viewModelScope)
+                .launchIn(viewModelScope)
         }
     }
 
     override fun handleAction(action: SearchJokeAction) {
         when (action) {
-            is SearchJokeAction.OnSearchExecute -> interactor.search(action.query)
-                .onEach {
-                    when (it) {
-                        is InteractorEvent.Error ->
-                            reduceState(SearchJokePartialState.JokesMessage(it.message))
+            is SearchJokeAction.OnSearchExecute ->
+                interactor.search(action.query)
+                    .onEach {
+                        when (it) {
+                            is InteractorEvent.Error ->
+                                reduceState(SearchJokePartialState.JokesMessage(
+                                    it.message
+                                ))
 
-                        is InteractorEvent.Loading ->
-                            reduceState(SearchJokePartialState.JokesLoading)
+                            is InteractorEvent.Loading ->
+                                reduceState(SearchJokePartialState.JokesLoading)
 
-                        is InteractorEvent.Success -> {
-                            reduceState(SearchJokePartialState.JokesLoaded(it.body))
-                            scrollUp()
+                            is InteractorEvent.Success -> {
+                                reduceState(SearchJokePartialState.JokesLoaded(
+                                    it.body
+                                ))
+                                scrollUp()
+                            }
                         }
                     }
-                }
-                .launchIn(viewModelScope)
-                .also { savedStateHandle.set(SAVED_QUERY, action.query) }
+                    .launchIn(viewModelScope)
+                    .also { savedStateHandle.set(SAVED_QUERY, action.query) }
         }
     }
 
