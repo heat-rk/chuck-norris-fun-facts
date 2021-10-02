@@ -3,15 +3,15 @@ package ru.heatalways.chucknorrisfunfacts.presentation.screen.random_joke.select
 import ru.heatalways.chucknorrisfunfacts.presentation.base.MviReducer
 
 object CategorySelectionStateReducer: MviReducer<
-        CategorySelectionState,
+        CategorySelectionViewState,
         CategorySelectionPartialState
 >{
     override fun reduce(
-        state: CategorySelectionState,
+        state: CategorySelectionViewState,
         partialState: CategorySelectionPartialState
     ) = when (partialState) {
-        is CategorySelectionPartialState.ScrollUp -> state.copy(
-            isScrollingUp = partialState.isScrolling
+        is CategorySelectionPartialState.Scroll -> state.copy(
+            scrollState = partialState.scrollState
         )
 
         is CategorySelectionPartialState.CategoriesLoaded -> state.copy(

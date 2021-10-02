@@ -56,8 +56,8 @@ object RandomJokeStateReducer: MviReducer<
         is RandomJokePartialState.Snackbar -> state.copy(
             snackbarState = partialState.snackbarState
         )
-        is RandomJokePartialState.ScrollUp -> state.copy(
-            isScrollingUp = partialState.isScrolling
+        is RandomJokePartialState.Scroll -> state.copy(
+            scrollState = partialState.scrollState
         )
 
 

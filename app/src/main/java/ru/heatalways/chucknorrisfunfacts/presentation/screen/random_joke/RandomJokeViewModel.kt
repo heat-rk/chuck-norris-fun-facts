@@ -18,6 +18,9 @@ import ru.heatalways.chucknorrisfunfacts.domain.utils.paging.PagingConfig
 import ru.heatalways.chucknorrisfunfacts.domain.utils.paging.PagingEvent
 import ru.heatalways.chucknorrisfunfacts.presentation.base.BaseMviViewModel
 import ru.heatalways.chucknorrisfunfacts.presentation.screen.random_joke.select_category.CategorySelectionFragment
+import ru.heatalways.chucknorrisfunfacts.presentation.util.ScrollState
+import ru.heatalways.chucknorrisfunfacts.presentation.util.SnackbarState
+import ru.heatalways.chucknorrisfunfacts.presentation.util.ToastState
 import javax.inject.Inject
 
 @HiltViewModel
@@ -157,8 +160,8 @@ class RandomJokeViewModel @Inject constructor(
     }
 
     private fun scrollUp() {
-        reduceState(RandomJokePartialState.ScrollUp(true))
-        reduceState(RandomJokePartialState.ScrollUp(false))
+        reduceState(RandomJokePartialState.Scroll(ScrollState.ScrollingUp))
+        reduceState(RandomJokePartialState.Scroll(ScrollState.Stopped))
     }
 
     private fun showToast(message: StringResource) {
@@ -173,7 +176,8 @@ class RandomJokeViewModel @Inject constructor(
         duration: Long
     ) {
         flow {
-            emit(RandomJokePartialState.Snackbar(SnackbarState.Shown(
+            emit(RandomJokePartialState.Snackbar(
+                SnackbarState.Shown(
                 message = message,
                 buttonText = buttonText,
                 buttonCallback = callback

@@ -9,22 +9,22 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.github.terrakok.cicerone.androidx.FragmentScreen
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.merge
 import ru.heatalways.chucknorrisfunfacts.R
 import ru.heatalways.chucknorrisfunfacts.databinding.FragmentRandomJokeBinding
 import ru.heatalways.chucknorrisfunfacts.domain.repositories.chuck_norris_jokes.Category
 import ru.heatalways.chucknorrisfunfacts.domain.repositories.chuck_norris_jokes.ChuckJoke
-import ru.heatalways.chucknorrisfunfacts.domain.utils.SnackbarState
+import ru.heatalways.chucknorrisfunfacts.presentation.util.SnackbarState
 import ru.heatalways.chucknorrisfunfacts.domain.utils.StringResource
-import ru.heatalways.chucknorrisfunfacts.domain.utils.ToastState
+import ru.heatalways.chucknorrisfunfacts.presentation.util.ToastState
 import ru.heatalways.chucknorrisfunfacts.extensions.postScrollToPosition
 import ru.heatalways.chucknorrisfunfacts.extensions.scrollsToLastItem
 import ru.heatalways.chucknorrisfunfacts.extensions.showToast
 import ru.heatalways.chucknorrisfunfacts.presentation.adapters.JokesAdapter
 import ru.heatalways.chucknorrisfunfacts.presentation.adapters.decorators.MarginItemDecoration
 import ru.heatalways.chucknorrisfunfacts.presentation.base.BaseMviFragment
+import ru.heatalways.chucknorrisfunfacts.presentation.util.ScrollState
 import ru.ldralighieri.corbind.appcompat.itemClicks
 import ru.ldralighieri.corbind.view.clicks
 
@@ -81,7 +81,7 @@ class RandomJokeFragment: BaseMviFragment<
         // single live events
         renderToast(state.toastState)
         renderSnackbar(state.snackbarState)
-        renderScrolling(state.isScrollingUp)
+        renderScrolling(state.scrollState)
     }
 
     private fun renderLoading(isLoading: Boolean) {
@@ -133,9 +133,9 @@ class RandomJokeFragment: BaseMviFragment<
                 hideSnackbar()
     }
 
-    private fun renderScrolling(isScrollingUp: Boolean) {
-        if (previousState?.isScrollingUp != isScrollingUp)
-            if (isScrollingUp) {
+    private fun renderScrolling(scrollState: ScrollState) {
+        if (previousState?.scrollState != scrollState)
+            if (scrollState == ScrollState.ScrollingUp) {
                 binding.motionLayout.transitionToStart()
                 binding.historyRecyclerView.postScrollToPosition(0)
             }

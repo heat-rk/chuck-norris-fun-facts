@@ -22,13 +22,14 @@ import ru.heatalways.chucknorrisfunfacts.extensions.putTrackedReference
 import ru.heatalways.chucknorrisfunfacts.presentation.adapters.CategoriesAdapter
 import ru.heatalways.chucknorrisfunfacts.presentation.adapters.decorators.MarginItemDecoration
 import ru.heatalways.chucknorrisfunfacts.presentation.base.BaseMviFragment
+import ru.heatalways.chucknorrisfunfacts.presentation.util.ScrollState
 import javax.inject.Inject
 
 @AndroidEntryPoint
 class CategorySelectionFragment: BaseMviFragment<
         FragmentSelectCategoryBinding,
         CategorySelectionAction,
-        CategorySelectionState
+        CategorySelectionViewState
 >() {
     @Inject
     lateinit var assistedFactory: CategorySelectionViewModel.Factory
@@ -72,14 +73,14 @@ class CategorySelectionFragment: BaseMviFragment<
                 }
         )
 
-    override fun renderState(state: CategorySelectionState) {
+    override fun renderState(state: CategorySelectionViewState) {
         binding.categoriesRecyclerView.isVisible =
             !state.isCategoriesLoading && state.categoriesMessage == null
 
         renderList(state.categories)
         renderLoading(state.isCategoriesLoading)
         renderError(state.categoriesMessage)
-        renderScrolling(state.isScrollingUp)
+        renderScrolling(state.scrollState)
     }
 
     private fun renderLoading(isLoading: Boolean) {
@@ -99,9 +100,9 @@ class CategorySelectionFragment: BaseMviFragment<
             categoriesAdapter.submitList(categories)
     }
 
-    private fun renderScrolling(isScrollingUp: Boolean) {
-        if (previousState?.isScrollingUp != isScrollingUp)
-            if (isScrollingUp)
+    private fun renderScrolling(scrollState: ScrollState) {
+        if (previousState?.scrollState != scrollState)
+            if (scrollState == ScrollState.ScrollingUp)
                 binding.categoriesRecyclerView.postScrollToPosition(0)
     }
 

@@ -1,4 +1,6 @@
-package ru.heatalways.chucknorrisfunfacts.domain.utils
+package ru.heatalways.chucknorrisfunfacts.presentation.util
+
+import ru.heatalways.chucknorrisfunfacts.domain.utils.StringResource
 
 sealed class SnackbarState {
     object Hidden: SnackbarState()

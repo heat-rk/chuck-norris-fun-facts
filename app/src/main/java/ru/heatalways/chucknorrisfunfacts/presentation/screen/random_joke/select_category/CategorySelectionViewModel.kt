@@ -7,14 +7,13 @@ import com.github.terrakok.cicerone.Router
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedFactory
 import dagger.assisted.AssistedInject
-import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import ru.heatalways.chucknorrisfunfacts.domain.interactors.chuck_norris_jokes.ChuckNorrisJokesInteractor
 import ru.heatalways.chucknorrisfunfacts.domain.repositories.chuck_norris_jokes.Category
 import ru.heatalways.chucknorrisfunfacts.domain.utils.InteractorEvent
 import ru.heatalways.chucknorrisfunfacts.presentation.base.BaseMviViewModel
-import javax.inject.Inject
+import ru.heatalways.chucknorrisfunfacts.presentation.util.ScrollState
 
 class CategorySelectionViewModel @AssistedInject constructor(
     @Assisted("onSelect") private val onSelect: (Category) -> Unit,
@@ -23,11 +22,11 @@ class CategorySelectionViewModel @AssistedInject constructor(
     private val router: Router
 ): BaseMviViewModel<
         CategorySelectionAction,
-        CategorySelectionState,
+        CategorySelectionViewState,
         CategorySelectionPartialState
 >(CategorySelectionStateReducer) {
 
-    override val initialState get() = CategorySelectionState(
+    override val initialState get() = CategorySelectionViewState(
         isCategoriesLoading = true
     )
 
@@ -104,8 +103,8 @@ class CategorySelectionViewModel @AssistedInject constructor(
     }
 
     private fun scrollUp() {
-        reduceState(CategorySelectionPartialState.ScrollUp(true))
-        reduceState(CategorySelectionPartialState.ScrollUp(false))
+        reduceState(CategorySelectionPartialState.Scroll(ScrollState.ScrollingUp))
+        reduceState(CategorySelectionPartialState.Scroll(ScrollState.Stopped))
     }
 
     @AssistedFactory

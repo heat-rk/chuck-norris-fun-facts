@@ -13,7 +13,7 @@ import ru.heatalways.chucknorrisfunfacts.domain.interactors.chuck_norris_jokes.C
 import ru.heatalways.chucknorrisfunfacts.domain.interactors.chuck_norris_jokes.ChuckNorrisJokesInteractorImpl
 import ru.heatalways.chucknorrisfunfacts.domain.repositories.chuck_norris_jokes.Category
 import ru.heatalways.chucknorrisfunfacts.domain.repositories.chuck_norris_jokes.ChuckNorrisJokesRepositoryFake
-import ru.heatalways.chucknorrisfunfacts.domain.utils.ToastState
+import ru.heatalways.chucknorrisfunfacts.presentation.util.ToastState
 import ru.heatalways.chucknorrisfunfacts.domain.utils.strRes
 import ru.heatalways.chucknorrisfunfacts.mappers.toEntity
 import ru.heatalways.chucknorrisfunfacts.utils.BaseViewModelTest
@@ -160,7 +160,8 @@ class RandomJokeViewModelTest: BaseViewModelTest() {
             assertThat(errorState.jokes).hasSize(0)
 
             val toastShownState = awaitItem()
-            assertThat(toastShownState.toastState).isEqualTo(ToastState.Shown(
+            assertThat(toastShownState.toastState).isEqualTo(
+                ToastState.Shown(
                 strRes(R.string.error_network)
             ))
 
