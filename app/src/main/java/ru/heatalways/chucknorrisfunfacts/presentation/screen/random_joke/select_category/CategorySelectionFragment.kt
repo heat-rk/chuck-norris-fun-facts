@@ -22,6 +22,7 @@ import ru.heatalways.chucknorrisfunfacts.extensions.putTrackedReference
 import ru.heatalways.chucknorrisfunfacts.presentation.adapters.CategoriesAdapter
 import ru.heatalways.chucknorrisfunfacts.presentation.adapters.decorators.MarginItemDecoration
 import ru.heatalways.chucknorrisfunfacts.presentation.base.BaseMviFragment
+import ru.heatalways.chucknorrisfunfacts.presentation.util.DefaultAppbar
 import ru.heatalways.chucknorrisfunfacts.presentation.util.ScrollState
 import javax.inject.Inject
 
@@ -43,6 +44,7 @@ class CategorySelectionFragment: BaseMviFragment<
         )
     }
 
+    private val appbar = DefaultAppbar(this)
     private val categoriesAdapter = CategoriesAdapter()
 
     override val bindingInflater: (LayoutInflater, ViewGroup?, Boolean) -> FragmentCategorySelectionBinding
@@ -50,8 +52,12 @@ class CategorySelectionFragment: BaseMviFragment<
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setTitle(R.string.select_category_screen_title)
-        initToolbarBackButton()
+
+        with(appbar) {
+            inflate(requireContext(), requireActivity(), rootBinding.topLayout)
+            setTitle(R.string.select_category_screen_title)
+            initBackButton()
+        }
 
         with(binding.categoriesRecyclerView) {
             addItemDecoration(MarginItemDecoration(R.dimen.paddingMD))

@@ -15,18 +15,14 @@ import ru.heatalways.chucknorrisfunfacts.R
 import ru.heatalways.chucknorrisfunfacts.databinding.FragmentRandomJokeBinding
 import ru.heatalways.chucknorrisfunfacts.domain.repositories.chuck_norris_jokes.Category
 import ru.heatalways.chucknorrisfunfacts.domain.repositories.chuck_norris_jokes.ChuckJoke
-import ru.heatalways.chucknorrisfunfacts.presentation.util.SnackbarState
 import ru.heatalways.chucknorrisfunfacts.domain.utils.StringResource
-import ru.heatalways.chucknorrisfunfacts.presentation.util.ToastState
 import ru.heatalways.chucknorrisfunfacts.extensions.postScrollToPosition
 import ru.heatalways.chucknorrisfunfacts.extensions.scrollsToLastItem
 import ru.heatalways.chucknorrisfunfacts.extensions.showToast
 import ru.heatalways.chucknorrisfunfacts.presentation.adapters.JokesAdapter
 import ru.heatalways.chucknorrisfunfacts.presentation.adapters.decorators.MarginItemDecoration
 import ru.heatalways.chucknorrisfunfacts.presentation.base.BaseMviFragment
-import ru.heatalways.chucknorrisfunfacts.presentation.util.IndefiniteSnackbar
-import ru.heatalways.chucknorrisfunfacts.presentation.util.ScrollState
-import ru.ldralighieri.corbind.appcompat.itemClicks
+import ru.heatalways.chucknorrisfunfacts.presentation.util.*
 import ru.ldralighieri.corbind.view.clicks
 
 @AndroidEntryPoint
@@ -37,6 +33,7 @@ class RandomJokeFragment: BaseMviFragment<
 >() {
     override val viewModel: RandomJokeViewModel by viewModels()
 
+    private val appbar = DefaultAppbar(this)
     private val jokesAdapter = JokesAdapter()
     private val snackbar = IndefiniteSnackbar()
 
@@ -45,8 +42,12 @@ class RandomJokeFragment: BaseMviFragment<
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setTitle(R.string.random_joke_screen_title)
-        initMenu(R.menu.random_jokes_history_menu)
+
+        with(appbar) {
+            inflate(requireContext(), requireActivity(), rootBinding.topLayout)
+            setTitle(R.string.random_joke_screen_title)
+            initMenu(R.menu.random_jokes_history_menu)
+        }
 
         with(binding.historyRecyclerView) {
             addItemDecoration(MarginItemDecoration(R.dimen.paddingMD))
@@ -66,7 +67,7 @@ class RandomJokeFragment: BaseMviFragment<
             binding.historyRecyclerView.scrollsToLastItem()
                 .map { RandomJokeAction.OnNextPage },
 
-            toolbar.itemClicks()
+            appbar.toolbarItemClicks
                 .map { RandomJokeAction.OnMenuItemSelect(it.itemId) }
         )
 

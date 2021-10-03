@@ -5,9 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.ColorRes
-import androidx.annotation.MenuRes
-import androidx.annotation.StringRes
-import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
@@ -21,28 +18,28 @@ import ru.heatalways.chucknorrisfunfacts.extensions.hideKeyboard
 import ru.heatalways.chucknorrisfunfacts.presentation.screen.main.MainActivity
 
 abstract class BaseFragment<Binding: ViewBinding>: Fragment(), KeyboardChangeListener {
-    private lateinit var rootBinding: BaseFragmentBinding
-    protected lateinit var binding: Binding
+    private var _rootBinding: BaseFragmentBinding? = null
+    private var _binding: Binding? = null
+
+    val rootBinding
+        get() = _rootBinding!!
+
+    val binding
+        get() = _binding!!
 
     protected abstract val bindingInflater: (LayoutInflater, ViewGroup?, Boolean) -> Binding
     @ColorRes protected open val backgroundColor = R.color.darkBackgroundColor
-
-    protected val toolbar: Toolbar
-        get() = rootBinding.appbar.toolbar
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        rootBinding = BaseFragmentBinding.inflate(inflater, container, false).apply {
+        _rootBinding = BaseFragmentBinding.inflate(inflater, container, false).apply {
             root.setBackgroundColor(ContextCompat.getColor(requireContext(), backgroundColor))
-            appbar.toolbar.setNavigationOnClickListener {
-                activity?.onBackPressed()
-            }
         }
 
-        binding = bindingInflater(inflater, rootBinding.contentContainer, true)
+        _binding = bindingInflater(inflater, rootBinding.contentContainer, true)
 
         return rootBinding.root
     }
@@ -65,6 +62,12 @@ abstract class BaseFragment<Binding: ViewBinding>: Fragment(), KeyboardChangeLis
         }
     }
 
+    override fun onDestroyView() {
+        _binding = null
+        _rootBinding = null
+        super.onDestroyView()
+    }
+
     protected fun setErrorVisibility(isVisible: Boolean, message: StringResource? = null) {
         rootBinding.errorContainer.isVisible = isVisible
         rootBinding.errorTextView.text = getString(message) ?: getString(R.string.error_unknown)
@@ -72,26 +75,6 @@ abstract class BaseFragment<Binding: ViewBinding>: Fragment(), KeyboardChangeLis
 
     protected fun setProgressBarVisibility(isVisible: Boolean) {
         rootBinding.progressBar.isVisible = isVisible
-    }
-
-    protected fun setTitle(@StringRes title: Int) {
-        rootBinding.appbar.toolbar.setTitle(title)
-    }
-
-    protected fun setTitle(title: String) {
-        rootBinding.appbar.toolbar.title = title
-    }
-
-    protected fun initToolbarBackButton() {
-        rootBinding.appbar.toolbar.navigationIcon =
-            ContextCompat.getDrawable(requireContext(), R.drawable.ic_back_arrow)
-
-        rootBinding.appbar.toolbar.navigationContentDescription =
-            getString(R.string.navigation_back)
-    }
-
-    protected fun initMenu(@MenuRes menuRes: Int) {
-        rootBinding.appbar.toolbar.inflateMenu(menuRes)
     }
 
     override fun onKeyboardChanged(isOpen: Boolean) {
