@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.ColorRes
-import androidx.annotation.IdRes
 import androidx.annotation.MenuRes
 import androidx.annotation.StringRes
 import androidx.appcompat.widget.Toolbar
@@ -13,7 +12,6 @@ import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.viewbinding.ViewBinding
-import com.google.android.material.snackbar.Snackbar
 import ru.heatalways.chucknorrisfunfacts.R
 import ru.heatalways.chucknorrisfunfacts.databinding.BaseFragmentBinding
 import ru.heatalways.chucknorrisfunfacts.domain.utils.StringResource
@@ -28,8 +26,6 @@ abstract class BaseFragment<Binding: ViewBinding>: Fragment(), KeyboardChangeLis
 
     protected abstract val bindingInflater: (LayoutInflater, ViewGroup?, Boolean) -> Binding
     @ColorRes protected open val backgroundColor = R.color.darkBackgroundColor
-
-    protected var snackbar: Snackbar? = null
 
     protected val toolbar: Toolbar
         get() = rootBinding.appbar.toolbar
@@ -67,33 +63,6 @@ abstract class BaseFragment<Binding: ViewBinding>: Fragment(), KeyboardChangeLis
         if (activity is MainActivity) {
             activity.removeKeyboardListener(this)
         }
-    }
-
-    protected fun showSnackbar(
-        view: View,
-        @IdRes anchorView: Int? = null,
-        message: StringResource,
-        buttonText: StringResource? = null,
-        buttonCallback: () -> Unit = {}
-    ) {
-        snackbar = Snackbar.make(
-            view,
-            getString(message) ?: getString(R.string.error_unknown),
-            Snackbar.LENGTH_INDEFINITE
-        ).apply {
-            if (buttonText != null)
-                setAction(getString(buttonText)) { buttonCallback() }
-
-            if (anchorView != null)
-                setAnchorView(anchorView)
-
-            show()
-        }
-    }
-
-    protected fun hideSnackbar() {
-        snackbar?.dismiss()
-        snackbar = null
     }
 
     protected fun setErrorVisibility(isVisible: Boolean, message: StringResource? = null) {

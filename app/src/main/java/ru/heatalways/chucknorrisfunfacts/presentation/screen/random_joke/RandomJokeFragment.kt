@@ -24,6 +24,7 @@ import ru.heatalways.chucknorrisfunfacts.extensions.showToast
 import ru.heatalways.chucknorrisfunfacts.presentation.adapters.JokesAdapter
 import ru.heatalways.chucknorrisfunfacts.presentation.adapters.decorators.MarginItemDecoration
 import ru.heatalways.chucknorrisfunfacts.presentation.base.BaseMviFragment
+import ru.heatalways.chucknorrisfunfacts.presentation.util.IndefiniteSnackbar
 import ru.heatalways.chucknorrisfunfacts.presentation.util.ScrollState
 import ru.ldralighieri.corbind.appcompat.itemClicks
 import ru.ldralighieri.corbind.view.clicks
@@ -37,6 +38,7 @@ class RandomJokeFragment: BaseMviFragment<
     override val viewModel: RandomJokeViewModel by viewModels()
 
     private val jokesAdapter = JokesAdapter()
+    private val snackbar = IndefiniteSnackbar()
 
     override val bindingInflater: (LayoutInflater, ViewGroup?, Boolean) -> FragmentRandomJokeBinding
         get() = FragmentRandomJokeBinding::inflate
@@ -123,14 +125,14 @@ class RandomJokeFragment: BaseMviFragment<
     private fun renderSnackbar(snackbarState: SnackbarState) {
         if (previousState?.snackbarState != snackbarState)
             if (snackbarState is SnackbarState.Shown)
-                showSnackbar(
+                snackbar.show(
                     view = binding.coordinatorLayout,
                     message = snackbarState.message,
                     buttonText = snackbarState.buttonText,
                     buttonCallback = snackbarState.buttonCallback
                 )
             else
-                hideSnackbar()
+                snackbar.hide()
     }
 
     private fun renderScrolling(scrollState: ScrollState) {
