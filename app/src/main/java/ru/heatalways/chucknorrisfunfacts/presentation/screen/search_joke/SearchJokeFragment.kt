@@ -68,7 +68,7 @@ class SearchJokeFragment: BaseMviFragment<
 
     private fun renderLoading(isLoading: Boolean) {
         if (previousState?.isJokesLoading != isLoading)
-            setProgressBarVisibility(isLoading)
+            binding.shimmerLayout.isVisible = isLoading
     }
 
     private fun renderError(message: StringResource?) {
@@ -87,6 +87,16 @@ class SearchJokeFragment: BaseMviFragment<
                 binding.root.transitionToStart()
                 binding.jokesRecyclerView.postScrollToPosition(0)
             }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        binding.shimmerLayout.startShimmer()
+    }
+
+    override fun onPause() {
+        binding.shimmerLayout.stopShimmer()
+        super.onPause()
     }
 
     override fun onDestroyView() {

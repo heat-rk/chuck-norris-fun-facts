@@ -12,7 +12,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.merge
 import ru.heatalways.chucknorrisfunfacts.R
-import ru.heatalways.chucknorrisfunfacts.databinding.FragmentSelectCategoryBinding
+import ru.heatalways.chucknorrisfunfacts.databinding.FragmentCategorySelectionBinding
 import ru.heatalways.chucknorrisfunfacts.domain.repositories.chuck_norris_jokes.Category
 import ru.heatalways.chucknorrisfunfacts.domain.utils.StringResource
 import ru.heatalways.chucknorrisfunfacts.extensions.getSafeTrackedArgument
@@ -27,7 +27,7 @@ import javax.inject.Inject
 
 @AndroidEntryPoint
 class CategorySelectionFragment: BaseMviFragment<
-        FragmentSelectCategoryBinding,
+        FragmentCategorySelectionBinding,
         CategorySelectionAction,
         CategorySelectionViewState
 >() {
@@ -45,8 +45,8 @@ class CategorySelectionFragment: BaseMviFragment<
 
     private val categoriesAdapter = CategoriesAdapter()
 
-    override val bindingInflater: (LayoutInflater, ViewGroup?, Boolean) -> FragmentSelectCategoryBinding
-        get() = FragmentSelectCategoryBinding::inflate
+    override val bindingInflater: (LayoutInflater, ViewGroup?, Boolean) -> FragmentCategorySelectionBinding
+        get() = FragmentCategorySelectionBinding::inflate
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -86,7 +86,7 @@ class CategorySelectionFragment: BaseMviFragment<
     private fun renderLoading(isLoading: Boolean) {
         if (previousState?.isCategoriesLoading != isLoading) {
             binding.searchView.setSearchButtonVisibility(!isLoading)
-            setProgressBarVisibility(isLoading)
+            binding.shimmerLayout.isVisible = isLoading
         }
     }
 
@@ -104,6 +104,16 @@ class CategorySelectionFragment: BaseMviFragment<
         if (previousState?.scrollState != scrollState)
             if (scrollState == ScrollState.ScrollingUp)
                 binding.categoriesRecyclerView.postScrollToPosition(0)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        binding.shimmerLayout.startShimmer()
+    }
+
+    override fun onPause() {
+        binding.shimmerLayout.stopShimmer()
+        super.onPause()
     }
 
     override fun onDestroyView() {

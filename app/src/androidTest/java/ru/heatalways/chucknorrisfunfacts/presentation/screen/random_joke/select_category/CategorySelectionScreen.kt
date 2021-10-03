@@ -7,7 +7,7 @@ import ru.heatalways.chucknorrisfunfacts.presentation.screen.BaseScreen
 import ru.heatalways.chucknorrisfunfacts.presentation.custom_view.KSearchQueryView
 
 object CategorySelectionScreen: BaseScreen<CategorySelectionScreen>() {
-    override val layoutId = R.layout.fragment_select_category
+    override val layoutId = R.layout.fragment_category_selection
     override val viewClass = CategorySelectionFragment::class.java
 
     val searchQueryView = KSearchQueryView { withId(R.id.searchView) }

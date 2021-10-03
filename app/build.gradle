@@ -135,6 +135,9 @@ dependencies {
     implementation "ru.ldralighieri.corbind:corbind-appcompat:$corbind_verison"
     implementation "ru.ldralighieri.corbind:corbind-material:$corbind_verison"
 
+    // SHIMMER
+    implementation "com.facebook.shimmer:shimmer:$shimmer_version"
+
     // OTHER STUFF --------------------------------------------------------
     implementation 'net.yslibrary.keyboardvisibilityevent:keyboardvisibilityevent:3.0.0-RC2'
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"

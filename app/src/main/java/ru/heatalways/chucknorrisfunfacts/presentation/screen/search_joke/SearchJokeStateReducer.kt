@@ -23,7 +23,8 @@ object SearchJokeStateReducer: MviReducer<
 
         is SearchJokePartialState.JokesLoading -> state.copy(
             isJokesLoading = true,
-            jokesMessage = null
+            jokesMessage = null,
+            jokes = emptyList()
         )
 
         is SearchJokePartialState.JokesMessage -> state.copy(

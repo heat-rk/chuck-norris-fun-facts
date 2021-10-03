@@ -1,41 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.motion.widget.MotionLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:focusable="true"
     android:focusableInTouchMode="true"
-    app:layoutDescription="@xml/fragment_search_joke_scene"
     style="@style/RootFragmentLayout">
 
     <ru.heatalways.chucknorrisfunfacts.presentation.custom_view.SearchQueryView
         android:id="@+id/searchView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:hint="@string/search_joke_enter_hint"
-        app:minQueryLength="3"
-        app:maxQueryLength="120"/>
+        android:layout_marginTop="@dimen/paddingMD"
+        app:hint="@string/select_category_search_hint"
+        app:search_button_visible="true"/>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/jokesRecyclerView"
+        android:id="@+id/categoriesRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingBottom="@dimen/paddingMD"
-        app:layout_constraintTop_toBottomOf="@id/searchView"
-        tools:listitem="@layout/item_joke_holder_view"
-        tools:itemCount="3"
+        tools:listitem="@layout/item_category_holder_view"
         style="@style/ScrollableBase"/>
 
     <com.facebook.shimmer.ShimmerFrameLayout
         android:id="@+id/shimmerLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:visibility="gone"
-        app:shimmer_auto_start="false"
-        app:layout_constraintTop_toBottomOf="@id/searchView">
+        android:visibility="gone">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -43,31 +37,31 @@
             android:orientation="vertical">
 
             <include
-                layout="@layout/item_joke_holder_shimmer_view"
+                layout="@layout/item_category_holder_shimmer_view"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/paddingMD"/>
 
             <include
-                layout="@layout/item_joke_holder_shimmer_view"
+                layout="@layout/item_category_holder_shimmer_view"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/paddingMD"/>
 
             <include
-                layout="@layout/item_joke_holder_shimmer_view"
+                layout="@layout/item_category_holder_shimmer_view"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/paddingMD"/>
 
             <include
-                layout="@layout/item_joke_holder_shimmer_view"
+                layout="@layout/item_category_holder_shimmer_view"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/paddingMD"/>
 
             <include
-                layout="@layout/item_joke_holder_shimmer_view"
+                layout="@layout/item_category_holder_shimmer_view"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/paddingMD"/>
@@ -76,4 +70,4 @@
 
     </com.facebook.shimmer.ShimmerFrameLayout>
 
-</androidx.constraintlayout.motion.widget.MotionLayout>
+</LinearLayout>

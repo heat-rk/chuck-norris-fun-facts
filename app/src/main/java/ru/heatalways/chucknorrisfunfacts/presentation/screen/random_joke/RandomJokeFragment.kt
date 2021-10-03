@@ -86,7 +86,7 @@ class RandomJokeFragment: BaseMviFragment<
 
     private fun renderLoading(isLoading: Boolean) {
         if (previousState?.isLoading != isLoading)
-            setProgressBarVisibility(isLoading)
+            binding.shimmerLayout.isVisible = isLoading
     }
 
     private fun renderError(message: StringResource?) {
@@ -139,6 +139,16 @@ class RandomJokeFragment: BaseMviFragment<
                 binding.motionLayout.transitionToStart()
                 binding.historyRecyclerView.postScrollToPosition(0)
             }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        binding.shimmerLayout.startShimmer()
+    }
+
+    override fun onPause() {
+        binding.shimmerLayout.stopShimmer()
+        super.onPause()
     }
 
     override fun onDestroyView() {

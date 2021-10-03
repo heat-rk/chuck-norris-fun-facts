@@ -19,6 +19,13 @@
 
         </Constraint>
 
+        <Constraint
+            android:id="@id/shimmerLayout">
+
+            <PropertySet app:visibilityMode="ignore"/>
+
+        </Constraint>
+
     </ConstraintSet>
 
     <ConstraintSet android:id="@+id/end">
@@ -33,6 +40,13 @@
 
         <Constraint
             android:id="@id/historyRecyclerView">
+
+            <PropertySet app:visibilityMode="ignore"/>
+
+        </Constraint>
+
+        <Constraint
+            android:id="@id/shimmerLayout">
 
             <PropertySet app:visibilityMode="ignore"/>
 

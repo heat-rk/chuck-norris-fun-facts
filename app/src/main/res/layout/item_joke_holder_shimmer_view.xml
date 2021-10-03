@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/mainLayout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/paddingMD">
+
+    <ImageView
+        android:id="@+id/iconImageView"
+        android:layout_width="@dimen/result_icon_size"
+        android:layout_height="@dimen/result_icon_size"
+        android:background="@color/shimmer"
+        android:contentDescription="@null"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <TextView
+        android:id="@+id/jokeTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/paddingMD"
+        android:background="@color/shimmer"
+        app:layout_constraintStart_toEndOf="@id/iconImageView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/iconImageView" />
+
+    <TextView
+        android:id="@+id/jokeTextViewSecondRow"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/paddingMD"
+        android:background="@color/shimmer"
+        android:layout_marginTop="@dimen/paddingSM"
+        app:layout_constraintStart_toEndOf="@id/iconImageView"
+        app:layout_constraintTop_toBottomOf="@id/jokeTextView" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
