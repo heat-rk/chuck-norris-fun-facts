@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.github.terrakok.cicerone.androidx.FragmentScreen
 import dagger.hilt.android.AndroidEntryPoint
@@ -59,16 +60,19 @@ class RandomJokeFragment: BaseMviFragment<
     override val actions get() =
         merge(
             binding.getJokeButton.clicks()
-                .map { RandomJokeAction.OnRandomJokeRequest },
+                .map { RandomJokeAction.RequestRandomJoke },
 
             binding.selectCategoryButton.clicks()
-                .map { RandomJokeAction.OnCategorySelectionButtonClick },
+                .map { RandomJokeAction.SelectCategory },
 
             binding.historyRecyclerView.scrollsToLastItem()
-                .map { RandomJokeAction.OnNextPage },
+                .map { RandomJokeAction.NextPage },
 
             appbar.toolbarItemClicks
-                .map { RandomJokeAction.OnMenuItemSelect(it.itemId) }
+                .map { RandomJokeAction.ToolbarItemSelect(it.itemId) },
+
+            snackbar.actions
+                .map { RandomJokeAction.RestoreJokes }
         )
 
     override fun renderState(state: RandomJokeViewState) {
@@ -130,7 +134,7 @@ class RandomJokeFragment: BaseMviFragment<
                     view = binding.coordinatorLayout,
                     message = snackbarState.message,
                     buttonText = snackbarState.buttonText,
-                    buttonCallback = snackbarState.buttonCallback
+                    coroutineScope = viewLifecycleOwner.lifecycleScope
                 )
             else
                 snackbar.hide()

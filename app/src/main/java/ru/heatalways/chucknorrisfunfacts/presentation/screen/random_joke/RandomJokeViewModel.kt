@@ -5,10 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.github.terrakok.cicerone.Router
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.flow.launchIn
-import kotlinx.coroutines.flow.onEach
-import kotlinx.coroutines.flow.onStart
+import kotlinx.coroutines.flow.*
 import ru.heatalways.chucknorrisfunfacts.R
 import ru.heatalways.chucknorrisfunfacts.domain.interactors.chuck_norris_jokes.ChuckNorrisJokesInteractor
 import ru.heatalways.chucknorrisfunfacts.domain.repositories.chuck_norris_jokes.Category
@@ -16,6 +13,8 @@ import ru.heatalways.chucknorrisfunfacts.domain.repositories.chuck_norris_jokes.
 import ru.heatalways.chucknorrisfunfacts.domain.utils.*
 import ru.heatalways.chucknorrisfunfacts.domain.utils.paging.PagingConfig
 import ru.heatalways.chucknorrisfunfacts.domain.utils.paging.PagingEvent
+import ru.heatalways.chucknorrisfunfacts.extensions.flowTimer
+import ru.heatalways.chucknorrisfunfacts.extensions.mergeWith
 import ru.heatalways.chucknorrisfunfacts.presentation.base.BaseMviViewModel
 import ru.heatalways.chucknorrisfunfacts.presentation.screen.random_joke.select_category.CategorySelectionFragment
 import ru.heatalways.chucknorrisfunfacts.presentation.util.ScrollState
@@ -55,19 +54,22 @@ class RandomJokeViewModel @Inject constructor(
 
     override fun handleAction(action: RandomJokeAction) {
         when (action) {
-            is RandomJokeAction.OnCategorySelectionButtonClick ->
+            is RandomJokeAction.SelectCategory ->
                 navigateToCategorySelectionScreen()
 
-            is RandomJokeAction.OnRandomJokeRequest ->
+            is RandomJokeAction.RequestRandomJoke ->
                 fetchRandomJoke()
 
-            is RandomJokeAction.OnMenuItemSelect ->
+            is RandomJokeAction.ToolbarItemSelect ->
                 when (action.itemId) {
                     R.id.removeAll -> removeSavedJokes()
                 }
 
-            is RandomJokeAction.OnNextPage ->
+            is RandomJokeAction.NextPage ->
                 nextPage()
+
+            is RandomJokeAction.RestoreJokes ->
+                restoreRemovedJokes()
         }
     }
 
@@ -122,7 +124,6 @@ class RandomJokeViewModel @Inject constructor(
                         showSnackbar(
                             message = strRes(R.string.remove_all_success),
                             buttonText = strRes(R.string.undo),
-                            callback = ::restoreRemovedJokes,
                             duration = 5000
                         )
                     }
@@ -172,22 +173,24 @@ class RandomJokeViewModel @Inject constructor(
     private fun showSnackbar(
         message: StringResource,
         buttonText: StringResource,
-        callback: () -> Unit = {},
         duration: Long
     ) {
-        flow {
-            emit(RandomJokePartialState.Snackbar(
-                SnackbarState.Shown(
-                message = message,
-                buttonText = buttonText,
-                buttonCallback = callback
-            )))
-
-            delay(duration)
-
-            emit(RandomJokePartialState.Snackbar(SnackbarState.Hidden))
-        }
-            .onEach { reduceState(it) }
+        flowTimer(duration)
+            .mergeWith(action.filter { it is RandomJokeAction.RestoreJokes })
+            .take(1)
+            .map {
+                RandomJokePartialState.Snackbar(SnackbarState.Hidden)
+            }
+            .onStart {
+                emit(RandomJokePartialState.Snackbar(
+                    SnackbarState.Shown(
+                        message = message,
+                        buttonText = buttonText
+                    )))
+            }
+            .onEach {
+                reduceState(it)
+            }
             .launchIn(viewModelScope)
     }
 
@@ -204,9 +207,6 @@ class RandomJokeViewModel @Inject constructor(
                     is InteractorEvent.Success ->
                         reduceState(RandomJokePartialState.JokesLoaded(it.body))
                 }
-            }
-            .onStart {
-                reduceState(RandomJokePartialState.Snackbar(SnackbarState.Hidden))
             }
             .launchIn(viewModelScope)
     }

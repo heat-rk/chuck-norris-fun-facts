@@ -84,7 +84,7 @@ class RandomJokeViewModelTest: BaseViewModelTest() {
             viewModel.fetchJokes()
 
             viewModel.state.test {
-                viewModel.setAction(RandomJokeAction.OnRandomJokeRequest)
+                viewModel.setAction(RandomJokeAction.RequestRandomJoke)
 
                 awaitItem() // skip state before action
 
@@ -113,7 +113,7 @@ class RandomJokeViewModelTest: BaseViewModelTest() {
 
             viewModel.state.test {
                 viewModel.selectCategory(Category.Specific("career"))
-                viewModel.setAction(RandomJokeAction.OnRandomJokeRequest)
+                viewModel.setAction(RandomJokeAction.RequestRandomJoke)
 
                 awaitItem() // skip state before action
 
@@ -148,7 +148,7 @@ class RandomJokeViewModelTest: BaseViewModelTest() {
         viewModel.fetchJokes()
 
         viewModel.state.test {
-            viewModel.setAction(RandomJokeAction.OnRandomJokeRequest)
+            viewModel.setAction(RandomJokeAction.RequestRandomJoke)
 
             awaitItem() // skip state before action
 
