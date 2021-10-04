@@ -98,7 +98,8 @@ class CategorySelectionFragment: BaseMviFragment<
 
     private fun renderError(message: StringResource?) {
         if (previousState?.categoriesMessage != message)
-            setErrorVisibility(message != null, message)
+            if (message != null) binding.errorView.show(message)
+            else binding.errorView.hide()
     }
 
     private fun renderList(categories: List<Category>) {

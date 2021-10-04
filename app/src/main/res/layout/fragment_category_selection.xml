@@ -70,4 +70,10 @@
 
     </com.facebook.shimmer.ShimmerFrameLayout>
 
+    <ru.heatalways.chucknorrisfunfacts.presentation.custom_view.errors.DefaultErrorView
+        android:id="@+id/errorView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:visibility="gone"/>
+
 </LinearLayout>

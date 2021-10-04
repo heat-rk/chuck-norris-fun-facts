@@ -98,7 +98,8 @@ class RandomJokeFragment: BaseMviFragment<
 
     private fun renderError(message: StringResource?) {
         if (previousState?.message != message)
-            setErrorVisibility(message != null, message)
+            if (message != null) binding.errorView.show(message)
+            else binding.errorView.hide()
     }
 
     private fun renderList(jokes: List<ChuckJoke>) {

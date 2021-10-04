@@ -9,7 +9,6 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.github.terrakok.cicerone.androidx.FragmentScreen
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.merge
 import ru.heatalways.chucknorrisfunfacts.R
@@ -21,6 +20,8 @@ import ru.heatalways.chucknorrisfunfacts.extensions.postScrollToPosition
 import ru.heatalways.chucknorrisfunfacts.presentation.adapters.JokesAdapter
 import ru.heatalways.chucknorrisfunfacts.presentation.adapters.decorators.MarginItemDecoration
 import ru.heatalways.chucknorrisfunfacts.presentation.base.BaseMviFragment
+import ru.heatalways.chucknorrisfunfacts.presentation.custom_view.errors.DefaultErrorView
+import ru.heatalways.chucknorrisfunfacts.presentation.custom_view.errors.ErrorView
 import ru.heatalways.chucknorrisfunfacts.presentation.util.DefaultAppbar
 
 @AndroidEntryPoint
@@ -79,7 +80,9 @@ class SearchJokeFragment: BaseMviFragment<
 
     private fun renderError(message: StringResource?) {
         if (previousState?.jokesMessage != message)
-            setErrorVisibility(message != null, message)
+            if (message != null) binding.errorView.show(message)
+            else binding.errorView.hide()
+            //setErrorVisibility(message != null, message)
     }
 
     private fun renderList(jokes: List<ChuckJoke>) {

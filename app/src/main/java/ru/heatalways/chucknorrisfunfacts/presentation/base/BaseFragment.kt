@@ -68,15 +68,6 @@ abstract class BaseFragment<Binding: ViewBinding>: Fragment(), KeyboardChangeLis
         super.onDestroyView()
     }
 
-    protected fun setErrorVisibility(isVisible: Boolean, message: StringResource? = null) {
-        rootBinding.errorContainer.isVisible = isVisible
-        rootBinding.errorTextView.text = getString(message) ?: getString(R.string.error_unknown)
-    }
-
-    protected fun setProgressBarVisibility(isVisible: Boolean) {
-        rootBinding.progressBar.isVisible = isVisible
-    }
-
     override fun onKeyboardChanged(isOpen: Boolean) {
         val activity = baseActivity
         if (activity is MainActivity) {
