@@ -1,9 +1,7 @@
 package ru.heatalways.chucknorrisfunfacts.presentation.screen.random_joke.select_category
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -21,17 +19,18 @@ import ru.heatalways.chucknorrisfunfacts.extensions.postScrollToPosition
 import ru.heatalways.chucknorrisfunfacts.extensions.putTrackedReference
 import ru.heatalways.chucknorrisfunfacts.presentation.adapters.CategoriesAdapter
 import ru.heatalways.chucknorrisfunfacts.presentation.adapters.decorators.MarginItemDecoration
-import ru.heatalways.chucknorrisfunfacts.presentation.base.BaseMviFragment
+import ru.heatalways.chucknorrisfunfacts.presentation.base.BindingMviFragment
 import ru.heatalways.chucknorrisfunfacts.presentation.util.DefaultAppbar
 import ru.heatalways.chucknorrisfunfacts.presentation.util.ScrollState
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class CategorySelectionFragment: BaseMviFragment<
+class CategorySelectionFragment: BindingMviFragment<
         FragmentCategorySelectionBinding,
         CategorySelectionAction,
         CategorySelectionViewState
->() {
+>(FragmentCategorySelectionBinding::inflate) {
+
     @Inject
     lateinit var assistedFactory: CategorySelectionViewModel.Factory
 
@@ -46,9 +45,6 @@ class CategorySelectionFragment: BaseMviFragment<
 
     private val appbar = DefaultAppbar(this)
     private val categoriesAdapter = CategoriesAdapter()
-
-    override val bindingInflater: (LayoutInflater, ViewGroup?, Boolean) -> FragmentCategorySelectionBinding
-        get() = FragmentCategorySelectionBinding::inflate
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

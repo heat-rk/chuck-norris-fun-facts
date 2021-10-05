@@ -1,20 +1,24 @@
 package ru.heatalways.chucknorrisfunfacts.presentation.base
 
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import androidx.lifecycle.lifecycleScope
 import androidx.viewbinding.ViewBinding
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 
-abstract class BaseMviFragment<
+abstract class BindingMviFragment<
         Binding: ViewBinding,
         Action: MviAction,
         State: MviState
->: BaseFragment<Binding>() {
+>(
+    bindingInflater: (LayoutInflater, ViewGroup?, Boolean) -> Binding
+): BindingFragment<Binding>(bindingInflater) {
 
-    protected abstract val viewModel: BaseMviViewModel<Action, State, *>
+    protected abstract val viewModel: MviViewModel<Action, State, *>
 
     protected var previousState: State? = null
 

@@ -12,7 +12,7 @@ abstract class BaseMviActivity<
         Action: MviAction,
         State: MviState
 >: BaseActivity<Binding>() {
-    protected abstract val viewModel: BaseMviViewModel<Action, State, *>
+    protected abstract val viewModel: MviViewModel<Action, State, *>
 
     protected abstract val actions: Flow<Action>
 

@@ -4,7 +4,7 @@ import androidx.lifecycle.SavedStateHandle
 import com.github.terrakok.cicerone.Router
 import dagger.hilt.android.lifecycle.HiltViewModel
 import ru.heatalways.chucknorrisfunfacts.R
-import ru.heatalways.chucknorrisfunfacts.presentation.base.BaseMviViewModel
+import ru.heatalways.chucknorrisfunfacts.presentation.base.MviViewModel
 import ru.heatalways.chucknorrisfunfacts.presentation.screen.random_joke.RandomJokeFragment
 import ru.heatalways.chucknorrisfunfacts.presentation.screen.search_joke.SearchJokeFragment
 import javax.inject.Inject
@@ -13,7 +13,7 @@ import javax.inject.Inject
 class MainViewModel @Inject constructor(
     private val savedStateHandle: SavedStateHandle,
     private val router: Router
-): BaseMviViewModel<
+): MviViewModel<
         MainAction,
         MainViewState,
         MainPartialState

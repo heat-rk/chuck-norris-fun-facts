@@ -26,7 +26,7 @@
 
         <activity
             android:name=".presentation.screen.main.MainActivity"
-            android:windowSoftInputMode="adjustResize"
+            android:windowSoftInputMode="adjustPan"
             android:exported="false">
 
             <intent-filter>

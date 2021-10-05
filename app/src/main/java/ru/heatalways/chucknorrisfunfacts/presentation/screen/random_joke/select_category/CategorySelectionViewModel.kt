@@ -12,7 +12,7 @@ import kotlinx.coroutines.flow.onEach
 import ru.heatalways.chucknorrisfunfacts.domain.interactors.chuck_norris_jokes.ChuckNorrisJokesInteractor
 import ru.heatalways.chucknorrisfunfacts.domain.repositories.chuck_norris_jokes.Category
 import ru.heatalways.chucknorrisfunfacts.domain.utils.InteractorEvent
-import ru.heatalways.chucknorrisfunfacts.presentation.base.BaseMviViewModel
+import ru.heatalways.chucknorrisfunfacts.presentation.base.MviViewModel
 import ru.heatalways.chucknorrisfunfacts.presentation.util.ScrollState
 
 class CategorySelectionViewModel @AssistedInject constructor(
@@ -20,7 +20,7 @@ class CategorySelectionViewModel @AssistedInject constructor(
     @Assisted("savedState") private val savedStateHandle: SavedStateHandle,
     private val interactor: ChuckNorrisJokesInteractor,
     private val router: Router
-): BaseMviViewModel<
+): MviViewModel<
         CategorySelectionAction,
         CategorySelectionViewState,
         CategorySelectionPartialState

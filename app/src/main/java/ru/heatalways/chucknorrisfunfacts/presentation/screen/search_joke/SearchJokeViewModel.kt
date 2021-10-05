@@ -10,14 +10,14 @@ import ru.heatalways.chucknorrisfunfacts.R
 import ru.heatalways.chucknorrisfunfacts.domain.interactors.chuck_norris_jokes.ChuckNorrisJokesInteractor
 import ru.heatalways.chucknorrisfunfacts.domain.utils.InteractorEvent
 import ru.heatalways.chucknorrisfunfacts.domain.utils.StringResource
-import ru.heatalways.chucknorrisfunfacts.presentation.base.BaseMviViewModel
+import ru.heatalways.chucknorrisfunfacts.presentation.base.MviViewModel
 import javax.inject.Inject
 
 @HiltViewModel
 class SearchJokeViewModel @Inject constructor(
     private val interactor: ChuckNorrisJokesInteractor,
     private val savedStateHandle: SavedStateHandle
-): BaseMviViewModel<
+): MviViewModel<
         SearchJokeAction,
         SearchJokeViewState,
         SearchJokePartialState

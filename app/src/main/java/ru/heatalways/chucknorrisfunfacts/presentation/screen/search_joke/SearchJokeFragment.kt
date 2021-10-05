@@ -1,9 +1,7 @@
 package ru.heatalways.chucknorrisfunfacts.presentation.screen.search_joke
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -19,24 +17,19 @@ import ru.heatalways.chucknorrisfunfacts.extensions.hideKeyboard
 import ru.heatalways.chucknorrisfunfacts.extensions.postScrollToPosition
 import ru.heatalways.chucknorrisfunfacts.presentation.adapters.JokesAdapter
 import ru.heatalways.chucknorrisfunfacts.presentation.adapters.decorators.MarginItemDecoration
-import ru.heatalways.chucknorrisfunfacts.presentation.base.BaseMviFragment
-import ru.heatalways.chucknorrisfunfacts.presentation.custom_view.errors.DefaultErrorView
-import ru.heatalways.chucknorrisfunfacts.presentation.custom_view.errors.ErrorView
+import ru.heatalways.chucknorrisfunfacts.presentation.base.BindingMviFragment
 import ru.heatalways.chucknorrisfunfacts.presentation.util.DefaultAppbar
 
 @AndroidEntryPoint
-class SearchJokeFragment: BaseMviFragment<
+class SearchJokeFragment: BindingMviFragment<
         FragmentSearchJokeBinding,
         SearchJokeAction,
         SearchJokeViewState
->() {
-    override val viewModel: SearchJokeViewModel by viewModels()
+>(FragmentSearchJokeBinding::inflate) {
 
+    override val viewModel: SearchJokeViewModel by viewModels()
     private val appbar = DefaultAppbar(this)
     private val jokesAdapter = JokesAdapter()
-
-    override val bindingInflater: (LayoutInflater, ViewGroup?, Boolean) -> FragmentSearchJokeBinding
-        get() = FragmentSearchJokeBinding::inflate
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -82,7 +75,6 @@ class SearchJokeFragment: BaseMviFragment<
         if (previousState?.jokesMessage != message)
             if (message != null) binding.errorView.show(message)
             else binding.errorView.hide()
-            //setErrorVisibility(message != null, message)
     }
 
     private fun renderList(jokes: List<ChuckJoke>) {

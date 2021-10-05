@@ -1,14 +1,15 @@
 package ru.heatalways.chucknorrisfunfacts.presentation.base
 
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 
-abstract class BaseMviViewModel<
+abstract class MviViewModel<
         Action: MviAction,
         State: MviState,
         PartialState
->(private val reducer: MviReducer<State, PartialState>): BaseViewModel() {
+>(private val reducer: MviReducer<State, PartialState>): ViewModel() {
 
     // Create Initial State of View
     private val _initialState : State by lazy { initialState }

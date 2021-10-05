@@ -4,7 +4,6 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewModelScope
 import com.github.terrakok.cicerone.Router
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.*
 import ru.heatalways.chucknorrisfunfacts.R
 import ru.heatalways.chucknorrisfunfacts.domain.interactors.chuck_norris_jokes.ChuckNorrisJokesInteractor
@@ -15,7 +14,7 @@ import ru.heatalways.chucknorrisfunfacts.domain.utils.paging.PagingConfig
 import ru.heatalways.chucknorrisfunfacts.domain.utils.paging.PagingEvent
 import ru.heatalways.chucknorrisfunfacts.extensions.flowTimer
 import ru.heatalways.chucknorrisfunfacts.extensions.mergeWith
-import ru.heatalways.chucknorrisfunfacts.presentation.base.BaseMviViewModel
+import ru.heatalways.chucknorrisfunfacts.presentation.base.MviViewModel
 import ru.heatalways.chucknorrisfunfacts.presentation.screen.random_joke.select_category.CategorySelectionFragment
 import ru.heatalways.chucknorrisfunfacts.presentation.util.ScrollState
 import ru.heatalways.chucknorrisfunfacts.presentation.util.SnackbarState
@@ -27,7 +26,7 @@ class RandomJokeViewModel @Inject constructor(
     private val interactor: ChuckNorrisJokesInteractor,
     private val savedStateHandle: SavedStateHandle,
     private val router: Router
-): BaseMviViewModel<
+): MviViewModel<
         RandomJokeAction,
         RandomJokeViewState,
         RandomJokePartialState

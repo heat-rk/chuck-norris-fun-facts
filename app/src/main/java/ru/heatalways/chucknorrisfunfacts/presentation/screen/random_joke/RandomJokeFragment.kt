@@ -1,9 +1,7 @@
 package ru.heatalways.chucknorrisfunfacts.presentation.screen.random_joke
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -22,24 +20,21 @@ import ru.heatalways.chucknorrisfunfacts.extensions.scrollsToLastItem
 import ru.heatalways.chucknorrisfunfacts.extensions.showToast
 import ru.heatalways.chucknorrisfunfacts.presentation.adapters.JokesAdapter
 import ru.heatalways.chucknorrisfunfacts.presentation.adapters.decorators.MarginItemDecoration
-import ru.heatalways.chucknorrisfunfacts.presentation.base.BaseMviFragment
+import ru.heatalways.chucknorrisfunfacts.presentation.base.BindingMviFragment
 import ru.heatalways.chucknorrisfunfacts.presentation.util.*
 import ru.ldralighieri.corbind.view.clicks
 
 @AndroidEntryPoint
-class RandomJokeFragment: BaseMviFragment<
+class RandomJokeFragment: BindingMviFragment<
         FragmentRandomJokeBinding,
         RandomJokeAction,
         RandomJokeViewState
->() {
-    override val viewModel: RandomJokeViewModel by viewModels()
+>(FragmentRandomJokeBinding::inflate) {
 
+    override val viewModel: RandomJokeViewModel by viewModels()
     private val appbar = DefaultAppbar(this)
     private val jokesAdapter = JokesAdapter()
     private val snackbar = IndefiniteSnackbar()
-
-    override val bindingInflater: (LayoutInflater, ViewGroup?, Boolean) -> FragmentRandomJokeBinding
-        get() = FragmentRandomJokeBinding::inflate
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
