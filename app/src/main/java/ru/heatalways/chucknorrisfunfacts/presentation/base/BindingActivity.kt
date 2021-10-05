@@ -8,30 +8,26 @@ import androidx.viewbinding.ViewBinding
 import com.github.terrakok.cicerone.Cicerone
 import com.github.terrakok.cicerone.Navigator
 import com.github.terrakok.cicerone.Router
-import ru.heatalways.chucknorrisfunfacts.App
 import ru.heatalways.chucknorrisfunfacts.presentation.navigation.AnimatedNavigator
 import javax.inject.Inject
 
-abstract class BaseActivity<Binding: ViewBinding>: AppCompatActivity(){
-    @Inject lateinit var cicerone: Cicerone<Router>
+abstract class BindingActivity<Binding: ViewBinding>(
+    private val bindingInflater: (LayoutInflater) -> Binding,
+    @IdRes private val fragmentContainerId: Int? = null
+): AppCompatActivity() {
 
+    @Inject lateinit var cicerone: Cicerone<Router>
     private var navigator: Navigator? = null
 
     protected lateinit var binding: Binding
 
-    private val app get() = application as App
-
-    protected abstract val bindingInflater: (LayoutInflater) -> Binding
-
-    @IdRes
-    abstract fun getFragmentContainerId(): Int?
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = bindingInflater(layoutInflater)
         setContentView(binding.root)
 
-        getFragmentContainerId()?.let { fragmentContainerId ->
+        fragmentContainerId?.let { fragmentContainerId ->
             navigator = AnimatedNavigator(this, fragmentContainerId)
         }
     }

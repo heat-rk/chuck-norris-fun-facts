@@ -2,16 +2,13 @@ package ru.heatalways.chucknorrisfunfacts.extensions
 
 import android.content.Context
 import android.os.Bundle
-import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import com.google.android.material.snackbar.Snackbar
 import ru.heatalways.chucknorrisfunfacts.R
 import ru.heatalways.chucknorrisfunfacts.domain.utils.StringResource
-import ru.heatalways.chucknorrisfunfacts.presentation.base.BaseActivity
-import ru.heatalways.chucknorrisfunfacts.presentation.util.TrackedReference
+import ru.heatalways.chucknorrisfunfacts.presentation.base.BindingActivity
 
-val Fragment.baseActivity get() = activity as BaseActivity<*>
+val Fragment.baseActivity get() = activity as BindingActivity<*>
 
 fun Fragment.showToast(message: StringResource?, length: Int = Toast.LENGTH_SHORT) {
     Toast.makeText(context, message?.getText(requireContext()) ?: getString(R.string.error_unknown), length).show()

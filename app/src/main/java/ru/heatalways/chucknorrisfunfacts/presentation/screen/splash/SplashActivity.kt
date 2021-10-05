@@ -4,17 +4,13 @@ import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import android.view.LayoutInflater
 import ru.heatalways.chucknorrisfunfacts.databinding.ActivitySplashBinding
-import ru.heatalways.chucknorrisfunfacts.presentation.base.BaseActivity
+import ru.heatalways.chucknorrisfunfacts.presentation.base.BindingActivity
 import ru.heatalways.chucknorrisfunfacts.presentation.screen.main.MainActivity
 
-class SplashActivity: BaseActivity<ActivitySplashBinding>() {
-    override val bindingInflater: (LayoutInflater) -> ActivitySplashBinding
-        get() = ActivitySplashBinding::inflate
-
-    override fun getFragmentContainerId(): Nothing? = null
-
+class SplashActivity: BindingActivity<ActivitySplashBinding>(
+    bindingInflater = ActivitySplashBinding::inflate
+) {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
