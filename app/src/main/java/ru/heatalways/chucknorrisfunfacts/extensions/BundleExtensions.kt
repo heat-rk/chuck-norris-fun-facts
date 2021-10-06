@@ -9,3 +9,6 @@ fun <T: Any> Bundle.getTrackedReference(key: String) =
 fun <T: Any> Bundle.putTrackedReference(key: String, value: T) {
     putParcelable(key, TrackedReference(value))
 }
+
+fun <T: Any> bundleWithTrackedReference(key: String, value: T) =
+    Bundle().apply { putTrackedReference(key, value) }

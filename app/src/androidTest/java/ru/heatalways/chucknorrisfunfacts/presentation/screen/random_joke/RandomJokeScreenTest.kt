@@ -11,9 +11,9 @@ import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import ru.heatalways.chucknorrisfunfacts.R
-import ru.heatalways.chucknorrisfunfacts.presentation.screen.main.MainActivity
 import ru.heatalways.chucknorrisfunfacts.presentation.adapters.view_holders.CategoryItem
 import ru.heatalways.chucknorrisfunfacts.presentation.adapters.view_holders.JokeItem
+import ru.heatalways.chucknorrisfunfacts.presentation.screen.MainActivity
 import ru.heatalways.chucknorrisfunfacts.presentation.screen.random_joke.select_category.CategorySelectionScreen
 import ru.heatalways.chucknorrisfunfacts.presentation.screen.search_joke.SearchJokeScreen
 
@@ -41,7 +41,7 @@ class RandomJokeScreenTest: TestCase() {
         step("1. Open random joke screen") {
             SearchJokeScreen.bottomNavigation {
                 flakySafely {
-                    setSelectedItem(R.id.navJokeRandom)
+                    setSelectedItem(R.id.nav_graph_random)
                 }
             }
         }
@@ -101,7 +101,7 @@ class RandomJokeScreenTest: TestCase() {
         step("1. Open random joke screen") {
             SearchJokeScreen.bottomNavigation {
                 flakySafely {
-                    setSelectedItem(R.id.navJokeRandom)
+                    setSelectedItem(R.id.nav_graph_random)
                 }
             }
         }

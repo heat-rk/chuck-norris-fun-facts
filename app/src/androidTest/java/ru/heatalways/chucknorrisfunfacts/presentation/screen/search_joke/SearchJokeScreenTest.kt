@@ -10,7 +10,7 @@ import dagger.hilt.android.testing.HiltAndroidTest
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
-import ru.heatalways.chucknorrisfunfacts.presentation.screen.main.MainActivity
+import ru.heatalways.chucknorrisfunfacts.presentation.screen.MainActivity
 
 @HiltAndroidTest
 @LargeTest
@@ -70,15 +70,7 @@ class SearchJokeScreenTest: TestCase() {
             }
         }
 
-        step("3. Check if progress bar is visible") {
-            SearchJokeScreen.progressBar {
-                flakySafely {
-                    isVisible()
-                }
-            }
-        }
-
-        step("4. Check recycler view size") {
+        step("3. Check recycler view size") {
             SearchJokeScreen.recyclerView {
                 flakySafely {
                     isVisible()

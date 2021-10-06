@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph_random"
+    app:startDestination="@id/randomJokeFragment">
+
+    <fragment
+        android:id="@+id/randomJokeFragment"
+        android:name="ru.heatalways.chucknorrisfunfacts.presentation.screen.random_joke.RandomJokeFragment"
+        android:label="RandomJokeFragment" >
+        <action
+            android:id="@+id/action_randomJokeFragment_to_categorySelectionFragment"
+            app:destination="@id/categorySelectionFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/categorySelectionFragment"
+        android:name="ru.heatalways.chucknorrisfunfacts.presentation.screen.random_joke.select_category.CategorySelectionFragment"
+        android:label="CategorySelectionFragment" />
+</navigation>

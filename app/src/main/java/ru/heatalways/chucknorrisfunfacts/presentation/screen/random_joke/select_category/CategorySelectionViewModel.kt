@@ -1,9 +1,11 @@
 package ru.heatalways.chucknorrisfunfacts.presentation.screen.random_joke.select_category
 
 import android.os.Bundle
-import androidx.lifecycle.*
+import androidx.lifecycle.AbstractSavedStateViewModelFactory
+import androidx.lifecycle.SavedStateHandle
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import androidx.savedstate.SavedStateRegistryOwner
-import com.github.terrakok.cicerone.Router
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedFactory
 import dagger.assisted.AssistedInject
@@ -18,8 +20,7 @@ import ru.heatalways.chucknorrisfunfacts.presentation.util.ScrollState
 class CategorySelectionViewModel @AssistedInject constructor(
     @Assisted("onSelect") private val onSelect: (Category) -> Unit,
     @Assisted("savedState") private val savedStateHandle: SavedStateHandle,
-    private val interactor: ChuckNorrisJokesInteractor,
-    private val router: Router
+    private val interactor: ChuckNorrisJokesInteractor
 ): MviViewModel<
         CategorySelectionAction,
         CategorySelectionViewState,
@@ -76,7 +77,7 @@ class CategorySelectionViewModel @AssistedInject constructor(
 
     private fun selectCategory(category: Category) {
         onSelect(category)
-        router.exit()
+        navigator { navigateUp() }
     }
 
     private fun search(query: String) {

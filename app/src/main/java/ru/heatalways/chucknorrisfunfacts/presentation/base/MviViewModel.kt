@@ -2,6 +2,8 @@ package ru.heatalways.chucknorrisfunfacts.presentation.base
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.navigation.NavController
+import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 
@@ -20,6 +22,9 @@ abstract class MviViewModel<
 
     private val _action : MutableSharedFlow<Action> = MutableSharedFlow()
     val action = _action.asSharedFlow()
+
+    private val _navigation = Channel<NavController.() -> Unit>()
+    val navigation = _navigation.receiveAsFlow()
 
     private val currentState: State get() = state.value
 
@@ -60,5 +65,9 @@ abstract class MviViewModel<
 
     fun resetState() {
         _state.value = _initialState
+    }
+
+    protected fun navigator(action: NavController.() -> Unit) {
+        viewModelScope.launch { _navigation.send(action) }
     }
 }

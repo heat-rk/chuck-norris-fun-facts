@@ -1,8 +1,9 @@
 package ru.heatalways.chucknorrisfunfacts.presentation.screen.random_joke
 
+import android.os.Bundle
+import androidx.core.os.bundleOf
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewModelScope
-import com.github.terrakok.cicerone.Router
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.*
 import ru.heatalways.chucknorrisfunfacts.R
@@ -12,8 +13,10 @@ import ru.heatalways.chucknorrisfunfacts.domain.repositories.chuck_norris_jokes.
 import ru.heatalways.chucknorrisfunfacts.domain.utils.*
 import ru.heatalways.chucknorrisfunfacts.domain.utils.paging.PagingConfig
 import ru.heatalways.chucknorrisfunfacts.domain.utils.paging.PagingEvent
+import ru.heatalways.chucknorrisfunfacts.extensions.bundleWithTrackedReference
 import ru.heatalways.chucknorrisfunfacts.extensions.flowTimer
 import ru.heatalways.chucknorrisfunfacts.extensions.mergeWith
+import ru.heatalways.chucknorrisfunfacts.extensions.putTrackedReference
 import ru.heatalways.chucknorrisfunfacts.presentation.base.MviViewModel
 import ru.heatalways.chucknorrisfunfacts.presentation.screen.random_joke.select_category.CategorySelectionFragment
 import ru.heatalways.chucknorrisfunfacts.presentation.util.ScrollState
@@ -24,8 +27,7 @@ import javax.inject.Inject
 @HiltViewModel
 class RandomJokeViewModel @Inject constructor(
     private val interactor: ChuckNorrisJokesInteractor,
-    private val savedStateHandle: SavedStateHandle,
-    private val router: Router
+    private val savedStateHandle: SavedStateHandle
 ): MviViewModel<
         RandomJokeAction,
         RandomJokeViewState,
@@ -78,9 +80,17 @@ class RandomJokeViewModel @Inject constructor(
     }
 
     private fun navigateToCategorySelectionScreen() {
-        router.navigateTo(CategorySelectionFragment.getScreen { category ->
-            selectCategory(category)
-        })
+        navigator {
+            navigate(
+                R.id.action_randomJokeFragment_to_categorySelectionFragment,
+                bundleWithTrackedReference(
+                    key = CategorySelectionFragment.ON_SELECT_EXTRA,
+                    value = { category: Category ->
+                        selectCategory(category)
+                    }
+                )
+            )
+        }
     }
 
     private fun fetchRandomJoke() {

@@ -7,21 +7,7 @@
         <item name="android:background">@color/darkBackgroundColor</item>
     </style>
 
-    <!-- APP -->
-    <style name="ApplicationTheme.NoActionBar" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
-
-        <item name="actionMenuTextColor">@color/colorPrimary</item>
-        <item name="actionMenuTextAppearance">@style/ToolbarTextAppearance</item>
-    </style>
-
     <!-- TOOLBAR -->
-    <style name="AppTheme.ActionBar" parent="Theme.AppCompat.Light.DarkActionBar">
-        <item name="actionMenuTextColor">@color/colorPrimary</item>
-        <item name="actionMenuTextAppearance">@style/ToolbarTextAppearance</item>
-    </style>
     <style name="ToolbarTextAppearance">
         <item name="android:textSize">@dimen/txtSizeMD</item>
         <item name="android:fontFamily">sans-serif-medium</item>

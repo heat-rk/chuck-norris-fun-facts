@@ -8,8 +8,6 @@ import ru.heatalways.chucknorrisfunfacts.R
 import ru.heatalways.chucknorrisfunfacts.domain.utils.StringResource
 import ru.heatalways.chucknorrisfunfacts.presentation.base.BindingActivity
 
-val Fragment.baseActivity get() = activity as BindingActivity<*>
-
 fun Fragment.showToast(message: StringResource?, length: Int = Toast.LENGTH_SHORT) {
     Toast.makeText(context, message?.getText(requireContext()) ?: getString(R.string.error_unknown), length).show()
 }
@@ -19,7 +17,7 @@ fun Fragment.showToast(message: String?, length: Int = Toast.LENGTH_SHORT) {
 }
 
 fun Fragment.showKeyboard(viewId: Int) {
-    baseActivity.showKeyboard(viewId)
+    activity?.showKeyboard(viewId)
 }
 
 fun Context.getString(stringResource: StringResource?) =
@@ -29,7 +27,7 @@ fun Fragment.getString(stringResource: StringResource?) =
     stringResource?.getText(requireContext())
 
 fun Fragment.hideKeyboard() {
-    baseActivity.hideKeyboard()
+    activity?.hideKeyboard()
 }
 
 fun <T: Any> Fragment.getTrackedArgument(key: String) =

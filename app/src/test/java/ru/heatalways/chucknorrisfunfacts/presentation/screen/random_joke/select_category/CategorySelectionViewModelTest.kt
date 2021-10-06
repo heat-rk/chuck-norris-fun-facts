@@ -2,7 +2,6 @@ package ru.heatalways.chucknorrisfunfacts.presentation.screen.random_joke.select
 
 import androidx.lifecycle.SavedStateHandle
 import app.cash.turbine.test
-import com.github.terrakok.cicerone.Router
 import com.google.common.truth.Truth.assertThat
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runBlockingTest
@@ -14,6 +13,7 @@ import ru.heatalways.chucknorrisfunfacts.domain.interactors.chuck_norris_jokes.C
 import ru.heatalways.chucknorrisfunfacts.domain.repositories.chuck_norris_jokes.Category
 import ru.heatalways.chucknorrisfunfacts.domain.repositories.chuck_norris_jokes.ChuckNorrisJokesRepositoryFake
 import ru.heatalways.chucknorrisfunfacts.domain.utils.strRes
+import ru.heatalways.chucknorrisfunfacts.presentation.util.ScrollState
 import ru.heatalways.chucknorrisfunfacts.utils.BaseViewModelTest
 import kotlin.time.ExperimentalTime
 
@@ -31,8 +31,7 @@ class CategorySelectionViewModelTest: BaseViewModelTest() {
         viewModel = CategorySelectionViewModel(
             onSelect = {},
             savedStateHandle = SavedStateHandle(),
-            interactor = interactor,
-            router = Router()
+            interactor = interactor
         )
         viewModel.resetState()
     }
@@ -97,10 +96,10 @@ class CategorySelectionViewModelTest: BaseViewModelTest() {
             ).contains("animal")
 
             val scrollingUpState = awaitItem()
-            assertThat(scrollingUpState.isScrollingUp).isTrue()
+            assertThat(scrollingUpState.scrollState).isEqualTo(ScrollState.ScrollingUp)
 
             val scrollFinishedState = awaitItem()
-            assertThat(scrollFinishedState.isScrollingUp).isFalse()
+            assertThat(scrollFinishedState.scrollState).isEqualTo(ScrollState.Stopped)
 
             assertThat(cancelAndConsumeRemainingEvents().size).isEqualTo(0)
         }

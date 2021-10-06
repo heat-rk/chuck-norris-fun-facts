@@ -5,7 +5,6 @@ import android.view.View
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.github.terrakok.cicerone.androidx.FragmentScreen
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.merge
@@ -16,7 +15,6 @@ import ru.heatalways.chucknorrisfunfacts.domain.utils.StringResource
 import ru.heatalways.chucknorrisfunfacts.extensions.getSafeTrackedArgument
 import ru.heatalways.chucknorrisfunfacts.extensions.hideKeyboard
 import ru.heatalways.chucknorrisfunfacts.extensions.postScrollToPosition
-import ru.heatalways.chucknorrisfunfacts.extensions.putTrackedReference
 import ru.heatalways.chucknorrisfunfacts.presentation.adapters.CategoriesAdapter
 import ru.heatalways.chucknorrisfunfacts.presentation.adapters.decorators.MarginItemDecoration
 import ru.heatalways.chucknorrisfunfacts.presentation.base.BindingMviFragment
@@ -130,13 +128,6 @@ class CategorySelectionFragment: BindingMviFragment<
     }
 
     companion object {
-        private const val ON_SELECT_EXTRA = "category_selection_fragment.on_select"
-
-        fun getScreen(onSelect: (Category) -> Unit) =
-            FragmentScreen {
-                CategorySelectionFragment().apply {
-                    putTrackedReference(ON_SELECT_EXTRA, onSelect)
-                }
-            }
+        const val ON_SELECT_EXTRA = "category_selection_fragment.on_select"
     }
 }

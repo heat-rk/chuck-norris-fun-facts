@@ -5,7 +5,6 @@ import android.view.View
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.github.terrakok.cicerone.androidx.FragmentScreen
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.merge
@@ -107,9 +106,5 @@ class SearchJokeFragment: BindingMviFragment<
         }
 
         super.onDestroyView()
-    }
-
-    companion object {
-        fun getScreen() = FragmentScreen { SearchJokeFragment() }
     }
 }

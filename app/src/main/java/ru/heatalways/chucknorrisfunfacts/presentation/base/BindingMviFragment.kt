@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.viewbinding.ViewBinding
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.launchIn
@@ -33,6 +34,10 @@ abstract class BindingMviFragment<
                     renderState(it)
                     previousState = it
                 }
+                .launchIn(this)
+
+            viewModel.navigation
+                .onEach { action -> findNavController().action() }
                 .launchIn(this)
 
             actions

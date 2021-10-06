@@ -2,7 +2,6 @@ package ru.heatalways.chucknorrisfunfacts.presentation.base
 
 import android.os.Bundle
 import android.view.LayoutInflater
-import androidx.annotation.IdRes
 import androidx.lifecycle.lifecycleScope
 import androidx.viewbinding.ViewBinding
 import kotlinx.coroutines.flow.Flow
@@ -14,9 +13,8 @@ abstract class BindingMviActivity<
         Action: MviAction,
         State: MviState
 >(
-    bindingInflater: (LayoutInflater) -> Binding,
-    @IdRes fragmentContainerId: Int? = null
-): BindingActivity<Binding>(bindingInflater, fragmentContainerId) {
+    bindingInflater: (LayoutInflater) -> Binding
+): BindingActivity<Binding>(bindingInflater) {
     protected abstract val viewModel: MviViewModel<Action, State, *>
 
     protected abstract val actions: Flow<Action>
