@@ -1,4 +1,4 @@
-package ru.heatalways.chucknorrisfunfacts.navigation
+package ru.heatalways.chucknorrisfunfacts.presentation.navigation
 
 import android.content.Context
 import android.os.Bundle
@@ -15,7 +15,7 @@ import ru.heatalways.chucknorrisfunfacts.R
  * Navigation method will use defaults for fragments transitions animations.
  */
 @Navigator.Name("fragment")
-class FragmentNavigatorWithDefaultAnimations(
+class AnimatedFragmentNavigator(
     context: Context,
     manager: FragmentManager,
     containerId: Int
