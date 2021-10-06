@@ -8,6 +8,7 @@ import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import ru.heatalways.chucknorrisfunfacts.R
+import ru.heatalways.chucknorrisfunfacts.navigation.NavHostFragmentWithDefaultAnimations
 
 /**
  * Manages the various graphs needed for a [BottomNavigationView].
@@ -220,7 +221,8 @@ private fun obtainNavHostFragment(
     }
 
     // Otherwise, create it and return it.
-    val navHostFragment = NavHostFragment.create(navGraphId)
+    val navHostFragment =
+        NavHostFragmentWithDefaultAnimations.createNavHost(navGraphId)
 
     fragmentManager.beginTransaction()
         .add(containerId, navHostFragment, fragmentTag)
