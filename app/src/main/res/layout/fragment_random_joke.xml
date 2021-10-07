@@ -7,7 +7,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <androidx.constraintlayout.motion.widget.MotionLayout
+    <ru.heatalways.chucknorrisfunfacts.presentation.custom_view.SavingMotionLayout
         android:id="@+id/motionLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -125,6 +125,6 @@
             android:layout_height="match_parent"
             tools:visibility="gone"/>
 
-    </androidx.constraintlayout.motion.widget.MotionLayout>
+    </ru.heatalways.chucknorrisfunfacts.presentation.custom_view.SavingMotionLayout>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
