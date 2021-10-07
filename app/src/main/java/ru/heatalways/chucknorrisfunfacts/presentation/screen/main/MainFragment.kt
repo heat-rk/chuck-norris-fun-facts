@@ -21,11 +21,23 @@ class MainFragment: BindingMviFragment<FragmentMainBinding, MainAction, MainView
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        if (savedInstanceState == null)
+            setupBottomNavigationBar()
+    }
+
+    override fun onViewStateRestored(savedInstanceState: Bundle?) {
+        super.onViewStateRestored(savedInstanceState)
+        setupBottomNavigationBar()
+    }
+
+    private fun setupBottomNavigationBar() {
+        val navGraphIds = listOf(
+            R.navigation.nav_graph_search,
+            R.navigation.nav_graph_random
+        )
+
         binding.bottomNavigationBar.setupWithNavController(
-            navGraphIds = listOf(
-                R.navigation.nav_graph_search,
-                R.navigation.nav_graph_random
-            ),
+            navGraphIds = navGraphIds,
             fragmentManager = childFragmentManager,
             containerId = R.id.mainFragmentContainer,
             intent = requireActivity().intent
