@@ -49,6 +49,10 @@ class CacheData<T>(
         this.value = value
     }
 
+    fun clear() {
+        this.value = null
+    }
+
     companion object {
         private const val CACHE_LIFE_TIME = 15000L
     }

@@ -21,3 +21,9 @@ suspend fun <Body, Result> ResultNetwork<Body>.handle(
     is ResultNetwork.Success ->
         onSuccess(value)
 }
+
+suspend fun <Body, Result> ResultNetwork<Body>.onSuccess(
+    func: suspend (Body) -> Result
+) {
+    if (this is ResultNetwork.Success) func(value)
+}

@@ -3,7 +3,7 @@ package ru.heatalways.chucknorrisfunfacts.data.repositories.chuck_norris_jokes
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
 import ru.heatalways.chucknorrisfunfacts.data.database.AppDatabase
-import ru.heatalways.chucknorrisfunfacts.data.database.InMemoryDatabase
+import ru.heatalways.chucknorrisfunfacts.data.database.models.ChuckJokeEntity
 import ru.heatalways.chucknorrisfunfacts.data.network.chuck_norris_jokes.ChuckNorrisJokesApi
 import ru.heatalways.chucknorrisfunfacts.data.network.util.safeApiCall
 import ru.heatalways.chucknorrisfunfacts.di.modules.IoDispatcher
@@ -19,10 +19,10 @@ import javax.inject.Inject
 class ChuckNorrisJokesRepositoryImpl @Inject constructor(
     private val api: ChuckNorrisJokesApi,
     private val appDatabase: AppDatabase,
-    private val inMemoryDatabase: InMemoryDatabase,
     @IoDispatcher private val dispatcher: CoroutineDispatcher
 ): ChuckNorrisJokesRepository {
-    private var categoriesCache = CacheData<List<Category>>()
+    private val categoriesCache = CacheData<List<Category>>()
+    private val trashJokesCache = CacheData<List<ChuckJokeEntity>>()
 
     override suspend fun random(category: String?) = safeApiCall(dispatcher) {
         api.random(category).toDomain()
@@ -83,21 +83,16 @@ class ChuckNorrisJokesRepositoryImpl @Inject constructor(
             .clear()
     }
 
-    override suspend fun saveJokesToTrash() {
-        inMemoryDatabase.trashJokesDao().apply {
-            clear()
-            insert(appDatabase.savedJokesDao().getAll())
-        }
+    override suspend fun saveJokesToTrash() = withContext(dispatcher) {
+        trashJokesCache.setValue(
+            appDatabase.savedJokesDao().getAll()
+        )
     }
 
-    override suspend fun restoreJokesFromTrash(): List<ChuckJoke> {
-        appDatabase.savedJokesDao()
-            .insert(inMemoryDatabase.trashJokesDao().getAll())
-
-        inMemoryDatabase.trashJokesDao()
-            .clear()
-
-        return appDatabase.savedJokesDao()
-            .getAll().map { it.toDomain() }
+    override suspend fun restoreJokesFromTrash() = withContext(dispatcher) {
+        trashJokesCache.getValue()?.let { jokes ->
+            appDatabase.savedJokesDao().insert(jokes)
+            appDatabase.savedJokesDao().getAll().map { it.toDomain() }
+        } ?: emptyList()
     }
 }
