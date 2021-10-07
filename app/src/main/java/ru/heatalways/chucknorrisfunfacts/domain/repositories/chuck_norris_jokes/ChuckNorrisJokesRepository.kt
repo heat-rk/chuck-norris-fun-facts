@@ -1,6 +1,8 @@
 package ru.heatalways.chucknorrisfunfacts.domain.repositories.chuck_norris_jokes
 
 import ru.heatalways.chucknorrisfunfacts.data.network.util.ResultNetwork
+import ru.heatalways.chucknorrisfunfacts.domain.models.Category
+import ru.heatalways.chucknorrisfunfacts.domain.models.ChuckJoke
 
 interface ChuckNorrisJokesRepository {
     suspend fun random(category: String? = null): ResultNetwork<ChuckJoke>

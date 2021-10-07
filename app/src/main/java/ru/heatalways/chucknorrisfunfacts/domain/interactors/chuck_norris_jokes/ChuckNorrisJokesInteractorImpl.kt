@@ -2,8 +2,8 @@ package ru.heatalways.chucknorrisfunfacts.domain.interactors.chuck_norris_jokes
 
 import kotlinx.coroutines.flow.flow
 import ru.heatalways.chucknorrisfunfacts.R
-import ru.heatalways.chucknorrisfunfacts.domain.repositories.chuck_norris_jokes.Category
-import ru.heatalways.chucknorrisfunfacts.domain.repositories.chuck_norris_jokes.ChuckJoke
+import ru.heatalways.chucknorrisfunfacts.domain.models.Category
+import ru.heatalways.chucknorrisfunfacts.domain.models.ChuckJoke
 import ru.heatalways.chucknorrisfunfacts.domain.repositories.chuck_norris_jokes.ChuckNorrisJokesRepository
 import ru.heatalways.chucknorrisfunfacts.domain.utils.InteractorEvent
 import ru.heatalways.chucknorrisfunfacts.domain.utils.StringResource

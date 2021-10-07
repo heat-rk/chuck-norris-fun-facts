@@ -2,7 +2,7 @@ package ru.heatalways.chucknorrisfunfacts.data.database
 
 import androidx.room.migration.Migration
 import androidx.sqlite.db.SupportSQLiteDatabase
-import ru.heatalways.chucknorrisfunfacts.data.database.saved_jokes.ChuckJokeEntity
+import ru.heatalways.chucknorrisfunfacts.data.database.models.ChuckJokeEntity
 
 val MIGRATION_1_2 = object : Migration(1, 2) {
     override fun migrate(database: SupportSQLiteDatabase) {

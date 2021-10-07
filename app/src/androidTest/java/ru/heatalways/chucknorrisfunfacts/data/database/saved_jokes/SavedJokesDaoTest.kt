@@ -12,8 +12,8 @@ import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import ru.heatalways.chucknorrisfunfacts.data.database.AppDatabase
+import ru.heatalways.chucknorrisfunfacts.data.database.models.ChuckJokeEntity
 import javax.inject.Inject
-import javax.inject.Named
 
 @ExperimentalCoroutinesApi
 @SmallTest

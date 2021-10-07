@@ -1,4 +1,4 @@
-package ru.heatalways.chucknorrisfunfacts.data.network.chuck_norris_jokes
+package ru.heatalways.chucknorrisfunfacts.data.network.models
 
 import com.google.gson.annotations.SerializedName
 

@@ -1,4 +1,4 @@
-package ru.heatalways.chucknorrisfunfacts.domain.repositories.chuck_norris_jokes
+package ru.heatalways.chucknorrisfunfacts.domain.models
 
 import java.io.Serializable
 

@@ -1,4 +1,4 @@
-package ru.heatalways.chucknorrisfunfacts.data.database.saved_jokes
+package ru.heatalways.chucknorrisfunfacts.data.database.models
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity

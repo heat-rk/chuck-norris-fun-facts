@@ -1,7 +1,7 @@
 package ru.heatalways.chucknorrisfunfacts.presentation.adapters.diff_utils
 
 import androidx.recyclerview.widget.DiffUtil
-import ru.heatalways.chucknorrisfunfacts.domain.repositories.chuck_norris_jokes.ChuckJoke
+import ru.heatalways.chucknorrisfunfacts.domain.models.ChuckJoke
 
 class ChuckJokeDiffUtil: DiffUtil.ItemCallback<ChuckJoke>() {
     override fun areItemsTheSame(oldItem: ChuckJoke, newItem: ChuckJoke): Boolean {

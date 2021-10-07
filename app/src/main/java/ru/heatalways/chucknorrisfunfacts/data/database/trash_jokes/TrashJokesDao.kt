@@ -1,7 +1,7 @@
 package ru.heatalways.chucknorrisfunfacts.data.database.trash_jokes
 
 import androidx.room.*
-import ru.heatalways.chucknorrisfunfacts.data.database.saved_jokes.ChuckJokeEntity
+import ru.heatalways.chucknorrisfunfacts.data.database.models.ChuckJokeEntity
 
 @Dao
 interface TrashJokesDao {

@@ -2,6 +2,8 @@ package ru.heatalways.chucknorrisfunfacts.data.network.chuck_norris_jokes
 
 import retrofit2.http.GET
 import retrofit2.http.Query
+import ru.heatalways.chucknorrisfunfacts.data.network.models.ChuckJokeNetwork
+import ru.heatalways.chucknorrisfunfacts.data.network.models.SearchResponse
 
 interface ChuckNorrisJokesApi {
     @GET("random")

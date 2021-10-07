@@ -1,7 +1,10 @@
-package ru.heatalways.chucknorrisfunfacts.domain.repositories.chuck_norris_jokes
+package ru.heatalways.chucknorrisfunfacts.data.repositories.chuck_norris_jokes
 
-import ru.heatalways.chucknorrisfunfacts.data.database.saved_jokes.ChuckJokeEntity
+import ru.heatalways.chucknorrisfunfacts.data.database.models.ChuckJokeEntity
 import ru.heatalways.chucknorrisfunfacts.data.network.util.ResultNetwork
+import ru.heatalways.chucknorrisfunfacts.domain.models.Category
+import ru.heatalways.chucknorrisfunfacts.domain.models.ChuckJoke
+import ru.heatalways.chucknorrisfunfacts.domain.repositories.chuck_norris_jokes.ChuckNorrisJokesRepository
 import ru.heatalways.chucknorrisfunfacts.domain.utils.StringResource
 import ru.heatalways.chucknorrisfunfacts.domain.utils.strRes
 import ru.heatalways.chucknorrisfunfacts.mappers.toDomain
