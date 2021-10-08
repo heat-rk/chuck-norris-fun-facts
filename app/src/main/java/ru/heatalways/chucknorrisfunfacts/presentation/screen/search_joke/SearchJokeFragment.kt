@@ -18,6 +18,7 @@ import ru.heatalways.chucknorrisfunfacts.presentation.adapters.JokesAdapter
 import ru.heatalways.chucknorrisfunfacts.presentation.adapters.decorators.MarginItemDecoration
 import ru.heatalways.chucknorrisfunfacts.presentation.base.BindingMviFragment
 import ru.heatalways.chucknorrisfunfacts.presentation.util.DefaultAppbar
+import ru.heatalways.chucknorrisfunfacts.presentation.util.ScrollState
 
 @AndroidEntryPoint
 class SearchJokeFragment: BindingMviFragment<
@@ -62,7 +63,7 @@ class SearchJokeFragment: BindingMviFragment<
         renderList(state.jokes)
         renderLoading(state.isJokesLoading)
         renderError(state.jokesMessage)
-        renderScrolling(state.isScrollingUp)
+        renderScrolling(state.scrollState)
     }
 
     private fun renderLoading(isLoading: Boolean) {
@@ -81,9 +82,9 @@ class SearchJokeFragment: BindingMviFragment<
             jokesAdapter.submitList(jokes)
     }
 
-    private fun renderScrolling(isScrollingUp: Boolean) {
-        if (previousState?.isScrollingUp != isScrollingUp)
-            if (isScrollingUp) {
+    private fun renderScrolling(scrollState: ScrollState) {
+        if (previousState?.scrollState != scrollState)
+            if (scrollState is ScrollState.ScrollingUp) {
                 binding.root.transitionToStart()
                 binding.jokesRecyclerView.postScrollToPosition(0)
             }

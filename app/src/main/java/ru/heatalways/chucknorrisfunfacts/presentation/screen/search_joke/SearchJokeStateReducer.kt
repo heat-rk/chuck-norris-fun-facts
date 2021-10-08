@@ -10,8 +10,8 @@ object SearchJokeStateReducer: MviReducer<
         state: SearchJokeViewState,
         partialState: SearchJokePartialState
     ) = when (partialState) {
-        is SearchJokePartialState.ScrollUp -> state.copy(
-            isScrollingUp = partialState.isScrolling
+        is SearchJokePartialState.Scroll -> state.copy(
+            scrollState = partialState.scrollState
         )
 
 

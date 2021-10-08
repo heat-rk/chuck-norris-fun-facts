@@ -11,6 +11,7 @@ import ru.heatalways.chucknorrisfunfacts.domain.interactors.chuck_norris_jokes.C
 import ru.heatalways.chucknorrisfunfacts.domain.utils.InteractorEvent
 import ru.heatalways.chucknorrisfunfacts.domain.utils.StringResource
 import ru.heatalways.chucknorrisfunfacts.presentation.base.MviViewModel
+import ru.heatalways.chucknorrisfunfacts.presentation.util.ScrollState
 import javax.inject.Inject
 
 @HiltViewModel
@@ -83,8 +84,8 @@ class SearchJokeViewModel @Inject constructor(
 
     private fun scrollUp() {
         flow {
-            emit(SearchJokePartialState.ScrollUp(true))
-            emit(SearchJokePartialState.ScrollUp(false))
+            emit(SearchJokePartialState.Scroll(ScrollState.ScrollingUp))
+            emit(SearchJokePartialState.Scroll(ScrollState.Stopped))
         }
             .onEach { reduceState(it) }
             .launchIn(viewModelScope)
