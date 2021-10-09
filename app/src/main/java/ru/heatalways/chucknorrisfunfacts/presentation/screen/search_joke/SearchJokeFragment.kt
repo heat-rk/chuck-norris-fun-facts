@@ -17,8 +17,8 @@ import ru.heatalways.chucknorrisfunfacts.extensions.postScrollToPosition
 import ru.heatalways.chucknorrisfunfacts.presentation.adapters.JokesAdapter
 import ru.heatalways.chucknorrisfunfacts.presentation.adapters.decorators.MarginItemDecoration
 import ru.heatalways.chucknorrisfunfacts.presentation.base.BindingMviFragment
-import ru.heatalways.chucknorrisfunfacts.presentation.util.DefaultAppbar
 import ru.heatalways.chucknorrisfunfacts.presentation.util.ScrollState
+import ru.heatalways.chucknorrisfunfacts.presentation.util.appbars.DefaultAppbar
 
 @AndroidEntryPoint
 class SearchJokeFragment: BindingMviFragment<
@@ -28,16 +28,17 @@ class SearchJokeFragment: BindingMviFragment<
 >(FragmentSearchJokeBinding::inflate) {
 
     override val viewModel: SearchJokeViewModel by viewModels()
-    private val appbar = DefaultAppbar(this)
     private val jokesAdapter = JokesAdapter()
+
+    override val appbar get() = DefaultAppbar(
+        parentLayoutId = R.id.topLayout,
+        builder = {
+            setTitle(R.string.search_joke_screen_title)
+        }
+    )
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        with(appbar) {
-            inflate(requireContext(), requireActivity(), rootBinding.topLayout)
-            setTitle(R.string.search_joke_screen_title)
-        }
 
         with(binding.jokesRecyclerView) {
             addItemDecoration(MarginItemDecoration(R.dimen.paddingMD))

@@ -2,16 +2,21 @@ package ru.heatalways.chucknorrisfunfacts.extensions
 
 import android.animation.Animator
 import android.animation.ValueAnimator
+import android.app.Activity
+import android.content.Context
 import android.text.InputFilter
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.DecelerateInterpolator
 import android.widget.EditText
 import android.widget.ImageView
+import androidx.appcompat.widget.Toolbar
+import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import ru.heatalways.chucknorrisfunfacts.R
 import ru.heatalways.chucknorrisfunfacts.domain.utils.LoadPhotoConfig
 
 fun ImageView.loadImage(config: LoadPhotoConfig) =
@@ -155,4 +160,10 @@ private fun animateView(v: View, initialHeight: Int, targetHeight: Int) {
     valueAnimator.duration = 300
     valueAnimator.interpolator = DecelerateInterpolator()
     valueAnimator.start()
+}
+
+fun Toolbar.initBackButton(activity: Activity) {
+    setNavigationIcon(R.drawable.ic_back_arrow)
+    setNavigationContentDescription(R.string.navigation_back)
+    setNavigationOnClickListener { activity.onBackPressed() }
 }

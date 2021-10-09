@@ -11,6 +11,8 @@ import androidx.viewbinding.ViewBinding
 import ru.heatalways.chucknorrisfunfacts.R
 import ru.heatalways.chucknorrisfunfacts.databinding.BaseFragmentBinding
 import ru.heatalways.chucknorrisfunfacts.extensions.hideKeyboard
+import ru.heatalways.chucknorrisfunfacts.presentation.util.appbars.Appbar
+import ru.heatalways.chucknorrisfunfacts.presentation.util.appbars.NoAppBar
 
 abstract class BindingFragment<Binding: ViewBinding>(
     private val bindingInflater: (LayoutInflater, ViewGroup?, Boolean) -> Binding
@@ -25,6 +27,7 @@ abstract class BindingFragment<Binding: ViewBinding>(
         get() = _binding!!
 
     @ColorRes protected open val backgroundColor = R.color.darkBackgroundColor
+    protected open val appbar: Appbar = NoAppBar()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -40,6 +43,11 @@ abstract class BindingFragment<Binding: ViewBinding>(
         return rootBinding.root
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        appbar.inflate(this)
+    }
+
     override fun onPause() {
         hideKeyboard()
         super.onPause()
@@ -48,6 +56,7 @@ abstract class BindingFragment<Binding: ViewBinding>(
     override fun onDestroyView() {
         _binding = null
         _rootBinding = null
+        appbar.destroy()
         super.onDestroyView()
     }
 }

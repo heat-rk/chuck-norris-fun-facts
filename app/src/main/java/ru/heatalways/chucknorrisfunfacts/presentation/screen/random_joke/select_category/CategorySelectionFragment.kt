@@ -14,11 +14,12 @@ import ru.heatalways.chucknorrisfunfacts.domain.models.Category
 import ru.heatalways.chucknorrisfunfacts.domain.utils.StringResource
 import ru.heatalways.chucknorrisfunfacts.extensions.getSafeTrackedArgument
 import ru.heatalways.chucknorrisfunfacts.extensions.hideKeyboard
+import ru.heatalways.chucknorrisfunfacts.extensions.initBackButton
 import ru.heatalways.chucknorrisfunfacts.extensions.postScrollToPosition
 import ru.heatalways.chucknorrisfunfacts.presentation.adapters.CategoriesAdapter
 import ru.heatalways.chucknorrisfunfacts.presentation.adapters.decorators.MarginItemDecoration
 import ru.heatalways.chucknorrisfunfacts.presentation.base.BindingMviFragment
-import ru.heatalways.chucknorrisfunfacts.presentation.util.DefaultAppbar
+import ru.heatalways.chucknorrisfunfacts.presentation.util.appbars.DefaultAppbar
 import ru.heatalways.chucknorrisfunfacts.presentation.util.ScrollState
 import javax.inject.Inject
 
@@ -41,17 +42,18 @@ class CategorySelectionFragment: BindingMviFragment<
         )
     }
 
-    private val appbar = DefaultAppbar(this)
+    override val appbar get() = DefaultAppbar(
+        parentLayoutId = R.id.topLayout,
+        builder = {
+            setTitle(R.string.select_category_screen_title)
+            initBackButton(requireActivity())
+        }
+    )
+
     private val categoriesAdapter = CategoriesAdapter()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        with(appbar) {
-            inflate(requireContext(), requireActivity(), rootBinding.topLayout)
-            setTitle(R.string.select_category_screen_title)
-            initBackButton()
-        }
 
         with(binding.categoriesRecyclerView) {
             addItemDecoration(MarginItemDecoration(R.dimen.paddingMD))

@@ -20,7 +20,11 @@ import ru.heatalways.chucknorrisfunfacts.extensions.showToast
 import ru.heatalways.chucknorrisfunfacts.presentation.adapters.JokesAdapter
 import ru.heatalways.chucknorrisfunfacts.presentation.adapters.decorators.MarginItemDecoration
 import ru.heatalways.chucknorrisfunfacts.presentation.base.BindingMviFragment
-import ru.heatalways.chucknorrisfunfacts.presentation.util.*
+import ru.heatalways.chucknorrisfunfacts.presentation.util.IndefiniteSnackbar
+import ru.heatalways.chucknorrisfunfacts.presentation.util.ScrollState
+import ru.heatalways.chucknorrisfunfacts.presentation.util.SnackbarState
+import ru.heatalways.chucknorrisfunfacts.presentation.util.ToastState
+import ru.heatalways.chucknorrisfunfacts.presentation.util.appbars.DefaultAppbar
 import ru.ldralighieri.corbind.view.clicks
 
 @AndroidEntryPoint
@@ -31,18 +35,19 @@ class RandomJokeFragment: BindingMviFragment<
 >(FragmentRandomJokeBinding::inflate) {
 
     override val viewModel: RandomJokeViewModel by viewModels()
-    private val appbar = DefaultAppbar(this)
     private val jokesAdapter = JokesAdapter()
     private val snackbar = IndefiniteSnackbar()
 
+    override val appbar = DefaultAppbar(
+        parentLayoutId = R.id.topLayout,
+        builder = {
+            setTitle(R.string.random_joke_screen_title)
+            inflateMenu(R.menu.random_jokes_history_menu)
+        }
+    )
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        with(appbar) {
-            inflate(requireContext(), requireActivity(), rootBinding.topLayout)
-            setTitle(R.string.random_joke_screen_title)
-            initMenu(R.menu.random_jokes_history_menu)
-        }
 
         with(binding.historyRecyclerView) {
             addItemDecoration(MarginItemDecoration(R.dimen.paddingMD))
