@@ -4,6 +4,7 @@ import ru.heatalways.chucknorrisfunfacts.domain.utils.StringResource
 import java.util.*
 
 data class ChuckJoke(
+    val actualId: Long,
     val id: String,
     val categories: List<Category>,
     val createdAt: Date?,

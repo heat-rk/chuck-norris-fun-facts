@@ -5,7 +5,7 @@ import ru.heatalways.chucknorrisfunfacts.domain.models.ChuckJoke
 
 class ChuckJokeDiffUtil: DiffUtil.ItemCallback<ChuckJoke>() {
     override fun areItemsTheSame(oldItem: ChuckJoke, newItem: ChuckJoke): Boolean {
-        return oldItem.id == newItem.id
+        return oldItem.id == newItem.id && oldItem.actualId == newItem.actualId
     }
 
     override fun areContentsTheSame(oldItem: ChuckJoke, newItem: ChuckJoke): Boolean {

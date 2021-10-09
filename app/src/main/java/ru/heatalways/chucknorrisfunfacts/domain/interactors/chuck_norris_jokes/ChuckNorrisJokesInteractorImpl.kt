@@ -73,7 +73,9 @@ class ChuckNorrisJokesInteractorImpl @Inject constructor(
             },
             onSuccess = { joke ->
                 repository.saveJoke(joke)
-                emit(InteractorEvent.Success(joke))
+                emit(InteractorEvent.Success(
+                    repository.getSavedJokesBy(limit = 1).first()
+                ))
             }
         )
     }

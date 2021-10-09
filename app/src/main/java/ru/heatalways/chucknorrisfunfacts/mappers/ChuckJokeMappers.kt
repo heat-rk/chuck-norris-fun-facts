@@ -11,6 +11,7 @@ import ru.heatalways.chucknorrisfunfacts.domain.utils.strRes
 import java.util.*
 
 fun ChuckJokeNetwork.toDomain() = ChuckJoke(
+    actualId = this.id.hashCode().toLong(),
     id = this.id,
     categories = this.categories?.map { Category.Specific(it) } ?: emptyList(),
     createdAt = this.createdAt?.let { DateUtils.toDate(it, DateUtils.Format.Default) },
@@ -22,6 +23,7 @@ fun ChuckJokeNetwork.toDomain() = ChuckJoke(
 )
 
 fun ChuckJokeEntity.toDomain() = ChuckJoke(
+    actualId = this.actualId,
     id = this.id,
     categories = this.categories?.map { Category.Specific(it) } ?: emptyList(),
     createdAt = this.createdAt?.let { Date(it) },
