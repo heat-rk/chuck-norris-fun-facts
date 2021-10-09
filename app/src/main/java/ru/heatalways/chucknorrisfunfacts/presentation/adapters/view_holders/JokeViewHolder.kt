@@ -11,13 +11,14 @@ import ru.heatalways.chucknorrisfunfacts.domain.models.ChuckJoke
 import ru.heatalways.chucknorrisfunfacts.domain.utils.LoadPhotoConfig
 import ru.heatalways.chucknorrisfunfacts.extensions.loadImage
 import ru.heatalways.chucknorrisfunfacts.extensions.setVisibleOrInvisible
+import ru.heatalways.chucknorrisfunfacts.extensions.toCharSequence
 
 class JokeViewHolder private constructor(rootView: View): RecyclerView.ViewHolder(rootView) {
     private val binding = ItemJokeHolderViewBinding.bind(rootView)
 
     fun bind(joke: ChuckJoke) {
         binding.iconImageView.loadImage(LoadPhotoConfig(url = joke.iconUrl))
-        binding.jokeTextView.text = joke.value.getText(itemView.context)
+        binding.jokeTextView.text = joke.value.toCharSequence(itemView.context)
         binding.mainLayout.setVisibleOrInvisible(!joke.isUpdating)
         binding.progressBar.isVisible = joke.isUpdating
     }

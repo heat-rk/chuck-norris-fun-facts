@@ -9,7 +9,7 @@ import ru.heatalways.chucknorrisfunfacts.domain.utils.StringResource
 import ru.heatalways.chucknorrisfunfacts.presentation.base.BindingActivity
 
 fun Fragment.showToast(message: StringResource?, length: Int = Toast.LENGTH_SHORT) {
-    Toast.makeText(context, message?.getText(requireContext()) ?: getString(R.string.error_unknown), length).show()
+    Toast.makeText(context, message?.toCharSequence(requireContext()) ?: getString(R.string.error_unknown), length).show()
 }
 
 fun Fragment.showToast(message: String?, length: Int = Toast.LENGTH_SHORT) {
@@ -21,10 +21,10 @@ fun Fragment.showKeyboard(viewId: Int) {
 }
 
 fun Context.getString(stringResource: StringResource?) =
-    stringResource?.getText(this)
+    stringResource?.toCharSequence(this)
 
 fun Fragment.getString(stringResource: StringResource?) =
-    stringResource?.getText(requireContext())
+    stringResource?.toCharSequence(requireContext())
 
 fun Fragment.hideKeyboard() {
     activity?.hideKeyboard()
