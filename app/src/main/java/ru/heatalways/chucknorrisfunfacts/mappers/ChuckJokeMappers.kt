@@ -35,7 +35,6 @@ fun ChuckJokeEntity.toDomain() = ChuckJoke(
 )
 
 fun ChuckJoke.toEntity() = ChuckJokeEntity(
-    actualId = this.actualId,
     id = this.id,
     categories = this.categories.mapNotNull { if (it is Category.Specific) it.name else null },
     createdAt = this.createdAt?.time,
