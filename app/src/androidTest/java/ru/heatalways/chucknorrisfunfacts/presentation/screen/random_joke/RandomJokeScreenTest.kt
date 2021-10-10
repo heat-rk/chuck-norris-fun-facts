@@ -64,16 +64,7 @@ class RandomJokeScreenTest: TestCase() {
             }
         }
 
-        step("4. Click search button") {
-            CategorySelectionScreen.searchQueryView.searchButton {
-                flakySafely {
-                    isVisible()
-                    click()
-                }
-            }
-        }
-
-        step("5. Select animal category") {
+        step("4. Select animal category") {
             CategorySelectionScreen.categories {
                 childWith<CategoryItem> { withText("animal") } perform {
                     button {
@@ -86,7 +77,7 @@ class RandomJokeScreenTest: TestCase() {
             }
         }
 
-        step("6. Check selected category") {
+        step("5. Check selected category") {
             RandomJokeScreen.selectCategoryButton {
                 flakySafely {
                     isVisible()

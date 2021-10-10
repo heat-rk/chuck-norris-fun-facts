@@ -61,16 +61,7 @@ class SearchJokeScreenTest: TestCase() {
             }
         }
 
-        step("2. Search button click") {
-            SearchJokeScreen.searchQueryView.searchButton {
-                flakySafely {
-                    isVisible()
-                    click()
-                }
-            }
-        }
-
-        step("3. Check recycler view size") {
+        step("2. Check recycler view size") {
             SearchJokeScreen.recyclerView {
                 flakySafely {
                     isVisible()
@@ -91,16 +82,7 @@ class SearchJokeScreenTest: TestCase() {
             }
         }
 
-        step("2. Search button click") {
-            SearchJokeScreen.searchQueryView.searchButton {
-                flakySafely {
-                    isVisible()
-                    click()
-                }
-            }
-        }
-
-        step("3. Check error visibility (should be VISIBLE)") {
+        step("2. Check error visibility (should be VISIBLE)") {
             SearchJokeScreen.errorTextView {
                 flakySafely {
                     isVisible()

@@ -12,6 +12,7 @@ import ru.heatalways.chucknorrisfunfacts.domain.interactors.chuck_norris_jokes.C
 import ru.heatalways.chucknorrisfunfacts.domain.interactors.chuck_norris_jokes.ChuckNorrisJokesInteractorImpl
 import ru.heatalways.chucknorrisfunfacts.data.repositories.chuck_norris_jokes.ChuckNorrisJokesRepositoryFake
 import ru.heatalways.chucknorrisfunfacts.domain.utils.strRes
+import ru.heatalways.chucknorrisfunfacts.presentation.util.ScrollState
 import ru.heatalways.chucknorrisfunfacts.utils.BaseViewModelTest
 import kotlin.time.ExperimentalTime
 
@@ -45,10 +46,10 @@ class SearchJokeViewModelTest: BaseViewModelTest() {
             assertThat(successState.jokesMessage).isNull()
 
             val scrollingUpState = awaitItem()
-            assertThat(scrollingUpState.isScrollingUp).isTrue()
+            assertThat(scrollingUpState.scrollState).isEqualTo(ScrollState.ScrollingUp)
 
             val scrollFinishedState = awaitItem()
-            assertThat(scrollFinishedState.isScrollingUp).isFalse()
+            assertThat(scrollFinishedState.scrollState).isEqualTo(ScrollState.Stopped)
 
             assertThat(cancelAndConsumeRemainingEvents().size).isEqualTo(0)
         }
