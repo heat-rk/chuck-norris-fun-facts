@@ -21,16 +21,23 @@ class SearchQueryView: FrameLayout {
     private var binding: IncSearchLayoutBinding? = null
     private var minQueryLength: Int = 0
     private var maxQueryLength: Int = Int.MAX_VALUE
-
     private var textWatcher: TextWatcher? = null
 
+
+    val queryLength
+        get() = binding?.searchQueryEditText?.length() ?: 0
+
     val isQueryLengthValid
-        get() = binding?.searchQueryEditText?.length() in minQueryLength..maxQueryLength
+        get() = queryLength in minQueryLength..maxQueryLength
 
     val searchQuery
         get() = binding?.searchQueryEditText?.text.toString()
 
     var onSearchExecute: ((query: String) -> Unit)? = null
+
+    var onQueryChanged: ((query: String) -> Unit)? = null
+
+
 
     constructor(context: Context) : super(context) {
         initView(null)
@@ -46,7 +53,7 @@ class SearchQueryView: FrameLayout {
         val attributes = context.obtainStyledAttributes(attrs, R.styleable.SearchQueryView)
 
         setHint(attributes.getText(R.styleable.SearchQueryView_hint))
-        setSearchButtonVisibility(attributes.getBoolean(R.styleable.SearchQueryView_search_button_visible, false))
+        setSearchButtonVisibility(attributes.getBoolean(R.styleable.SearchQueryView_searchButtonVisible, true))
         setMaxQueryLength(attributes.getInteger(R.styleable.SearchQueryView_maxQueryLength, Int.MAX_VALUE))
         setMinQueryLength(attributes.getInteger(R.styleable.SearchQueryView_minQueryLength, 0))
 
@@ -59,7 +66,8 @@ class SearchQueryView: FrameLayout {
         binding?.apply {
             searchQueryEditText.apply {
                 textWatcher = doAfterTextChanged {
-                    searchButton.showHideSmoothly(isQueryLengthValid)
+                    clearButton.showHideSmoothly(queryLength > 0)
+                    onQueryChanged?.invoke(searchQuery)
                 }
 
                 setOnEditorActionListener { _, actionId,_ ->
@@ -73,6 +81,10 @@ class SearchQueryView: FrameLayout {
 
             searchButton.setOnClickListener {
                 onSearchExecute?.invoke(searchQuery)
+            }
+
+            clearButton.setOnClickListener {
+                searchQueryEditText.setText("")
             }
         }
     }
@@ -95,8 +107,13 @@ class SearchQueryView: FrameLayout {
     }
 
     fun searches(): Flow<String> = channelFlow {
-        onSearchExecute = { if (isActive) { trySend(it) } }
-        awaitClose { onSearchExecute = {} }
+        onSearchExecute = { if (isActive) trySend(it) }
+        awaitClose { onSearchExecute = null }
+    }
+
+    fun queryChanges(): Flow<String> = channelFlow {
+        onQueryChanged = { if (isActive) trySend(it) }
+        awaitClose { onQueryChanged = null }
     }
 
     fun clearListeners() {
@@ -104,5 +121,9 @@ class SearchQueryView: FrameLayout {
         binding?.searchButton?.setOnClickListener(null)
         onSearchExecute = null
         textWatcher = null
+    }
+
+    companion object {
+        const val DEFAULT_DEBOUNCE_TIME = 300L
     }
 }

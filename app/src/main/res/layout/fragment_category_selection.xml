@@ -15,7 +15,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/paddingMD"
         app:hint="@string/select_category_search_hint"
-        app:search_button_visible="true"/>
+        app:searchButtonVisible="false"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/categoriesRecyclerView"

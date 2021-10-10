@@ -6,8 +6,7 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.flow.merge
+import kotlinx.coroutines.flow.*
 import ru.heatalways.chucknorrisfunfacts.R
 import ru.heatalways.chucknorrisfunfacts.databinding.FragmentSearchJokeBinding
 import ru.heatalways.chucknorrisfunfacts.domain.models.ChuckJoke
@@ -17,6 +16,7 @@ import ru.heatalways.chucknorrisfunfacts.extensions.postScrollToPosition
 import ru.heatalways.chucknorrisfunfacts.presentation.adapters.JokesAdapter
 import ru.heatalways.chucknorrisfunfacts.presentation.adapters.decorators.MarginItemDecoration
 import ru.heatalways.chucknorrisfunfacts.presentation.base.BindingMviFragment
+import ru.heatalways.chucknorrisfunfacts.presentation.custom_view.SearchQueryView
 import ru.heatalways.chucknorrisfunfacts.presentation.util.ScrollState
 import ru.heatalways.chucknorrisfunfacts.presentation.util.appbars.DefaultAppbar
 
@@ -49,12 +49,11 @@ class SearchJokeFragment: BindingMviFragment<
 
     override val actions get() =
         merge(
-            binding.searchView.searches()
-                .map {
-                    binding.searchView.clearFocus()
-                    hideKeyboard()
-                    SearchJokeAction.OnSearchExecute(it)
-                }
+            binding.searchView.queryChanges()
+                .distinctUntilChanged()
+                .debounce(SearchQueryView.DEFAULT_DEBOUNCE_TIME)
+                .filter { binding.searchView.isQueryLengthValid }
+                .map { SearchJokeAction.OnSearchExecute(it) }
         )
 
     override fun renderState(state: SearchJokeViewState) {

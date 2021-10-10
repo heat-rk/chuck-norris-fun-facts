@@ -18,7 +18,8 @@
         android:layout_height="wrap_content"
         app:hint="@string/search_joke_enter_hint"
         app:minQueryLength="3"
-        app:maxQueryLength="120"/>
+        app:maxQueryLength="120"
+        app:searchButtonVisible="false"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/jokesRecyclerView"

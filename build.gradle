@@ -1,7 +1,7 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 buildscript {
     ext {
-        kotlin_version = "1.5.0"
+        kotlin_version = "1.5.30"
 
         // TESTS
         arch_test_version = "2.1.0"
@@ -17,7 +17,7 @@ buildscript {
         leak_canary_version = "2.7"
 
         // DI
-        dagger_version = "2.37"
+        dagger_version = "2.38.1"
 
         // KTX
         ktx_core_version = "1.6.0"
@@ -62,7 +62,6 @@ allprojects {
     repositories {
         google()
         mavenCentral()
-        jcenter() // Warning: this repository is going to shut down soon
     }
 }
 
