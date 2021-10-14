@@ -14,9 +14,7 @@ import ru.heatalways.chucknorrisfunfacts.databinding.FragmentRandomJokeBinding
 import ru.heatalways.chucknorrisfunfacts.domain.models.Category
 import ru.heatalways.chucknorrisfunfacts.domain.models.ChuckJoke
 import ru.heatalways.chucknorrisfunfacts.domain.utils.StringResource
-import ru.heatalways.chucknorrisfunfacts.extensions.postScrollToPosition
-import ru.heatalways.chucknorrisfunfacts.extensions.scrollsToLastItem
-import ru.heatalways.chucknorrisfunfacts.extensions.showToast
+import ru.heatalways.chucknorrisfunfacts.extensions.*
 import ru.heatalways.chucknorrisfunfacts.presentation.adapters.JokesAdapter
 import ru.heatalways.chucknorrisfunfacts.presentation.adapters.decorators.MarginItemDecoration
 import ru.heatalways.chucknorrisfunfacts.presentation.base.BindingMviFragment
@@ -68,6 +66,8 @@ class RandomJokeFragment: BindingMviFragment<
                 .map { RandomJokeAction.NextPage },
 
             appbar.toolbarItemClicks
+                .debounceFirst(CLEAR_JOKES_DEBOUNCE)
+                .throttleFirst(CLEAR_JOKES_THROTTLE)
                 .map { RandomJokeAction.ToolbarItemSelect(it.itemId) },
 
             snackbar.actions
@@ -165,5 +165,10 @@ class RandomJokeFragment: BindingMviFragment<
         }
 
         super.onDestroyView()
+    }
+
+    companion object {
+        private const val CLEAR_JOKES_DEBOUNCE = 1000L
+        private const val CLEAR_JOKES_THROTTLE = 2000L
     }
 }

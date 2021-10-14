@@ -2,10 +2,7 @@ package ru.heatalways.chucknorrisfunfacts.extensions
 
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.filter
-import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.flow.merge
+import kotlinx.coroutines.flow.*
 import ru.ldralighieri.corbind.recyclerview.scrollEvents
 
 fun RecyclerView.scrollsToLastItem() = scrollEvents()
@@ -22,6 +19,43 @@ fun RecyclerView.scrollsToLastItem() = scrollEvents()
         (visibleItemCount + firstVisibleItemPosition) >= totalItemCount &&
                 firstVisibleItemPosition >= 0
     }
+
+fun <T> Flow<T>.throttleFirst(windowDuration: Long): Flow<T> = flow {
+    var windowStartTime = System.currentTimeMillis()
+    var emitted = false
+    collect { value ->
+        val currentTime = System.currentTimeMillis()
+        val delta = currentTime - windowStartTime
+        if (delta >= windowDuration) {
+            windowStartTime += delta / windowDuration * windowDuration
+            emitted = false
+        }
+        if (!emitted) {
+            emit(value)
+            emitted = true
+        }
+    }
+}
+
+fun <T> Flow<T>.debounceFirst(windowDuration: Long): Flow<T> = flow {
+    var windowStartTime = System.currentTimeMillis()
+    var emitted = false
+    collect { value ->
+        val currentTime = System.currentTimeMillis()
+        val delta = currentTime - windowStartTime
+        if (delta >= windowDuration) {
+            windowStartTime += delta / windowDuration * windowDuration
+            emitted = false
+        }
+        if (!emitted) {
+            emit(value)
+            emitted = true
+        }
+        if (emitted && delta < windowDuration) {
+            windowStartTime = System.currentTimeMillis()
+        }
+    }
+}
 
 fun flowTimer(millis: Long) = flow {
     kotlinx.coroutines.delay(millis)
