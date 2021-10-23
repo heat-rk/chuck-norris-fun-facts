@@ -29,14 +29,3 @@ fun Fragment.getString(stringResource: StringResource?) =
 fun Fragment.hideKeyboard() {
     activity?.hideKeyboard()
 }
-
-fun <T: Any> Fragment.getTrackedArgument(key: String) =
-    arguments?.getTrackedReference<T>(key)
-
-fun <T: Any> Fragment.getSafeTrackedArgument(key: String) =
-    arguments?.getTrackedReference<T>(key)?.safeGet()
-
-fun <T: Any> Fragment.putTrackedReference(key: String, value: T) {
-    if (arguments == null) arguments = Bundle()
-    arguments?.putTrackedReference(key, value)
-}

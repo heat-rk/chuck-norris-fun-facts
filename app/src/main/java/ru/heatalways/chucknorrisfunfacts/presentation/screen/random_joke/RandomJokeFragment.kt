@@ -5,6 +5,7 @@ import android.view.View
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.map
@@ -52,6 +53,14 @@ class RandomJokeFragment: BindingMviFragment<
             layoutManager = LinearLayoutManager(requireContext())
             adapter = jokesAdapter
         }
+
+        findNavController().currentBackStackEntry
+            ?.savedStateHandle?.let { handle ->
+                handle.getLiveData<Category>("category")
+                .observe(viewLifecycleOwner, { category ->
+                    viewModel.selectCategory(category)
+                })
+            }
     }
 
     override val actions get() =

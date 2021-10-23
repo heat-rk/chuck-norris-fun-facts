@@ -1,14 +1,8 @@
 package ru.heatalways.chucknorrisfunfacts.presentation.screen.random_joke.select_category
 
-import android.os.Bundle
-import androidx.lifecycle.AbstractSavedStateViewModelFactory
 import androidx.lifecycle.SavedStateHandle
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import androidx.savedstate.SavedStateRegistryOwner
-import dagger.assisted.Assisted
-import dagger.assisted.AssistedFactory
-import dagger.assisted.AssistedInject
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import ru.heatalways.chucknorrisfunfacts.domain.interactors.chuck_norris_jokes.ChuckNorrisJokesInteractor
@@ -16,10 +10,11 @@ import ru.heatalways.chucknorrisfunfacts.domain.models.Category
 import ru.heatalways.chucknorrisfunfacts.domain.utils.InteractorEvent
 import ru.heatalways.chucknorrisfunfacts.presentation.base.MviViewModel
 import ru.heatalways.chucknorrisfunfacts.presentation.util.ScrollState
+import javax.inject.Inject
 
-class CategorySelectionViewModel @AssistedInject constructor(
-    @Assisted("onSelect") private val onSelect: (Category) -> Unit,
-    @Assisted("savedState") private val savedStateHandle: SavedStateHandle,
+@HiltViewModel
+class CategorySelectionViewModel @Inject constructor(
+    private val savedStateHandle: SavedStateHandle,
     private val interactor: ChuckNorrisJokesInteractor
 ): MviViewModel<
         CategorySelectionAction,
@@ -76,8 +71,12 @@ class CategorySelectionViewModel @AssistedInject constructor(
     }
 
     private fun selectCategory(category: Category) {
-        onSelect(category)
-        navigator { navigateUp() }
+        navigator {
+            previousBackStackEntry
+                ?.savedStateHandle?.set("category", category)
+
+            navigateUp()
+        }
     }
 
     private fun search(query: String) {
@@ -108,32 +107,8 @@ class CategorySelectionViewModel @AssistedInject constructor(
         reduceState(CategorySelectionPartialState.Scroll(ScrollState.Stopped))
     }
 
-    @AssistedFactory
-    interface Factory {
-        fun create(
-            @Assisted("onSelect") config: (Category) -> Unit,
-            @Assisted("savedState") savedStateHandle: SavedStateHandle
-        ): CategorySelectionViewModel
-    }
-
     companion object {
         private const val SAVED_SEARCH_QUERY =
             "screen.random_joke.select_category.search_query"
-
-        @Suppress("UNCHECKED_CAST")
-        fun provideFactory(
-            assistedFactory: Factory,
-            owner: SavedStateRegistryOwner,
-            defaultArgs: Bundle? = null,
-            onSelect: (Category) -> Unit
-        ) = object : AbstractSavedStateViewModelFactory(owner, defaultArgs) {
-            override fun <T : ViewModel?> create(
-                key: String,
-                modelClass: Class<T>,
-                handle: SavedStateHandle
-            ): T {
-                return assistedFactory.create(onSelect, handle) as T
-            }
-        }
     }
 }

@@ -1,6 +1,5 @@
 package ru.heatalways.chucknorrisfunfacts.presentation.screen.random_joke
 
-import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.*
@@ -8,14 +7,14 @@ import ru.heatalways.chucknorrisfunfacts.R
 import ru.heatalways.chucknorrisfunfacts.domain.interactors.chuck_norris_jokes.ChuckNorrisJokesInteractor
 import ru.heatalways.chucknorrisfunfacts.domain.models.Category
 import ru.heatalways.chucknorrisfunfacts.domain.models.ChuckJoke
-import ru.heatalways.chucknorrisfunfacts.domain.utils.*
+import ru.heatalways.chucknorrisfunfacts.domain.utils.InteractorEvent
+import ru.heatalways.chucknorrisfunfacts.domain.utils.StringResource
 import ru.heatalways.chucknorrisfunfacts.domain.utils.paging.PagingConfig
 import ru.heatalways.chucknorrisfunfacts.domain.utils.paging.PagingEvent
-import ru.heatalways.chucknorrisfunfacts.extensions.bundleWithTrackedReference
+import ru.heatalways.chucknorrisfunfacts.domain.utils.strRes
 import ru.heatalways.chucknorrisfunfacts.extensions.flowTimer
 import ru.heatalways.chucknorrisfunfacts.extensions.mergeWith
 import ru.heatalways.chucknorrisfunfacts.presentation.base.MviViewModel
-import ru.heatalways.chucknorrisfunfacts.presentation.screen.random_joke.select_category.CategorySelectionFragment
 import ru.heatalways.chucknorrisfunfacts.presentation.util.ScrollState
 import ru.heatalways.chucknorrisfunfacts.presentation.util.SnackbarState
 import ru.heatalways.chucknorrisfunfacts.presentation.util.ToastState
@@ -23,8 +22,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class RandomJokeViewModel @Inject constructor(
-    private val interactor: ChuckNorrisJokesInteractor,
-    private val savedStateHandle: SavedStateHandle
+    private val interactor: ChuckNorrisJokesInteractor
 ): MviViewModel<
         RandomJokeAction,
         RandomJokeViewState,
@@ -34,14 +32,7 @@ class RandomJokeViewModel @Inject constructor(
     override val initialState get() = RandomJokeViewState(isLoading = true)
 
     init {
-        handleSavedState()
         fetchJokes()
-    }
-
-    private fun handleSavedState() {
-        savedStateHandle.get<Category?>(SAVED_SELECTED_CATEGORY)?.let { category ->
-            reduceState(RandomJokePartialState.CategorySelected(category))
-        }
     }
 
     fun fetchJokes() {
@@ -73,20 +64,11 @@ class RandomJokeViewModel @Inject constructor(
 
     fun selectCategory(category: Category) {
         reduceState(RandomJokePartialState.CategorySelected(category))
-        savedStateHandle.set(SAVED_SELECTED_CATEGORY, category)
     }
 
     private fun navigateToCategorySelectionScreen() {
         navigator {
-            navigate(
-                R.id.action_randomJokeFragment_to_categorySelectionFragment,
-                bundleWithTrackedReference(
-                    key = CategorySelectionFragment.ON_SELECT_EXTRA,
-                    value = { category: Category ->
-                        selectCategory(category)
-                    }
-                )
-            )
+            navigate(R.id.action_randomJokeFragment_to_categorySelectionFragment)
         }
     }
 
@@ -215,10 +197,5 @@ class RandomJokeViewModel @Inject constructor(
                 }
             }
             .launchIn(viewModelScope)
-    }
-
-    companion object {
-        private const val SAVED_SELECTED_CATEGORY =
-            "screen.random_joke.saved_selected_category"
     }
 }

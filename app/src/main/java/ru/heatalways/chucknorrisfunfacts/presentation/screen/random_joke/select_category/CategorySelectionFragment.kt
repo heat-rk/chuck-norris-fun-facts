@@ -11,17 +11,14 @@ import ru.heatalways.chucknorrisfunfacts.R
 import ru.heatalways.chucknorrisfunfacts.databinding.FragmentCategorySelectionBinding
 import ru.heatalways.chucknorrisfunfacts.domain.models.Category
 import ru.heatalways.chucknorrisfunfacts.domain.utils.StringResource
-import ru.heatalways.chucknorrisfunfacts.extensions.getSafeTrackedArgument
-import ru.heatalways.chucknorrisfunfacts.extensions.hideKeyboard
 import ru.heatalways.chucknorrisfunfacts.extensions.initBackButton
 import ru.heatalways.chucknorrisfunfacts.extensions.postScrollToPosition
 import ru.heatalways.chucknorrisfunfacts.presentation.adapters.CategoriesAdapter
 import ru.heatalways.chucknorrisfunfacts.presentation.adapters.decorators.MarginItemDecoration
 import ru.heatalways.chucknorrisfunfacts.presentation.base.BindingMviFragment
 import ru.heatalways.chucknorrisfunfacts.presentation.custom_view.SearchQueryView
-import ru.heatalways.chucknorrisfunfacts.presentation.util.appbars.DefaultAppbar
 import ru.heatalways.chucknorrisfunfacts.presentation.util.ScrollState
-import javax.inject.Inject
+import ru.heatalways.chucknorrisfunfacts.presentation.util.appbars.DefaultAppbar
 
 @AndroidEntryPoint
 class CategorySelectionFragment: BindingMviFragment<
@@ -30,17 +27,7 @@ class CategorySelectionFragment: BindingMviFragment<
         CategorySelectionViewState
 >(FragmentCategorySelectionBinding::inflate) {
 
-    @Inject
-    lateinit var assistedFactory: CategorySelectionViewModel.Factory
-
-    override val viewModel: CategorySelectionViewModel by viewModels {
-        CategorySelectionViewModel.provideFactory(
-            assistedFactory = assistedFactory,
-            owner = this,
-            defaultArgs = arguments,
-            onSelect = getSafeTrackedArgument(ON_SELECT_EXTRA) ?: {}
-        )
-    }
+    override val viewModel: CategorySelectionViewModel by viewModels()
 
     override val appbar get() = DefaultAppbar(
         parentLayoutId = R.id.topLayout,
@@ -125,9 +112,5 @@ class CategorySelectionFragment: BindingMviFragment<
         }
 
         super.onDestroyView()
-    }
-
-    companion object {
-        const val ON_SELECT_EXTRA = "category_selection_fragment.on_select"
     }
 }
