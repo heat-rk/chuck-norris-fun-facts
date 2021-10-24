@@ -8,7 +8,7 @@ import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.launch
 import ru.heatalways.chucknorrisfunfacts.R
-import ru.heatalways.chucknorrisfunfacts.domain.utils.StringResource
+import ru.heatalways.chucknorrisfunfacts.core.utils.StringResource
 import ru.heatalways.chucknorrisfunfacts.extensions.getString
 
 class IndefiniteSnackbar {

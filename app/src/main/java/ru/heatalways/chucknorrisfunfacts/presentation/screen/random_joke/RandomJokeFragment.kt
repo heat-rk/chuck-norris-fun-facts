@@ -14,7 +14,7 @@ import ru.heatalways.chucknorrisfunfacts.R
 import ru.heatalways.chucknorrisfunfacts.databinding.FragmentRandomJokeBinding
 import ru.heatalways.chucknorrisfunfacts.domain.models.Category
 import ru.heatalways.chucknorrisfunfacts.domain.models.ChuckJoke
-import ru.heatalways.chucknorrisfunfacts.domain.utils.StringResource
+import ru.heatalways.chucknorrisfunfacts.core.utils.StringResource
 import ru.heatalways.chucknorrisfunfacts.extensions.*
 import ru.heatalways.chucknorrisfunfacts.presentation.adapters.JokesAdapter
 import ru.heatalways.chucknorrisfunfacts.presentation.adapters.decorators.MarginItemDecoration

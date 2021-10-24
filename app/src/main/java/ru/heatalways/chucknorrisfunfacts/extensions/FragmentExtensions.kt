@@ -5,7 +5,7 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import ru.heatalways.chucknorrisfunfacts.R
-import ru.heatalways.chucknorrisfunfacts.domain.utils.StringResource
+import ru.heatalways.chucknorrisfunfacts.core.utils.StringResource
 import ru.heatalways.chucknorrisfunfacts.presentation.base.BindingActivity
 
 fun Fragment.showToast(message: StringResource?, length: Int = Toast.LENGTH_SHORT) {

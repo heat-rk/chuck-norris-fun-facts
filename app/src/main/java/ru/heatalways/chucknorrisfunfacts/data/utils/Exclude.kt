@@ -1,4 +1,4 @@
-package ru.heatalways.chucknorrisfunfacts.domain.utils
+package ru.heatalways.chucknorrisfunfacts.data.utils
 
 @Retention(AnnotationRetention.RUNTIME)
 @Target(AnnotationTarget.FIELD)

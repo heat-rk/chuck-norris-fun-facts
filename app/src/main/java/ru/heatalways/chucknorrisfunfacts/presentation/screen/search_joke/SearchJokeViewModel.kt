@@ -9,7 +9,7 @@ import kotlinx.coroutines.flow.onEach
 import ru.heatalways.chucknorrisfunfacts.R
 import ru.heatalways.chucknorrisfunfacts.domain.interactors.chuck_norris_jokes.ChuckNorrisJokesInteractor
 import ru.heatalways.chucknorrisfunfacts.domain.utils.InteractorEvent
-import ru.heatalways.chucknorrisfunfacts.domain.utils.StringResource
+import ru.heatalways.chucknorrisfunfacts.core.utils.StringResource
 import ru.heatalways.chucknorrisfunfacts.presentation.base.MviViewModel
 import ru.heatalways.chucknorrisfunfacts.presentation.util.ScrollState
 import javax.inject.Inject

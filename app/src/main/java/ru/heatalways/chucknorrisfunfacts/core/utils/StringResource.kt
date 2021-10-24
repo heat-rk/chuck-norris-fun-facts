@@ -1,4 +1,4 @@
-package ru.heatalways.chucknorrisfunfacts.domain.utils
+package ru.heatalways.chucknorrisfunfacts.core.utils
 
 import androidx.annotation.StringRes
 
@@ -8,4 +8,4 @@ sealed class StringResource {
 }
 
 fun strRes(text: String?) = StringResource.ByString(text)
-fun strRes(text: Int) = StringResource.ByRes(text)
+fun strRes(@StringRes text: Int) = StringResource.ByRes(text)

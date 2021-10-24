@@ -10,8 +10,7 @@ import kotlinx.coroutines.flow.*
 import ru.heatalways.chucknorrisfunfacts.R
 import ru.heatalways.chucknorrisfunfacts.databinding.FragmentSearchJokeBinding
 import ru.heatalways.chucknorrisfunfacts.domain.models.ChuckJoke
-import ru.heatalways.chucknorrisfunfacts.domain.utils.StringResource
-import ru.heatalways.chucknorrisfunfacts.extensions.hideKeyboard
+import ru.heatalways.chucknorrisfunfacts.core.utils.StringResource
 import ru.heatalways.chucknorrisfunfacts.extensions.postScrollToPosition
 import ru.heatalways.chucknorrisfunfacts.presentation.adapters.JokesAdapter
 import ru.heatalways.chucknorrisfunfacts.presentation.adapters.decorators.MarginItemDecoration

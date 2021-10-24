@@ -7,7 +7,7 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import ru.heatalways.chucknorrisfunfacts.domain.utils.Exclude
+import ru.heatalways.chucknorrisfunfacts.data.utils.Exclude
 import javax.inject.Singleton
 
 

@@ -10,7 +10,7 @@ import ru.heatalways.chucknorrisfunfacts.di.modules.IoDispatcher
 import ru.heatalways.chucknorrisfunfacts.domain.models.Category
 import ru.heatalways.chucknorrisfunfacts.domain.models.ChuckJoke
 import ru.heatalways.chucknorrisfunfacts.domain.repositories.chuck_norris_jokes.ChuckNorrisJokesRepository
-import ru.heatalways.chucknorrisfunfacts.domain.utils.CacheData
+import ru.heatalways.chucknorrisfunfacts.data.utils.CacheData
 import ru.heatalways.chucknorrisfunfacts.mappers.toDomain
 import ru.heatalways.chucknorrisfunfacts.mappers.toEntity
 import java.util.*

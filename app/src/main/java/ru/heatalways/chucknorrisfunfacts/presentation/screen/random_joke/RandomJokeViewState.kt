@@ -3,7 +3,7 @@ package ru.heatalways.chucknorrisfunfacts.presentation.screen.random_joke
 import ru.heatalways.chucknorrisfunfacts.domain.models.Category
 import ru.heatalways.chucknorrisfunfacts.domain.models.ChuckJoke
 import ru.heatalways.chucknorrisfunfacts.presentation.util.SnackbarState
-import ru.heatalways.chucknorrisfunfacts.domain.utils.StringResource
+import ru.heatalways.chucknorrisfunfacts.core.utils.StringResource
 import ru.heatalways.chucknorrisfunfacts.presentation.util.ToastState
 import ru.heatalways.chucknorrisfunfacts.presentation.base.MviState
 import ru.heatalways.chucknorrisfunfacts.presentation.util.ScrollState

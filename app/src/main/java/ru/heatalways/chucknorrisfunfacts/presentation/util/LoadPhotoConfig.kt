@@ -1,4 +1,4 @@
-package ru.heatalways.chucknorrisfunfacts.domain.utils
+package ru.heatalways.chucknorrisfunfacts.presentation.util
 
 import androidx.annotation.DrawableRes
 

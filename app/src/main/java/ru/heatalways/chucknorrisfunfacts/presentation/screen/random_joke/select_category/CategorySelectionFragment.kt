@@ -10,7 +10,7 @@ import kotlinx.coroutines.flow.*
 import ru.heatalways.chucknorrisfunfacts.R
 import ru.heatalways.chucknorrisfunfacts.databinding.FragmentCategorySelectionBinding
 import ru.heatalways.chucknorrisfunfacts.domain.models.Category
-import ru.heatalways.chucknorrisfunfacts.domain.utils.StringResource
+import ru.heatalways.chucknorrisfunfacts.core.utils.StringResource
 import ru.heatalways.chucknorrisfunfacts.extensions.initBackButton
 import ru.heatalways.chucknorrisfunfacts.extensions.postScrollToPosition
 import ru.heatalways.chucknorrisfunfacts.presentation.adapters.CategoriesAdapter

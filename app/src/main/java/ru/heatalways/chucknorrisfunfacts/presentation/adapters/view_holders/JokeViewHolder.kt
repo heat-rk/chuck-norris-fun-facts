@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import ru.heatalways.chucknorrisfunfacts.R
 import ru.heatalways.chucknorrisfunfacts.databinding.ItemJokeHolderViewBinding
 import ru.heatalways.chucknorrisfunfacts.domain.models.ChuckJoke
-import ru.heatalways.chucknorrisfunfacts.domain.utils.LoadPhotoConfig
+import ru.heatalways.chucknorrisfunfacts.presentation.util.LoadPhotoConfig
 import ru.heatalways.chucknorrisfunfacts.extensions.loadImage
 import ru.heatalways.chucknorrisfunfacts.extensions.setVisibleOrInvisible
 import ru.heatalways.chucknorrisfunfacts.extensions.toCharSequence

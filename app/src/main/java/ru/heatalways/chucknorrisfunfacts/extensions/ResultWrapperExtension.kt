@@ -1,8 +1,8 @@
 package ru.heatalways.chucknorrisfunfacts.extensions
 
 import ru.heatalways.chucknorrisfunfacts.data.network.util.ResultNetwork
-import ru.heatalways.chucknorrisfunfacts.domain.utils.StringResource
-import ru.heatalways.chucknorrisfunfacts.domain.utils.strRes
+import ru.heatalways.chucknorrisfunfacts.core.utils.StringResource
+import ru.heatalways.chucknorrisfunfacts.core.utils.strRes
 import ru.heatalways.chucknorrisfunfacts.R
 
 suspend fun <Body, Result> ResultNetwork<Body>.handle(

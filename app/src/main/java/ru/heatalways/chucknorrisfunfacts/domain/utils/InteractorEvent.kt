@@ -1,5 +1,7 @@
 package ru.heatalways.chucknorrisfunfacts.domain.utils
 
+import ru.heatalways.chucknorrisfunfacts.core.utils.StringResource
+
 sealed class InteractorEvent<out T> {
     object Loading: InteractorEvent<Nothing>()
     data class Error(val message: StringResource): InteractorEvent<Nothing>()
