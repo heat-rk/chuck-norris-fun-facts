@@ -1,9 +1,7 @@
 package ru.heatalways.chucknorrisfunfacts.presentation.screen.splash
 
 import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.findNavController
 import kotlinx.coroutines.flow.emptyFlow
-import ru.heatalways.chucknorrisfunfacts.R
 import ru.heatalways.chucknorrisfunfacts.databinding.FragmentSplashBinding
 import ru.heatalways.chucknorrisfunfacts.presentation.base.BindingMviFragment
 

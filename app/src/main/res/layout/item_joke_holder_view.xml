@@ -19,6 +19,7 @@
             android:layout_height="@dimen/result_icon_size"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            android:contentDescription="@string/joke_image_description"
             tools:src="@tools:sample/avatars"/>
 
         <TextView

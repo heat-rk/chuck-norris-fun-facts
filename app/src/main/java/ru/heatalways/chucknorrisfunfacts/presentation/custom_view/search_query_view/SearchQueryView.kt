@@ -1,4 +1,4 @@
-package ru.heatalways.chucknorrisfunfacts.presentation.custom_view
+package ru.heatalways.chucknorrisfunfacts.presentation.custom_view.search_query_view
 
 import android.content.Context
 import android.text.TextWatcher

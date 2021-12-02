@@ -1,12 +1,10 @@
 package ru.heatalways.chucknorrisfunfacts.extensions
 
 import android.content.Context
-import android.os.Bundle
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import ru.heatalways.chucknorrisfunfacts.R
 import ru.heatalways.chucknorrisfunfacts.core.utils.StringResource
-import ru.heatalways.chucknorrisfunfacts.presentation.base.BindingActivity
 
 fun Fragment.showToast(message: StringResource?, length: Int = Toast.LENGTH_SHORT) {
     Toast.makeText(context, message?.toCharSequence(requireContext()) ?: getString(R.string.error_unknown), length).show()

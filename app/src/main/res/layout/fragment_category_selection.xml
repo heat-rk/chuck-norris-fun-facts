@@ -9,7 +9,7 @@
     android:focusableInTouchMode="true"
     style="@style/RootFragmentLayout">
 
-    <ru.heatalways.chucknorrisfunfacts.presentation.custom_view.SearchQueryView
+    <ru.heatalways.chucknorrisfunfacts.presentation.custom_view.search_query_view.SearchQueryView
         android:id="@+id/searchView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

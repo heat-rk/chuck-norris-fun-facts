@@ -12,7 +12,7 @@ import ru.heatalways.chucknorrisfunfacts.domain.interactors.chuck_norris_jokes.C
 import ru.heatalways.chucknorrisfunfacts.domain.interactors.chuck_norris_jokes.ChuckNorrisJokesInteractorImpl
 import ru.heatalways.chucknorrisfunfacts.domain.models.Category
 import ru.heatalways.chucknorrisfunfacts.data.repositories.chuck_norris_jokes.ChuckNorrisJokesRepositoryFake
-import ru.heatalways.chucknorrisfunfacts.domain.utils.strRes
+import ru.heatalways.chucknorrisfunfacts.core.utils.strRes
 import ru.heatalways.chucknorrisfunfacts.mappers.toEntity
 import ru.heatalways.chucknorrisfunfacts.presentation.util.ScrollState
 import ru.heatalways.chucknorrisfunfacts.presentation.util.ToastState
@@ -30,10 +30,7 @@ class RandomJokeViewModelTest: BaseViewModelTest() {
     fun setup() {
         repository = ChuckNorrisJokesRepositoryFake()
         interactor = ChuckNorrisJokesInteractorImpl(repository)
-        viewModel = RandomJokeViewModel(
-            interactor,
-            SavedStateHandle()
-        )
+        viewModel = RandomJokeViewModel(interactor)
         viewModel.resetState()
     }
 

@@ -2,6 +2,7 @@ package ru.heatalways.chucknorrisfunfacts.di.modules
 
 import com.google.gson.ExclusionStrategy
 import com.google.gson.FieldAttributes
+import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import dagger.Module
 import dagger.Provides
@@ -16,7 +17,7 @@ import javax.inject.Singleton
 object GsonModule {
     @Provides
     @Singleton
-    fun provideGson() = GsonBuilder()
+    fun provideGson(): Gson = GsonBuilder()
         .addSerializationExclusionStrategy(JsonExclusionStrategy())
         .addDeserializationExclusionStrategy(JsonExclusionStrategy())
         .serializeNulls()

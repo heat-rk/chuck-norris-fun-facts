@@ -9,6 +9,7 @@
     <string name="no_saved_jokes_error">There are no jokes already!</string>
     <string name="remove_all_error">Remove failed :(</string>
     <string name="undo">Undo</string>
+    <string name="joke_image_description">Joke Image</string>
 
     <!-- SEARCH JOKE FRAGMENT -->
     <string name="search_joke_screen_title">Search Chuck Norris Joke!</string>

@@ -16,7 +16,7 @@ import ru.heatalways.chucknorrisfunfacts.extensions.postScrollToPosition
 import ru.heatalways.chucknorrisfunfacts.presentation.adapters.CategoriesAdapter
 import ru.heatalways.chucknorrisfunfacts.presentation.adapters.decorators.MarginItemDecoration
 import ru.heatalways.chucknorrisfunfacts.presentation.base.BindingMviFragment
-import ru.heatalways.chucknorrisfunfacts.presentation.custom_view.SearchQueryView
+import ru.heatalways.chucknorrisfunfacts.presentation.custom_view.search_query_view.SearchQueryView
 import ru.heatalways.chucknorrisfunfacts.presentation.util.ScrollState
 import ru.heatalways.chucknorrisfunfacts.presentation.util.appbars.DefaultAppbar
 
