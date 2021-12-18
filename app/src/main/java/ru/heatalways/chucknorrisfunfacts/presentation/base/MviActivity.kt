@@ -2,19 +2,17 @@ package ru.heatalways.chucknorrisfunfacts.presentation.base
 
 import android.os.Bundle
 import android.view.LayoutInflater
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import androidx.viewbinding.ViewBinding
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 
-abstract class BindingMviActivity<
-        Binding: ViewBinding,
+abstract class MviActivity<
         Action: MviAction,
         State: MviState
->(
-    bindingInflater: (LayoutInflater) -> Binding
-): BindingActivity<Binding>(bindingInflater) {
+>: AppCompatActivity() {
     protected abstract val viewModel: MviViewModel<Action, State, *>
 
     protected abstract val actions: Flow<Action>

@@ -135,6 +135,9 @@ dependencies {
     // SHIMMER
     implementation "com.facebook.shimmer:shimmer:$shimmer_version"
 
+    // VIEW BINDING DELEGATE
+    implementation "com.github.kirich1409:viewbindingpropertydelegate-noreflection:$view_binding_delegate"
+
     // OTHER STUFF --------------------------------------------------------
     implementation 'androidx.appcompat:appcompat:1.4.0'
     implementation 'com.google.android.material:material:1.4.0'

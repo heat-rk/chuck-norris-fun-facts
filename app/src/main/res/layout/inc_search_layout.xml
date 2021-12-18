@@ -17,7 +17,8 @@
             android:layout_height="wrap_content"
             app:hintAnimationEnabled="false"
             app:hintEnabled="false"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toTopOf="parent"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/searchQueryEditText"

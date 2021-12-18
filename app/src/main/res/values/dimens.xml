@@ -53,5 +53,5 @@
     <dimen name="subtitle_text_size">16sp</dimen>
     <dimen name="telegram_splash_image_size">100dp</dimen>
     <dimen name="orange_border_small_width">2dp</dimen>
-    <dimen name="appbar_layout_height">98dp</dimen>
+    <dimen name="search_view_height">65dp</dimen>
 </resources>

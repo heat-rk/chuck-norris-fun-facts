@@ -2,8 +2,6 @@
 <resources>
     <!-- LAYOUTS -->
     <style name="RootFragmentLayout">
-        <item name="android:paddingStart">@dimen/paddingMD</item>
-        <item name="android:paddingEnd">@dimen/paddingMD</item>
         <item name="android:background">@color/darkBackgroundColor</item>
     </style>
 
@@ -43,8 +41,9 @@
     </style>
 
     <!-- BUTTON -->
-    <style name="RoundedBorderedButton">
+    <style name="RoundedBorderedButton" parent="Widget.AppCompat.Button.Borderless">
         <item name="android:textAllCaps">false</item>
+        <item name="backgroundTint">@null</item>
         <item name="android:background">@drawable/white_rounded_bordered_bg</item>
         <item name="android:textSize">@dimen/txtSizeMD</item>
         <item name="android:padding">@dimen/paddingSM</item>

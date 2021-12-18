@@ -7,11 +7,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <include
+        android:id="@+id/appbar"
+        layout="@layout/inc_appbar_layout"/>
+
     <ru.heatalways.chucknorrisfunfacts.presentation.custom_view.SavingMotionLayout
         android:id="@+id/motionLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:paddingHorizontal="@dimen/paddingMD"
         app:layoutDescription="@xml/fragment_random_joke_scene"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
         style="@style/RootFragmentLayout">
 
         <LinearLayout

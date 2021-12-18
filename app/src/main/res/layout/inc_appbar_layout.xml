@@ -10,7 +10,6 @@
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         app:titleTextColor="@color/white"
-        app:subtitleTextColor="@color/white"
-        app:layout_collapseMode="pin"/>
+        app:subtitleTextColor="@color/white"/>
 
 </com.google.android.material.appbar.AppBarLayout>

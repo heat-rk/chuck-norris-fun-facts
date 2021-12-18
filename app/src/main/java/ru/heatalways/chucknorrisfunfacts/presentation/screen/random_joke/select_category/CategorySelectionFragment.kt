@@ -5,42 +5,37 @@ import android.view.View
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
+import by.kirich1409.viewbindingdelegate.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.*
 import ru.heatalways.chucknorrisfunfacts.R
+import ru.heatalways.chucknorrisfunfacts.core.utils.StringResource
 import ru.heatalways.chucknorrisfunfacts.databinding.FragmentCategorySelectionBinding
 import ru.heatalways.chucknorrisfunfacts.domain.models.Category
-import ru.heatalways.chucknorrisfunfacts.core.utils.StringResource
 import ru.heatalways.chucknorrisfunfacts.extensions.initBackButton
 import ru.heatalways.chucknorrisfunfacts.extensions.postScrollToPosition
 import ru.heatalways.chucknorrisfunfacts.presentation.adapters.CategoriesAdapter
 import ru.heatalways.chucknorrisfunfacts.presentation.adapters.decorators.MarginItemDecoration
-import ru.heatalways.chucknorrisfunfacts.presentation.base.BindingMviFragment
+import ru.heatalways.chucknorrisfunfacts.presentation.base.MviFragment
 import ru.heatalways.chucknorrisfunfacts.presentation.custom_view.search_query_view.SearchQueryView
 import ru.heatalways.chucknorrisfunfacts.presentation.util.ScrollState
-import ru.heatalways.chucknorrisfunfacts.presentation.util.appbars.DefaultAppbar
 
 @AndroidEntryPoint
-class CategorySelectionFragment: BindingMviFragment<
-        FragmentCategorySelectionBinding,
+class CategorySelectionFragment: MviFragment<
         CategorySelectionAction,
         CategorySelectionViewState
->(FragmentCategorySelectionBinding::inflate) {
+>(R.layout.fragment_category_selection) {
 
     override val viewModel: CategorySelectionViewModel by viewModels()
-
-    override val appbar get() = DefaultAppbar(
-        parentLayoutId = R.id.topLayout,
-        builder = {
-            setTitle(R.string.select_category_screen_title)
-            initBackButton(requireActivity())
-        }
-    )
+    private val binding by viewBinding(FragmentCategorySelectionBinding::bind)
 
     private val categoriesAdapter = CategoriesAdapter()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        binding.appbar.toolbar.setTitle(R.string.select_category_screen_title)
+        binding.appbar.toolbar.initBackButton(requireActivity())
 
         with(binding.categoriesRecyclerView) {
             addItemDecoration(MarginItemDecoration(R.dimen.paddingMD))
@@ -73,7 +68,7 @@ class CategorySelectionFragment: BindingMviFragment<
 
     private fun renderLoading(isLoading: Boolean) {
         if (previousState?.isCategoriesLoading != isLoading) {
-            binding.shimmerLayout.isVisible = isLoading
+            binding.shimmerLayout.root.isVisible = isLoading
         }
     }
 
@@ -96,11 +91,11 @@ class CategorySelectionFragment: BindingMviFragment<
 
     override fun onResume() {
         super.onResume()
-        binding.shimmerLayout.startShimmer()
+        binding.shimmerLayout.root.startShimmer()
     }
 
     override fun onPause() {
-        binding.shimmerLayout.stopShimmer()
+        binding.shimmerLayout.root.stopShimmer()
         super.onPause()
     }
 

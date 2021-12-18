@@ -5,39 +5,35 @@ import android.view.View
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
+import by.kirich1409.viewbindingdelegate.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.*
 import ru.heatalways.chucknorrisfunfacts.R
+import ru.heatalways.chucknorrisfunfacts.core.utils.StringResource
 import ru.heatalways.chucknorrisfunfacts.databinding.FragmentSearchJokeBinding
 import ru.heatalways.chucknorrisfunfacts.domain.models.ChuckJoke
-import ru.heatalways.chucknorrisfunfacts.core.utils.StringResource
 import ru.heatalways.chucknorrisfunfacts.extensions.postScrollToPosition
 import ru.heatalways.chucknorrisfunfacts.presentation.adapters.JokesAdapter
 import ru.heatalways.chucknorrisfunfacts.presentation.adapters.decorators.MarginItemDecoration
-import ru.heatalways.chucknorrisfunfacts.presentation.base.BindingMviFragment
+import ru.heatalways.chucknorrisfunfacts.presentation.base.MviFragment
 import ru.heatalways.chucknorrisfunfacts.presentation.custom_view.search_query_view.SearchQueryView
 import ru.heatalways.chucknorrisfunfacts.presentation.util.ScrollState
-import ru.heatalways.chucknorrisfunfacts.presentation.util.appbars.DefaultAppbar
 
 @AndroidEntryPoint
-class SearchJokeFragment: BindingMviFragment<
-        FragmentSearchJokeBinding,
+class SearchJokeFragment: MviFragment<
         SearchJokeAction,
         SearchJokeViewState
->(FragmentSearchJokeBinding::inflate) {
+>(R.layout.fragment_search_joke) {
 
     override val viewModel: SearchJokeViewModel by viewModels()
+    private val binding by viewBinding(FragmentSearchJokeBinding::bind)
     private val jokesAdapter = JokesAdapter()
 
-    override val appbar get() = DefaultAppbar(
-        parentLayoutId = R.id.topLayout,
-        builder = {
-            setTitle(R.string.search_joke_screen_title)
-        }
-    )
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+
         super.onViewCreated(view, savedInstanceState)
+
+        binding.appbar.toolbar.setTitle(R.string.search_joke_screen_title)
 
         with(binding.jokesRecyclerView) {
             addItemDecoration(MarginItemDecoration(R.dimen.paddingMD))
@@ -67,7 +63,7 @@ class SearchJokeFragment: BindingMviFragment<
 
     private fun renderLoading(isLoading: Boolean) {
         if (previousState?.isJokesLoading != isLoading)
-            binding.shimmerLayout.isVisible = isLoading
+            binding.shimmerLayout.root.isVisible = isLoading
     }
 
     private fun renderError(message: StringResource?) {
@@ -84,18 +80,17 @@ class SearchJokeFragment: BindingMviFragment<
     private fun renderScrolling(scrollState: ScrollState) {
         if (previousState?.scrollState != scrollState)
             if (scrollState is ScrollState.ScrollingUp) {
-                binding.root.transitionToStart()
                 binding.jokesRecyclerView.postScrollToPosition(0)
             }
     }
 
     override fun onResume() {
         super.onResume()
-        binding.shimmerLayout.startShimmer()
+        binding.shimmerLayout.root.startShimmer()
     }
 
     override fun onPause() {
-        binding.shimmerLayout.stopShimmer()
+        binding.shimmerLayout.root.stopShimmer()
         super.onPause()
     }
 

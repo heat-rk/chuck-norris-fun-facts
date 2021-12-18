@@ -1,6 +1,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.ChuckNorrisJokeApplication" parent="Theme.AppCompat.DayNight.NoActionBar">
+    <style name="Theme.ChuckNorrisJokeApplication" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorAccent">@color/colorAccent</item>
         <item name="colorPrimary">@color/colorPrimary</item>
@@ -19,5 +19,6 @@
         <!-- Action bar -->
         <item name="actionMenuTextColor">@color/colorPrimary</item>
         <item name="actionMenuTextAppearance">@style/ToolbarTextAppearance</item>
+        <item name="android:spotShadowAlpha">0.5</item>
     </style>
 </resources>
