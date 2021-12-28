@@ -1,11 +1,12 @@
 package ru.heatalways.chucknorrisfunfacts.presentation.screen.random_joke
 
+import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewModelScope
-import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.*
 import ru.heatalways.chucknorrisfunfacts.R
 import ru.heatalways.chucknorrisfunfacts.core.utils.StringResource
 import ru.heatalways.chucknorrisfunfacts.core.utils.strRes
+import ru.heatalways.chucknorrisfunfacts.core.viewmodels.ViewModelFactory
 import ru.heatalways.chucknorrisfunfacts.domain.interactors.chuck_norris_jokes.ChuckNorrisJokesInteractor
 import ru.heatalways.chucknorrisfunfacts.domain.models.Category
 import ru.heatalways.chucknorrisfunfacts.domain.models.ChuckJoke
@@ -20,8 +21,7 @@ import ru.heatalways.chucknorrisfunfacts.presentation.util.SnackbarState
 import ru.heatalways.chucknorrisfunfacts.presentation.util.ToastState
 import javax.inject.Inject
 
-@HiltViewModel
-class RandomJokeViewModel @Inject constructor(
+class RandomJokeViewModel(
     private val interactor: ChuckNorrisJokesInteractor
 ): MviViewModel<
         RandomJokeAction,
@@ -197,5 +197,12 @@ class RandomJokeViewModel @Inject constructor(
                 }
             }
             .launchIn(viewModelScope)
+    }
+
+    class Factory @Inject constructor(
+        private val interactor: ChuckNorrisJokesInteractor
+    ): ViewModelFactory<RandomJokeViewModel> {
+        override fun create(handle: SavedStateHandle) =
+            RandomJokeViewModel(interactor)
     }
 }

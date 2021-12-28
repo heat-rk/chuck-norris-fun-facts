@@ -6,10 +6,11 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import by.kirich1409.viewbindingdelegate.viewBinding
-import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.*
 import ru.heatalways.chucknorrisfunfacts.R
+import ru.heatalways.chucknorrisfunfacts.appComponent
 import ru.heatalways.chucknorrisfunfacts.core.utils.StringResource
+import ru.heatalways.chucknorrisfunfacts.core.viewmodels.GenericSavedStateViewModelFactory
 import ru.heatalways.chucknorrisfunfacts.databinding.FragmentSearchJokeBinding
 import ru.heatalways.chucknorrisfunfacts.domain.models.ChuckJoke
 import ru.heatalways.chucknorrisfunfacts.extensions.postScrollToPosition
@@ -18,19 +19,29 @@ import ru.heatalways.chucknorrisfunfacts.presentation.adapters.decorators.Margin
 import ru.heatalways.chucknorrisfunfacts.presentation.base.MviFragment
 import ru.heatalways.chucknorrisfunfacts.presentation.custom_view.search_query_view.SearchQueryView
 import ru.heatalways.chucknorrisfunfacts.presentation.util.ScrollState
+import javax.inject.Inject
 
-@AndroidEntryPoint
 class SearchJokeFragment: MviFragment<
         SearchJokeAction,
         SearchJokeViewState
 >(R.layout.fragment_search_joke) {
 
-    override val viewModel: SearchJokeViewModel by viewModels()
+    @Inject
+    lateinit var viewModelFactory: SearchJokeViewModel.Factory
+
+    override val viewModel: SearchJokeViewModel by viewModels {
+        GenericSavedStateViewModelFactory(viewModelFactory, this)
+    }
+
     private val binding by viewBinding(FragmentSearchJokeBinding::bind)
     private val jokesAdapter = JokesAdapter()
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        requireContext().appComponent.inject(this)
+    }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         binding.appbar.toolbar.setTitle(R.string.search_joke_screen_title)

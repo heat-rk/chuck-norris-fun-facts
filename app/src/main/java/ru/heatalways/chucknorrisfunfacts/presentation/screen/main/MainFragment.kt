@@ -4,14 +4,12 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
 import by.kirich1409.viewbindingdelegate.viewBinding
-import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.emptyFlow
 import ru.heatalways.chucknorrisfunfacts.R
 import ru.heatalways.chucknorrisfunfacts.databinding.FragmentMainBinding
 import ru.heatalways.chucknorrisfunfacts.extensions.setupWithNavController
 import ru.heatalways.chucknorrisfunfacts.presentation.base.MviFragment
 
-@AndroidEntryPoint
 class MainFragment: MviFragment<
         MainAction,
         MainViewState

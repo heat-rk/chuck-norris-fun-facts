@@ -2,9 +2,9 @@ package ru.heatalways.chucknorrisfunfacts.presentation.screen.random_joke.select
 
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewModelScope
-import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
+import ru.heatalways.chucknorrisfunfacts.core.viewmodels.ViewModelFactory
 import ru.heatalways.chucknorrisfunfacts.domain.interactors.chuck_norris_jokes.ChuckNorrisJokesInteractor
 import ru.heatalways.chucknorrisfunfacts.domain.models.Category
 import ru.heatalways.chucknorrisfunfacts.domain.utils.InteractorEvent
@@ -12,8 +12,7 @@ import ru.heatalways.chucknorrisfunfacts.presentation.base.MviViewModel
 import ru.heatalways.chucknorrisfunfacts.presentation.util.ScrollState
 import javax.inject.Inject
 
-@HiltViewModel
-class CategorySelectionViewModel @Inject constructor(
+class CategorySelectionViewModel(
     private val savedStateHandle: SavedStateHandle,
     private val interactor: ChuckNorrisJokesInteractor
 ): MviViewModel<
@@ -110,5 +109,12 @@ class CategorySelectionViewModel @Inject constructor(
     companion object {
         private const val SAVED_SEARCH_QUERY =
             "screen.random_joke.select_category.search_query"
+    }
+
+    class Factory @Inject constructor(
+        private val interactor: ChuckNorrisJokesInteractor
+    ): ViewModelFactory<CategorySelectionViewModel> {
+        override fun create(handle: SavedStateHandle) =
+            CategorySelectionViewModel(handle, interactor)
     }
 }

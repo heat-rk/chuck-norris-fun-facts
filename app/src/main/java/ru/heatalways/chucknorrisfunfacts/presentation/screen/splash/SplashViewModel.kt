@@ -1,15 +1,15 @@
 package ru.heatalways.chucknorrisfunfacts.presentation.screen.splash
 
+import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewModelScope
-import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import ru.heatalways.chucknorrisfunfacts.R
+import ru.heatalways.chucknorrisfunfacts.core.viewmodels.ViewModelFactory
 import ru.heatalways.chucknorrisfunfacts.presentation.base.MviViewModel
 import javax.inject.Inject
 
-@HiltViewModel
-class SplashViewModel @Inject constructor(): MviViewModel<
+class SplashViewModel: MviViewModel<
         SplashAction, SplashViewState, SplashPartialState
 >(reducer = SplashReducer) {
     override val initialState get() = SplashViewState()
@@ -25,5 +25,10 @@ class SplashViewModel @Inject constructor(): MviViewModel<
 
     companion object {
         private const val SPLASH_SCREEN_DURATION = 1000L
+    }
+
+    class Factory @Inject constructor(): ViewModelFactory<SplashViewModel> {
+        override fun create(handle: SavedStateHandle) =
+            SplashViewModel()
     }
 }

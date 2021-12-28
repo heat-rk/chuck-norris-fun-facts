@@ -2,14 +2,11 @@ package ru.heatalways.chucknorrisfunfacts.di.modules
 
 import dagger.Module
 import dagger.Provides
-import dagger.hilt.InstallIn
-import dagger.hilt.components.SingletonComponent
 import retrofit2.Retrofit
 import ru.heatalways.chucknorrisfunfacts.data.network.chuck_norris_jokes.ChuckNorrisJokesApi
 import javax.inject.Singleton
 
 @Module(includes = [RetrofitModule::class])
-@InstallIn(SingletonComponent::class)
 object ApiModule {
     @Provides
     @Singleton

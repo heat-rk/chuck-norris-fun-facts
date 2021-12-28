@@ -2,20 +2,19 @@ package ru.heatalways.chucknorrisfunfacts.presentation.screen.search_joke
 
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewModelScope
-import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import ru.heatalways.chucknorrisfunfacts.R
+import ru.heatalways.chucknorrisfunfacts.core.utils.StringResource
+import ru.heatalways.chucknorrisfunfacts.core.viewmodels.ViewModelFactory
 import ru.heatalways.chucknorrisfunfacts.domain.interactors.chuck_norris_jokes.ChuckNorrisJokesInteractor
 import ru.heatalways.chucknorrisfunfacts.domain.utils.InteractorEvent
-import ru.heatalways.chucknorrisfunfacts.core.utils.StringResource
 import ru.heatalways.chucknorrisfunfacts.presentation.base.MviViewModel
 import ru.heatalways.chucknorrisfunfacts.presentation.util.ScrollState
 import javax.inject.Inject
 
-@HiltViewModel
-class SearchJokeViewModel @Inject constructor(
+class SearchJokeViewModel(
     private val interactor: ChuckNorrisJokesInteractor,
     private val savedStateHandle: SavedStateHandle
 ): MviViewModel<
@@ -93,5 +92,12 @@ class SearchJokeViewModel @Inject constructor(
 
     companion object {
         private const val SAVED_QUERY = "screen.search_joke.saved_query"
+    }
+
+    class Factory @Inject constructor(
+        private val interactor: ChuckNorrisJokesInteractor
+    ) : ViewModelFactory<SearchJokeViewModel> {
+        override fun create(handle: SavedStateHandle) =
+            SearchJokeViewModel(interactor, handle)
     }
 }
