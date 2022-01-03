@@ -9,7 +9,7 @@ import javax.inject.Singleton
 @Component(modules = [
     ApiModule::class,
     AppModule::class,
-    ChuckNorrisJokesModule::class,
+    ChuckNorrisJokesModuleFake::class,
     DatabaseModuleFake::class,
     DispatcherModule::class,
     GsonModule::class,

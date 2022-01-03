@@ -97,15 +97,7 @@ class RandomJokeScreenTest: TestCase() {
             }
         }
 
-        step("3. Check progress bar visibility") {
-            RandomJokeScreen.buttonProgressBar {
-                flakySafely {
-                    isVisible()
-                }
-            }
-        }
-
-        step("4. Check that recycler view size is increased by one") {
+        step("3. Check that recycler view size is increased by one") {
             RandomJokeScreen.recyclerView {
                 flakySafely {
                     assert(getSize() == 1)
@@ -113,7 +105,7 @@ class RandomJokeScreenTest: TestCase() {
             }
         }
 
-        step("5. Check that new item has image and text") {
+        step("4. Check that new item has image and text") {
             RandomJokeScreen.recyclerView.firstChild<JokeItem> {
                 image {
                     flakySafely {

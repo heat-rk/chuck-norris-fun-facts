@@ -6,7 +6,7 @@ import ru.heatalways.chucknorrisfunfacts.domain.interactors.chuck_norris_jokes.C
 import ru.heatalways.chucknorrisfunfacts.domain.interactors.chuck_norris_jokes.ChuckNorrisJokesInteractorImpl
 import javax.inject.Singleton
 
-@Module(includes = [ChuckNorrisJokesModule::class])
+@Module
 abstract class InteractorModule {
     @Binds
     @Singleton
