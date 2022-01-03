@@ -5,7 +5,7 @@ buildscript {
 
         // TESTS
         arch_test_version = "2.1.0"
-        coroutines_test_version = "1.5.0"
+        coroutines_test_version = '1.6.0-native-mt'
         junit_version = "4.13.2"
         mockito_version = '4.0.0'
         truth_version = "1.1.3"
@@ -35,7 +35,7 @@ buildscript {
         nav_version = "2.3.5"
 
         // DATA STORAGE
-        room_version = "2.4.0-rc01"
+        room_version = '2.4.0'
 
         // CORBIND
         corbind_verison = "1.5.2"
@@ -44,7 +44,7 @@ buildscript {
         shimmer_version = "0.5.0"
 
         // VIEW BINDING DELEGATE
-        view_binding_delegate = '1.5.3'
+        view_binding_delegate = '1.5.4'
     }
 
     repositories {
@@ -52,7 +52,7 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:7.0.3'
+        classpath 'com.android.tools.build:gradle:7.0.4'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
 
         // NOTE: Do not place your application dependencies here; they belong

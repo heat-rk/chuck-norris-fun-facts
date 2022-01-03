@@ -2,37 +2,33 @@ package ru.heatalways.chucknorrisfunfacts.data.database.saved_jokes
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.test.filters.SmallTest
+import androidx.test.platform.app.InstrumentationRegistry
 import com.google.common.truth.Truth.assertThat
-import dagger.hilt.android.testing.HiltAndroidRule
-import dagger.hilt.android.testing.HiltAndroidTest
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runBlockingTest
 import org.junit.After
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
+import ru.heatalways.chucknorrisfunfacts.appComponent
 import ru.heatalways.chucknorrisfunfacts.data.database.AppDatabase
 import ru.heatalways.chucknorrisfunfacts.data.database.models.ChuckJokeEntity
-import javax.inject.Inject
+import ru.heatalways.chucknorrisfunfacts.di.TestAppComponent
 
 @ExperimentalCoroutinesApi
 @SmallTest
-@HiltAndroidTest
 class SavedJokesDaoTest {
-    @get:Rule(order = 0)
-    var hiltRule = HiltAndroidRule(this)
-
     @get:Rule(order = 1)
     var instantTaskExecutorRule = InstantTaskExecutorRule()
 
-    @Inject
-    lateinit var database: AppDatabase
-
+    private lateinit var database: AppDatabase
     private lateinit var dao: SavedJokesDao
 
     @Before
     fun setup() {
-        hiltRule.inject()
+        database = (InstrumentationRegistry.getInstrumentation().targetContext.appComponent as TestAppComponent)
+            .database
+
         dao = database.savedJokesDao()
     }
 

@@ -6,12 +6,15 @@ import ru.heatalways.chucknorrisfunfacts.di.AppComponent
 import ru.heatalways.chucknorrisfunfacts.di.DaggerAppComponent
 import ru.heatalways.chucknorrisfunfacts.di.modules.AppModule
 
-class App: Application() {
+open class App: Application() {
     val appComponent: AppComponent by lazy {
+        initDaggerComponent()
+    }
+
+    open fun initDaggerComponent(): AppComponent =
         DaggerAppComponent.builder()
             .appModule(AppModule(applicationContext))
             .build()
-    }
 }
 
 val Context.appComponent: AppComponent get() =
