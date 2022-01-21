@@ -8,7 +8,7 @@ import kotlinx.coroutines.flow.emptyFlow
 import ru.heatalways.chucknorrisfunfacts.R
 import ru.heatalways.chucknorrisfunfacts.databinding.FragmentMainBinding
 import ru.heatalways.chucknorrisfunfacts.extensions.setupWithNavController
-import ru.heatalways.chucknorrisfunfacts.presentation.base.MviFragment
+import ru.heatalways.chucknorrisfunfacts.core.base.MviFragment
 
 class MainFragment: MviFragment<
         MainAction,
@@ -35,7 +35,8 @@ class MainFragment: MviFragment<
     private fun setupBottomNavigationBar() {
         val navGraphIds = listOf(
             R.navigation.nav_graph_search,
-            R.navigation.nav_graph_random
+            R.navigation.nav_graph_random,
+            R.navigation.nav_graph_settings
         )
 
         binding.bottomNavigationBar.setupWithNavController(

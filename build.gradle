@@ -14,7 +14,7 @@ buildscript {
         turbine_version = '0.7.0'
 
         // LEAK CANARY
-        leak_canary_version = "2.7"
+        leak_canary_version = "2.8.1"
 
         // DI
         dagger_version = '2.40.5'
@@ -35,16 +35,17 @@ buildscript {
         nav_version = "2.3.5"
 
         // DATA STORAGE
-        room_version = '2.4.0'
+        data_store_versison = "1.0.0"
+        room_version = '2.4.1'
 
         // CORBIND
-        corbind_verison = "1.5.2"
+        corbind_verison = '1.5.3'
 
         // SHIMMER
         shimmer_version = "0.5.0"
 
         // VIEW BINDING DELEGATE
-        view_binding_delegate = '1.5.4'
+        view_binding_delegate = '1.5.6'
     }
 
     repositories {

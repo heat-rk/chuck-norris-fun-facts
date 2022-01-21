@@ -69,7 +69,7 @@ fun BottomNavigationView.setupWithNavController(
     var isOnFirstFragment = selectedItemTag == firstFragmentTag
 
     // When a navigation item is selected
-    setOnNavigationItemSelectedListener { item ->
+    setOnItemSelectedListener { item ->
         onItemSelected?.invoke(item.title.toString())
         // Don't do anything if the state is state has already been saved.
         if (fragmentManager.isStateSaved) {
@@ -91,12 +91,6 @@ fun BottomNavigationView.setupWithNavController(
                     // Commit a transaction that cleans the back stack and adds the first fragment
                     // to it, creating the fixed started destination.
                     fragmentManager.beginTransaction()
-                        .setCustomAnimations(
-                            R.anim.screen_slide_in_left,
-                            R.anim.screen_slide_out_left,
-                            R.anim.screen_slide_out_right,
-                            R.anim.screen_slide_in_right
-                        )
                         .attach(selectedFragment)
                         .setPrimaryNavigationFragment(selectedFragment)
                         .apply {
@@ -173,7 +167,7 @@ private fun BottomNavigationView.setupItemReselected(
     graphIdToTagMap: HashMap<Int, String>,
     fragmentManager: FragmentManager
 ) {
-    setOnNavigationItemReselectedListener { item ->
+    setOnItemReselectedListener { item ->
         val newlySelectedItemTag = graphIdToTagMap[item.itemId]
         val selectedFragment = fragmentManager.findFragmentByTag(newlySelectedItemTag)
             as NavHostFragment

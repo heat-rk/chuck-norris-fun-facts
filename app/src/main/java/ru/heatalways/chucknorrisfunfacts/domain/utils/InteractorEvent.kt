@@ -1,6 +1,6 @@
 package ru.heatalways.chucknorrisfunfacts.domain.utils
 
-import ru.heatalways.chucknorrisfunfacts.core.utils.StringResource
+import ru.heatalways.chucknorrisfunfacts.core.models.StringResource
 
 sealed class InteractorEvent<out T> {
     object Loading: InteractorEvent<Nothing>()

@@ -1,6 +1,6 @@
 package ru.heatalways.chucknorrisfunfacts.presentation.screen.random_joke
 
-import ru.heatalways.chucknorrisfunfacts.presentation.base.MviAction
+import ru.heatalways.chucknorrisfunfacts.core.base.MviAction
 
 sealed class RandomJokeAction: MviAction {
     object NextPage: RandomJokeAction()

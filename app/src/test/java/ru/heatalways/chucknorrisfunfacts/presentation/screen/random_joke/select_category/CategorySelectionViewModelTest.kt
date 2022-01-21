@@ -4,15 +4,15 @@ import androidx.lifecycle.SavedStateHandle
 import app.cash.turbine.test
 import com.google.common.truth.Truth.assertThat
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.test.runBlockingTest
+import kotlinx.coroutines.test.runTest
 import org.junit.Before
 import org.junit.Test
 import ru.heatalways.chucknorrisfunfacts.R
+import ru.heatalways.chucknorrisfunfacts.core.utils.strRes
+import ru.heatalways.chucknorrisfunfacts.data.repositories.chuck_norris_jokes.ChuckNorrisJokesRepositoryFake
 import ru.heatalways.chucknorrisfunfacts.domain.interactors.chuck_norris_jokes.ChuckNorrisJokesInteractor
 import ru.heatalways.chucknorrisfunfacts.domain.interactors.chuck_norris_jokes.ChuckNorrisJokesInteractorImpl
 import ru.heatalways.chucknorrisfunfacts.domain.models.Category
-import ru.heatalways.chucknorrisfunfacts.data.repositories.chuck_norris_jokes.ChuckNorrisJokesRepositoryFake
-import ru.heatalways.chucknorrisfunfacts.core.utils.strRes
 import ru.heatalways.chucknorrisfunfacts.presentation.util.ScrollState
 import ru.heatalways.chucknorrisfunfacts.utils.BaseViewModelTest
 import kotlin.time.ExperimentalTime
@@ -32,14 +32,11 @@ class CategorySelectionViewModelTest: BaseViewModelTest() {
             savedStateHandle = SavedStateHandle(),
             interactor = interactor
         )
-        viewModel.resetState()
     }
 
     @Test
-    fun `test viewModel init, returns 3 categories`() = coroutineRule.runBlockingTest {
+    fun `test viewModel init, returns 3 categories`() = runTest {
         viewModel.state.test {
-            viewModel.fetchCategories()
-
             val loadingState = awaitItem()
             assertThat(loadingState.isCategoriesLoading).isTrue()
             assertThat(loadingState.categories).isEmpty()
@@ -47,15 +44,15 @@ class CategorySelectionViewModelTest: BaseViewModelTest() {
             val loadedState = awaitItem()
             assertThat(loadedState.isCategoriesLoading).isFalse()
             assertThat(loadedState.categories).hasSize(3)
+
+            assertThat(cancelAndConsumeRemainingEvents().size).isEqualTo(0)
         }
     }
 
     @Test
-    fun `test viewModel init, returns error`() = coroutineRule.runBlockingTest {
+    fun `test viewModel init, returns error`() = runTest {
+        repositoryFake.shouldReturnErrorResponse = true
         viewModel.state.test {
-            repositoryFake.shouldReturnErrorResponse = true
-            viewModel.fetchCategories()
-
             val loadingState = awaitItem()
             assertThat(loadingState.isCategoriesLoading).isTrue()
             assertThat(loadingState.categories).isEmpty()
@@ -70,18 +67,21 @@ class CategorySelectionViewModelTest: BaseViewModelTest() {
     }
 
     @Test
-    fun `test category selection, returns effect GoBack`() = coroutineRule.runBlockingTest {
+    fun `test category selection, returns effect GoBack`() = runTest {
         viewModel.setAction(CategorySelectionAction.OnCategorySelect(Category.Any))
         // TODO: test navigation in future
     }
 
     @Test
-    fun `test search, returns list with one item`() = coroutineRule.runBlockingTest {
-        viewModel.fetchCategories()
+    fun `test search, returns list with one item`() = runTest {
         viewModel.state.test {
+            awaitItem() // skip state before action
+
             viewModel.setAction(CategorySelectionAction.OnSearchExecute("animal"))
 
-            awaitItem() // skip state before action
+            val initialEmptyState = awaitItem()
+            assertThat(initialEmptyState.isCategoriesLoading).isFalse()
+            assertThat(initialEmptyState.categories).hasSize(3)
 
             val searchLoadingState = awaitItem()
             assertThat(searchLoadingState.isCategoriesLoading).isTrue()
@@ -105,12 +105,15 @@ class CategorySelectionViewModelTest: BaseViewModelTest() {
     }
 
     @Test
-    fun `invalid test search, returns error`() = coroutineRule.runBlockingTest {
-        viewModel.fetchCategories()
+    fun `invalid test search, returns error`() = runTest {
         viewModel.state.test {
+            awaitItem() // skip state before action
+
             viewModel.setAction(CategorySelectionAction.OnSearchExecute("animalgdgdf"))
 
-            awaitItem() // skip state before action
+            val initialEmptyState = awaitItem()
+            assertThat(initialEmptyState.isCategoriesLoading).isFalse()
+            assertThat(initialEmptyState.categories).hasSize(3)
 
             val searchLoadingState = awaitItem()
             assertThat(searchLoadingState.isCategoriesLoading).isTrue()
@@ -127,14 +130,20 @@ class CategorySelectionViewModelTest: BaseViewModelTest() {
     }
 
     @Test
-    fun `valid test search, returns error`() = coroutineRule.runBlockingTest {
+    fun `valid test search, returns error`() = runTest {
         repositoryFake.shouldReturnErrorResponse = true
-        viewModel.fetchCategories()
 
         viewModel.state.test {
+            awaitItem()
+
             viewModel.setAction(CategorySelectionAction.OnSearchExecute("animal"))
 
-            awaitItem() // skip state before action
+            val initialEmptyState = awaitItem()
+            assertThat(initialEmptyState.isCategoriesLoading).isFalse()
+            assertThat(initialEmptyState.categories).isEmpty()
+            assertThat(initialEmptyState.categoriesMessage).isEqualTo(
+                strRes(R.string.error_network)
+            )
 
             val searchLoadingState = awaitItem()
             assertThat(searchLoadingState.isCategoriesLoading).isTrue()

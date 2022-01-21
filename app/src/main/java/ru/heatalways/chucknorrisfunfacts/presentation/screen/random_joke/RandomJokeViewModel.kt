@@ -2,10 +2,12 @@ package ru.heatalways.chucknorrisfunfacts.presentation.screen.random_joke
 
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.*
 import ru.heatalways.chucknorrisfunfacts.R
-import ru.heatalways.chucknorrisfunfacts.core.utils.StringResource
-import ru.heatalways.chucknorrisfunfacts.core.utils.strRes
+import ru.heatalways.chucknorrisfunfacts.core.base.MviViewModel
+import ru.heatalways.chucknorrisfunfacts.core.models.StringResource
+import ru.heatalways.chucknorrisfunfacts.core.models.strRes
 import ru.heatalways.chucknorrisfunfacts.core.viewmodels.ViewModelFactory
 import ru.heatalways.chucknorrisfunfacts.domain.interactors.chuck_norris_jokes.ChuckNorrisJokesInteractor
 import ru.heatalways.chucknorrisfunfacts.domain.models.Category
@@ -15,7 +17,6 @@ import ru.heatalways.chucknorrisfunfacts.domain.utils.paging.PagingConfig
 import ru.heatalways.chucknorrisfunfacts.domain.utils.paging.PagingEvent
 import ru.heatalways.chucknorrisfunfacts.extensions.flowTimer
 import ru.heatalways.chucknorrisfunfacts.extensions.mergeWith
-import ru.heatalways.chucknorrisfunfacts.presentation.base.MviViewModel
 import ru.heatalways.chucknorrisfunfacts.presentation.util.ScrollState
 import ru.heatalways.chucknorrisfunfacts.presentation.util.SnackbarState
 import ru.heatalways.chucknorrisfunfacts.presentation.util.ToastState
@@ -158,6 +159,7 @@ class RandomJokeViewModel(
         reduceState(RandomJokePartialState.Toast(ToastState.Hidden))
     }
 
+    @Suppress("SameParameterValue")
     private fun showSnackbar(
         message: StringResource,
         buttonText: StringResource,

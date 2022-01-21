@@ -1,5 +1,5 @@
 package ru.heatalways.chucknorrisfunfacts.presentation.screen.main
 
-import ru.heatalways.chucknorrisfunfacts.presentation.base.MviAction
+import ru.heatalways.chucknorrisfunfacts.core.base.MviAction
 
 sealed class MainAction: MviAction

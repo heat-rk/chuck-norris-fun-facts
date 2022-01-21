@@ -8,7 +8,7 @@ import kotlinx.coroutines.isActive
 import ru.heatalways.chucknorrisfunfacts.domain.models.Category
 import ru.heatalways.chucknorrisfunfacts.presentation.adapters.diff_utils.CategoryDiffUtil
 import ru.heatalways.chucknorrisfunfacts.presentation.adapters.view_holders.CategoryViewHolder
-import ru.heatalways.chucknorrisfunfacts.presentation.base.BaseListAdapter
+import ru.heatalways.chucknorrisfunfacts.core.base.BaseListAdapter
 
 class CategoriesAdapter: BaseListAdapter<Category, CategoryViewHolder>(CategoryDiffUtil()) {
     var onCategoryClick: ((Category) -> Unit)? = null

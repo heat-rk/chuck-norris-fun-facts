@@ -3,13 +3,14 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="?attr/actionBarSize">
+    android:layout_height="?attr/actionBarSize"
+    android:background="@color/colorToolbar">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        app:titleTextColor="@color/white"
-        app:subtitleTextColor="@color/white"/>
+        app:titleTextColor="@color/colorToolbarText"
+        app:subtitleTextColor="@color/colorToolbarText"/>
 
 </com.google.android.material.appbar.AppBarLayout>

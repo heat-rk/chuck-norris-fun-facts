@@ -1,4 +1,4 @@
-package ru.heatalways.chucknorrisfunfacts.core.utils
+package ru.heatalways.chucknorrisfunfacts.core.models
 
 import androidx.annotation.StringRes
 

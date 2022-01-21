@@ -1,18 +1,17 @@
 package ru.heatalways.chucknorrisfunfacts.presentation.screen.random_joke
 
-import androidx.lifecycle.SavedStateHandle
 import app.cash.turbine.test
 import com.google.common.truth.Truth.assertThat
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.test.runBlockingTest
+import kotlinx.coroutines.test.runTest
 import org.junit.Before
 import org.junit.Test
 import ru.heatalways.chucknorrisfunfacts.R
+import ru.heatalways.chucknorrisfunfacts.core.utils.strRes
+import ru.heatalways.chucknorrisfunfacts.data.repositories.chuck_norris_jokes.ChuckNorrisJokesRepositoryFake
 import ru.heatalways.chucknorrisfunfacts.domain.interactors.chuck_norris_jokes.ChuckNorrisJokesInteractor
 import ru.heatalways.chucknorrisfunfacts.domain.interactors.chuck_norris_jokes.ChuckNorrisJokesInteractorImpl
 import ru.heatalways.chucknorrisfunfacts.domain.models.Category
-import ru.heatalways.chucknorrisfunfacts.data.repositories.chuck_norris_jokes.ChuckNorrisJokesRepositoryFake
-import ru.heatalways.chucknorrisfunfacts.core.utils.strRes
 import ru.heatalways.chucknorrisfunfacts.mappers.toEntity
 import ru.heatalways.chucknorrisfunfacts.presentation.util.ScrollState
 import ru.heatalways.chucknorrisfunfacts.presentation.util.ToastState
@@ -31,11 +30,10 @@ class RandomJokeViewModelTest: BaseViewModelTest() {
         repository = ChuckNorrisJokesRepositoryFake()
         interactor = ChuckNorrisJokesInteractorImpl(repository)
         viewModel = RandomJokeViewModel(interactor)
-        viewModel.resetState()
     }
 
     @Test
-    fun `test viewModel init, should return jokes`() = coroutineRule.runBlockingTest {
+    fun `test viewModel init, should return jokes`() = runTest {
         repository.savedJokes.add(repository.jokes.first().toEntity())
 
         viewModel.state.test {
@@ -56,7 +54,7 @@ class RandomJokeViewModelTest: BaseViewModelTest() {
     }
 
     @Test
-    fun `test viewModel init, should return empty list with message`() = coroutineRule.runBlockingTest {
+    fun `test viewModel init, should return empty list with message`() = runTest {
         viewModel.state.test {
             viewModel.fetchJokes()
 
@@ -75,78 +73,82 @@ class RandomJokeViewModelTest: BaseViewModelTest() {
     }
 
     @Test
-    fun `fetch joke from ANY category, returns list with new element`() =
-        coroutineRule.runBlockingTest {
-            viewModel.fetchJokes()
-
-            viewModel.state.test {
-                viewModel.setAction(RandomJokeAction.RequestRandomJoke)
-
-                awaitItem() // skip state before action
-
-                val jokeLoadingState = awaitItem()
-                assertThat(jokeLoadingState.isJokeLoading).isTrue()
-
-                val successState = awaitItem()
-                assertThat(successState.isLoading).isFalse()
-                assertThat(successState.jokes).hasSize(1)
-                assertThat(successState.message).isNull()
-
-                val scrollingUpState = awaitItem()
-                assertThat(scrollingUpState.scrollState).isEqualTo(ScrollState.ScrollingUp)
-
-                val scrollFinishedState = awaitItem()
-                assertThat(scrollFinishedState.scrollState).isEqualTo(ScrollState.Stopped)
-
-                assertThat(cancelAndConsumeRemainingEvents().size).isEqualTo(0)
-            }
-        }
-
-    @Test
-    fun `fetch joke from CAREER category, returns list with new element`() =
-        coroutineRule.runBlockingTest {
-            viewModel.fetchJokes()
-
-            viewModel.state.test {
-                viewModel.selectCategory(Category.Specific("career"))
-                viewModel.setAction(RandomJokeAction.RequestRandomJoke)
-
-                awaitItem() // skip state before action
-
-                val categorySelectedState = awaitItem()
-                assertThat(categorySelectedState.category).isEqualTo(
-                    Category.Specific("career")
-                )
-
-                val jokeLoadingState = awaitItem()
-                assertThat(jokeLoadingState.isJokeLoading).isTrue()
-
-                val successState = awaitItem()
-                assertThat(successState.isLoading).isFalse()
-                assertThat(successState.jokes).hasSize(1)
-                assertThat(successState.jokes.first().categories)
-                    .contains(Category.Specific("career"))
-                assertThat(successState.message).isNull()
-
-                val scrollingUpState = awaitItem()
-                assertThat(scrollingUpState.scrollState).isEqualTo(ScrollState.ScrollingUp)
-
-                val scrollFinishedState = awaitItem()
-                assertThat(scrollFinishedState.scrollState).isEqualTo(ScrollState.Stopped)
-
-                assertThat(cancelAndConsumeRemainingEvents().size).isEqualTo(0)
-            }
-        }
-
-    @Test
-    fun `fetch joke from ANY category, returns error`() = coroutineRule.runBlockingTest {
-        repository.shouldReturnErrorResponse = true
-        viewModel.fetchJokes()
-
+    fun `fetch joke from ANY category, returns list with new element`() = runTest {
         viewModel.state.test {
+            awaitItem() // skip state before action
+
             viewModel.setAction(RandomJokeAction.RequestRandomJoke)
 
+            val initialEmptyState = awaitItem()
+            assertThat(initialEmptyState.jokes).isEmpty()
+            assertThat(initialEmptyState.message).isNotNull()
+
+            val jokeLoadingState = awaitItem()
+            assertThat(jokeLoadingState.isJokeLoading).isTrue()
+
+            val successState = awaitItem()
+            assertThat(successState.isLoading).isFalse()
+            assertThat(successState.jokes).hasSize(1)
+            assertThat(successState.message).isNull()
+
+            val scrollingUpState = awaitItem()
+            assertThat(scrollingUpState.scrollState).isEqualTo(ScrollState.ScrollingUp)
+
+            val scrollFinishedState = awaitItem()
+            assertThat(scrollFinishedState.scrollState).isEqualTo(ScrollState.Stopped)
+
+            assertThat(cancelAndConsumeRemainingEvents().size).isEqualTo(0)
+        }
+    }
+
+    @Test
+    fun `fetch joke from CAREER category, returns list with new element`() = runTest {
+        viewModel.state.test {
             awaitItem() // skip state before action
+
+            viewModel.selectCategory(Category.Specific("career"))
+            viewModel.setAction(RandomJokeAction.RequestRandomJoke)
+
+            val initialEmptyState = awaitItem()
+            assertThat(initialEmptyState.category).isEqualTo(Category.Specific("career"))
+
+            val categorySelectedState = awaitItem()
+            assertThat(categorySelectedState.category).isEqualTo(
+                Category.Specific("career")
+            )
+
+            val jokeLoadingState = awaitItem()
+            assertThat(jokeLoadingState.isJokeLoading).isTrue()
+
+            val successState = awaitItem()
+            assertThat(successState.isLoading).isFalse()
+            assertThat(successState.jokes).hasSize(1)
+            assertThat(successState.jokes.first().categories)
+                .contains(Category.Specific("career"))
+            assertThat(successState.message).isNull()
+
+            val scrollingUpState = awaitItem()
+            assertThat(scrollingUpState.scrollState).isEqualTo(ScrollState.ScrollingUp)
+
+            val scrollFinishedState = awaitItem()
+            assertThat(scrollFinishedState.scrollState).isEqualTo(ScrollState.Stopped)
+
+            assertThat(cancelAndConsumeRemainingEvents().size).isEqualTo(0)
+        }
+    }
+
+    @Test
+    fun `fetch joke from ANY category, returns error`() = runTest {
+        repository.shouldReturnErrorResponse = true
+
+        viewModel.state.test {
+            awaitItem() // skip state before action
+
+            viewModel.setAction(RandomJokeAction.RequestRandomJoke)
+
+            val initialEmptyState = awaitItem()
+            assertThat(initialEmptyState.jokes).isEmpty()
+            assertThat(initialEmptyState.message).isNotNull()
 
             val jokeLoadingState = awaitItem()
             assertThat(jokeLoadingState.isJokeLoading).isTrue()

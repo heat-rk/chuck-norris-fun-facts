@@ -9,14 +9,14 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 import kotlinx.coroutines.flow.*
 import ru.heatalways.chucknorrisfunfacts.R
 import ru.heatalways.chucknorrisfunfacts.appComponent
-import ru.heatalways.chucknorrisfunfacts.core.utils.StringResource
+import ru.heatalways.chucknorrisfunfacts.core.models.StringResource
 import ru.heatalways.chucknorrisfunfacts.core.viewmodels.GenericSavedStateViewModelFactory
 import ru.heatalways.chucknorrisfunfacts.databinding.FragmentSearchJokeBinding
 import ru.heatalways.chucknorrisfunfacts.domain.models.ChuckJoke
 import ru.heatalways.chucknorrisfunfacts.extensions.postScrollToPosition
 import ru.heatalways.chucknorrisfunfacts.presentation.adapters.JokesAdapter
 import ru.heatalways.chucknorrisfunfacts.presentation.adapters.decorators.MarginItemDecoration
-import ru.heatalways.chucknorrisfunfacts.presentation.base.MviFragment
+import ru.heatalways.chucknorrisfunfacts.core.base.MviFragment
 import ru.heatalways.chucknorrisfunfacts.presentation.custom_view.search_query_view.SearchQueryView
 import ru.heatalways.chucknorrisfunfacts.presentation.util.ScrollState
 import javax.inject.Inject

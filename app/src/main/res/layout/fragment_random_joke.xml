@@ -25,7 +25,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:background="@drawable/white_rounded_bordered_bg"
+            android:background="@drawable/action_rounded_bordered_bg"
             android:padding="@dimen/paddingMD"
             app:layout_constraintTop_toTopOf="parent">
 
@@ -41,7 +41,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/random_joke_select_category"
                     android:layout_marginBottom="@dimen/paddingXS"
-                    style="@style/DarkOrangeText"/>
+                    style="@style/DefaultPrimaryText"/>
 
                 <Button
                     android:id="@+id/selectCategoryButton"

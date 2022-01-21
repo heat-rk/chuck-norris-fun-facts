@@ -8,7 +8,7 @@ import ru.heatalways.chucknorrisfunfacts.core.viewmodels.ViewModelFactory
 import ru.heatalways.chucknorrisfunfacts.domain.interactors.chuck_norris_jokes.ChuckNorrisJokesInteractor
 import ru.heatalways.chucknorrisfunfacts.domain.models.Category
 import ru.heatalways.chucknorrisfunfacts.domain.utils.InteractorEvent
-import ru.heatalways.chucknorrisfunfacts.presentation.base.MviViewModel
+import ru.heatalways.chucknorrisfunfacts.core.base.MviViewModel
 import ru.heatalways.chucknorrisfunfacts.presentation.util.ScrollState
 import javax.inject.Inject
 

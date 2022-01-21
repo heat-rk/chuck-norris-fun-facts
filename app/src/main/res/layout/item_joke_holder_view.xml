@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="@dimen/paddingMD"
-        android:background="@drawable/white_rounded_bordered_bg">
+        android:background="@drawable/action_rounded_bordered_bg">
 
         <ImageView
             android:id="@+id/iconImageView"
@@ -31,7 +31,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@id/iconImageView"
             tools:text="@tools:sample/lorem"
-            style="@style/DefaultOrangeText"/>
+            style="@style/DefaultPrimaryText"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

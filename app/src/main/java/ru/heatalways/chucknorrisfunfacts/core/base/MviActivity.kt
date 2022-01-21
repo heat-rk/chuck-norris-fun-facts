@@ -1,10 +1,8 @@
-package ru.heatalways.chucknorrisfunfacts.presentation.base
+package ru.heatalways.chucknorrisfunfacts.core.base
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
-import androidx.viewbinding.ViewBinding
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach

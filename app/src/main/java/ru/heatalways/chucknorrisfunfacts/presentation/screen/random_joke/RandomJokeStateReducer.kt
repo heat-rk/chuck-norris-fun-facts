@@ -2,7 +2,7 @@ package ru.heatalways.chucknorrisfunfacts.presentation.screen.random_joke
 
 import ru.heatalways.chucknorrisfunfacts.extensions.editLast
 import ru.heatalways.chucknorrisfunfacts.extensions.singleList
-import ru.heatalways.chucknorrisfunfacts.presentation.base.MviReducer
+import ru.heatalways.chucknorrisfunfacts.core.base.MviReducer
 
 object RandomJokeStateReducer: MviReducer<
         RandomJokeViewState,

@@ -1,7 +1,7 @@
 package ru.heatalways.chucknorrisfunfacts.extensions
 
 import android.content.Context
-import ru.heatalways.chucknorrisfunfacts.core.utils.StringResource
+import ru.heatalways.chucknorrisfunfacts.core.models.StringResource
 
 fun String?.toTextResource() = StringResource.ByString(this)
 

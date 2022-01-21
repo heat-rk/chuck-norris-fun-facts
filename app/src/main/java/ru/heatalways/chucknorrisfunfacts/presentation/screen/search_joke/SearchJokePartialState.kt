@@ -1,7 +1,7 @@
 package ru.heatalways.chucknorrisfunfacts.presentation.screen.search_joke
 
 import ru.heatalways.chucknorrisfunfacts.domain.models.ChuckJoke
-import ru.heatalways.chucknorrisfunfacts.core.utils.StringResource
+import ru.heatalways.chucknorrisfunfacts.core.models.StringResource
 import ru.heatalways.chucknorrisfunfacts.presentation.util.ScrollState
 
 sealed class SearchJokePartialState {

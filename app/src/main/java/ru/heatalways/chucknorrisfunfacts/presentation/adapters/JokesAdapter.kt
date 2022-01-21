@@ -4,7 +4,7 @@ import android.view.ViewGroup
 import ru.heatalways.chucknorrisfunfacts.domain.models.ChuckJoke
 import ru.heatalways.chucknorrisfunfacts.presentation.adapters.diff_utils.ChuckJokeDiffUtil
 import ru.heatalways.chucknorrisfunfacts.presentation.adapters.view_holders.JokeViewHolder
-import ru.heatalways.chucknorrisfunfacts.presentation.base.BaseListAdapter
+import ru.heatalways.chucknorrisfunfacts.core.base.BaseListAdapter
 
 class JokesAdapter: BaseListAdapter<ChuckJoke, JokeViewHolder>(ChuckJokeDiffUtil()) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): JokeViewHolder {

@@ -1,22 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <color name="colorAccent">@color/colorPrimary</color>
     <color name="colorPrimary">#f27146</color>
-    <color name="colorPrimaryDark">#bc4821</color>
-    <color name="colorPrimaryExtraDark">#832E12</color>
-    <color name="colorAccent">#f27146</color>
-    <color name="transparent">#00000000</color>
-
-    <color name="toolbarTextColor">#000000</color>
-
-    <color name="purple_200">#FFBB86FC</color>
-    <color name="purple_500">#FF6200EE</color>
-    <color name="purple_700">#FF3700B3</color>
-    <color name="teal_200">#FF03DAC5</color>
-    <color name="teal_700">#FF018786</color>
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
-    <color name="shimmer">#ECB7A5</color>
-
-    <!-- BACKGROUND -->
-    <color name="darkBackgroundColor">#eaeaea</color>
+    <color name="colorPrimaryVariant">#D5B3A8</color>
+    <color name="colorSecondary">#FFFFFF</color>
+    <color name="colorSecondaryVariant">#EAEAEA</color>
+    <color name="colorOnPrimary">#FFFFFFFF</color>
+    <color name="colorOnSecondary">#000000</color>
+    <color name="colorPrimaryDisabled">#CD9786</color>
+    <color name="colorRipple">#26000000</color>
+    <color name="colorToolbar">@color/colorPrimary</color>
+    <color name="colorTransparent">#00000000</color>
+    <color name="colorToolbarText">#FFFFFF</color>
+    <color name="colorShimmer">#ECB7A5</color>
+    <color name="colorActionBorder">#E4B6A7</color>
+    <color name="colorBottomNavItemSelected">#FFFFFF</color>
+    <color name="colorBottomNavItemUnselected">#703420</color>
 </resources>

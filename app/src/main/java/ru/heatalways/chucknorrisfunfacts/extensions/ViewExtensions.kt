@@ -7,6 +7,7 @@ import android.text.InputFilter
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.DecelerateInterpolator
+import android.widget.CompoundButton
 import android.widget.EditText
 import android.widget.ImageView
 import androidx.appcompat.widget.Toolbar
@@ -16,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import ru.heatalways.chucknorrisfunfacts.R
 import ru.heatalways.chucknorrisfunfacts.presentation.util.LoadPhotoConfig
+
 
 fun ImageView.loadImage(config: LoadPhotoConfig) =
     Glide
@@ -164,4 +166,9 @@ fun Toolbar.initBackButton(activity: Activity) {
     setNavigationIcon(R.drawable.ic_back_arrow)
     setNavigationContentDescription(R.string.navigation_back)
     setNavigationOnClickListener { activity.onBackPressed() }
+}
+
+fun CompoundButton.setChecked(isChecked: Boolean, animate: Boolean) {
+    this.isChecked = isChecked
+    if (!animate) this.jumpDrawablesToCurrentState()
 }

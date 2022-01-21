@@ -3,18 +3,18 @@ package ru.heatalways.chucknorrisfunfacts.domain.interactors.chuck_norris_jokes
 import com.google.common.truth.Truth.assertThat
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.toList
-import kotlinx.coroutines.test.runBlockingTest
+import kotlinx.coroutines.test.runTest
 import org.junit.Before
 import org.junit.Test
 import ru.heatalways.chucknorrisfunfacts.R
+import ru.heatalways.chucknorrisfunfacts.core.utils.StringResource
+import ru.heatalways.chucknorrisfunfacts.core.utils.strRes
+import ru.heatalways.chucknorrisfunfacts.data.repositories.chuck_norris_jokes.ChuckNorrisJokesRepositoryFake
 import ru.heatalways.chucknorrisfunfacts.domain.models.Category
 import ru.heatalways.chucknorrisfunfacts.domain.models.ChuckJoke
-import ru.heatalways.chucknorrisfunfacts.data.repositories.chuck_norris_jokes.ChuckNorrisJokesRepositoryFake
 import ru.heatalways.chucknorrisfunfacts.domain.utils.InteractorEvent
-import ru.heatalways.chucknorrisfunfacts.core.utils.StringResource
 import ru.heatalways.chucknorrisfunfacts.domain.utils.paging.PagingConfig
 import ru.heatalways.chucknorrisfunfacts.domain.utils.paging.PagingEvent
-import ru.heatalways.chucknorrisfunfacts.core.utils.strRes
 import ru.heatalways.chucknorrisfunfacts.mappers.toEntity
 
 @ExperimentalCoroutinesApi
@@ -29,7 +29,7 @@ class ChuckNorrisJokesInteractorTest {
     }
 
     @Test
-    fun `search valid query, should return network error message state`() = runBlockingTest {
+    fun `search valid query, should return network error message state`() = runTest {
         repositoryFake.shouldReturnErrorResponse = true
 
         val responses = interactor.search("hey").toList()
@@ -42,7 +42,7 @@ class ChuckNorrisJokesInteractorTest {
     }
 
     @Test
-    fun `search valid query, should return one item`() = runBlockingTest {
+    fun `search valid query, should return one item`() = runTest {
         val responses = interactor.search("hey").toList()
 
         assertThat(responses).hasSize(2)
@@ -53,7 +53,7 @@ class ChuckNorrisJokesInteractorTest {
     }
 
     @Test
-    fun `fetch saved jokes, returns list with one element`() = runBlockingTest {
+    fun `fetch saved jokes, returns list with one element`() = runTest {
         repositoryFake.savedJokes.add(repositoryFake.jokes.first().toEntity())
         val responses = interactor.fetchJokes(PagingConfig.Initial).toList()
 
@@ -66,7 +66,7 @@ class ChuckNorrisJokesInteractorTest {
     }
 
     @Test
-    fun `fetch saved jokes, returns empty list with message`() = runBlockingTest {
+    fun `fetch saved jokes, returns empty list with message`() = runTest {
         val responses = interactor.fetchJokes(PagingConfig.Initial).toList()
 
         assertThat(responses).hasSize(1)
@@ -78,7 +78,7 @@ class ChuckNorrisJokesInteractorTest {
     }
 
     @Test
-    fun `fetch random joke from category ANY, returns one joke`() = runBlockingTest {
+    fun `fetch random joke from category ANY, returns one joke`() = runTest {
         val responses = interactor.fetchRandomJoke(Category.Any).toList()
 
         assertThat(responses).hasSize(2)
@@ -87,7 +87,7 @@ class ChuckNorrisJokesInteractorTest {
     }
 
     @Test
-    fun `fetch random joke from category CAREER, returns one joke`() = runBlockingTest {
+    fun `fetch random joke from category CAREER, returns one joke`() = runTest {
         val responses = interactor
             .fetchRandomJoke(Category.Specific("career")).toList()
 
@@ -101,7 +101,7 @@ class ChuckNorrisJokesInteractorTest {
     }
 
     @Test
-    fun `fetch random joke from category BLABLABLA, returns error`() = runBlockingTest {
+    fun `fetch random joke from category BLABLABLA, returns error`() = runTest {
         val responses = interactor
             .fetchRandomJoke(Category.Specific("blablabla")).toList()
 
@@ -111,7 +111,7 @@ class ChuckNorrisJokesInteractorTest {
     }
 
     @Test
-    fun `fetch random joke from category ANY, returns error`() = runBlockingTest {
+    fun `fetch random joke from category ANY, returns error`() = runTest {
         repositoryFake.shouldReturnErrorResponse = true
         val responses = interactor
             .fetchRandomJoke(Category.Any).toList()
@@ -122,7 +122,7 @@ class ChuckNorrisJokesInteractorTest {
     }
 
     @Test
-    fun `fetch categories, returns list with 3 elements`() = runBlockingTest {
+    fun `fetch categories, returns list with 3 elements`() = runTest {
         val responses = interactor.fetchCategories().toList()
 
         assertThat(responses).hasSize(2)
@@ -135,7 +135,7 @@ class ChuckNorrisJokesInteractorTest {
     }
 
     @Test
-    fun `fetch categories, returns error`() = runBlockingTest {
+    fun `fetch categories, returns error`() = runTest {
         repositoryFake.shouldReturnErrorResponse = true
         val responses = interactor.fetchCategories().toList()
 
@@ -148,7 +148,7 @@ class ChuckNorrisJokesInteractorTest {
     }
 
     @Test
-    fun `search categories, returns list with 1 element`() = runBlockingTest {
+    fun `search categories, returns list with 1 element`() = runTest {
         interactor.fetchCategories().toList()
         val responses = interactor.searchCategories("animal").toList()
 
@@ -160,7 +160,7 @@ class ChuckNorrisJokesInteractorTest {
     }
 
     @Test
-    fun `search invalid category, returns error`() = runBlockingTest {
+    fun `search invalid category, returns error`() = runTest {
         interactor.fetchCategories().toList()
         val responses = interactor.searchCategories("animalsdgsdg").toList()
 
@@ -172,7 +172,7 @@ class ChuckNorrisJokesInteractorTest {
     }
 
     @Test
-    fun `search valid category, returns error`() = runBlockingTest {
+    fun `search valid category, returns error`() = runTest {
         repositoryFake.shouldReturnErrorResponse = true
         interactor.fetchCategories().toList()
         val responses = interactor.searchCategories("animal").toList()

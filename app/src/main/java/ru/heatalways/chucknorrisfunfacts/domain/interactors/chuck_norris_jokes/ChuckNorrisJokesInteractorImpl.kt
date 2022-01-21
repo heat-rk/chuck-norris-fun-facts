@@ -6,11 +6,11 @@ import ru.heatalways.chucknorrisfunfacts.domain.models.Category
 import ru.heatalways.chucknorrisfunfacts.domain.models.ChuckJoke
 import ru.heatalways.chucknorrisfunfacts.domain.repositories.chuck_norris_jokes.ChuckNorrisJokesRepository
 import ru.heatalways.chucknorrisfunfacts.domain.utils.InteractorEvent
-import ru.heatalways.chucknorrisfunfacts.core.utils.StringResource
+import ru.heatalways.chucknorrisfunfacts.core.models.StringResource
 import ru.heatalways.chucknorrisfunfacts.domain.utils.paging.PagingConfig
 import ru.heatalways.chucknorrisfunfacts.domain.utils.paging.PagingData
 import ru.heatalways.chucknorrisfunfacts.domain.utils.paging.PagingSource
-import ru.heatalways.chucknorrisfunfacts.core.utils.strRes
+import ru.heatalways.chucknorrisfunfacts.core.models.strRes
 import ru.heatalways.chucknorrisfunfacts.extensions.handle
 import javax.inject.Inject
 

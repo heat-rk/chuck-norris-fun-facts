@@ -1,8 +1,8 @@
 package ru.heatalways.chucknorrisfunfacts.presentation.screen.random_joke.select_category
 
 import ru.heatalways.chucknorrisfunfacts.domain.models.Category
-import ru.heatalways.chucknorrisfunfacts.core.utils.StringResource
-import ru.heatalways.chucknorrisfunfacts.presentation.base.MviState
+import ru.heatalways.chucknorrisfunfacts.core.models.StringResource
+import ru.heatalways.chucknorrisfunfacts.core.base.MviState
 import ru.heatalways.chucknorrisfunfacts.presentation.util.ScrollState
 
 data class CategorySelectionViewState(

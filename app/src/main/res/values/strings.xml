@@ -10,6 +10,8 @@
     <string name="remove_all_error">Remove failed :(</string>
     <string name="undo">Undo</string>
     <string name="joke_image_description">Joke Image</string>
+    <string name="save">Save</string>
+    <string name="settings">Settings</string>
 
     <!-- SEARCH JOKE FRAGMENT -->
     <string name="search_joke_screen_title">Search Chuck Norris Joke!</string>
@@ -26,6 +28,11 @@
     <!-- SELECT CATEGORY FRAGMENT -->
     <string name="select_category_screen_title">Select category</string>
     <string name="select_category_search_hint">animal</string>
+
+    <!-- SETTINGS FRAGMENT -->
+    <string name="settings_night_mode">Night mode</string>
+    <string name="settings_clear_cache_after_exit">Clear cache after exiting the application</string>
+    <string name="settings_saved_notification">New settings applied and saved!</string>
 
     <!-- ERRORS -->
     <string name="error_unknown">Unknown error :(</string>

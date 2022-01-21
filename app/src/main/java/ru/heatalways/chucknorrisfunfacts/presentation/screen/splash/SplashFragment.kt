@@ -2,12 +2,11 @@ package ru.heatalways.chucknorrisfunfacts.presentation.screen.splash
 
 import android.os.Bundle
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModelProvider
 import kotlinx.coroutines.flow.emptyFlow
 import ru.heatalways.chucknorrisfunfacts.R
 import ru.heatalways.chucknorrisfunfacts.appComponent
 import ru.heatalways.chucknorrisfunfacts.core.viewmodels.GenericSavedStateViewModelFactory
-import ru.heatalways.chucknorrisfunfacts.presentation.base.MviFragment
+import ru.heatalways.chucknorrisfunfacts.core.base.MviFragment
 import javax.inject.Inject
 
 class SplashFragment: MviFragment<

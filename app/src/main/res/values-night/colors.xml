@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorAccent">@color/colorPrimary</color>
+    <color name="colorPrimary">#B57D6A</color>
+    <color name="colorPrimaryVariant">#95452B</color>
+    <color name="colorSecondary">#303030</color>
+    <color name="colorSecondaryVariant">#232323</color>
+    <color name="colorOnPrimary">#4E3329</color>
+    <color name="colorOnSecondary">#FFFFFF</color>
+    <color name="colorPrimaryDisabled">#CD9786</color>
+    <color name="colorRipple">#26000000</color>
+    <color name="colorToolbar">@color/colorSecondary</color>
+    <color name="colorTransparent">#00000000</color>
+    <color name="colorToolbarText">#FFFFFF</color>
+    <color name="colorShimmer">#ECB7A5</color>
+    <color name="colorActionBorder">#60443A</color>
+    <color name="colorBottomNavItemSelected">#FFFFFF</color>
+    <color name="colorBottomNavItemUnselected">#703420</color>
+</resources>

@@ -1,6 +1,6 @@
 package ru.heatalways.chucknorrisfunfacts.presentation.screen.search_joke
 
-import ru.heatalways.chucknorrisfunfacts.presentation.base.MviReducer
+import ru.heatalways.chucknorrisfunfacts.core.base.MviReducer
 
 object SearchJokeStateReducer: MviReducer<
         SearchJokeViewState,

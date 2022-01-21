@@ -1,4 +1,4 @@
-package ru.heatalways.chucknorrisfunfacts.presentation.base
+package ru.heatalways.chucknorrisfunfacts.core.base
 
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter

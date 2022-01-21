@@ -7,7 +7,7 @@ import android.widget.FrameLayout
 import androidx.core.view.isVisible
 import ru.heatalways.chucknorrisfunfacts.R
 import ru.heatalways.chucknorrisfunfacts.databinding.IncErrorDefaultBinding
-import ru.heatalways.chucknorrisfunfacts.core.utils.StringResource
+import ru.heatalways.chucknorrisfunfacts.core.models.StringResource
 import ru.heatalways.chucknorrisfunfacts.extensions.getString
 
 class DefaultErrorView: FrameLayout, ErrorView {

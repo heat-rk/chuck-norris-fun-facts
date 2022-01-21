@@ -1,4 +1,4 @@
-package ru.heatalways.chucknorrisfunfacts.presentation.base
+package ru.heatalways.chucknorrisfunfacts.core.base
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

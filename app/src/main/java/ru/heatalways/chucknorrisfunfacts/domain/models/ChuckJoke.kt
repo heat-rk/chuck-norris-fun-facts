@@ -1,6 +1,6 @@
 package ru.heatalways.chucknorrisfunfacts.domain.models
 
-import ru.heatalways.chucknorrisfunfacts.core.utils.StringResource
+import ru.heatalways.chucknorrisfunfacts.core.models.StringResource
 import java.util.*
 
 data class ChuckJoke(

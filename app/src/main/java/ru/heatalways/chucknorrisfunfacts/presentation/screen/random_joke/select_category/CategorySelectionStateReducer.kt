@@ -1,6 +1,6 @@
 package ru.heatalways.chucknorrisfunfacts.presentation.screen.random_joke.select_category
 
-import ru.heatalways.chucknorrisfunfacts.presentation.base.MviReducer
+import ru.heatalways.chucknorrisfunfacts.core.base.MviReducer
 
 object CategorySelectionStateReducer: MviReducer<
         CategorySelectionViewState,
