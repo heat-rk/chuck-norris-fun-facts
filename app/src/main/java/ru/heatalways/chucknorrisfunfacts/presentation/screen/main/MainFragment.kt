@@ -6,19 +6,33 @@ import androidx.fragment.app.viewModels
 import by.kirich1409.viewbindingdelegate.viewBinding
 import kotlinx.coroutines.flow.emptyFlow
 import ru.heatalways.chucknorrisfunfacts.R
+import ru.heatalways.chucknorrisfunfacts.appComponent
+import ru.heatalways.chucknorrisfunfacts.core.base.MviFragment
+import ru.heatalways.chucknorrisfunfacts.core.viewmodels.GenericSavedStateViewModelFactory
 import ru.heatalways.chucknorrisfunfacts.databinding.FragmentMainBinding
 import ru.heatalways.chucknorrisfunfacts.extensions.setupWithNavController
-import ru.heatalways.chucknorrisfunfacts.core.base.MviFragment
+import javax.inject.Inject
 
 class MainFragment: MviFragment<
         MainAction,
         MainViewState
 >(R.layout.fragment_main) {
 
-    override val viewModel: MainViewModel by viewModels()
+    @Inject
+    lateinit var factory: MainViewModel.Factory
+
+    override val viewModel: MainViewModel by viewModels {
+        GenericSavedStateViewModelFactory(factory, this)
+    }
+
     private val binding by viewBinding(FragmentMainBinding::bind)
 
     override val actions get() = emptyFlow<MainAction>()
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        requireContext().appComponent.inject(this)
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

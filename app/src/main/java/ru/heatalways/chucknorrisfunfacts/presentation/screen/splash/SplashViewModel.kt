@@ -11,13 +11,15 @@ import ru.heatalways.chucknorrisfunfacts.core.base.MviViewModel
 import ru.heatalways.chucknorrisfunfacts.core.viewmodels.ViewModelFactory
 import ru.heatalways.chucknorrisfunfacts.domain.interactors.settings.SettingsInteractor
 import ru.heatalways.chucknorrisfunfacts.core.models.AppSettings
+import ru.heatalways.chucknorrisfunfacts.domain.usecases.ClearAppDataBaseUseCase
 import ru.heatalways.chucknorrisfunfacts.extensions.flowTimer
 import ru.heatalways.chucknorrisfunfacts.extensions.mergeWith
 import ru.heatalways.chucknorrisfunfacts.presentation.util.AppUtils
 import javax.inject.Inject
 
 class SplashViewModel(
-    settingsInteractor: SettingsInteractor
+    settingsInteractor: SettingsInteractor,
+    clearAppDataBaseUseCase: ClearAppDataBaseUseCase
 ): MviViewModel<
         SplashAction,
         SplashViewState,
@@ -31,6 +33,9 @@ class SplashViewModel(
             .onEach {
                 if (it is AppSettings) {
                     AppUtils.setDefaultNightMode(it.isNightModeEnabled)
+
+                    if (it.isClearCacheAfterExitEnabled)
+                        clearAppDataBaseUseCase.execute()
                 }
             }
             .onCompletion {
@@ -46,9 +51,10 @@ class SplashViewModel(
     }
 
     class Factory @Inject constructor(
-        private val settingsInteractor: SettingsInteractor
+        private val settingsInteractor: SettingsInteractor,
+        private val clearAppDataBaseUseCase: ClearAppDataBaseUseCase
     ): ViewModelFactory<SplashViewModel> {
         override fun create(handle: SavedStateHandle) =
-            SplashViewModel(settingsInteractor)
+            SplashViewModel(settingsInteractor, clearAppDataBaseUseCase)
     }
 }
