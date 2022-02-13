@@ -32,9 +32,8 @@ class DependenciesModule {
 
     @Provides
     @Singleton
-    fun provideClearAppDataUseCase(coreApi: CoreApi) =
-        coreApi.getClearAppDataUseCase()
-
+    fun provideChuckNorrisJokesInteractor(chuckNorrisJokesCoreApi: ChuckNorrisJokesCoreApi) =
+        chuckNorrisJokesCoreApi.getChuckNorrisJokesInteractor()
 
     @Provides
     @Singleton

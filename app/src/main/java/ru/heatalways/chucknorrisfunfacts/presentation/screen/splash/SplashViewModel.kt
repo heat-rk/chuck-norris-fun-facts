@@ -10,16 +10,16 @@ import ru.heatalways.chucknorrisfunfacts.common.extensions.flowTimer
 import ru.heatalways.chucknorrisfunfacts.common.extensions.mergeWith
 import ru.heatalways.chucknorrisfunfacts.common.presentation.factories.ViewModelFactory
 import ru.heatalways.chucknorrisfunfacts.common.presentation.utils.AppUtils
-import ru.heatalways.chucknorrisfunfacts.core.domain.usecases.ClearAppDataBaseUseCase
 import ru.heatalways.chucknorrisfunfacts.core.general.AppSettings
 import ru.heatalways.chucknorrisfunfacts.core.presentation.base.MviViewModel
+import ru.heatalways.chucknorrisfunfacts.core_chuck_norris_jokes.domain.interactors.chuck_norris_jokes.ChuckNorrisJokesInteractor
 import ru.heatalways.chucknorrisfunfacts.core_settings.domain.interactors.settings.SettingsInteractor
 import ru.heatalways.navigation.R
 import javax.inject.Inject
 
 class SplashViewModel(
     settingsInteractor: SettingsInteractor,
-    clearAppDataBaseUseCase: ClearAppDataBaseUseCase
+    chuckNorrisJokesInteractor: ChuckNorrisJokesInteractor
 ): MviViewModel<
         SplashAction,
         SplashViewState,
@@ -35,7 +35,8 @@ class SplashViewModel(
                     AppUtils.setDefaultNightMode(it.isNightModeEnabled)
 
                     if (it.isClearCacheAfterExitEnabled)
-                        clearAppDataBaseUseCase.execute()
+                        chuckNorrisJokesInteractor.removeSavedJokes()
+                            .launchIn(viewModelScope)
                 }
             }
             .onCompletion {
@@ -52,9 +53,9 @@ class SplashViewModel(
 
     class Factory @Inject constructor(
         private val settingsInteractor: SettingsInteractor,
-        private val clearAppDataBaseUseCase: ClearAppDataBaseUseCase
+        private val chuckNorrisJokesInteractor: ChuckNorrisJokesInteractor
     ): ViewModelFactory<SplashViewModel> {
         override fun create(handle: SavedStateHandle) =
-            SplashViewModel(settingsInteractor, clearAppDataBaseUseCase)
+            SplashViewModel(settingsInteractor, chuckNorrisJokesInteractor)
     }
 }

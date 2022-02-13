@@ -31,7 +31,7 @@
 
     <!-- SETTINGS FRAGMENT -->
     <string name="settings_night_mode">Night mode</string>
-    <string name="settings_clear_cache_after_exit">Clear cache after exiting the application</string>
+    <string name="settings_clear_cache_after_exit">Clear saved jokes after exiting the application</string>
     <string name="settings_saved_notification">New settings applied and saved!</string>
 
     <!-- ERRORS -->
