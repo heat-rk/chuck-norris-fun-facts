@@ -1,2 +1,15 @@
 rootProject.name = "ChuckNorrisFunFacts"
 include ':app'
+include ':core'
+include ':common'
+include ':navigation'
+
+
+include ':features:settings'
+include ':features:search_joke'
+include ':features:random_joke'
+
+include ':core_settings'
+include ':core_chuck_norris_jokes'
+
+include ':module_injector'

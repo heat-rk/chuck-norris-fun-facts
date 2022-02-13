@@ -3,16 +3,16 @@ package ru.heatalways.chucknorrisfunfacts.presentation.screen.splash
 import android.os.Bundle
 import androidx.fragment.app.viewModels
 import kotlinx.coroutines.flow.emptyFlow
-import ru.heatalways.chucknorrisfunfacts.R
-import ru.heatalways.chucknorrisfunfacts.appComponent
-import ru.heatalways.chucknorrisfunfacts.core.viewmodels.GenericSavedStateViewModelFactory
-import ru.heatalways.chucknorrisfunfacts.core.base.MviFragment
+import ru.heatalways.chucknorrisfunfacts.common.presentation.factories.GenericSavedStateViewModelFactory
+import ru.heatalways.chucknorrisfunfacts.core.presentation.base.MviFragment
+import ru.heatalways.chucknorrisfunfacts.di.AppComponent
+import ru.heatalways.navigation.R
 import javax.inject.Inject
 
 class SplashFragment: MviFragment<
         SplashAction,
         SplashViewState
->(R.layout.fragment_splash) {
+        >(R.layout.fragment_splash) {
 
     @Inject
     lateinit var viewModelFactory: SplashViewModel.Factory
@@ -25,7 +25,7 @@ class SplashFragment: MviFragment<
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        requireContext().appComponent.inject(this)
+        AppComponent.get().inject(this)
     }
 
     override fun renderState(state: SplashViewState) = Unit

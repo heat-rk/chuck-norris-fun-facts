@@ -1,32 +1,36 @@
 package ru.heatalways.chucknorrisfunfacts.di
 
+import android.app.Application
 import dagger.Component
-import ru.heatalways.chucknorrisfunfacts.di.modules.*
+import dagger.internal.Preconditions
+import ru.heatalways.chucknorrisfunfacts.di.modules.AppModule
+import ru.heatalways.chucknorrisfunfacts.di.modules.DependenciesModule
 import ru.heatalways.chucknorrisfunfacts.presentation.screen.main.MainFragment
-import ru.heatalways.chucknorrisfunfacts.presentation.screen.random_joke.RandomJokeFragment
-import ru.heatalways.chucknorrisfunfacts.presentation.screen.random_joke.select_category.CategorySelectionFragment
-import ru.heatalways.chucknorrisfunfacts.presentation.screen.search_joke.SearchJokeFragment
-import ru.heatalways.chucknorrisfunfacts.presentation.screen.settings.SettingsFragment
 import ru.heatalways.chucknorrisfunfacts.presentation.screen.splash.SplashFragment
 import javax.inject.Singleton
 
 @Singleton
 @Component(modules = [
-    ApiModule::class,
     AppModule::class,
-    ChuckNorrisJokesModule::class,
-    DatabaseModule::class,
-    DispatcherModule::class,
-    GsonModule::class,
-    HttpClientModule::class,
-    RetrofitModule::class,
-    SettingsModule::class
+    DependenciesModule::class
 ])
 interface AppComponent {
+    fun inject(application: Application)
     fun inject(splashFragment: SplashFragment)
-    fun inject(searchJokeFragment: SearchJokeFragment)
-    fun inject(randomJokeFragment: RandomJokeFragment)
-    fun inject(categorySelectionFragment: CategorySelectionFragment)
-    fun inject(settingsFragment: SettingsFragment)
     fun inject(mainFragment: MainFragment)
+
+    companion object {
+        @Volatile
+        private var instance: AppComponent? = null
+
+        fun get(): AppComponent {
+            return Preconditions.checkNotNull(instance,
+                "AppComponent is not initialized yet. Call init first.")!!
+        }
+
+        fun init(component: AppComponent) {
+            require(instance == null) { "AppComponent is already initialized." }
+            instance = component
+        }
+    }
 }

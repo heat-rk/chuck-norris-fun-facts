@@ -5,10 +5,9 @@ import androidx.test.ext.junit.rules.ActivityScenarioRule
 import androidx.test.filters.LargeTest
 import androidx.test.rule.GrantPermissionRule
 import com.kaspersky.kaspresso.testcases.api.testcase.TestCase
-import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
-import ru.heatalways.chucknorrisfunfacts.R
+import ru.heatalways.navigation.R
 import ru.heatalways.chucknorrisfunfacts.presentation.adapters.view_holders.CategoryItem
 import ru.heatalways.chucknorrisfunfacts.presentation.adapters.view_holders.JokeItem
 import ru.heatalways.chucknorrisfunfacts.presentation.screen.MainActivity

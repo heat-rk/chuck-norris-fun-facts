@@ -52,18 +52,26 @@ android {
     buildFeatures {
         viewBinding true
     }
-
-    sourceSets {
-        androidTest {
-            java.srcDirs += "src/sharedTest/java"
-        }
-        test {
-            java.srcDirs += "src/sharedTest/java"
-        }
-    }
 }
 
 dependencies {
+    implementation project(":core")
+    implementation project(":common")
+    implementation project(":navigation")
+    implementation project(":core_settings")
+    implementation project(":core_chuck_norris_jokes")
+    implementation project(":features:search_joke")
+    implementation project(":features:random_joke")
+    implementation project(":features:settings")
+    implementation project(":module_injector")
+
+    // LEAK CANARY -----------------------------------------------
+    debugImplementation "com.squareup.leakcanary:leakcanary-android:$leak_canary_version"
+
+    // NAVIGATION --------------------------------------------------------
+    implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
+    implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
+
     // TESTS --------------------------------------------------------
     testImplementation "junit:junit:$junit_version"
     testImplementation "org.mockito.kotlin:mockito-kotlin:$mockito_version"
@@ -83,19 +91,8 @@ dependencies {
     androidTestImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutines_test_version"
     androidTestImplementation "androidx.arch.core:core-testing:$arch_test_version"
 
-    kaptAndroidTest "com.google.dagger:dagger-compiler:$dagger_version"
-
-    // LEAK CANARY -----------------------------------------------
-    debugImplementation "com.squareup.leakcanary:leakcanary-android:$leak_canary_version"
-
-    // DI --------------------------------------------------------
-    implementation "com.google.dagger:dagger:$dagger_version"
-    kapt "com.google.dagger:dagger-android-processor:$dagger_version"
-    kapt "com.google.dagger:dagger-compiler:$dagger_version"
-
-    // KTX --------------------------------------------------------
-    implementation "androidx.core:core-ktx:$ktx_core_version"
-    implementation "androidx.fragment:fragment-ktx:$ktx_fragments"
+    // VIEW BINDING DELEGATE
+    implementation "com.github.kirich1409:viewbindingpropertydelegate-noreflection:$view_binding_delegate"
 
     // NETWORK --------------------------------------------------------
     implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
@@ -106,32 +103,19 @@ dependencies {
     implementation "com.squareup.okhttp3:logging-interceptor:$okhttp_version"
     implementation "com.squareup.okio:okio:$okio_version"
 
-    // IMAGE LOADER --------------------------------------------------------
-    implementation "com.github.bumptech.glide:glide:$glide_version"
-    kapt "com.github.bumptech.glide:compiler:$glide_version"
-
-    // NAVIGATION --------------------------------------------------------
-    implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
-    implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
-
     // DATA STORAGE --------------------------------------------------------
-    implementation "androidx.datastore:datastore-preferences:$data_store_versison"
     implementation "androidx.room:room-runtime:$room_version"
     implementation "androidx.room:room-ktx:$room_version"
     kapt "androidx.room:room-compiler:$room_version"
 
-    // CORBIND
-    implementation "ru.ldralighieri.corbind:corbind:$corbind_verison"
-    implementation "ru.ldralighieri.corbind:corbind-recyclerview:$corbind_verison"
-    implementation "ru.ldralighieri.corbind:corbind-core:$corbind_verison"
-    implementation "ru.ldralighieri.corbind:corbind-appcompat:$corbind_verison"
-    implementation "ru.ldralighieri.corbind:corbind-material:$corbind_verison"
+    // DI --------------------------------------------------------
+    implementation "com.google.dagger:dagger:$dagger_version"
+    kapt "com.google.dagger:dagger-android-processor:$dagger_version"
+    kapt "com.google.dagger:dagger-compiler:$dagger_version"
 
-    // SHIMMER
-    implementation "com.facebook.shimmer:shimmer:$shimmer_version"
-
-    // VIEW BINDING DELEGATE
-    implementation "com.github.kirich1409:viewbindingpropertydelegate-noreflection:$view_binding_delegate"
+    // KTX --------------------------------------------------------
+    implementation "androidx.core:core-ktx:$ktx_core_version"
+    implementation "androidx.fragment:fragment-ktx:$ktx_fragments"
 
     // OTHER STUFF --------------------------------------------------------
     implementation 'androidx.appcompat:appcompat:1.4.1'

@@ -6,15 +6,15 @@ import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onCompletion
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.take
-import ru.heatalways.chucknorrisfunfacts.R
-import ru.heatalways.chucknorrisfunfacts.core.base.MviViewModel
-import ru.heatalways.chucknorrisfunfacts.core.viewmodels.ViewModelFactory
-import ru.heatalways.chucknorrisfunfacts.domain.interactors.settings.SettingsInteractor
-import ru.heatalways.chucknorrisfunfacts.core.models.AppSettings
-import ru.heatalways.chucknorrisfunfacts.domain.usecases.ClearAppDataBaseUseCase
-import ru.heatalways.chucknorrisfunfacts.extensions.flowTimer
-import ru.heatalways.chucknorrisfunfacts.extensions.mergeWith
-import ru.heatalways.chucknorrisfunfacts.presentation.util.AppUtils
+import ru.heatalways.chucknorrisfunfacts.common.extensions.flowTimer
+import ru.heatalways.chucknorrisfunfacts.common.extensions.mergeWith
+import ru.heatalways.chucknorrisfunfacts.common.presentation.factories.ViewModelFactory
+import ru.heatalways.chucknorrisfunfacts.common.presentation.utils.AppUtils
+import ru.heatalways.chucknorrisfunfacts.core.domain.usecases.ClearAppDataBaseUseCase
+import ru.heatalways.chucknorrisfunfacts.core.general.AppSettings
+import ru.heatalways.chucknorrisfunfacts.core.presentation.base.MviViewModel
+import ru.heatalways.chucknorrisfunfacts.core_settings.domain.interactors.settings.SettingsInteractor
+import ru.heatalways.navigation.R
 import javax.inject.Inject
 
 class SplashViewModel(
@@ -24,7 +24,7 @@ class SplashViewModel(
         SplashAction,
         SplashViewState,
         SplashPartialState
->(reducer = SplashReducer) {
+        >(reducer = SplashReducer) {
     override val initialState get() = SplashViewState()
 
     init {

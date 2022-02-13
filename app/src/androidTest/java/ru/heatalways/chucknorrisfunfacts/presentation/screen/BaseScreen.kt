@@ -4,7 +4,7 @@ import com.kaspersky.kaspresso.screens.KScreen
 import io.github.kakaocup.kakao.bottomnav.KBottomNavigationView
 import io.github.kakaocup.kakao.progress.KProgressBar
 import io.github.kakaocup.kakao.text.KTextView
-import ru.heatalways.chucknorrisfunfacts.R
+import ru.heatalways.chucknorrisfunfacts.core.R
 
 abstract class BaseScreen<T: KScreen<T>>: KScreen<T>() {
     val bottomNavigation = KBottomNavigationView {

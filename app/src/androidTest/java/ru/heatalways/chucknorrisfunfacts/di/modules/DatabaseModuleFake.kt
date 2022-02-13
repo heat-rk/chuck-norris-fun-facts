@@ -1,10 +1,10 @@
-package ru.heatalways.chucknorrisfunfacts.di.modules
+package ru.heatalways.chucknorrisfunfacts.core.di.modules
 
 import android.content.Context
 import androidx.room.Room
 import dagger.Module
 import dagger.Provides
-import ru.heatalways.chucknorrisfunfacts.data.database.AppDatabase
+import ru.heatalways.chucknorrisfunfacts.core.data.database.AppDatabase
 
 @Module
 object DatabaseModuleFake {
